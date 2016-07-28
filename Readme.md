@@ -1,4 +1,4 @@
-# parcelLab Javascipt Plugin
+# parcelLab Javascript Plugin
 JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.
 This plugin uses the v2 api and is under development. - use with caution!
 
