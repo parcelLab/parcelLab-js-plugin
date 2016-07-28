@@ -1,0 +1,84 @@
+<!-- Heading -->
+<div class="pl-heading">
+  {{heading}}
+</div>
+
+<!-- Tabs -->
+<div class="pl-container">
+  {{#tabs}}
+    <div class="pl-tab-{{template.size}}">
+      <div class="pl-tab btn-default {{template.active}} btn col-xs-12" href="{{template.href}}">
+        <input type="hidden" class="objectHolder" value="{{template.object}}">
+        <div class="pl-icon">
+          <span class="fa-stack fa-lg" style="color:{{template.transitStatusColor}}">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-{{template.transitStatus.icon}} fa-stack-1x"></i>
+          </span>
+        </div>
+        <div>
+          <span>{{courier}}</span>
+          <span class="pl-status">
+            <i style="color: {{template.signalColourGreen}}" class="fa fa-circle"></i>
+            <i style="color: {{template.signalColourOrange}}" class="fa fa-circle"></i>
+            <i style="color: {{template.signalColourRed}}" class="fa fa-circle"></i>
+          </span>
+          <br />
+          <span> {{tracking_number}}</span>
+        </div>
+      </div>
+    </div>
+  {{/tabs}}
+</div>
+
+<!-- Trackings-Container -->
+{{#trackings}}
+  <div class="row  parcel_lab_tracking {{hidden}}" id="{{id}}">
+
+      <!-- Subheading -->
+      <div>{{subHeading}}</div>
+
+      <!-- Prediction -->
+      {{#prediction}}
+        <div class="pl-box prediction">
+          <div class="row">
+            <input type="hidden" value="{{status}}">
+            <div class="col-xs-10 col-xs-offset-1">
+              <div class="pl-row alert no-background">
+                <div class="pl-icon">
+                  <span class="fa-stack fa-lg" style="color:">
+                  <i class="fa fa-square fa-stack-2x"></i>
+                  <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
+                </span>
+                </div>
+                <div style="display: table-cell;">
+                  <p>{{{text}}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/prediction}}
+
+      <div class="pl-box">
+          <div class="pl-row-wrapper">
+            {{#checkpoints}}
+              <div class="pl-row pl-alert {{alert}} {{checkpoint_hidden}}">
+                <div class="pl-icon">
+                  <span class="fa-stack fa-lg" style="color:{{transitStatusColor}};">
+                    <i class="fa fa-circle-thin fa-stack-2x" style="color:{{transitStatusColor}};"></i>
+                    <i class="fa fa-{{transitStatus.icon}} fa-stack-1x" style="color:{{transitStatusColor}};"></i>
+                  </span>
+                </div>
+                <div class="pl-text">
+                  <small>{{ dateText }}  {{ locationText }}</small><br />
+                  <b>{{ checkpoint.status_text }}</b>: {{{ checkpoint.status_details }}}
+                </div>
+                {{#button}}
+                  <button class="pl-btn show-more-button">{{more}}</button>
+                {{/button}}
+              </div>
+            {{/checkpoints}}
+          </div>
+      </div>
+  </div>
+{{/trackings}}

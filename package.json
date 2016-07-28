@@ -1,0 +1,63 @@
+{
+  "name": "parcelLab-js-plugin",
+  "version": "1.0.0",
+  "description": "JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.",
+  "main": "src/js/index.js",
+  "scripts": {
+    "serve": "serve build/",
+    "test": "make test",
+    "build": "make bundle",
+    "dev-js": "webpack --module-bind 'js=babel?presets[]=es2015' --progress --colors --watch ./src/js/index.js ./build/parcelLab.min.js",
+    "dev-scss": "node-sass -wr ./src/scss/main.scss  ./build/parcelLab.min.css",
+    "deploy": "make deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "parcellab",
+    "trackings"
+  ],
+  "author": "Julian Krenge, Oscar Reyes, Andrej Fritz",
+  "license": "MIT",
+  "homepage": "",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "country-language": "^0.1.7",
+    "countryjs": "^1.5.2",
+    "expose-loader": "^0.7.1",
+    "hogan.js": "^3.0.2",
+    "mustache-loader": "^0.3.1",
+    "node-sass": "^3.4.2",
+    "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "promise": "^7.1.1"
+  },
+  "jshintConfig": {
+    "esnext": true,
+    "eqeqeq": true,
+    "forin": true,
+    "undef": true,
+    "unused": true,
+    "latedef": true,
+    "nocomma": true,
+    "predef": [
+      "console",
+      "require",
+      "document",
+      "process",
+      "window",
+      "localStorage",
+      "module",
+      "exports",
+      "describe",
+      "navigator",
+      "it",
+      "setTimeout"
+    ]
+  }
+}
