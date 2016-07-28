@@ -24,7 +24,7 @@ Minified `parcelLab.min.js` and `parcelLab.min.css` will be in the build dir.
 $ npm run test
 ```
 
-### Deploy
+### Deploy - coming soon !!!
 ```bash
 $ npm run deploy
 ```
@@ -35,7 +35,7 @@ Just add a target and write your commands.
 
 ## For users
 ### Adding to your webpage
-Just add the two minified files (`parcelLab.min.js` and `parcelLab.min.css`) to your webpage.
+Just add the two minified files (`parcelLab.min.js` and `parcelLab.min.css` and `fontawesome.min.css`) to your webpage.
 ```html
 <head>
   ...
