@@ -107,7 +107,7 @@ class ParcelLab {
     if (typeof err === 'string')
       console.error(`🙀  ${err}`);
     else if (typeof err === 'object')
-      console.error(err.message);
+      console.error(`🙀  ${err.message}`);
   }
 
   ///////////////////////////
