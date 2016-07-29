@@ -105,7 +105,7 @@ class ParcelLab {
   handleError(err) {
     // TODO: send to sentry bro
     if (typeof err === 'string')
-      console.error(err);
+      console.error(`🙀  ${err}`);
     else if (typeof err === 'object')
       console.error(err.message);
   }
