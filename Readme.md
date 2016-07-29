@@ -2,8 +2,36 @@
 JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.
 This plugin uses the v2 api and is under development. - use with caution!
 
-## For developers
+## For shop users
+### Adding to your webpage
+Just add the following files (`parcelLab.min.js` and `parcelLab.min.css` and `fontawesome.min.css`) to your webpage. Then just initialize a new parcelLab object.
+```html
+<head>
+  ...
+  <link href="https://cdn.parcellab.com/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://cdn.parcellab.com/css/v2/parcelLab.min.css" rel="stylesheet">
+</head>
+<body>
+  ...
+  <script src="https://cdn.parcellab.com/js/v2/parcelLab.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var parcelLab = new ParcelLab('#some-dom-id');
+    parcelLab.initialize();
+  </script>
+</body>  
+```
 
+### Initializing the magic
+After adding the script you will have a new ParcelLab class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
+```html
+...
+<script type="text/javascript">
+  var parcelLab = new ParcelLab('#pl-trace'); // <~ where the trackings will be rendered...
+  parcelLab.initialize();
+</script>
+```
+
+## For developers
 ### Develop
 Start the following commands in new terminal windows. Then
 ```bash  
@@ -32,29 +60,3 @@ $ npm run deploy
 ### Adding dev scripts
 There are no scripts in this project. All dev cycles are maintained in the Makefile.  
 Just add a target and write your commands.
-
-## For users
-### Adding to your webpage
-Just add the two minified files (`parcelLab.min.js` and `parcelLab.min.css` and `fontawesome.min.css`) to your webpage.
-```html
-<head>
-  ...
-  <link rel="stylesheet" href=".../parcelLab.min.css" >
-</head>
-<body>
-  ...
-  <script src=".../parcelLab.min.js" charset="utf-8"></script>
-</body>  
-```
-
-### Initialize the magic
-After adding the script you will have a new ParcelLab class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
-```html
-...
-<script src=".../parcelLab.min.js" charset="utf-8"></script>
-<script type="text/javascript">
-  var parcelLab = new ParcelLab('#pl-trace');
-  parcelLab.initialize();
-</script>
-```
-For more information read the users manual [here]('').

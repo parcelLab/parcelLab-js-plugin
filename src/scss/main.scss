@@ -3,28 +3,52 @@
 .parcelLab-styles,
 .parcellab-styles, {
 
-
+  // GENERAL
   * {
     font-size: 14px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 1.42857;
   }
-  .pl-heading {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 300;
-    font-size: 2em;
-    margin-bottom: 25px;
-  }
   .hidden {
     display: none;
   }
+
+  // GRID
+  .pl-container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0;
+    box-sizing: border-box;
+  }
+  .pl-col {
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+  }
+  /* For devices larger than 550px */
+  @media (min-width: 550px) {
+    .pl-col {
+      margin-left: 4%; }
+    .pl-col:first-child {
+      margin-left: 0; }
+    .pl-col-4 { width: 30.6666666667%; }
+    .pl-col-6 { width: 48%;}
+    .pl-col-12 { width: 100%; margin-left: 0; }
+
+  }
+  .pl-container:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+
+  // STYLES
   div.loading {
     padding:25px 0;
     text-align: center;
     font-size: 2em;
-  }
-  div.pl-box-heading {
-    margin-top: 40px;
   }
   div.pl-box {
     border: 1px #ddd solid;
@@ -32,20 +56,27 @@
     background-color: #fff;
     padding-top: 16px;
     padding-bottom: 16px;
-
-  }
-  div.pl-box-footer {
-    padding-bottom: 20px;
-    padding-top: 5px;
-  }
-  div.pl-row-wrapper {
-    padding: 0 25px;
+    & > .pl-box-heading {
+      border-bottom: 1px #ddd dashed;
+      font-weight: 300;
+      font-size: 2em;
+      padding: 0 25px 12.5px;
+      margin-bottom:25px;
+    }
+    & > .pl-box-body {
+      padding: 0 25px
+    }
+    & > .pl-box-footer {
+      padding-bottom: 20px;
+      padding-top: 5px;
+    }
   }
   .img-responsive {
       display: block;
       max-width: 100%;
       height: auto;
   }
+
   div.pl-row {
     margin: 0;
   	background-image: url("https://cdn.parcellab.com/img/traceline.png");
@@ -59,7 +90,11 @@
       background-repeat: no-repeat;
       padding-top: 15px;
     }
+    &:last-of-type:first-of-type {
+      background: none;
+    }
   }
+
   div.pl-alert {
     padding: 15px;
     border: 1px solid transparent;
@@ -106,10 +141,17 @@
     border-color: #ccc;
     cursor: pointer;
   }
+  .pl-btn-block {
+    width: 100%;
+  }
+
   div.pl-tab {
-  	margin: 8px 0;
+  	margin: 0px 0 15px;
   	padding: 8px;
   	opacity: 0.5;
+    &:hover {
+      cursor: pointer;
+    }
   	&.active {
   		background: whitesmoke;
   		opacity: 1;

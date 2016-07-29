@@ -1,4 +1,3 @@
-const _Promise = require('promise'); // TODO: drop this for native code [Promise]
 const Api = require('./lib/api'); // TODO: drop this for native code [fetch]
 const defaultsDeep = require('./lib/utils/defaultsDeep');
 const statics = require('./lib/static');
@@ -9,9 +8,18 @@ const Templates = require('../templates');
 const CURRENT_VERSION_TAG = 'P7VM86ZW';
 const BASE_URL = 'https://api.parcellab.com/';
 const ENDPOINT = 'v2/checkpoints';
-const CSS_URL = 'http://localhost:3000/parcelLab.min.css'; // TODO: change this
+const VERSIONURL = 'https://cdn.parcellab.com/js/v2/version.txt';
+const CSS_URL = 'https://localhost:3000/parcelLab.min.css'; // TODO: change this
 
 // const FA_URL = 'http://localhost:3000/parcelLab.min.css';
+
+/**
+ *   TODO:
+ *   (clean legacy code)
+ *   (setLang method)
+ *   (get & render sendrInfos if enabled)
+ *   (render components to optional domNodes)
+ */
 
 var defaultRootNodeQuery = '#parcelLab-trace-wrapper';
 var defaultOpts = {
@@ -76,9 +84,12 @@ class ParcelLab {
 
     // this.loadCSS(); // TODO: problems with fa css
 
-    this.getCheckpoints()
-    .then(res => this.renderHTML(this.checkpointsToHTML(res)))
-    .catch(err => console.error(err));
+    this.getCheckpoints((err, res)=> {
+      if (err) return this.handleError(err);
+      else {
+        this.renderHTML(this.checkpointsToHTML(res));
+      }
+    });
   }
 
   initLanguage() {
@@ -86,9 +97,17 @@ class ParcelLab {
     if (statics.languages[this._langCode]) {
       this.lang = statics.languages[this._langCode];
     } else {
-      console.error('🙀 Could not detect user language ... fallback to [EN]!');
+      this.handleError('Could not detect user language ... fallback to [EN]!');
       this.lang = statics.languages.en;
     }
+  }
+
+  handleError(err) {
+    // TODO: send to sentry bro
+    if (typeof err === 'string')
+      console.error(err);
+    else if (typeof err === 'object')
+      console.error(err.message);
   }
 
   ///////////////////////////
@@ -103,8 +122,9 @@ class ParcelLab {
       return;
     }
 
-    Api.getNewestVersionTag((err, versionTag)=> {
-      if (err) console.error(err);
+    console.log('👻 Searching for new parcelLab.js version...');
+    Api.getNewestVersionTag(VERSIONURL, (err, versionTag)=> {
+      if (err) this.handleError(err);
       else {
         if (versionTag !== CURRENT_VERSION_TAG) {
           console.log('👻 Updating plugin to version ~> ', versionTag);
@@ -146,9 +166,13 @@ class ParcelLab {
       if (this.userId) result.push({ name: 'user', value: this.userId });
       if (this.courier) result.push({ name: 'courier', value: this.courier }); // why not?
     } else {
-      var errMsg = '🙀 ParcelLab instance has no trackingNo or orderNo! Check the url...';
-      console.error(errMsg);
-      throw new Error(errMsg);
+      var errMsg = 'ParcelLab instance has no trackingNo or orderNo! Check the url...';
+      this.renderHTML(
+        `<div class="pl-alert alert-danger">
+          <i class="fa fa-error"></i> ${statics.translations[this.lang.code].error.delivery}
+        </div>`
+      );
+      return this.handleError(errMsg);
     }
 
     if (this.lang) result.push({ name: 'lang', value: this.lang.code });
@@ -159,33 +183,10 @@ class ParcelLab {
   // API wrappers //
   //////////////////
 
-  getCheckpoints() {
-    return new _Promise((resolve, reject)=> {
-      var lang = new Lang(this.lang, null);
-      Checkpoints.getCheckpoints(BASE_URL, ENDPOINT, this.propsToQuery(), lang,
-        function (err, res) {
-          if (err)
-            reject(err);
-          else
-            resolve(res);
-        });
-    });
+  getCheckpoints(callback) {
+    var lang = new Lang(this.lang, null);
+    Checkpoints.getCheckpoints(BASE_URL, ENDPOINT, this.propsToQuery(), lang, callback);
   }
-
-  checkpointsToHTML(checkpointData) {
-    var html = Templates.get('checkpoints')(checkpointData);
-    return html;
-  }
-
-  // getCheckpoints() {
-  //   return new _Promise((resolve, reject)=> {
-  //     Api.loadFromAPI(BASE_URL, ENDPOINT, this.propsToQuery(), 'GET', null,
-  //       function (err, result) {
-  //         if (err) reject(err);
-  //         else resolve(result);
-  //       });
-  //   });
-  // }
 
   ///////////////////////////
   // DOM affecting methods //
@@ -200,13 +201,46 @@ class ParcelLab {
   }
 
   bindEvents() {
+    // TODO: use external lib for dom stuff because of fkn firefox...
+    // show more
     document.querySelector('.pl-btn.show-more-button').addEventListener('click', (e)=> {
       e.preventDefault();
-      document.querySelectorAll('.pl-row.pl-alert.hidden').forEach(row => {
+      var allRows = document.querySelectorAll('.pl-row.pl-alert.hidden');
+      [].forEach.call(allRows, (row) => {
         row.className = row.className.replace('hidden', '');
       });
-      e.srcElement.remove();
+      document.querySelector('.pl-btn.show-more-button').remove();
     });
+
+    // toggle tabs
+    var allTabBtns = document.querySelectorAll('.pl-tab.pl-btn');
+    [].forEach.call(allTabBtns, (elem) => {
+      elem.addEventListener('click', (e)=> {
+        e.preventDefault();
+        var allTrackings = document.querySelectorAll('div.parcel_lab_tracking');
+
+        // remove active from all btns
+        [].forEach.call(allTabBtns, (btn) => {
+          btn.classList.remove('active');
+        });
+
+        // first hide all
+        [].forEach.call(allTrackings, (tracking) => {
+          tracking.classList.add('hidden');
+        });
+
+        // set btn to active
+        elem.classList.add('active');
+
+        // show only current trackings
+        document.getElementById(elem.getAttribute('href')).classList.remove('hidden');
+      });
+    });
+  }
+
+  checkpointsToHTML(checkpointData) {
+    var html = Templates.get('checkpoints')(checkpointData);
+    return html;
   }
 
   renderHTML(html) {
@@ -215,7 +249,7 @@ class ParcelLab {
     try {
       this.bindEvents();
     } catch (e) {
-      console.log(e);
+      this.handleError(e);
     }
   }
 }

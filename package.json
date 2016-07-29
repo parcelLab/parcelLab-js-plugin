@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/parcelLab/parcelLab-js-plugin.git"
   },
   "keywords": [
     "parcellab",
@@ -23,19 +23,18 @@
   "license": "MIT",
   "homepage": "",
   "devDependencies": {
+    "hogan.js": "^3.0.2",
+    "node-sass": "^3.4.2",
+    "mustache-loader": "^0.3.1",
+    "expose-loader": "^0.7.1",
+    "webpack": "^1.13.0"
+  },
+  "dependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "country-language": "^0.1.7",
-    "countryjs": "^1.5.2",
-    "expose-loader": "^0.7.1",
-    "hogan.js": "^3.0.2",
-    "mustache-loader": "^0.3.1",
-    "node-sass": "^3.4.2",
-    "webpack": "^1.13.0"
-  },
-  "dependencies": {
-    "promise": "^7.1.1"
+    "countryjs": "^1.5.2"
   },
   "jshintConfig": {
     "esnext": true,
@@ -49,6 +48,7 @@
       "console",
       "require",
       "document",
+      "XMLHttpRequest",
       "process",
       "window",
       "localStorage",

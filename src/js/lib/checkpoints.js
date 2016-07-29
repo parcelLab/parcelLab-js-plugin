@@ -1,5 +1,4 @@
 var Api = require('./api.js');
-var Utils = require('./utils/utils.js');
 var Static = require('./static.js');
 
 // var rootName = null;
@@ -30,11 +29,16 @@ function renderTrackingsToHTML(result, query, lang, cb) {
     content.tabs = getTabsContent(requestObject, lang, result.header);
 
   // normalize trackings.
-  if (!result.header) {
-    requestObject.checkpoints = result;
+  if (result.header.length === 1) {
+    // fall
     requestObject.visible = true;
     requestObject.subHeading = false;
-    trackings = [requestObject];
+    trackings = result.header.map(function (tracking, index) {
+      tracking.checkpoints = result.body[tracking.id];
+      tracking.visible = index === 0;
+      tracking.subHeading = false;
+      return tracking;
+    });
   } else {
     trackings = result.header.map(function (tracking, index) {
       tracking.checkpoints = result.body[tracking.id];
@@ -46,36 +50,20 @@ function renderTrackingsToHTML(result, query, lang, cb) {
 
   // get Trace
   content.trackings = [];
-  trackings.forEach(function (tracking) {
-    content.heading = generateTitle(requestObject, lang);
-    content.trackings.push(getTrackingContent(tracking, lang));
-  });
+  if (trackings.length === 1) {
+    content.heading = generateTitle(trackings[0], lang);
+    trackings.forEach(function (tracking) {
+      content.trackings.push(getTrackingContent(tracking, lang));
+    });
+  } else {
+    trackings.forEach(function (tracking) {
+      content.heading = generateTitle(requestObject, lang);
+      content.trackings.push(getTrackingContent(tracking, lang));
+    });
+  }
 
   cb(null, content);
 }
-
-// function initListeners() {
-//   // show more buttons listener
-//   document.querySelector('button.show-more-button')
-//   Utils.eventFromParent('click', rootName, '.show-more-button', function (e) {
-//     e.preventDefault();
-//     console.log('clicked this fkin btn', e);
-//     Utils.addClassToObject(e.target, 'hidden');
-//     var rows = e.target.parentElement.parentElement.querySelectorAll('.pl-row');
-//     for (var i = 0; i < rows.length; i++)
-//       Utils.removeClassToObject(rows[i], 'hidden');
-//   });
-//
-//   // tabs listener
-//   Utils.eventFromParent('click', rootName, '.pl-tab', function (e, target) {
-//     var url = target.getAttribute('href');
-//     Utils.removeClass('.pl-tab', 'active');
-//     Utils.addClassToObject(target, 'active');
-//
-//     Utils.addClass('div[class*="parcel_lab_tracking"]', 'hidden');
-//     Utils.removeClass('[id="' + url + '"]', 'hidden');
-//   });
-// }
 
 /**
  * Returns the title depending of the info contained in the object.
@@ -85,14 +73,10 @@ function generateTitle(requestObject, lang) {
   var heading = '';
   if (requestObject.orderNo) {
     heading = lang.data('orderNo') + ' ' + requestObject.orderNo;
-
-  } else if (requestObject.courier && requestObject.trackingNo) {
-
-    var courierName = Static.courierNames[requestObject.courier];
-    if (typeof courierName == 'undefined') courierName = requestObject.courier.toUpperCase();
-
+  } else if (requestObject.tracking_number && requestObject.courier) {
+    var courierName = requestObject.courier.prettyname;
     heading = lang.data('delivery') + ' ' +
-      requestObject.trackingNo + ' (' + courierName + ')';
+      requestObject.tracking_number + ' (' + courierName + ')';
   }
 
   return heading;
