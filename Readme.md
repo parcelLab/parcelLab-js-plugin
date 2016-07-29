@@ -4,12 +4,12 @@ This plugin uses the v2 api and is under development. - use with caution!
 
 ## For shop users
 ### Adding to your webpage
-Just add the following files (`parcelLab.min.js` and `parcelLab.min.css` and `fontawesome.min.css`) to your webpage. Then just initialize a new parcelLab object.
+Just add the following files (`parcelLab.min.js` and `fontawesome.min.css` and `parcelLab.min.css`) to your webpage. Then just initialize a new parcelLab object.
 ```html
 <head>
   ...
-  <link href="https://cdn.parcellab.com/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://cdn.parcellab.com/css/v2/parcelLab.min.css" rel="stylesheet">
+  <link href="https://cdn.parcellab.com/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
   ...
