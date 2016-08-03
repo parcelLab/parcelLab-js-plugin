@@ -52,7 +52,7 @@ Minified `parcelLab.min.js` and `parcelLab.min.css` will be in the build dir.
 $ npm run test
 ```
 
-### Deploy - coming soon !!!
+### Deploy
 ```bash
 $ npm run deploy
 ```
