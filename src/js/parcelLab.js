@@ -1,23 +1,20 @@
 const Api = require('./lib/api'); // TODO: drop this for native code [fetch]
-const defaultsDeep = require('./lib/utils/defaultsDeep');
 const statics = require('./lib/static');
-const Checkpoints = require('./lib/checkpoints');
-const Lang = require('./lib/utils/lang');
-const Templates = require('../templates');
+const Template = require('../hbs');
 
-const CURRENT_VERSION_TAG = 'P7VM86ZW';
+var $ = require('cash-dom');
+
+if (typeof window.jQuery === 'function')
+  $ = window.jQuery;
+
+const CURRENT_VERSION_TAG = 'PZ1T2QYQ';
 const BASE_URL = 'https://api.parcellab.com/';
 const ENDPOINT = 'v2/checkpoints';
-const VERSIONURL = 'https://cdn.parcellab.com/js/v2/version.txt';
-const CSS_URL = 'https://localhost:3000/parcelLab.min.css'; // TODO: change this
-
-// const FA_URL = 'http://localhost:3000/parcelLab.min.css';
+const VERSION_URL = 'https://cdn.parcellab.com/js/v2/version.txt';
 
 /**
  *   TODO:
- *   (clean legacy code)
- *   (setLang method)
- *   (get & render sendrInfos if enabled)
+ *   (get & render shop-infos if needed)
  *   (render components to optional domNodes)
  */
 
@@ -54,18 +51,16 @@ class ParcelLab {
   constructor(rootNodeQuery=defaultRootNodeQuery, opts=defaultOpts) {
     // set rootNode
     if (rootNodeQuery && typeof rootNodeQuery === 'string') {
-      var rootNode = document.querySelector(rootNodeQuery);
-      if (rootNode) {
+      if ($(rootNodeQuery).get(0)) {
         this.rootNodeQuery = rootNodeQuery;
-        this.rootNode = rootNode;
+        this.$ = $(rootNodeQuery);
         this._langCode = navigator.language || navigator.userLanguage;
       } else {
         console.error('🙀 Could not find the rootNode ~> ' + rootNodeQuery);
       }
     }
 
-    // fill up opts with defaultOpts
-    this.options = defaultsDeep(opts, defaultOpts);
+    this.options = opts;
   }
 
   ///////////////////////
@@ -88,6 +83,7 @@ class ParcelLab {
       if (err) return this.handleError(err);
       else {
         this.renderHTML(this.checkpointsToHTML(res));
+        this.bindEvents();
       }
     });
   }
@@ -100,6 +96,20 @@ class ParcelLab {
       this.handleError('Could not detect user language ... fallback to [EN]!');
       this.lang = statics.languages.en;
     }
+  }
+
+  props() {
+    return {
+      trackingNo: this.trackingNo,
+      orderNo: this.orderNo,
+      courier: this.courier,
+      userId: this.userId,
+      lang: this.lang,
+    };
+  }
+
+  getCheckpoints(callback) {
+    Api.get(Api.toURL(BASE_URL, ENDPOINT, this.propsToQuery()), true, callback);
   }
 
   handleError(err) {
@@ -123,7 +133,7 @@ class ParcelLab {
     }
 
     console.log('👻 Searching for new parcelLab.js version...');
-    Api.getNewestVersionTag(VERSIONURL, (err, versionTag)=> {
+    Api.get(VERSION_URL, false, (err, versionTag)=> {
       if (err) this.handleError(err);
       else {
         if (versionTag !== CURRENT_VERSION_TAG) {
@@ -133,15 +143,6 @@ class ParcelLab {
         }
       }
     });
-  }
-
-  loadCSS() {
-    var link = document.createElement('link');
-    link.href = CSS_URL;
-    link.type = 'text/css';
-    link.rel = 'stylesheet';
-    link.media = 'screen,print';
-    document.getElementsByTagName('head')[0].appendChild(link);
   }
 
   getUrlQuery(key, url) {
@@ -168,7 +169,7 @@ class ParcelLab {
     } else {
       var errMsg = 'ParcelLab instance has no trackingNo or orderNo! Check the url...';
       this.renderHTML(
-        `<div class="pl-alert alert-danger">
+        `<div class="pl-alert pl-alert-danger">
           <i class="fa fa-error"></i> ${statics.translations[this.lang.code].error.delivery}
         </div>`
       );
@@ -179,78 +180,52 @@ class ParcelLab {
     return result;
   }
 
-  //////////////////
-  // API wrappers //
-  //////////////////
-
-  getCheckpoints(callback) {
-    var lang = new Lang(this.lang, null);
-    Checkpoints.getCheckpoints(BASE_URL, ENDPOINT, this.propsToQuery(), lang, callback);
-  }
-
   ///////////////////////////
   // DOM affecting methods //
   ///////////////////////////
 
   loading(isLoading=true) {
     if (isLoading) {
-      this.rootNode.innerHTML = `<div class="loading"><i class="fa fa-refresh fa-spin"></i></div>`;
+      this.$.html(`<div class="pl-loading"><i class="fa fa-refresh fa-spin"></i></div>`);
     } else {
-      this.rootNode.innerHTML = '';
+      this.$.html('');
     }
   }
 
   bindEvents() {
-    // TODO: use external lib for dom stuff because of fkn firefox...
-    // show more
-    document.querySelector('.pl-btn.show-more-button').addEventListener('click', (e)=> {
+    this.$.find('.pl-action.pl-show-more-button').on('click', (e)=> {
       e.preventDefault();
-      var allRows = document.querySelectorAll('.pl-row.pl-alert.hidden');
-      [].forEach.call(allRows, (row) => {
-        row.className = row.className.replace('hidden', '');
-      });
-      document.querySelector('.pl-btn.show-more-button').remove();
+      $('.pl-row.pl-alert.hidden').removeClass('hidden');
+      $('.pl-action.pl-show-more-button').remove();
     });
 
-    // toggle tabs
-    var allTabBtns = document.querySelectorAll('.pl-tab.pl-btn');
-    [].forEach.call(allTabBtns, (elem) => {
-      elem.addEventListener('click', (e)=> {
-        e.preventDefault();
-        var allTrackings = document.querySelectorAll('div.parcel_lab_tracking');
+    this.$.find('.pl-tab.pl-btn').on('click', function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      var $allTrackings = $('div.parcel_lab_tracking');
 
-        // remove active from all btns
-        [].forEach.call(allTabBtns, (btn) => {
-          btn.classList.remove('active');
-        });
+      // toggle all active
+      $('.pl-tab.pl-btn').removeClass('pl-active');
+      $this.addClass('pl-active');
 
-        // first hide all
-        [].forEach.call(allTrackings, (tracking) => {
-          tracking.classList.add('hidden');
-        });
-
-        // set btn to active
-        elem.classList.add('active');
-
-        // show only current trackings
-        document.getElementById(elem.getAttribute('href')).classList.remove('hidden');
-      });
+      // toggle all hidden
+      $allTrackings.addClass('hidden');
+      $(`#${$this.attr('href')}`).removeClass('hidden');
     });
   }
 
   checkpointsToHTML(checkpointData) {
-    var html = Templates.get('checkpoints')(checkpointData);
+    var context = {
+      data: checkpointData,
+      props: this.props(),
+    };
+    var html = Template(context);
     return html;
   }
 
   renderHTML(html) {
     this.loading(false);
-    this.rootNode.innerHTML = html;
-    try {
-      this.bindEvents();
-    } catch (e) {
-      this.handleError(e);
-    }
+    this.$.html(html);
   }
 }
 

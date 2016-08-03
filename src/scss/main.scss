@@ -34,7 +34,7 @@
     .pl-col:first-child {
       margin-left: 0; }
     .pl-col-4 { width: 30.6666666667%; }
-    .pl-col-6 { width: 48%;}
+    .pl-col-6 { width: 48%; }
     .pl-col-12 { width: 100%; margin-left: 0; }
 
   }
@@ -43,9 +43,25 @@
     display: table;
     clear: both; }
 
+  .pl-action {
+    color: #eee;
+    .pl-show-more-text {
+      line-height:38px;
+      color:#aaa;
+      transition: all .2s linear;
+    }
+    &:hover {
+      cursor: pointer;
+      color: #bbb !important;
+      .pl-show-more-text {
+        transition: all .2s linear;
+        color: #58B957;
+      }
+    }
+  }
 
   // STYLES
-  div.loading {
+  div.pl-loading {
     padding:25px 0;
     text-align: center;
     font-size: 2em;
@@ -54,29 +70,26 @@
     border: 1px #ddd solid;
     border-radius: 5px;
     background-color: #fff;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    & > .pl-box-heading {
+    padding:0;
+    .pl-box-heading {
       border-bottom: 1px #ddd dashed;
       font-weight: 300;
       font-size: 2em;
-      padding: 0 25px 12.5px;
-      margin-bottom:25px;
+      padding: 25px;
     }
-    & > .pl-box-body {
-      padding: 0 25px
+    .pl-box-body {
+      padding: 0 25px;
     }
-    & > .pl-box-footer {
-      padding-bottom: 20px;
-      padding-top: 5px;
+    .pl-box-footer {
+      border-top: 1px #ddd dashed;
+      padding: 10px 25px;
     }
   }
-  .img-responsive {
+  .pl-img-responsive {
       display: block;
       max-width: 100%;
       height: auto;
   }
-
   div.pl-row {
     margin: 0;
   	background-image: url("https://cdn.parcellab.com/img/traceline.png");
@@ -99,11 +112,11 @@
     padding: 15px;
     border: 1px solid transparent;
     border-radius: 4px;
-    &.alert-success {
+    &.pl-alert-success {
       background-color: #dff0d8;
       border-color: #d6e9c6;
     }
-    &.alert-danger {
+    &.pl-alert-danger {
       background-color: #f2dede;
       border-color: #ebccd1;
     }
@@ -125,7 +138,7 @@
   a:hover, a:focus {
     text-decoration: none;
   }
-  .alert {
+  .pl-alert {
   	color: #000000;
   }
   .pl-btn {
@@ -152,7 +165,7 @@
     &:hover {
       cursor: pointer;
     }
-  	&.active {
+  	&.pl-active {
   		background: whitesmoke;
   		opacity: 1;
   	}
@@ -165,7 +178,7 @@
   		margin-right: 4px;
   	}
   }
-  div.prediction {
+  div.pl-prediction {
   	margin-bottom: 12px;
   	.no-background {
   		background-image: none !important;
@@ -176,5 +189,10 @@
   		margin-top: 10px;
   		margin-bottom: 14px;
   	}
+  }
+  div.pl-more-infos {
+    border: 1px #ddd dashed;
+    padding: 10px 15px;
+    border-radius: 5px;
   }
 }

@@ -4,25 +4,36 @@ var status = {
   OK: 200,
 };
 
-var getNewestVersionTag = function (versionFileUrl, callback) {
-  var request = new XMLHttpRequest();
-  request.open('GET', versionFileUrl);
-  request.onreadystatechange = function () {
-    if (request.readyState === status.DONE) {
-      if (request.status >= 200 && request.status < 300) {
-        callback(null, request.responseText.trim());
-      } else {
-        callback(request.responseText, null);
+var get = function (url, isJson=false, callback) {
+  if (window && window.fetch) {
+    window.fetch(url)
+    .then(res => {
+      if (isJson) return res.json();
+      else return res.text();
+    })
+    .then(json => callback(null, json))
+    .catch(err => callback(err));
+  } else {
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onreadystatechange = function () {
+      if (request.readyState === status.DONE) {
+        if (request.status >= 200 && request.status < 300) {
+          var res = request.responseText.trim();
+          if (isJson)
+            res = JSON.parse(res);
+          callback(null, res);
+        } else {
+          callback(request.responseText, null);
+        }
       }
-    }
-  };
+    };
 
-  request.send();
+    request.send();
+  }
 };
 
-var loadFromAPI = function (baseUrl, endpoint, query, method, data, callback) {
-  var request = new XMLHttpRequest();
-
+var toURL = function (baseUrl, endpoint, query) {
   var url = baseUrl + endpoint + '/?';
 
   query.forEach(function (param) {
@@ -37,26 +48,7 @@ var loadFromAPI = function (baseUrl, endpoint, query, method, data, callback) {
     url += param.name + '=' + param.value + '&';
   });
 
-  request.open(method, url);
-  request.setRequestHeader('Content-type', 'application/json');
-  request.onreadystatechange = function () {
-    if (request.readyState === status.DONE) {
-      if (request.status >= 200 && request.status < 300) {
-        var response;
-        try {
-          response = JSON.parse(request.responseText);
-          callback(null, response);
-        }
-        catch (e) {
-          callback(null, response);
-        }
-      } else {
-        callback(request.responseText, null);
-      }
-    }
-  };
-
-  request.send(JSON.stringify(data));
+  return url;
 };
 
-module.exports = { loadFromAPI, getNewestVersionTag };
+module.exports = { get, toURL };

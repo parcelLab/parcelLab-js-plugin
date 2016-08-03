@@ -1,0 +1,27 @@
+<div class="pl-row pl-alert pl-{{alert}} {{checkpoint_hidden}}">
+  <div class="pl-icon">
+    <span class="fa-stack fa-lg" style="color:{{transitStatusColor}};">
+      <i class="fa fa-circle-thin fa-stack-2x" style="color:{{transitStatusColor}};"></i>
+      <i class="fa fa-{{transitStatus.icon}} fa-stack-1x" style="color:{{transitStatusColor}};"></i>
+    </span>
+  </div>
+  <div class="pl-text">
+    <small>{{ dateText }}  {{ locationText }}</small><br />
+    <b>{{ checkpoint.status_text }}</b>: {{{ checkpoint.status_details }}}
+  </div>
+</div>
+
+{{#if button}}
+  <div class="pl-row pl-alert pl-action pl-show-more-button">
+    <div class="pl-icon">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle-thin fa-stack-2x" style="color:#eee;"></i>
+        <i class="fa fa-ellipsis-h fa-stack-1x"></i>
+      </span>
+    </div>
+    <div class="pl-text pl-show-more-text">
+      Mehr anzeigen
+      <br>
+    </div>
+  </div>
+{{/if}}

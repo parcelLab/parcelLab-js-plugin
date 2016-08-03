@@ -1,0 +1,52 @@
+<!--
+  layout.hbs
+  -
+  Context:
+    {Object} data - API response data
+    {Object} props - parcelLab instance props
+-->
+
+
+<!-- Heading -->
+<div class="pl-box">
+
+    <div class="pl-box-heading">
+      {{generateHeading data props}}
+    </div>
+
+    <!-- Tabs -->
+    <div class="pl-container" style="padding: 15px 25px 0;">
+      {{#tabbify data props}}
+        {{> tab}}
+      {{/tabbify}}
+    </div>
+
+
+
+    <!-- Trackings-Container -->
+    {{#trackify data props}}
+      <div class="parcel_lab_tracking {{#unless visible}}hidden{{/unless}}" id="{{id}}">
+        <div class="pl-box-body">
+
+            <!-- Subheading
+              <div>{{subHeading}}</div -->
+
+            <!-- Prediction -->
+            {{#with prediction}}
+              {{> prediction}}
+            {{/with}}
+
+
+            <div class="pl-padded">
+              {{#each checkpoints}}
+                {{> checkpoint}}
+              {{/each}}
+            </div>
+
+          </div>
+        <div class="pl-box-footer">
+          {{{generateFurtherInfosText this ../this}}}
+        </div>
+      </div>
+    {{/trackify}}
+</div>
