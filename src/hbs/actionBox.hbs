@@ -1,0 +1,26 @@
+{{#equals type "maps"}}
+  <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
+    <div class="pl-box-body" style="padding:0px;height:140px;{{{generateMapBG address}}}">
+    </div>
+  </a>
+{{else}}
+  <div class="pl-box-body" style="padding: 15px;">
+    {{#if label}}<h3 style="text-align:center;">{{label}}</h3>{{/if}}
+
+    {{#equals type "vote-courier"}}
+      <div class="rating-body">
+          <div class="pl-courier-vote up" data-vote="up">
+            <i class="fa fa-thumbs-o-up"></i>
+          </div>
+          <div class="pl-courier-vote down" data-vote="down">
+            <i class="fa fa-thumbs-o-down"></i>
+          </div>
+      </div>
+    {{/equals}}
+
+    {{#equals type "predictio"}}
+      prediction go here
+    {{/equals}}
+
+  </div>
+{{/equals}}

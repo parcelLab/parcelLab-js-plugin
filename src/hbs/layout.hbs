@@ -8,7 +8,15 @@
 
 
 <!-- Heading -->
-<div class="pl-box">
+<div class="pl-container">
+
+<div class="pl-box pl-col pl-col-4" style="margin-bottom:25px;">
+  {{#actionBoxify this.data}}
+    {{> actionBox}}
+  {{/actionBoxify}}
+</div>
+
+<div class="pl-box pl-col pl-col-8">
 
     <div class="pl-box-heading">
       {{generateHeading data props}}
@@ -49,4 +57,6 @@
         </div>
       </div>
     {{/trackify}}
+</div>
+
 </div>

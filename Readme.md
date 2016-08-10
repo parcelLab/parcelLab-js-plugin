@@ -5,6 +5,11 @@ This plugin uses the v2 api and is under development. - use with caution!
 ## For shop users
 ### Adding to your webpage
 Just add the following files (`parcelLab.min.js` and `fontawesome.min.css` and `parcelLab.min.css`) to your webpage. Then just initialize a new parcelLab object.
+
+### Initializing the magic
+After adding the script you will have a new ParcelLab class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
+
+### Example
 ```html
 <head>
   ...
@@ -15,20 +20,11 @@ Just add the following files (`parcelLab.min.js` and `fontawesome.min.css` and `
   ...
   <script src="https://cdn.parcellab.com/js/v2/parcelLab.min.js" charset="utf-8"></script>
   <script type="text/javascript">
-    var parcelLab = new ParcelLab('#some-dom-id');
+    var parcelLab = new ParcelLab('#pl-trace');
+    // trackings container will be rendered to dom-elem. with id="pl-trace"
     parcelLab.initialize();
   </script>
 </body>  
-```
-
-### Initializing the magic
-After adding the script you will have a new ParcelLab class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
-```html
-...
-<script type="text/javascript">
-  var parcelLab = new ParcelLab('#pl-trace'); // <~ where the trackings will be rendered...
-  parcelLab.initialize();
-</script>
 ```
 
 ## For developers

@@ -33,6 +33,37 @@ var get = function (url, isJson=false, callback) {
   }
 };
 
+var post = function (url, data={}, isJson=false, callback) {
+  console.log(arguments);
+  return callback(); // TODO: remove
+  if (window && window.fetch) {
+    window.fetch(url, { method: 'POST', body: JSON.stringify(data), })
+    .then(res => {
+      if (isJson) return res.json();
+      else return res.text();
+    })
+    .then(json => callback(null, json))
+    .catch(err => callback(err));
+  } else {
+    var request = new XMLHttpRequest();
+    request.open('POST', url);
+    request.onreadystatechange = function () {
+      if (request.readyState === status.DONE) {
+        if (request.status >= 200 && request.status < 300) {
+          var res = request.responseText.trim();
+          if (isJson)
+            res = JSON.parse(res);
+          callback(null, res);
+        } else {
+          callback(request.responseText, null);
+        }
+      }
+    };
+
+    request.send(JSON.stringify(data));
+  }
+};
+
 var toURL = function (baseUrl, endpoint, query) {
   var url = baseUrl + endpoint + '/?';
 
@@ -51,4 +82,4 @@ var toURL = function (baseUrl, endpoint, query) {
   return url;
 };
 
-module.exports = { get, toURL };
+module.exports = { get, post, toURL };

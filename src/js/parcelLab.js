@@ -10,6 +10,7 @@ if (typeof window.jQuery === 'function')
 const CURRENT_VERSION_TAG = 'PZ1T2QYQ';
 const BASE_URL = 'https://api.parcellab.com/';
 const ENDPOINT = 'v2/checkpoints';
+const VOTE_ENDPOINT = 'v2/vote-courier/';
 const VERSION_URL = 'https://cdn.parcellab.com/js/v2/version.txt';
 
 /**
@@ -193,13 +194,15 @@ class ParcelLab {
   }
 
   bindEvents() {
-    this.$.find('.pl-action.pl-show-more-button').on('click', (e)=> {
+    var _this = this;
+
+    _this.$.find('.pl-action.pl-show-more-button').on('click', (e)=> {
       e.preventDefault();
       $('.pl-row.pl-alert.hidden').removeClass('hidden');
       $('.pl-action.pl-show-more-button').remove();
     });
 
-    this.$.find('.pl-tab.pl-btn').on('click', function (e) {
+    _this.$.find('.pl-tab.pl-btn').on('click', function (e) {
       e.preventDefault();
       var $this = $(this);
       var $allTrackings = $('div.parcel_lab_tracking');
@@ -211,6 +214,17 @@ class ParcelLab {
       // toggle all hidden
       $allTrackings.addClass('hidden');
       $(`#${$this.attr('href')}`).removeClass('hidden');
+    });
+
+    _this.$.find('.pl-courier-vote').on('click', function (e) {
+      var vote = this.dataset.vote;
+      var url = Api.toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _this.propsToQuery());
+      Api.post(url, null, false, (err, res)=> {
+        if (err) return _this.handleError(err);
+        else {
+          _this.$.find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
+        }
+      });
     });
   }
 
