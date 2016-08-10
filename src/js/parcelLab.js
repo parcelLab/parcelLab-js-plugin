@@ -7,7 +7,7 @@ var $ = require('cash-dom');
 if (typeof window.jQuery === 'function')
   $ = window.jQuery;
 
-const CURRENT_VERSION_TAG = 'PZ1T2QYQ';
+const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim();
 const BASE_URL = 'https://api.parcellab.com/';
 const ENDPOINT = 'v2/checkpoints';
 const VOTE_ENDPOINT = 'v2/vote-courier/';
@@ -75,6 +75,7 @@ class ParcelLab {
     this.courier = this.getUrlQuery('courier');
     this.initLanguage();
     this.userId = this.getUrlQuery('u');
+    this.actionBox = true; // HACK: hide on order
 
     this.selfUpdate();
 
@@ -83,6 +84,7 @@ class ParcelLab {
     this.getCheckpoints((err, res)=> {
       if (err) return this.handleError(err);
       else {
+        if (res.header.length >= 2) this.actionBox = false; // TODO: kill
         this.renderHTML(this.checkpointsToHTML(res));
         this.bindEvents();
       }
@@ -106,6 +108,7 @@ class ParcelLab {
       courier: this.courier,
       userId: this.userId,
       lang: this.lang,
+      actionBox: this.actionBox, // TODO: kill
     };
   }
 
@@ -195,13 +198,14 @@ class ParcelLab {
 
   bindEvents() {
     var _this = this;
-
+    // show more checkpoints
     _this.$.find('.pl-action.pl-show-more-button').on('click', (e)=> {
       e.preventDefault();
       $('.pl-row.pl-alert.hidden').removeClass('hidden');
       $('.pl-action.pl-show-more-button').remove();
     });
 
+    // toggle tabs
     _this.$.find('.pl-tab.pl-btn').on('click', function (e) {
       e.preventDefault();
       var $this = $(this);
@@ -216,12 +220,15 @@ class ParcelLab {
       $(`#${$this.attr('href')}`).removeClass('hidden');
     });
 
+    // vote courier
     _this.$.find('.pl-courier-vote').on('click', function (e) {
       var vote = this.dataset.vote;
       var url = Api.toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _this.propsToQuery());
       Api.post(url, null, false, (err, res)=> {
-        if (err) return _this.handleError(err);
-        else {
+        if (err) {
+          _this.handleError(err);
+        } else {
+          _this.$.find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
           _this.$.find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
         }
       });

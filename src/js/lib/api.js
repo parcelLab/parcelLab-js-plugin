@@ -34,8 +34,6 @@ var get = function (url, isJson=false, callback) {
 };
 
 var post = function (url, data={}, isJson=false, callback) {
-  console.log(arguments);
-  return callback(); // TODO: remove
   if (window && window.fetch) {
     window.fetch(url, { method: 'POST', body: JSON.stringify(data), })
     .then(res => {

@@ -1,6 +1,10 @@
 {{#equals type "maps"}}
   <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
-    <div class="pl-box-body" style="padding:0px;height:140px;{{{generateMapBG address}}}">
+    <div class="pl-box-body pl-box-maps" style="{{{generateMapBG address}}}">
+      <div class="pl-box-action-info">
+        <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
+        {{address}}
+      </div>
     </div>
   </a>
 {{else}}
@@ -18,9 +22,9 @@
       </div>
     {{/equals}}
 
-    {{#equals type "predictio"}}
+    {{#equals type "prediction"}}
       prediction go here
     {{/equals}}
-
+    
   </div>
 {{/equals}}

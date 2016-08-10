@@ -1,0 +1,134 @@
+.pl-action {
+  color: #eee;
+  .pl-show-more-text {
+    line-height:38px;
+    color:#aaa;
+    transition: all .2s linear;
+  }
+  &:hover {
+    cursor: default;
+    // cursor: pointer;
+    color: #bbb !important;
+    .pl-show-more-text {
+      transition: all .2s linear;
+      color: #58B957;
+    }
+  }
+}
+
+div.pl-row {
+  margin: 0;
+  background-image: url("https://cdn.parcellab.com/img/traceline.png");
+  background-repeat: repeat-y;
+  background-position: 33px -2px;
+  &:first-of-type {
+    background-image: url("https://cdn.parcellab.com/img/traceline-first.png");
+  }
+  &:last-of-type {
+    background-position: 33px -2px;
+    background-repeat: no-repeat;
+    padding-top: 15px;
+  }
+  &:last-of-type:first-of-type {
+    background: none;
+  }
+}
+
+div.pl-alert {
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  &.pl-alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  &.pl-alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+}
+
+div.pl-icon {
+  float: left;
+  margin-top: 0px;
+  margin-right: 15px;
+  &>.fa-stack > *{
+    color: #AAA;
+  }
+}
+
+div.pl-text{
+  display: table-cell;
+}
+
+a.lang-select:hover {
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+.pl-alert {
+  color: #000000;
+}
+
+.pl-btn {
+  padding: 5px 10px;
+  line-height: 1.5;
+  border-radius: 3px;
+  margin-top: 30px;
+  background: white;
+  border: 1px solid #B2B2B2 !important;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  // cursor: pointer;
+}
+
+.pl-btn-block {
+  width: 100%;
+}
+
+div.pl-tab {
+  margin: 0px 0 15px;
+  padding: 8px;
+  opacity: 0.5;
+  &:hover {
+    // cursor: pointer;
+    cursor: default;
+    opacity: 0.8;
+  }
+  &.pl-active {
+    background: whitesmoke;
+    opacity: 1;
+  }
+  div + div {
+    text-align: left;
+  }
+  .pl-status {
+    display: block;
+    float: right;
+    margin-right: 4px;
+  }
+}
+
+div.pl-prediction {
+  margin-bottom: 12px;
+  .no-background {
+    background-image: none !important;
+    padding-top: 0;
+    padding-bottom: 1px;
+  }
+  p {
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
+}
+
+div.pl-more-infos {
+  border: 1px #ddd dashed;
+  padding: 10px 15px;
+  border-radius: 5px;
+}

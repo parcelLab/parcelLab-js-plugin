@@ -10,20 +10,25 @@
 <!-- Heading -->
 <div class="pl-container">
 
-<div class="pl-box pl-col pl-col-4" style="margin-bottom:25px;">
-  {{#actionBoxify this.data}}
-    {{> actionBox}}
-  {{/actionBoxify}}
-</div>
 
-<div class="pl-box pl-col pl-col-8">
+  <!-- Action box -->
+  {{#if props.actionBox}}
+    <div class="pl-box pl-col pl-col-4" style="margin-bottom:25px;">
+        {{#with data.header.0.actionBox}}
+          {{> actionBox}}
+        {{/with}}
+    </div>
+  {{/if}}
 
-    <div class="pl-box-heading">
+<!-- content / order /  -->
+<div class="pl-box pl-col {{#if props.actionBox}}pl-col-8{{else}}pl-col-12{{/if}}">
+
+    <div class="pl-box-heading" style="margin-bottom: 15px;">
       {{generateHeading data props}}
     </div>
 
     <!-- Tabs -->
-    <div class="pl-container" style="padding: 15px 25px 0;">
+    <div class="pl-container" style="padding: 0 25px;">
       {{#tabbify data props}}
         {{> tab}}
       {{/tabbify}}
