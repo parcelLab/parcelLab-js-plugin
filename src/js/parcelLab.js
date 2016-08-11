@@ -84,7 +84,6 @@ class ParcelLab {
     this.getCheckpoints((err, res)=> {
       if (err) return this.handleError(err);
       else {
-        res.header[0].actionBox = {type: 'maps', address: 'Crailsheim'};
         if (res.header.length >= 2) this.actionBox = false; // HACK hide on order
         this.renderHTML(this.checkpointsToHTML(res));
         this.bindEvents();
