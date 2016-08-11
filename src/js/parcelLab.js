@@ -1,17 +1,17 @@
 const Api = require('./lib/api'); // TODO: drop this for native code [fetch]
 const statics = require('./lib/static');
 const Template = require('../hbs');
+const _settings = require('json!../../settings.json');
 
 var $ = require('cash-dom');
-
 if (typeof window.jQuery === 'function')
   $ = window.jQuery;
 
 const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim();
-const BASE_URL = 'https://api.parcellab.com/';
-const ENDPOINT = 'v2/checkpoints';
-const VOTE_ENDPOINT = 'v2/vote-courier/';
-const VERSION_URL = 'https://cdn.parcellab.com/js/v2/version.txt';
+const BASE_URL = _settings.base_url;
+const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint;
+const VOTE_ENDPOINT = _settings.vote_endpoint;
+const VERSION_URL = _settings.version_url;
 
 /**
  *   TODO:
@@ -84,6 +84,7 @@ class ParcelLab {
     this.getCheckpoints((err, res)=> {
       if (err) return this.handleError(err);
       else {
+        res.header[0].actionBox = {type: 'maps', address: 'Crailsheim'};
         if (res.header.length >= 2) this.actionBox = false; // HACK hide on order
         this.renderHTML(this.checkpointsToHTML(res));
         this.bindEvents();
@@ -113,7 +114,7 @@ class ParcelLab {
   }
 
   getCheckpoints(callback) {
-    Api.get(Api.toURL(BASE_URL, ENDPOINT, this.propsToQuery()), true, callback);
+    Api.get(Api.toURL(BASE_URL, CHECKPOINTS_ENDPOINT, this.propsToQuery()), true, callback);
   }
 
   handleError(err) {

@@ -1,0 +1,6 @@
+{
+  "base_url": "https://api.parcellab.com/",
+  "checkpoints_endpoint": "v2/checkpoints",
+  "vote_endpoint": "v2/vote-courier/",
+  "version_url": "https://cdn.parcellab.com/js/v2/version.txt"
+}
