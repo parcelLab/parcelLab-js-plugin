@@ -11,14 +11,19 @@
 <div class="pl-container">
 
 
-  <!-- Action box -->
-  {{#if props.actionBox}}
-    <div class="pl-box pl-col pl-col-4" style="margin-bottom:25px;">
-        {{#with data.header.0.actionBox}}
-          {{> actionBox}}
-        {{/with}}
-    </div>
-  {{/if}}
+  <!--
+    HACK display none for people not using our css
+  -->
+  <aside  style="display: none;" class="pl-box-aside">
+    {{#if props.actionBox}}
+      <div class="pl-box pl-col pl-col-4" style="margin-bottom:25px;">
+          {{#with data.header.0.actionBox}}
+            <!-- Action box -->
+            {{> actionBox}}
+          {{/with}}
+      </div>
+    {{/if}}
+  </aside>
 
 <!-- content / order /  -->
 <div class="pl-box pl-col {{#if props.actionBox}}pl-col-8{{else}}pl-col-12{{/if}}">

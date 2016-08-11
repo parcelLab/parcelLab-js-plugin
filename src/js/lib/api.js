@@ -37,8 +37,12 @@ var post = function (url, data={}, isJson=false, callback) {
   if (window && window.fetch) {
     window.fetch(url, { method: 'POST', body: JSON.stringify(data), })
     .then(res => {
-      if (isJson) return res.json();
-      else return res.text();
+      if (res.status >= 200 && res.status < 300) {
+        if (isJson) return res.json();
+        else return res.text();
+      } else {
+        throw new Error(`Request Error at fetch POST: ${res.status} ~> ${res.statusText}`);
+      }
     })
     .then(json => callback(null, json))
     .catch(err => callback(err));
@@ -53,7 +57,10 @@ var post = function (url, data={}, isJson=false, callback) {
             res = JSON.parse(res);
           callback(null, res);
         } else {
-          callback(request.responseText, null);
+          callback(
+            `Request Error at fetch POST: ${request.status} ~> ${request.responseText}`,
+            null
+          );
         }
       }
     };

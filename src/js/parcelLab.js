@@ -75,7 +75,7 @@ class ParcelLab {
     this.courier = this.getUrlQuery('courier');
     this.initLanguage();
     this.userId = this.getUrlQuery('u');
-    this.actionBox = true; // HACK: hide on order
+    this.actionBox = true; // HACK
 
     this.selfUpdate();
 
@@ -84,7 +84,7 @@ class ParcelLab {
     this.getCheckpoints((err, res)=> {
       if (err) return this.handleError(err);
       else {
-        if (res.header.length >= 2) this.actionBox = false; // TODO: kill
+        if (res.header.length >= 2) this.actionBox = false; // HACK hide on order
         this.renderHTML(this.checkpointsToHTML(res));
         this.bindEvents();
       }
@@ -198,6 +198,7 @@ class ParcelLab {
 
   bindEvents() {
     var _this = this;
+
     // show more checkpoints
     _this.$.find('.pl-action.pl-show-more-button').on('click', (e)=> {
       e.preventDefault();
@@ -222,13 +223,19 @@ class ParcelLab {
 
     // vote courier
     _this.$.find('.pl-courier-vote').on('click', function (e) {
+      e.preventDefault();
       var vote = this.dataset.vote;
       var url = Api.toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _this.propsToQuery());
-      Api.post(url, null, false, (err, res)=> {
+      _this.$.find('.rating-body').html('<i class="fa fa-refresh fa-spin fa-2x"></i>');
+      Api.post(url, null, false, (err)=> {
         if (err) {
           _this.handleError(err);
+          _this.$.find('.rating-body').html(`
+            <small style="text-align:center;">
+              An Error occurred, we are very sorry 😥
+            </small>
+          `);
         } else {
-          _this.$.find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
           _this.$.find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
         }
       });
