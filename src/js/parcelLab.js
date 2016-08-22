@@ -59,12 +59,6 @@ class ParcelLab {
       if (err) return this.handleError(err);
       else {
 
-        // HACK -- TESTING
-        res.header[0].actionBox = {
-          type: 'prediction',
-          label: 'Voraussichtliches Zustelldatum:',
-        };
-
         if (res.header.length >= 2) this.showActionBox = false; // HACK
 
         // render layout and bind events
@@ -116,7 +110,7 @@ class ParcelLab {
   getPrediction(callback) {
     // Api.get(Api.toURL(BASE_URL, PREDICTION_ENDPOINT, this.propsToQuery()), callback);
     Api.get(
-      Api.toURL('http://localhost:16139/', 'prediction/tracking', this.propsToQuery()),
+      Api.toURL(BASE_URL, PREDICTION_ENDPOINT, this.propsToQuery()),
       callback
     );
   }
