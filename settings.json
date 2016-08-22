@@ -2,5 +2,29 @@
   "base_url": "https://api.parcellab.com/",
   "checkpoints_endpoint": "v2/checkpoints",
   "vote_endpoint": "v2/vote-courier/",
-  "version_url": "https://cdn.parcellab.com/js/v2/version.txt"
+  "prediction_endpoint": "prediction",
+  "version_url": "https://cdn.parcellab.com/js/v2/version.txt",
+  "default_root_node": "#parcelLab-trace-wrapper",
+  "defualt_opts": {
+    "senderInfos": {
+      "enabled": false,
+      "bindToNodes": {
+        "faq": "#parcelLab-faq",
+        "imprint": "#parcelLab-imprint-link",
+        "questionBox": "#tickets-holder",
+        "infoBox": "#parcelLab-sender",
+        "resultBox": "#result-ticket"
+      }
+    },
+    "languageSelector": {
+      "rootNode": "#parcelLab-lang-wrapper"
+    },
+    "errorMessages": {
+      "bindToNodes": {
+        "trace": "#parcelLab-trace-wrapper",
+        "sender": "#parcelLab-sender"
+      }
+    }
+  }
+
 }

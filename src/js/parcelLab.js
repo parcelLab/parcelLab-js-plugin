@@ -1,55 +1,31 @@
-const Api = require('./lib/api'); // TODO: drop this for native code [fetch]
-const statics = require('./lib/static');
-const Template = require('../hbs');
-const _settings = require('json!../../settings.json');
-
+// deps
 var $ = require('cash-dom');
 if (typeof window.jQuery === 'function')
   $ = window.jQuery;
 
+// libs
+const Api = require('./lib/api');
+const statics = require('./lib/static');
+const Template = require('../hbs');
+const _settings = require('json!../../settings.json');
+
+// settings
 const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim();
 const BASE_URL = _settings.base_url;
 const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint;
 const VOTE_ENDPOINT = _settings.vote_endpoint;
+const PREDICTION_ENDPOINT = _settings.prediction_endpoint;
 const VERSION_URL = _settings.version_url;
+const DEFAULT_ROOT_NODE = _settings.default_root_node;
+const DEFAULT_OPTS = _settings.default_opts;
 
 /**
- *   TODO:
- *   (get & render shop-infos if needed)
- *   (render components to optional domNodes)
- */
-
-var defaultRootNodeQuery = '#parcelLab-trace-wrapper';
-var defaultOpts = {
-  senderInfos: {
-    enabled: true,
-    bindToNodes: {
-      faq: '#parcelLab-faq',
-      imprint: '#parcelLab-imprint-link',
-      questionBox: '#tickets-holder',
-      infoBox: '#parcelLab-sender',
-      resultBox: '#result-ticket',
-    },
-  },
-  languageSelector: {
-    rootNode: '#parcelLab-lang-wrapper',
-  },
-  errorMessages: {
-    bindToNodes: {
-      trace: '#parcelLab-trace-wrapper',
-      sender: '#parcelLab-sender',
-    },
-  },
-};
-
-/**
- * {Class} ParcelLab
- *   usage:
- *     var parcelLab = new ParcelLab('#root-node-for-checkpoints', opts);
- *     parcelLab.initialize();
+ * {class} ParcelLab
+ * find information about usage at
+ * ~> https://github.com/parcelLab/parcelLab-js-plugin
  */
 class ParcelLab {
-  constructor(rootNodeQuery=defaultRootNodeQuery, opts=defaultOpts) {
+  constructor(rootNodeQuery=DEFAULT_ROOT_NODE, opts=DEFAULT_OPTS) {
     // set rootNode
     if (rootNodeQuery && typeof rootNodeQuery === 'string') {
       if ($(rootNodeQuery).get(0)) {
@@ -75,18 +51,38 @@ class ParcelLab {
     this.courier = this.getUrlQuery('courier');
     this.initLanguage();
     this.userId = this.getUrlQuery('u');
-    this.actionBox = true; // HACK
+    this.showActionBox = true; // HACK
 
     this.selfUpdate();
-
-    // this.loadCSS(); // TODO: problems with fa css
 
     this.getCheckpoints((err, res)=> {
       if (err) return this.handleError(err);
       else {
-        if (res.header.length >= 2) this.actionBox = false; // HACK hide on order
+
+        // HACK -- TESTING
+        res.header[0].actionBox = {
+          type: 'prediction',
+          label: 'Voraussichtliches Zustelldatum:',
+        };
+
+        if (res.header.length >= 2) this.showActionBox = false; // HACK
+
+        // render layout and bind events
         this.renderHTML(this.checkpointsToHTML(res));
         this.bindEvents();
+
+        // get prediction
+        if (res.header[0].actionBox.type === 'prediction') {
+          this.getPrediction((err, res) => {
+            if (err) {
+              this.handleError(err);
+              this.$.find('aside').remove();
+              this.$.find('.pl-main.pl-col-8').removeClass('pl-col-8').addClass('pl-col-12');
+            }
+
+            if (res && res.actionBox) this.renderPrediciton(res.actionBox);
+          });
+        }
       }
     });
   }
@@ -108,16 +104,25 @@ class ParcelLab {
       courier: this.courier,
       userId: this.userId,
       lang: this.lang,
-      actionBox: this.actionBox, // TODO: kill
+      showActionBox: this.showActionBox, // HACK
     };
   }
 
+  // TODO: transfer em to api.js
   getCheckpoints(callback) {
-    Api.get(Api.toURL(BASE_URL, CHECKPOINTS_ENDPOINT, this.propsToQuery()), true, callback);
+    Api.get(Api.toURL(BASE_URL, CHECKPOINTS_ENDPOINT, this.propsToQuery()), callback);
+  }
+
+  getPrediction(callback) {
+    // Api.get(Api.toURL(BASE_URL, PREDICTION_ENDPOINT, this.propsToQuery()), callback);
+    Api.get(
+      Api.toURL('http://localhost:16139/', 'prediction/tracking', this.propsToQuery()),
+      callback
+    );
   }
 
   handleError(err) {
-    // TODO: send to sentry bro
+    // TODO: send to sentry
     if (typeof err === 'string')
       console.error(`🙀  ${err}`);
     else if (typeof err === 'object')
@@ -137,7 +142,7 @@ class ParcelLab {
     }
 
     console.log('👻 Searching for new parcelLab.js version...');
-    Api.get(VERSION_URL, false, (err, versionTag)=> {
+    Api.get(VERSION_URL, (err, versionTag)=> {
       if (err) this.handleError(err);
       else {
         if (versionTag !== CURRENT_VERSION_TAG) {
@@ -227,7 +232,7 @@ class ParcelLab {
       var vote = this.dataset.vote;
       var url = Api.toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _this.propsToQuery());
       _this.$.find('.rating-body').html('<i class="fa fa-refresh fa-spin fa-2x"></i>');
-      Api.post(url, null, false, (err)=> {
+      Api.post(url, {}, (err)=> {
         if (err) {
           _this.handleError(err);
           _this.$.find('.rating-body').html(`
@@ -254,6 +259,34 @@ class ParcelLab {
   renderHTML(html) {
     this.loading(false);
     this.$.html(html);
+  }
+
+  renderPrediciton(data) {
+    console.log(data);
+    var $predictionRoot = this.$.find('.pl-box-prediction');
+    if (!data || !data.label || !data.dateOfMonth || !data.month || !data.dayOfWeek) {
+      var $aside = $predictionRoot.parent().parent();
+      return $aside.removeClass('pl-box-aside');
+    }
+
+    var cal = `
+      <div class="pl-cal-week-day">${data.dayOfWeek}</div>
+      <div class="pl-cal-day">${data.dateOfMonth}</div>
+      <div class="pl-cal-month">${data.month}</div>
+    `;
+    $predictionRoot.html(cal);
+    this.$.find('.pl-prediction-caption').html(data.caption);
+    if (data.startTime) {
+      var timeText = data.startTime;
+      if (data.endTime) timeText += ' - ' + data.endTime;
+      if (data.timeCaption) timeText += `<br> <small>${data.timeCaption}</small>`;
+      this.$.find('.pl-time-container').html(`
+        <div class="pl-box pl-box-time">
+          ${timeText}
+        </div>
+      `);
+      this.$.find('.pl-time-caption').html(data.caption);
+    }
   }
 }
 

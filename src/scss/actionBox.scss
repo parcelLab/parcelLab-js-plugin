@@ -114,3 +114,43 @@ h3 {
     color: #eee !important;
   }
 };
+
+.pl-box-cal-heading {
+  padding: 8px;
+  // background-color: rgb(29, 141, 189);
+  // background-color: rgb(71, 71, 71);
+  background-color: rgb(209, 74, 74);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-color: #eee !important;
+  h3 {
+    color: #eee;
+    margin: 0;
+  }
+}
+.pl-box-cal-body {
+  margin: 25px 0;
+  text-align: center;
+  font-size: 20px;
+  position: relative;
+  .pl-cal-day {
+    font-weight: bold;;
+    font-size: 50px;
+  }
+  .pl-cal-week-day {
+    font-weight: 200;
+    font-size: 15px;
+  }
+  .pl-cal-month {
+    font-weight: 200;
+    font-size: 15px;
+  }
+}
+
+.pl-box-cal-btn {
+  font-size: 18px;
+  color: #ddd;
+  position: absolute;
+  top: -25px;
+  right: 5px;
+}

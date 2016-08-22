@@ -1,5 +1,4 @@
 {{#equals type "maps"}}
-  <!-- Maps  -->
   <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
     <div class="pl-box-body pl-box-maps" style="{{{generateMapBG address}}}">
       <div class="pl-box-action-info">
@@ -11,27 +10,31 @@
       </div>
     </div>
   </a>
-{{else}}
-  {{#if type}}
-    <div class="pl-box-body" style="padding: 15px;">
-      {{#if label}}<h3 style="text-align:center;">{{label}}</h3>{{/if}}
+{{/equals}}
 
-      <!-- Vote -->
-      {{#equals type "vote-courier"}}
-        <div class="rating-body">
-            <div class="pl-courier-vote up" data-vote="up">
-              <i class="fa fa-thumbs-o-up"></i>
-            </div>
-            <div class="pl-courier-vote down" data-vote="down">
-              <i class="fa fa-thumbs-o-down"></i>
-            </div>
+{{#equals type "vote-courier"}}
+  <div class="pl-box-body" style="padding: 15px;">
+    {{#if label}}<h3 style="text-align:center;">{{label}}</h3>{{/if}}
+    <div class="rating-body">
+        <div class="pl-courier-vote up" data-vote="up">
+          <i class="fa fa-thumbs-o-up"></i>
         </div>
-      {{/equals}}
+        <div class="pl-courier-vote down" data-vote="down">
+          <i class="fa fa-thumbs-o-down"></i>
+        </div>
+    </div>
+  </div>
+{{/equals}}
 
-      {{#equals type "prediction"}}
-        prediction go here
-      {{/equals}}
-
+{{#equals type "prediction"}}
+  {{#if label}}
+    <div class="pl-box-heading pl-box-cal-heading">
+      <h3 style="text-align:center;">{{label}}</h3>
     </div>
   {{/if}}
+  <div class="pl-box-body pl-box-cal-body pl-box-prediction">
+      <div class="pl-loading">
+        <i class="fa fa-spin fa-refresh"></i>
+      </div>
+  </div>
 {{/equals}}
