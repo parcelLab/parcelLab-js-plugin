@@ -70,11 +70,14 @@ class ParcelLab {
           this.getPrediction((err, res) => {
             if (err) {
               this.handleError(err);
-              this.$.find('aside').remove();
-              this.$.find('.pl-main.pl-col-8').removeClass('pl-col-8').addClass('pl-col-12');
+              this.hideActionBox();
             }
 
-            if (res && res.actionBox) this.renderPrediciton(res.actionBox);
+            if (res && res.actionBox) {
+              this.renderPrediciton(res.actionBox);
+            } else {
+              this.hideActionBox();
+            }
           });
         }
       }
@@ -108,7 +111,6 @@ class ParcelLab {
   }
 
   getPrediction(callback) {
-    // Api.get(Api.toURL(BASE_URL, PREDICTION_ENDPOINT, this.propsToQuery()), callback);
     Api.get(
       Api.toURL(BASE_URL, PREDICTION_ENDPOINT, this.propsToQuery()),
       callback
@@ -281,6 +283,11 @@ class ParcelLab {
       `);
       this.$.find('.pl-time-caption').html(data.caption);
     }
+  }
+
+  hideActionBox() {
+    this.$.find('aside').remove();
+    this.$.find('.pl-main.pl-col-8').removeClass('pl-col-8').addClass('pl-col-12');
   }
 }
 
