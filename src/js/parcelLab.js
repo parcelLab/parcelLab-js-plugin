@@ -47,7 +47,9 @@ class ParcelLab {
   //////////////////////
 
   initialize() {
-    Raven.config('https://2b7ac8796fe140b8b8908749849ff1ce@app.getsentry.com/94336').install();
+    Raven.config('https://2b7ac8796fe140b8b8908749849ff1ce@app.getsentry.com/94336', {
+      whitelistUrls: [/cdn\.parcellab\.com/]
+    }).install();
     this.loading();
     this.orderNo = this.getUrlQuery('orderNo');
     this.trackingNo = this.getUrlQuery('trackingNo');
