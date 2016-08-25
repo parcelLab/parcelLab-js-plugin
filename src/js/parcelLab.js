@@ -1,7 +1,8 @@
 // deps
-var $ = require('cash-dom');
+const Raven = require('raven-js');
+var _$ = require('cash-dom');
 if (typeof window.jQuery === 'function')
-  $ = window.jQuery;
+  _$ = window.jQuery;
 
 // libs
 const Api = require('./lib/api');
@@ -28,9 +29,10 @@ class ParcelLab {
   constructor(rootNodeQuery=DEFAULT_ROOT_NODE, opts=DEFAULT_OPTS) {
     // set rootNode
     if (rootNodeQuery && typeof rootNodeQuery === 'string') {
-      if ($(rootNodeQuery).get(0)) {
+      if (_$(rootNodeQuery).get(0)) {
         this.rootNodeQuery = rootNodeQuery;
-        this.$ = $(rootNodeQuery);
+        this.$ = _$(rootNodeQuery);
+        this.$el = ()=> _$(rootNodeQuery);
         this._langCode = navigator.language || navigator.userLanguage;
       } else {
         console.error('🙀 Could not find the rootNode ~> ' + rootNodeQuery);
@@ -45,6 +47,7 @@ class ParcelLab {
   //////////////////////
 
   initialize() {
+    Raven.config('https://2b7ac8796fe140b8b8908749849ff1ce@app.getsentry.com/94336').install();
     this.loading();
     this.orderNo = this.getUrlQuery('orderNo');
     this.trackingNo = this.getUrlQuery('trackingNo');
@@ -58,19 +61,17 @@ class ParcelLab {
     this.getCheckpoints((err, res)=> {
       if (err) return this.handleError(err);
       else {
-
         if (res.header.length >= 2) this.showActionBox = false; // HACK
 
         // render layout and bind events
         this.renderHTML(this.checkpointsToHTML(res));
         this.bindEvents();
-
         // get prediction
-        if (res.header[0].actionBox.type === 'prediction') {
+        if (res && res.header &&res.header[0] && res.header[0].actionBox.type === 'prediction') {
           this.getPrediction((err, res) => {
             if (err) {
-              this.handleError(err);
               this.hideActionBox();
+              this.handleError(err);
             }
 
             if (res && res.actionBox) {
@@ -80,6 +81,7 @@ class ParcelLab {
             }
           });
         }
+      
       }
     });
   }
@@ -105,6 +107,12 @@ class ParcelLab {
     };
   }
 
+  selector(sel) {
+    var res = this.rootNodeQuery;
+    if (sel) res += ` ${sel}`;
+    return res; 
+  }
+
   // TODO: transfer em to api.js
   getCheckpoints(callback) {
     Api.get(Api.toURL(BASE_URL, CHECKPOINTS_ENDPOINT, this.propsToQuery()), callback);
@@ -118,7 +126,7 @@ class ParcelLab {
   }
 
   handleError(err) {
-    // TODO: send to sentry
+    Raven.captureException(err);
     if (typeof err === 'string')
       console.error(`🙀  ${err}`);
     else if (typeof err === 'object')
@@ -199,45 +207,46 @@ class ParcelLab {
 
   bindEvents() {
     var _this = this;
-
+    var sel = _this.selector.bind(_this); // HACK : because of cash-dom
+    
     // show more checkpoints
-    _this.$.find('.pl-action.pl-show-more-button').on('click', (e)=> {
+    _$(sel('.pl-action.pl-show-more-button')).on('click', (e)=> {
       e.preventDefault();
-      $('.pl-row.pl-alert.hidden').removeClass('hidden');
-      $('.pl-action.pl-show-more-button').remove();
+      _$(sel('.pl-row.pl-alert.hidden')).removeClass('hidden');
+      _$(sel('.pl-action.pl-show-more-button')).remove();
     });
-
+    
     // toggle tabs
-    _this.$.find('.pl-tab.pl-btn').on('click', function (e) {
+    _$(sel('.pl-tab.pl-btn')).on('click', function (e) {
       e.preventDefault();
-      var $this = $(this);
-      var $allTrackings = $('div.parcel_lab_tracking');
+      var $this = _$(this);
+      var $allTrackings = _$(sel('div.parcel_lab_tracking'));
 
       // toggle all active
-      $('.pl-tab.pl-btn').removeClass('pl-active');
+      _$(sel('.pl-tab.pl-btn')).removeClass('pl-active');
       $this.addClass('pl-active');
 
       // toggle all hidden
       $allTrackings.addClass('hidden');
-      $(`#${$this.attr('href')}`).removeClass('hidden');
+      _$(sel(`#${$this.attr('href')}`)).removeClass('hidden');
     });
 
     // vote courier
-    _this.$.find('.pl-courier-vote').on('click', function (e) {
+    _$(sel('.pl-courier-vote')).on('click', function (e) {
       e.preventDefault();
       var vote = this.dataset.vote;
       var url = Api.toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _this.propsToQuery());
-      _this.$.find('.rating-body').html('<i class="fa fa-refresh fa-spin fa-2x"></i>');
+      _$(sel('.rating-body')).html('<i class="fa fa-refresh fa-spin fa-2x"></i>');
       Api.post(url, {}, (err)=> {
         if (err) {
           _this.handleError(err);
-          _this.$.find('.rating-body').html(`
+          _$(sel('.rating-body')).html(`
             <small style="text-align:center;">
               An Error occurred, we are very sorry 😥
             </small>
           `);
         } else {
-          _this.$.find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
+          _$(sel('.rating-body')).html('<i class="fa fa-check fa-2x"></i>');
         }
       });
     });
@@ -258,7 +267,6 @@ class ParcelLab {
   }
 
   renderPrediciton(data) {
-    console.log(data);
     var $predictionRoot = this.$.find('.pl-box-prediction');
     if (!data || !data.label || !data.dateOfMonth || !data.month || !data.dayOfWeek) {
       var $aside = $predictionRoot.parent().parent();

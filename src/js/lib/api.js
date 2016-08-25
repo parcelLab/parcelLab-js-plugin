@@ -9,6 +9,7 @@ var status = {
 //////////////
 
 function handleFetchResponse(res) {
+  if (!res || !res.status || !res.headers) throw new Error('Cant parse empty handleFetchResponse');
   if (res.status >= 200 && res.status < 300) {
     var ct = res.headers.get('content-type');
     if (ct && ct.indexOf('json') > -1)
@@ -21,13 +22,14 @@ function handleFetchResponse(res) {
 }
 
 function handleRequestResponse(request, callback) {
-  if (request.status >= 200 && request.status < 300) {
+  if (!request || !request.status) return callback(new Error('Cant parse empty requestResponse'));
+  if (request && request.status >= 200 && request.status < 300) {
     var res = request.responseText.trim();
     var ct = request.getResponseHeader('content-type');
     if (ct && ct.indexOf('json') > -1) res = JSON.parse(res);
-    callback(null, res);
+    return callback(null, res);
   } else {
-    callback(`Request Error at fetch POST: ${request.status} ~> ${request.responseText}`);
+    return callback(`Request Error at fetch POST: ${request.status} ~> ${request.responseText}`);
   }
 }
 
@@ -65,6 +67,11 @@ var urlAddQueryObject = function (url, queryObj) {
 };
 
 var get = function (url, callback) {
+
+
+  window.fetch = null;
+
+
   if (window && window.fetch) {
     window.fetch(url)
     .then(res => handleFetchResponse(res))
