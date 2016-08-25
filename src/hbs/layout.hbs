@@ -46,15 +46,6 @@
       <div class="parcel_lab_tracking {{#unless visible}}hidden{{/unless}}" id="{{id}}">
         <div class="pl-box-body">
 
-            <!-- Subheading
-              <div>{{subHeading}}</div -->
-
-            <!-- Prediction -->
-            {{#with prediction}}
-              {{> prediction}}
-            {{/with}}
-
-
             <div class="pl-padded">
               {{#each checkpoints}}
                 {{> checkpoint}}
