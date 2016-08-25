@@ -126,11 +126,12 @@ class ParcelLab {
   }
 
   handleError(err) {
-    Raven.captureException(err);
     if (typeof err === 'string')
       console.error(`🙀  ${err}`);
-    else if (typeof err === 'object')
+    else if (typeof err === 'object') {
+      Raven.captureException(err);
       console.error(`🙀  ${err.message}`);
+    }
   }
 
   ///////////////////////////
