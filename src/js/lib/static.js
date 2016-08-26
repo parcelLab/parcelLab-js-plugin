@@ -130,26 +130,26 @@ var languages = {
     name: 'es',
     label: 'Español',
     code: 'ESP',
-    icon: 'https://cdn.parcellab.com/img/flags/es.png'
+    icon: 'https://cdn.parcellab.com/img/flags/es.png',
   },
   fr: {
     name: 'fr',
     label: 'Français',
     code: 'FRA',
-    icon: 'https://cdn.parcellab.com/img/flags/fr.png'
+    icon: 'https://cdn.parcellab.com/img/flags/fr.png',
   },
   it: {
     name: 'it',
     label: 'Italiano',
     code: 'ITA',
-    icon: 'https://cdn.parcellab.com/img/flags/it.png'
+    icon: 'https://cdn.parcellab.com/img/flags/it.png',
   },
   nl: {
     name: 'nl',
     label: 'Nederlands',
     code: 'NLD',
-    icon: 'https://cdn.parcellab.com/img/flags/nl.png'
-  }
+    icon: 'https://cdn.parcellab.com/img/flags/nl.png',
+  },
 };
 
 var translations = {

@@ -1,3 +1,4 @@
-var template = require('./layout.hbs');
 
-module.exports = template;
+exports.layout = require('./layout.hbs');
+exports.shopInfos = require('./shopInfos.hbs');
+exports.actionBox = require('./actionBox.hbs');

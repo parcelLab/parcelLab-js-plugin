@@ -1,3 +1,11 @@
+const _settings = require('json!../../../settings.json');
+const BASE_URL = _settings.base_url;
+const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint;
+const VOTE_ENDPOINT = _settings.vote_endpoint;
+const SENDER_ENDPOINT = _settings.sender_endpoint;
+const PREDICTION_ENDPOINT = _settings.prediction_endpoint;
+const VERSION_URL = _settings.version_url;
+
 // API calls for all the modules
 var status = {
   DONE: 4,
@@ -8,73 +16,45 @@ var status = {
 // Handlers //
 //////////////
 
+function handleJSON(text) {
+  var json = null;
+  try {
+    json = JSON.parse(text);
+  } catch(err) {
+    return text;
+  }
+  if (json) return json;
+  else return text;
+}
+
 function handleFetchResponse(res) {
-  if (!res || !res.status || !res.headers) throw new Error('Cant parse empty handleFetchResponse');
+  if (!res) throw new Error('Cant parse empty handleFetchResponse');
+  if (!res.headers) return res.text();
   if (res.status >= 200 && res.status < 300) {
-    var ct = res.headers.get('content-type');
-    if (ct && ct.indexOf('json') > -1)
-      return res.json();
-    else
-      return res.text();
+    return res.text();
   } else {
-    throw new Error(`Request Error at fetch POST: ${res.status} ~> ${res.statusText}`);
+    throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`);
   }
 }
 
 function handleRequestResponse(request, callback) {
-  if (!request || !request.status) return callback(new Error('Cant parse empty requestResponse'));
+  if (!request) return callback(new Error('Cant parse empty requestResponse'));
   if (request && request.status >= 200 && request.status < 300) {
-    var res = request.responseText.trim();
-    var ct = request.getResponseHeader('content-type');
-    if (ct && ct.indexOf('json') > -1) res = JSON.parse(res);
-    return callback(null, res);
+    return callback(null, handleJSON(request.responseText.trim()));
   } else {
-    return callback(`Request Error at fetch POST: ${request.status} ~> ${request.responseText}`);
+    return callback(`Request Error at xhr request: ${request.status} ~> ${request.responseText}`);
   }
 }
 
 /////////////
-// Helpers //
+// METHODS //
 /////////////
 
-var toURL = function (baseUrl, endpoint, query) {
-  var url = baseUrl + endpoint + '/?';
-
-  query.forEach(function (param) {
-    switch (param.name) {
-      case 'trackingNo':
-        param.name = 'tno';
-        break;
-      case 'u':
-        param.name = 'user';
-        break;
-    }
-    url += param.name + '=' + param.value + '&';
-  });
-
-  return url;
-};
-
-var urlAddQueryObject = function (url, queryObj) {
-  var query = '?';
-  for (var key in queryObj) {
-    if (queryObj.hasOwnProperty(key)) {
-      query += `${key}=${queryObj[key]}&`;
-    }
-  }
-
-  return encodeURI(`${url}${query}`);
-};
-
-var get = function (url, callback) {
-
-
-  window.fetch = null;
-
-
+function _get(url, callback) {
   if (window && window.fetch) {
     window.fetch(url)
     .then(res => handleFetchResponse(res))
+    .then(res =>  handleJSON(res))
     .then(res => callback(null, res))
     .catch(err => callback(err));
   } else {
@@ -88,10 +68,9 @@ var get = function (url, callback) {
 
     request.send();
   }
-};
+}
 
-var post = function (url, data, callback) {
-  console.log(arguments);
+function _post(url, data, callback) {
   if (!data) data = {};
   if (window && window.fetch) {
     window.fetch(url, { method: 'POST', body: JSON.stringify(data), })
@@ -112,10 +91,73 @@ var post = function (url, data, callback) {
     else
       request.send(data);
   }
+}
+
+function _toURL(baseUrl, endpoint, queryArr) {
+  var url = baseUrl + endpoint + '/?';
+
+  queryArr.forEach(function (param) {
+    switch (param.name) {
+      case 'trackingNo':
+        param.name = 'tno';
+        break;
+      case 'u':
+        param.name = 'user';
+        break;
+    }
+    url += param.name + '=' + param.value + '&';
+  });
+
+  return url;
+}
+
+function _objToQueryArr(propsObj) {
+  var result = [];
+  if (propsObj.trackingNo) {
+    // query for checkpoints by trackingNo
+    if (propsObj.trackingNo) result.push({ name: 'trackingNo', value: propsObj.trackingNo });
+    if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier });
+  } else if (propsObj.orderNo) {
+    // query for checkpoints by orderNo
+    if (propsObj.orderNo) result.push({ name: 'orderNo', value: propsObj.orderNo });
+    if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId });
+    if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier }); // why not?
+  }
+
+  if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.code });
+  return result;
+}
+
+/////////////
+// Exports //
+/////////////
+
+exports.get = _get;
+
+exports.post = _post;
+
+exports.toURL = _toURL;
+
+exports.getCheckpoints = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, CHECKPOINTS_ENDPOINT, _objToQueryArr(propsObj)), callback);
 };
 
-////////////////////////////
-// TODO: REAL API WRAPPER //
-////////////////////////////
+exports.getPrediction = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, PREDICTION_ENDPOINT, _objToQueryArr(propsObj)), callback);
+};
 
-module.exports = { get, post, toURL, urlAddQueryObject };
+exports.getCurrentPluginVersion = function (callback) {
+  _get(VERSION_URL, callback);
+};
+
+exports.getShopInfos = function (propsObj, callback) {
+  console.log(arguments);
+  var url = _toURL(BASE_URL, SENDER_ENDPOINT, _objToQueryArr(propsObj));
+  _get(url, callback);
+};
+
+exports.voteCourier = function (vote, propsObj, callback) {
+  if (['up', 'down'].indexOf(vote) < 0) callback(new Error('Wrong argument for vote!'));
+  var url = _toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _objToQueryArr(propsObj));
+  _post(url, {}, callback);
+};

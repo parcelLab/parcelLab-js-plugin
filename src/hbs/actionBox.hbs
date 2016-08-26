@@ -1,40 +1,67 @@
-{{#equals type "maps"}}
-  <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
-    <div class="pl-box-body pl-box-maps" style="{{{generateMapBG address}}}">
-      <div class="pl-box-action-info">
-        <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
-        {{address}}
-      </div>
-      <div class="pl-address-info">
-        <div>{{address}}</div>
-      </div>
-    </div>
-  </a>
-{{/equals}}
 
-{{#equals type "vote-courier"}}
-  <div class="pl-box-body" style="padding: 15px;">
-    {{#if label}}<h3 style="text-align:center;">{{label}}</h3>{{/if}}
-    <div class="rating-body">
-        <div class="pl-courier-vote up" data-vote="up">
-          <i class="fa fa-thumbs-o-up"></i>
+  {{#equals type "maps"}}
+  <div class="pl-box" style="margin-bottom:25px;">
+    <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
+      <div class="pl-box-body pl-box-maps" style="{{{generateMapBG address}}}">
+        <div class="pl-box-action-info">
+          <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
+          {{address}}
         </div>
-        <div class="pl-courier-vote down" data-vote="down">
-          <i class="fa fa-thumbs-o-down"></i>
+        <div class="pl-address-info">
+          <div>{{address}}</div>
         </div>
+      </div>
+    </a>
+  </div>
+  {{/equals}}
+
+  {{#equals type "vote-courier"}}
+  <div class="pl-box" style="margin-bottom:25px;">
+    <div class="pl-box-body" style="padding: 15px;">
+      {{#if label}}<h3 style="text-align:center;">{{label}}</h3>{{/if}}
+      <div class="rating-body">
+          <div class="pl-courier-vote up" data-vote="up">
+            <i class="fa fa-thumbs-o-up"></i>
+          </div>
+          <div class="pl-courier-vote down" data-vote="down">
+            <i class="fa fa-thumbs-o-down"></i>
+          </div>
+      </div>
     </div>
   </div>
-{{/equals}}
+  {{/equals}}
 
-{{#equals type "prediction"}}
-  {{#if label}}
-    <div class="pl-box-heading pl-box-cal-heading">
-      <h3 style="text-align:center;">{{label}}</h3>
-    </div>
-  {{/if}}
-  <div class="pl-box-body pl-box-cal-body pl-box-prediction">
-      <div class="pl-loading">
-        <i class="fa fa-spin fa-refresh"></i>
+  {{#equals type "prediction"}}
+    <div class="pl-box" style="margin-bottom: 10px;">
+      {{#if label}}
+        <div class="pl-box-heading pl-box-cal-heading">
+          <h3 style="text-align:center;">{{label}}</h3>
+        </div>
+      {{/if}}
+
+      <div class="pl-box-body pl-box-cal-body pl-box-prediction">
+        <div class="pl-cal-week-day">{{dayOfWeek}}</div>
+        <div class="pl-cal-day">{{dateOfMonth}}</div>
+        <div class="pl-cal-month">{{month}}</div>
       </div>
-  </div>
-{{/equals}}
+    </div>
+
+    {{#if startTime}}
+      <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
+        <div class="pl-box-body">
+          <div class="pl-time-data">
+            <i class="fa fa-clock-o"></i> {{startTime}} {{#if endTime}}- {{endTime}}{{/if}}
+          </div>
+          {{#with timeCaption}}
+            <small class="pl-time-caption">{{this}}</small>
+          {{/with}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#with caption}}
+      <div class="pl-prediction-caption" style="margin-bottom:25px;">
+        <i class="fa fa-info"></i> &nbsp; {{this}}
+      </small>
+    {{/with}}
+  {{/equals}}

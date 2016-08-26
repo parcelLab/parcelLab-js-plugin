@@ -3,28 +3,10 @@
   "checkpoints_endpoint": "v2/checkpoints",
   "vote_endpoint": "v2/vote-courier/",
   "prediction_endpoint": "prediction/tracking",
+  "sender_endpoint": "sender",
   "version_url": "https://cdn.parcellab.com/js/v2/version.txt",
   "default_root_node": "#parcelLab-trace-wrapper",
   "defualt_opts": {
-    "senderInfos": {
-      "enabled": false,
-      "bindToNodes": {
-        "faq": "#parcelLab-faq",
-        "imprint": "#parcelLab-imprint-link",
-        "questionBox": "#tickets-holder",
-        "infoBox": "#parcelLab-sender",
-        "resultBox": "#result-ticket"
-      }
-    },
-    "languageSelector": {
-      "rootNode": "#parcelLab-lang-wrapper"
-    },
-    "errorMessages": {
-      "bindToNodes": {
-        "trace": "#parcelLab-trace-wrapper",
-        "sender": "#parcelLab-sender"
-      }
-    }
+    "show_shopInfos": false
   }
-
 }

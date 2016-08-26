@@ -7,26 +7,15 @@
 -->
 
 
-<!-- Heading -->
-<div class="pl-container">
+
+{{!-- HACK aside hidden if no parcellab styles ... --}}
+<aside  style="display: none;" class="pl-box-aside pl-col pl-col-4">
+  <div id="pl-shop-info-container"></div>
+  <div id="pl-action-box-container"></div>
+</aside>
 
 
-  <!--
-    CSS HACK ~> display:none if not using our stylesheet
-  -->
-  {{#if props.showActionBox}}
-  <aside  style="display: none;" class="pl-box-aside">
-      <div class="pl-box pl-col pl-col-4" style="margin-bottom:25px;">
-          {{#with data.header.0.actionBox}}
-            <!-- Action box -->
-            {{> actionBox}}
-          {{/with}}
-      </div>
-  </aside>
-  {{/if}}
-
-<!-- content / order /  -->
-<div class="pl-main pl-box pl-col {{#if props.showActionBox}}pl-col-8{{else}}pl-col-12{{/if}}">
+<main class="pl-main pl-box pl-col pl-col-12">
 
     <div class="pl-box-heading" style="margin-bottom: 15px;">
       {{generateHeading data props}}
@@ -58,6 +47,5 @@
         </div>
       </div>
     {{/trackify}}
-</div>
 
-</div>
+</main>

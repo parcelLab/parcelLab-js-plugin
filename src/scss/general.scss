@@ -46,7 +46,7 @@
   content: "";
   display: table;
   clear: both; }
-div.pl-box {
+.pl-box {
   border: 1px #ddd solid;
   border-radius: 5px;
   background-color: #fff;
@@ -65,7 +65,7 @@ div.pl-box {
     padding: 10px 25px;
   }
 }
-div.pl-loading {
+.pl-loading {
   padding:25px 0;
   text-align: center;
   font-size: 2em;

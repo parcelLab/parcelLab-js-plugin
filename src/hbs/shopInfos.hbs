@@ -1,0 +1,26 @@
+<div class="pl-box" style="margin-bottom: 25px;">
+  <div class="pl-box-body">
+    <a  href='{{contact.website}}' target="_blank">
+        <img src="{{customisation.logoUrl}}" alt="{{name.full}}" class="img-responsive" style="margin-bottom: 6px;" />
+    </a>
+    {{{name.full}}}
+    {{#with address}}
+      <address>
+        {{{street}}}
+        {{{zip_code}}} {{{city}}}
+      </address>
+    {{/with}}
+    {{{generateContactLink contact.pubEmail}}}
+    <br />
+    <a href="{{contact.website}}" target="_blank">{{contact.website}}</a>
+    <br />
+    <div style="text-align: center; margin:15px 0;">
+      {{log this}}
+      {{#each social}}
+        {{{generateSocialLink @key this}}}
+      {{/each}}
+    </div>
+
+  </div>
+
+</div>

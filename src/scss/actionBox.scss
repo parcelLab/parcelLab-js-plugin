@@ -154,3 +154,21 @@ h3 {
   top: -25px;
   right: 5px;
 }
+
+.pl-box-time {
+  padding:10px 0;
+  .pl-time-data {
+    font-size: 20px;
+  }
+  .pl-time-caption {
+    color: #aaa;
+    font-size: 13px;
+  }
+  hr {
+    margin: 5px 0;
+  }
+}
+.pl-prediction-caption {
+  color: #aaa;
+  font-size:13px;
+}
