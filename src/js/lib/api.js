@@ -147,7 +147,15 @@ exports.getPrediction = function (propsObj, callback) {
 };
 
 exports.getCurrentPluginVersion = function (callback) {
-  _get(VERSION_URL, callback);
+  _get(VERSION_URL, (err, vt)=> {
+    if (err)  return callback(err);
+    else if (vt && vt.length > 0) {
+      var newLineRgx = /\r?\n|\r/g;
+      var spaceRgx = /\s/g; 
+      vt = vt.replace(newLineRgx, '').replace(spaceRgx, '');
+      callback(null, vt);
+    }
+  });
 };
 
 exports.getShopInfos = function (propsObj, callback) {

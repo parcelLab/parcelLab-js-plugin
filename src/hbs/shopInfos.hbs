@@ -1,7 +1,7 @@
 
 <div class="hide-on-desktop" style="margin-bottom:25px;">
   <a href='{{contact.website}}' target="_blank">
-      <img src="{{customisation.logoUrl}}" alt="{{name.full}}" class="img-responsive" style="margin-bottom: 6px;"  height="80px" />
+      <img src="{{customisation.logoUrl}}" alt="{{name.full}}" class="img-responsive" style="margin-bottom: 6px; max-height:80px;" />
   </a>
 </div>
 
@@ -24,7 +24,7 @@
       <br />
       <a href="{{contact.website}}" target="_blank">{{contact.website}}</a>
       <br />
-      <div style="text-align: center; margin-top:20px;">
+      <div style="text-align: center; margin-top:40px;">
         {{#each social}}
           {{{generateSocialLink @key this}}}
         {{/each}}
