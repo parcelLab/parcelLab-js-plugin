@@ -1,0 +1,20 @@
+<div class="pl-box hide-on-desktop" style="margin: 25px 0; padding: 20px 0px;">
+  <div class="pl-box-body">
+    {{{name.full}}}
+    {{#with address}}
+      <address>
+        {{{street}}} <br>
+        {{{zip_code}}} {{{city}}}
+      </address>
+    {{/with}}
+    {{{generateContactLink contact.pubEmail}}}
+    <br />
+    <a href="{{contact.website}}" target="_blank">{{contact.website}}</a>
+    <br />
+    <div style="text-align: center; margin-top:20px;">
+      {{#each social}}
+        {{{generateSocialLink @key this}}}
+      {{/each}}
+    </div>
+  </div>
+</div>

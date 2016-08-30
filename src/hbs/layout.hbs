@@ -9,43 +9,49 @@
 
 
 {{!-- HACK aside hidden if no parcellab styles ... --}}
-<aside  style="display: none;" class="pl-box-aside pl-col pl-col-4">
-  <div id="pl-shop-info-container"></div>
-  <div id="pl-action-box-container"></div>
-</aside>
+<div class="pl-col-row">
+
+  <aside  style="display: none;" class="pl-box-aside pl-col pl-col-4">
+    <div id="pl-shop-info-container"></div>
+    <div id="pl-action-box-container"></div>
+  </aside>
 
 
-<main class="pl-main pl-box pl-col pl-col-12">
+  <main class="pl-main pl-box pl-col pl-col-12">
 
-    <div class="pl-box-heading" style="margin-bottom: 15px;">
-      {{generateHeading data props}}
-    </div>
-
-    <!-- Tabs -->
-    <div class="pl-container" style="padding: 0 25px;">
-      {{#tabbify data props}}
-        {{> tab}}
-      {{/tabbify}}
-    </div>
-
-
-
-    <!-- Trackings-Container -->
-    {{#trackify data props}}
-      <div class="parcel_lab_tracking {{#unless visible}}hidden{{/unless}}" id="{{id}}">
-        <div class="pl-box-body">
-
-            <div class="pl-padded">
-              {{#each checkpoints}}
-                {{> checkpoint}}
-              {{/each}}
-            </div>
-
-          </div>
-        <div class="pl-box-footer">
-          {{{generateFurtherInfosText this ../this}}}
-        </div>
+      <div class="pl-box-heading" style="margin-bottom: 15px;">
+        {{generateHeading data props}}
       </div>
-    {{/trackify}}
 
-</main>
+      <!-- Tabs -->
+      <div class="pl-container" style="padding: 0 25px;">
+        {{#tabbify data props}}
+          {{> tab}}
+        {{/tabbify}}
+      </div>
+
+
+
+      <!-- Trackings-Container -->
+      {{#trackify data props}}
+        <div class="parcel_lab_tracking {{#unless visible}}hidden{{/unless}}" id="{{id}}">
+          <div class="pl-box-body">
+
+              <div class="pl-padded">
+                {{#each checkpoints}}
+                  {{> checkpoint}}
+                {{/each}}
+              </div>
+
+            </div>
+          <div class="pl-box-footer">
+            {{{generateFurtherInfosText this ../this}}}
+          </div>
+        </div>
+      {{/trackify}}
+
+  </main>
+
+</div>
+
+<div id="pl-mobile-shop-info-container" class="hide-on-desktop"></div>

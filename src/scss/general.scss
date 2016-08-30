@@ -8,6 +8,18 @@
   display: none;
 }
 
+.hide-on-mobile {
+  @media(max-width: 749px) {
+    display: none;
+  }
+}
+
+.hide-on-desktop {
+  @media(min-width: 750px) {
+    display: none;
+  }
+}
+
 // GRID
 .pl-container {
   position: relative;
@@ -16,7 +28,21 @@
   margin: 0 auto;
   padding: 0 0;
   box-sizing: border-box;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
+
+.pl-col-row, .pl-cf {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 .pl-col {
   width: 100%;
   float: left;

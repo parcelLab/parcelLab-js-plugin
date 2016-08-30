@@ -151,7 +151,6 @@ exports.getCurrentPluginVersion = function (callback) {
 };
 
 exports.getShopInfos = function (propsObj, callback) {
-  console.log(arguments);
   var url = _toURL(BASE_URL, SENDER_ENDPOINT, _objToQueryArr(propsObj));
   _get(url, callback);
 };

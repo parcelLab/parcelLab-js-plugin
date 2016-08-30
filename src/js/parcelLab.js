@@ -152,9 +152,32 @@ class ParcelLab {
     }
   }
 
-  selfUpdate() {
-    var lastUpdate = localStorage.getItem('parcelLab.js.updatedAt');
+  lsSet(key, val) {
+    try {
+      localStorage.setItem(key, val);
+    } catch(e) {
+      if (e.name == "NS_ERROR_FILE_CORRUPTED") {
+        console.log("😿 Sorry, it looks like your browser storage has been corrupted. Please clear your storage by going to Tools -> Clear Recent History -> Cookies and set time range to 'Everything'. This will remove the corrupted browser storage across all sites.");
+      }
+    }
+  }
 
+  lsGet(key) {
+    var res = null;
+    try {
+      res = localStorage.getItem(key);
+    } catch(e) {
+      if(e.name == "NS_ERROR_FILE_CORRUPTED") {
+        console.log("😿 Sorry, it looks like your browser storage has been corrupted. Please clear your storage by going to Tools -> Clear Recent History -> Cookies and set time range to 'Everything'. This will remove the corrupted browser storage across all sites.");
+      }
+    }
+    finally {
+      return res;
+    }
+  }
+
+  selfUpdate() {
+    var lastUpdate = this.lsGet('parcelLab.js.updatedAt');
     // check if selfUpdate was executed in the last 12 h
     if (lastUpdate && lastUpdate > Date.now() - 43200000) {
       return;
@@ -162,11 +185,11 @@ class ParcelLab {
 
     console.log('👻 Searching for new parcelLab.js version...');
     Api.getCurrentPluginVersion((err, versionTag)=> {
-      if (err) return localStorage.setItem('parcelLab.js.updatedAt', Date.now());
+      if (err) return this.lsSet('parcelLab.js.updatedAt', Date.now());
       else {
-        if (versionTag !== CURRENT_VERSION_TAG) {
+        this.lsSet('parcelLab.js.updatedAt', Date.now()); 
+        if (verstionTag && versionTag !== CURRENT_VERSION_TAG) {
           console.log('👻 Updating plugin to version ~> ', versionTag);
-          localStorage.setItem('parcelLab.js.updatedAt', Date.now());
           window.location.reload(true);
         }
       }
@@ -274,6 +297,7 @@ class ParcelLab {
   renderShopInfos(data) {
     this.switchLayout(false);
     this.$find('#pl-shop-info-container').html(templates.shopInfos(data));
+    this.$find('#pl-mobile-shop-info-container').html(templates.mobileShopInfos(data));
   }
 
 }
