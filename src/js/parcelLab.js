@@ -188,7 +188,7 @@ class ParcelLab {
       if (err) return this.lsSet('parcelLab.js.updatedAt', Date.now());
       else {
         this.lsSet('parcelLab.js.updatedAt', Date.now()); 
-        if (verstionTag && versionTag !== CURRENT_VERSION_TAG) {
+        if (versionTag && versionTag !== CURRENT_VERSION_TAG) {
           console.log('👻 Updating plugin to version ~> ', versionTag);
           window.location.reload(true);
         }
