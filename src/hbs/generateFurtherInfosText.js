@@ -8,7 +8,7 @@ module.exports = function ({ id }, { data }) {
       <i class="fa fa-lightbulb-o"></i> ${courier.trackingurl_label}
     </a>`;
   else
-    return `<a href="" target="">
+    return `<span style="opacity:.6;">
       <i class="fa fa-lightbulb-o"></i> ${courier.trackingurl_label}
-    </a>`;
+    </span>`;
 };

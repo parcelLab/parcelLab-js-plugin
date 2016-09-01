@@ -65,7 +65,6 @@ class ParcelLab {
         if (this.options.show_shopInfos) this.initShopInfos();
         this.bindEvents();
       } else {
-        this.handleError(new Error('Server did return an empty result!'));
         this.showError();
       }
     });
