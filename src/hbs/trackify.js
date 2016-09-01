@@ -12,7 +12,6 @@ module.exports = function (data, props, opts) {
   var trackings = [];
   var aceptedStatus = 'OutForDelivery DestinationDeliveryCenter';
   var content = { trackings: [] };
-
   trackings = data.header.map(function (hObj, index) {
 
     var tracking = {

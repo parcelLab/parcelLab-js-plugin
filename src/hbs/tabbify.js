@@ -8,7 +8,6 @@ var statics = require('../js/lib/static');
  * @return {string}       HTML
  */
 module.exports  = function (data, props, opts) {
-  // var data = JSON.parse(JSON.stringify(dat));
   var { header } = data;
   var { lang } = props;
   var colSize = header.length === 3 ? 4 : 6;

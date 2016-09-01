@@ -20,9 +20,10 @@ function handleJSON(text) {
   var json = null;
   try {
     json = JSON.parse(text);
-  } catch(err) {
+  } catch (err) {
     return text;
   }
+
   if (json) return json;
   else return text;
 }
@@ -33,7 +34,8 @@ function handleFetchResponse(res) {
   if (res.status >= 200 && res.status < 300) {
     return res.text();
   } else {
-    throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`);
+    if (res.status === 404) return null; // HACK: for tracking not found
+    else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`);
   }
 }
 
@@ -151,7 +153,7 @@ exports.getCurrentPluginVersion = function (callback) {
     if (err)  return callback(err);
     else if (vt && vt.length > 0) {
       var newLineRgx = /\r?\n|\r/g;
-      var spaceRgx = /\s/g; 
+      var spaceRgx = /\s/g;
       vt = vt.replace(newLineRgx, '').replace(spaceRgx, '');
       callback(null, vt);
     }

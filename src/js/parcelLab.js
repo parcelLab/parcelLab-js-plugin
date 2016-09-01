@@ -155,9 +155,12 @@ class ParcelLab {
   lsSet(key, val) {
     try {
       localStorage.setItem(key, val);
-    } catch(e) {
-      if (e.name == "NS_ERROR_FILE_CORRUPTED") {
-        console.log("😿 Sorry, it looks like your browser storage has been corrupted. Please clear your storage by going to Tools -> Clear Recent History -> Cookies and set time range to 'Everything'. This will remove the corrupted browser storage across all sites.");
+    } catch (e) {
+      if (e.name === 'NS_ERROR_FILE_CORRUPTED') {
+        console.log(`😿 Sorry, it looks like your browser storage is corrupted.
+        Please clear your storage by going to Tools -> Clear Recent History -> Cookies
+        and set time range to 'Everything'.
+        This will remove the corrupted browser storage across all sites.`);
       }
     }
   }
@@ -166,9 +169,12 @@ class ParcelLab {
     var res = null;
     try {
       res = localStorage.getItem(key);
-    } catch(e) {
-      if(e.name == "NS_ERROR_FILE_CORRUPTED") {
-        console.log("😿 Sorry, it looks like your browser storage has been corrupted. Please clear your storage by going to Tools -> Clear Recent History -> Cookies and set time range to 'Everything'. This will remove the corrupted browser storage across all sites.");
+    } catch (e) {
+      if (e.name === 'NS_ERROR_FILE_CORRUPTED') {
+        console.log(`😿 Sorry, it looks like your browser storage is corrupted.
+        Please clear your storage by going to Tools -> Clear Recent History -> Cookies
+        and set time range to 'Everything'.
+        This will remove the corrupted browser storage across all sites.`);
       }
     }
     finally {
@@ -178,6 +184,7 @@ class ParcelLab {
 
   selfUpdate() {
     var lastUpdate = this.lsGet('parcelLab.js.updatedAt');
+
     // check if selfUpdate was executed in the last 12 h
     if (lastUpdate && lastUpdate > Date.now() - 43200000) {
       return;
@@ -187,7 +194,7 @@ class ParcelLab {
     Api.getCurrentPluginVersion((err, versionTag)=> {
       if (err) return this.lsSet('parcelLab.js.updatedAt', Date.now());
       else {
-        this.lsSet('parcelLab.js.updatedAt', Date.now()); 
+        this.lsSet('parcelLab.js.updatedAt', Date.now());
         if (versionTag && versionTag !== CURRENT_VERSION_TAG) {
           console.log('👻 Updating plugin to version ~> ', versionTag);
           window.location.reload(true);
