@@ -191,7 +191,7 @@ var translations = {
     help: {
       text_help_btn: 'Fragen zum Sendungsverlauf?',
     },
-    more: 'Gesamten Verlauf anzeigen...',
+    more: 'Mehr anzeigen...',
     ask: 'Nachfragen',
     anyquestion: 'Fragen zum Versand?',
     ticketSuccess: '<strong>Vielen Dank für die Nachfrage!</strong> Wir antworten schnellstmöglich per Email.', //jscs:ignore
