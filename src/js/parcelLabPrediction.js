@@ -55,9 +55,11 @@ class ParcelLab {
       if (err) return this.handleError(err);
       else if (res) {
 
-        var prediction = res.minDeliveryTime === res.maxDeliveryTime ?
-          res.minDeliveryTime :
-          res.minDeliveryTime + '-' + res.maxDeliveryTime;
+        var offset = this.options.offset ? this.options.offset : 0;
+        var min = res.minDeliveryTime + offset;
+        var max = res.maxDeliveryTime + offset;
+
+        var prediction = min === max ? min : min + '-' + max;
         if (this.options.prefix) prediction = this.options.prefix + ' ' + prediction;
         if (this.options.suffix) prediction += ' ' + this.options.suffix;
 
