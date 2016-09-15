@@ -4,6 +4,7 @@ const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint;
 const VOTE_ENDPOINT = _settings.vote_endpoint;
 const SENDER_ENDPOINT = _settings.sender_endpoint;
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint;
+const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint;
 const VERSION_URL = _settings.version_url;
 
 // API calls for all the modules
@@ -124,6 +125,11 @@ function _objToQueryArr(propsObj) {
     if (propsObj.orderNo) result.push({ name: 'orderNo', value: propsObj.orderNo });
     if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId });
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier }); // why not?
+  } else if (propsObj.location) {
+    // query for a shop prediction
+    if (propsObj.location) result.push({ name: 'location', value: propsObj.location });
+    if (propsObj.userId) result.push({ name: 'u', value: propsObj.userId });
+    if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier });
   }
 
   if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.code });
@@ -146,6 +152,10 @@ exports.getCheckpoints = function (propsObj, callback) {
 
 exports.getPrediction = function (propsObj, callback) {
   _get(_toURL(BASE_URL, PREDICTION_ENDPOINT, _objToQueryArr(propsObj)), callback);
+};
+
+exports.getShopPrediction = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, SHOP_PREDICTION_ENDPOINT, _objToQueryArr(propsObj)), callback);
 };
 
 exports.getCurrentPluginVersion = function (callback) {
