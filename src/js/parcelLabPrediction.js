@@ -55,15 +55,19 @@ class ParcelLab {
       if (err) return this.handleError(err);
       else if (res) {
 
-        var offset = this.options.offset ? this.options.offset : 0;
-        var min = res.minDeliveryTime + offset;
-        var max = res.maxDeliveryTime + offset;
+        if (res.confidence && res.confidence > 40) {
 
-        var prediction = min === max ? min : min + '-' + max;
-        if (this.options.prefix) prediction = this.options.prefix + ' ' + prediction;
-        if (this.options.suffix) prediction += ' ' + this.options.suffix;
+          var offset = this.options.offset ? this.options.offset : 0;
+          var min = res.minDeliveryTime + offset;
+          var max = res.maxDeliveryTime + offset;
 
-        this.innerHTML(prediction);
+          var prediction = min === max ? min : min + '-' + max;
+          if (this.options.prefix) prediction = this.options.prefix + ' ' + prediction;
+          if (this.options.suffix) prediction += ' ' + this.options.suffix;
+
+          this.innerHTML(prediction);
+
+        }
 
       } else this.showError();
     });
