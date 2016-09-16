@@ -1,13 +1,14 @@
 # parcelLab Javascript Plugin
-JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.
-This plugin uses the v2 api and is under development. - use with caution!
+JavaScript to integrate a shop frontend (or any webpage) with parcelLab. This plugin can be used to retrieve and display the checkpoints of a tracking (delivery status page), or display an estimated delivery date for a given destination and courier (delivery time prediction) — on any given webpage.
 
-## For shop users
+## Integrate delivery status page
 ### Adding to your webpage
 Just add the following files (`parcelLab.min.js` and `fontawesome.min.css` and `parcelLab.min.css`) to your webpage. Then just initialize a new parcelLab object.
 
+A recent version of these scripts is always available at the parcelLab CDN (see example below).
+
 ### Initializing the magic
-After adding the script you will have a new ParcelLab class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
+After adding the script you will have a new `ParcelLab` class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
 
 ### Example
 ```html
@@ -21,20 +22,65 @@ After adding the script you will have a new ParcelLab class in your global scope
   <script src="https://cdn.parcellab.com/js/v2/parcelLab.min.js" charset="utf-8"></script>
   <script type="text/javascript">
     var parcelLab = new ParcelLab('#pl-trace');
-    // trackings container will be rendered to dom-elem. with id="pl-trace"
-    parcelLab.initialize();
+    parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"
+  </script>
+</body>  
+```
+
+## Integrate delivery time prediction
+*Please note: Delivery time prediction is currently only supported for deliveries to Germany.*
+
+### Adding to your webpage
+Same as above.
+
+### Initializing
+After adding the script, there will be a new `ParcelLabPrediction` class in the global scope. This can also just be initialized, but more options are required for the script to work. Following parameters are required to be supplied in the options object:
+
+* `userId`: This is your shop's parcelLab user-id and is used to map the start location.
+* `courier`: Here, the parcelLab courier code for the planned courier has to be specified.
+* `location`: This specifies the location of the recipient in one of two ways:
+  1. Using the zip code and country, in the format `<zip-code>_<country>`, where `<zip-code>` is the pure-numerical zip code, and `<country>` the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) code of the country. For example: `80331_DEU`.
+  2. The IP-Address of the visitor, e.g. `127.0.0.1`.
+
+### Example
+```html
+<head>
+  ...
+  <link href="https://cdn.parcellab.com/css/v2/parcelLab.min.css" rel="stylesheet">
+  <link href="https://cdn.parcellab.com/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+  ...
+  <script src="https://cdn.parcellab.com/js/v2/parcelLab.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var prediction = new ParcelLabPrediction('#deliveryTime', {
+      // required
+      userId: 122,
+      courier: 'dhl-germany',
+      location: '94261_DEU',
+
+      // optional
+      prefix: 'Lieferzeit:', // text to display left of the prediction
+      suffix: 'Werktage', // text to display right of the prediction
+      offset: 1, // offset in days to add to the predicted delivery time
+      infoCaption: '#infoLabel', // where to display the info caption
+      language: 'de', // language in which to display the info caption in 
+    });
+    prediction.initialize(); // <~ this display the prediction in a dom-elem with id="#deliveryTime"
   </script>
 </body>  
 ```
 
 ## For developers
 ### Develop
-Start the following commands in new terminal windows. Then
+First, make sure you `npm i serve -g`, as this package is used to locally serve compiled sources when testing.
+
+Then:
 ```bash  
-$ npm run dev-js
-$ npm run dev-scss
-$ serve build/
+$ npm run start
 ```
+
+Now, the resources are served on `localhost:4000`.
 
 ### Build
 ```bash
