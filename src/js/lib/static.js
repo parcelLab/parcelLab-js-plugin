@@ -156,8 +156,8 @@ var languages = {
     code: 'DNK',
     icon: 'https://cdn.parcellab.com/img/flags/dk.png',
   },
-  se: {
-    name: 'se',
+  sv: {
+    name: 'sv',
     label: 'Svenska',
     code: 'SWE',
     icon: 'https://cdn.parcellab.com/img/flags/se.png',
