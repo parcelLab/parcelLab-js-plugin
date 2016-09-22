@@ -1,2 +1,3 @@
-var ParcelLab = require('expose?ParcelLab!./parcelLab.js');
-var ParcelLabPrediction = require('expose?ParcelLabPrediction!./parcelLabPrediction.js');
+require('../scss/main.scss');
+require('expose?ParcelLab!./parcelLab.js');
+require('expose?ParcelLabPrediction!./parcelLabPrediction.js');

@@ -8,7 +8,7 @@ if (typeof window.jQuery === 'function')
 const Api = require('./lib/api');
 const statics = require('./lib/static');
 const templates = require('../hbs');
-const _settings = require('json!../../settings.json');
+const _settings = require('../settings');
 
 // settings
 const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim();
@@ -104,10 +104,17 @@ class ParcelLab {
       case 'prediction':
         Api.getPrediction(this.props(), (err, res) => {
           if (err) this.handleError(err);
+
+          // HACK: this will be killed in newer version
+          if (res && res instanceof Array) {
+            if (res.length === 1) res = res[0].prediction;
+          }
+
           if (res && res.dateOfMonth && res.month) {
-            res.type = 'prediction'; // HACK: because idk what type it is
-            if (!res.label && this.checkpoints.header[0] && this.checkpoints.header[0].actionBox)
-              res.label = this.checkpoints.header[0].actionBox.label; // HACK
+            if (!res.label &&
+              this.checkpoints.header[0] &&
+              this.checkpoints.header[0].actionBox)
+                res.label = this.checkpoints.header[0].actionBox.label; // fallback
             this.renderActionBox(res);
           }
         });

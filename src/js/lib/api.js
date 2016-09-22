@@ -1,4 +1,4 @@
-const _settings = require('json!../../../settings.json');
+const _settings = require('../../settings');
 const BASE_URL = _settings.base_url;
 const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint;
 const VOTE_ENDPOINT = _settings.vote_endpoint;

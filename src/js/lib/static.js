@@ -180,6 +180,10 @@ var translations = {
   USA: {
     delivery: 'Delivery',
     more: 'Show more...',
+    predictions: {
+      OutForDelivery: 'The package will arrive <b>today</b>.',
+      DestinationDeliveryCenter: 'The package will arrive <b>tomorrow</b>.',
+    },
     error: {
       delivery: 'Unfortunately, this delivery is not available.',
     },
@@ -187,6 +191,10 @@ var translations = {
   DEU: {
     delivery: 'Lieferung',
     more: 'Mehr anzeigen...',
+    predictions: {
+      OutForDelivery: 'Die Ware wird noch <b>heute</b> geliefert.',
+      DestinationDeliveryCenter: 'Die Ware wird <b>morgen</b> geliefert.',
+    },
     error: {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
     },
@@ -194,6 +202,10 @@ var translations = {
   ESP: {
     delivery: 'Entrega',
     more: 'Ver más...',
+    predictions: {
+      OutForDelivery: 'El paquete llegará <b>Hoy</b>.',
+      DestinationDeliveryCenter: 'El paquete llegará <b>Mañana</b>.',
+    },
     error: {
       delivery: 'Desafortunadamente el paquete no esta disponible.',
     },
@@ -201,6 +213,10 @@ var translations = {
   FRA: {
     delivery: 'Livraison',
     more: 'Montre plus...',
+    predictions: {
+      OutForDelivery: 'Le colis arrivera <b>aujourd\'hui</b>.',
+      DestinationDeliveryCenter: 'Le colis arrivera <b>demain</b>.',
+    },
     error: {
       delivery: 'Malheureusement , cette livraison ne sont pas disponibles.',
     },
@@ -208,6 +224,10 @@ var translations = {
   ITA: {
     delivery: 'Consegna',
     more: 'Mostra di più...',
+    predictions: {
+      OutForDelivery: 'Il pacchetto arriverà <b>oggi</b>.',
+      DestinationDeliveryCenter: 'Il pacchetto arriverà <b>domani</b>.',
+    },
     error: {
       delivery: 'Purtroppo , questa consegna non è disponibile .',
     },

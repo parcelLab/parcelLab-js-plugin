@@ -7,7 +7,7 @@ if (typeof window.jQuery === 'function')
 // libs
 const Api = require('./lib/api');
 const statics = require('./lib/static');
-const _settings = require('json!../../settings.json');
+const _settings = require('../settings');
 
 // settings
 const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim();

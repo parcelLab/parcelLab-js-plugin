@@ -2,8 +2,7 @@ bundle:
 	@- make clean;
 	@make version;
 	@echo '🤖  Building JavaScript And CSS! ';
-	@node node_modules/webpack/bin/webpack.js --module-bind 'js=babel' --module-bind 'hbs=handlebars' -p ./src/js/index.js ./build/parcelLab.min.js;
-	@node node_modules/node-sass/bin/node-sass --output-style compressed  ./src/scss/main.scss  ./build/parcelLab.min.css;
+	@node node_modules/webpack/bin/webpack.js -p;
 	@echo '🎉  Done! ';
 
 clean:

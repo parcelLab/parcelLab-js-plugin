@@ -8,10 +8,9 @@
     "test": "make test",
     "build": "make bundle",
     "deploy": "make deploy",
-    "dev:js": "webpack --module-bind 'js=babel' --module-bind 'hbs=handlebars' --progress --colors --watch ./src/js/index.js ./build/parcelLab.min.js",
-    "dev:scss": "node-sass -wr ./src/scss/main.scss  ./build/parcelLab.min.css",
-    "dev:serve": "serve build/ -p 4001",
-    "dev:serve-test": "serve test/ -p 4000"
+    "dev:serve-test": "serve test/ -p 4000",
+    "dev:serve-bundle": "serve build/ -p 4001",
+    "dev:watch-build": "webpack -d --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -28,7 +27,9 @@
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015-minimal": "^2.0.0",
+    "css-loader": "^0.25.0",
     "expose-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "handlebars-loader": "^1.3.0",
     "hogan.js": "^3.0.2",
     "json-loader": "^0.5.4",
@@ -36,6 +37,7 @@
     "node-sass": "^3.4.2",
     "npm-run-all": "^3.0.0",
     "raw-loader": "^0.5.1",
+    "sass-loader": "^4.0.2",
     "webpack": "^1.13.0"
   },
   "dependencies": {
