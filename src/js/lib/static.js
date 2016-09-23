@@ -180,6 +180,7 @@ var translations = {
   USA: {
     delivery: 'Delivery',
     more: 'Show more...',
+    orderNo: 'Order',
     predictions: {
       OutForDelivery: 'The package will arrive <b>today</b>.',
       DestinationDeliveryCenter: 'The package will arrive <b>tomorrow</b>.',
@@ -191,6 +192,7 @@ var translations = {
   DEU: {
     delivery: 'Lieferung',
     more: 'Mehr anzeigen...',
+    orderNo: 'Auftrag',
     predictions: {
       OutForDelivery: 'Die Ware wird noch <b>heute</b> geliefert.',
       DestinationDeliveryCenter: 'Die Ware wird <b>morgen</b> geliefert.',
@@ -202,6 +204,7 @@ var translations = {
   ESP: {
     delivery: 'Entrega',
     more: 'Ver más...',
+    orderNo: 'Número de Orden',
     predictions: {
       OutForDelivery: 'El paquete llegará <b>Hoy</b>.',
       DestinationDeliveryCenter: 'El paquete llegará <b>Mañana</b>.',
@@ -213,6 +216,7 @@ var translations = {
   FRA: {
     delivery: 'Livraison',
     more: 'Montre plus...',
+    orderNo: 'Commande',
     predictions: {
       OutForDelivery: 'Le colis arrivera <b>aujourd\'hui</b>.',
       DestinationDeliveryCenter: 'Le colis arrivera <b>demain</b>.',
@@ -224,6 +228,7 @@ var translations = {
   ITA: {
     delivery: 'Consegna',
     more: 'Mostra di più...',
+    orderNo: 'Ordine',
     predictions: {
       OutForDelivery: 'Il pacchetto arriverà <b>oggi</b>.',
       DestinationDeliveryCenter: 'Il pacchetto arriverà <b>domani</b>.',
@@ -235,13 +240,23 @@ var translations = {
   NLD: {
     delivery: 'Levering',
     more: 'Vis mere...',
+    orderNo: 'Bestille',
+    predictions: {
+      OutForDelivery: 'Het pakket zal <b>vandaag</b> aankomen.',
+      DestinationDeliveryCenter: 'Het pakket komt <b>morgen</b>.',
+    },
     error: {
-      delivery: 'Desværre er dette leverance er ikke tilgængelig .',
+      delivery: 'Desværre er dette leverance er ikke tilgængelig.',
     },
   },
   DNK: {
     delivery: 'Levering',
     more: 'Se mere...',
+    orderNo: 'Bestilling',
+    predictions: {
+      OutForDelivery: 'Den pakke ankommer <b>i dag</b>.',
+      DestinationDeliveryCenter: 'Den pakke ankommer <b>i morgen</b>.',
+    },
     error: {
       delivery: 'Desværre er dette leverance er ikke tilgængelig.',
     },
@@ -249,6 +264,11 @@ var translations = {
   SWE: {
     delivery: 'Leverans',
     more: 'Se mer...',
+    orderNo: 'Beställa',
+    predictions: {
+      OutForDelivery: 'Paketet kommer fram <b>i dag</b>.',
+      DestinationDeliveryCenter: 'Paketet kommer fram <b>i morgon</b>.',
+    },
     error: {
       delivery: 'Tyvärr är inte denna leverans.',
     },
@@ -256,6 +276,11 @@ var translations = {
   FIN: {
     delivery: 'Toimitus',
     more: 'Katso lisää...',
+    orderNo: 'Tilata',
+    predictions: {
+      OutForDelivery: 'Paketti saapuu <b>tänään</b>.',
+      DestinationDeliveryCenter: 'Paketti saapuu <b>huomenna</b>.',
+    },
     error: {
       delivery: 'Valitettavasti tämä toimitus ei ole käytettävissä.',
     },
@@ -263,6 +288,11 @@ var translations = {
   NOR: {
     delivery: 'Levering',
     more: 'Se mer...',
+    orderNo: 'Rekkefølge',
+    predictions: {
+      OutForDelivery: 'Pakken kommer <b>i dag</b>.',
+      DestinationDeliveryCenter: 'Pakken kommer <b>i morgen</b>.',
+    },
     error: {
       delivery: 'Dessverre er denne leveransen ikke tilgjengelig.',
     },
