@@ -11,7 +11,7 @@
     <a  href='{{contact.website}}' target="_blank">
         <img src="{{customisation.logoUrl}}" alt="{{name.full}}" class="img-responsive" style="margin-bottom: 6px;" />
     </a>
-    
+
 
       {{{name.full}}}
       {{#with address}}
@@ -20,9 +20,12 @@
           {{{zip_code}}} {{{city}}}
         </address>
       {{/with}}
+      {{#with contact.phone}}
+        {{{generateContactLink contact.phone}}}
+      {{/with}}
       {{{generateContactLink contact.pubEmail}}}
       <br />
-      <a href="{{contact.website}}" target="_blank">{{contact.website}}</a>
+      <a href="{{contact.website}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{contact.website}}</a>
       <br />
       <div style="text-align: center; margin-top:40px;">
         {{#each social}}

@@ -1,5 +1,5 @@
 module.exports = function generateContactLink(link) {
-  var emailTest = /\S+@\S+\.\S+/;
-  if (emailTest.test(link)) return `<a href="mailto:${link}">${link}</a>`;
-  else return `<a href="${link}" _target="blank">${link}</a>`;
+  if (/\S+@\S+\.\S+/.test(link)) return `<a href="mailto:${link}"><i class="fa fa-fw fa-envelope-o"></i> ${link}</a>`;
+  if (/^http.*/.test(link)) return `<a href="${link}" _target="blank"><i class="fa fa-fw fa-question-circle"></i> ${link}</a>`;
+  else return `<a href="tel:${link}"><i class="fa fa-fw fa-phone"></i> ${link}</a>`;
 };

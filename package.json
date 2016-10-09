@@ -69,5 +69,11 @@
       "it",
       "setTimeout"
     ]
+  },
+  "jscsConfig": {
+    "preset": "airbnb",
+    "disallowSpacesInsideBrackets": false,
+    "disallowSpacesInsideArrayBrackets": false,
+    "maximumLineLength": false
   }
 }
