@@ -4,6 +4,9 @@ var colors = {
   pinterest: '#bd081c',
   twitter: '#55acee',
   'google-plus': '#dd4b39',
+  'youtube-play': '#e52d27',
+  xing: '#006567',
+  tumblr: '#34465d',
 };
 
 module.exports = function generateSocialLinks(social, link) {
