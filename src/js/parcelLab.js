@@ -56,7 +56,7 @@ class ParcelLab {
     this.selfUpdate();
 
     // get checkpoints
-    Api.getCheckpoints(this.props(), (err, res)=> {
+    Api.getCheckpoints(this.props(), (err, res) => {
       if (err) return this.handleError(err);
       else if (res && res.header && res.body) {
         this.checkpoints = res;
@@ -75,13 +75,13 @@ class ParcelLab {
     if (statics.languages[this._langCode]) {
       this.lang = statics.languages[this._langCode];
     } else {
-      this.handleError('Could not detect user language ... fallback to [EN]!');
+      this.handleWarning('Could not detect user language ... fallback to [EN]!');
       this.lang = statics.languages.en;
     }
   }
 
   initShopInfos() {
-    Api.getShopInfos(this.props(), (err, res)=> {
+    Api.getShopInfos(this.props(), (err, res) => {
       if (err) return this.handleError(err);
       if (res && res.name && res.address) {
         this.renderShopInfos(res);
@@ -114,7 +114,7 @@ class ParcelLab {
             if (!res.label &&
               this.checkpoints.header[0] &&
               this.checkpoints.header[0].actionBox)
-                res.label = this.checkpoints.header[0].actionBox.label; // fallback
+              res.label = this.checkpoints.header[0].actionBox.label; // fallback
             this.renderActionBox(res);
           }
         });
@@ -140,7 +140,7 @@ class ParcelLab {
   }
 
   $find(sel) {
-    var buildSelector = (sel)=> {
+    var buildSelector = (sel) => {
       var res = this.rootNodeQuery;
       if (sel) res += ` ${sel}`;
       return res;
@@ -156,6 +156,13 @@ class ParcelLab {
       Raven.captureException(err);
       console.error(`🙀  ${err.message}`);
     }
+  }
+
+  handleWarning(err) {
+    if (typeof err === 'string')
+      console.log(`🐱  ${err}`);
+    else if (typeof err === 'object')
+      console.log(`🐱  ${err.message}`);
   }
 
   lsSet(key, val) {
@@ -182,8 +189,7 @@ class ParcelLab {
         and set time range to 'Everything'.
         This will remove the corrupted browser storage across all sites.`);
       }
-    }
-    finally {
+    } finally {
       return res;
     }
   }
@@ -197,7 +203,7 @@ class ParcelLab {
     }
 
     console.log('👻 Searching for new parcelLab.js version...');
-    Api.getCurrentPluginVersion((err, versionTag)=> {
+    Api.getCurrentPluginVersion((err, versionTag) => {
       if (err) return this.lsSet('parcelLab.js.updatedAt', Date.now());
       else {
         this.lsSet('parcelLab.js.updatedAt', Date.now());
@@ -223,7 +229,7 @@ class ParcelLab {
   // DOM affecting methods //
   ///////////////////////////
 
-  loading(isLoading=true) {
+  loading(isLoading = true) {
     if (isLoading) {
       this.$find().html(`<div class="pl-loading"><i class="fa fa-refresh fa-spin"></i></div>`);
     } else {
@@ -243,7 +249,7 @@ class ParcelLab {
     var _this = this;
 
     // show more checkpoints
-    _this.$find('.pl-action.pl-show-more-button').on('click', (e)=> {
+    _this.$find('.pl-action.pl-show-more-button').on('click', (e) => {
       e.preventDefault();
       _this.$find('.pl-row.pl-alert.hidden').removeClass('hidden');
       _this.$find('.pl-action.pl-show-more-button').remove();
@@ -269,7 +275,7 @@ class ParcelLab {
       e.preventDefault();
       var vote = this.dataset.vote;
       _this.$find('.rating-body').html('<i class="fa fa-refresh fa-spin fa-2x"></i>');
-      Api.voteCourier(vote, _this.props(), (err)=> {
+      Api.voteCourier(vote, _this.props(), (err) => {
         if (err) {
           _this.handleError(err);
           _this.$('.rating-body').html(`
@@ -298,7 +304,10 @@ class ParcelLab {
   }
 
   renderLayout(data) {
-    var ctx = { data: data, props: this.props() };
+    var ctx = {
+      data: data,
+      props: this.props(),
+    };
     this.innerHTML(templates.layout(ctx));
   }
 
