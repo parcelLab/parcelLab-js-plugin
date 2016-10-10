@@ -21,10 +21,10 @@
         </address>
       {{/with}}
       {{#with contact.phone}}
-        {{{generatePhoneLink this}}}
+        {{{generatePhoneLink this false}}}
         <br />
       {{/with}}
-      {{{generateContactLink contact.pubEmail}}}
+      {{{generateContactLink contact.pubEmail false}}}
       <br />
       <a href="{{contact.website}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{contact.website}}</a>
       <br />
