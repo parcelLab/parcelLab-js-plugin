@@ -7,6 +7,10 @@
         {{{zip_code}}} {{{city}}}
       </address>
     {{/with}}
+    {{#with contact.phone}}
+      {{{generateContactLink contact.phone}}}
+      <br />
+    {{/with}}
     {{{generateContactLink contact.pubEmail}}}
     <br />
     <a href="{{contact.website}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{contact.website}}</a>
