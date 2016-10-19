@@ -46,7 +46,8 @@
     "country-language": "^0.1.7",
     "countryjs": "^1.5.2",
     "handlebars": "^4.0.5",
-    "raven-js": "^3.5.1"
+    "raven-js": "^3.5.1",
+    "serve": "^1.4.0"
   },
   "jshintConfig": {
     "esnext": true,
