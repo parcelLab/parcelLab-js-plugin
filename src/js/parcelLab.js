@@ -111,6 +111,7 @@ class ParcelLab {
           }
 
           if (res) {
+            res.gmapApiKey = _settings.gmap_api_key;
             if (!res.label &&
               this.checkpoints.header[0] &&
               this.checkpoints.header[0].actionBox)

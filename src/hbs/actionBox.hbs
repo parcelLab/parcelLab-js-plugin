@@ -61,6 +61,13 @@
       </div>
     {{/if}}
 
+    <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
+      <div class="pl-box-body">
+        <div id="pl-map"></div>
+      </div>
+    </div>
+    {{generateDeliveriesMap gmapApiKey startTime endTime deliveryLocation nearbyDeliveries}}
+
     {{#with caption}}
       <div class="pl-prediction-caption" style="margin-bottom:25px;">
         <i class="fa fa-info"></i> &nbsp; {{this}}
