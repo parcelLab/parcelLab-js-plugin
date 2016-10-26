@@ -110,7 +110,7 @@ class ParcelLab {
             if (res.length === 1) res = res[0].prediction;
           }
 
-          if (res && res.dateOfMonth && res.month) {
+          if (res) {
             if (!res.label &&
               this.checkpoints.header[0] &&
               this.checkpoints.header[0].actionBox)

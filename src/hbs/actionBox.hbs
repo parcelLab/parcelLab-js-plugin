@@ -39,11 +39,13 @@
         </div>
       {{/if}}
 
-      <div class="pl-box-body pl-box-cal-body pl-box-prediction">
-        <div class="pl-cal-week-day">{{dayOfWeek}}</div>
-        <div class="pl-cal-day">{{dateOfMonth}}</div>
-        <div class="pl-cal-month">{{month}}</div>
-      </div>
+    {{#if dayOfWeek}}
+        <div class="pl-box-body pl-box-cal-body pl-box-prediction">
+            <div class="pl-cal-week-day">{{dayOfWeek}}</div>
+            <div class="pl-cal-day">{{dateOfMonth}}</div>
+            <div class="pl-cal-month">{{month}}</div>
+        </div>
+      {{/if}}
     </div>
 
     {{#if startTime}}
