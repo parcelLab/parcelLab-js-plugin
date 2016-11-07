@@ -95,8 +95,16 @@ class ParcelLab {
     var actionBox = this.checkpoints.header[0].actionBox;
     if (!actionBox || !actionBox.type) return;
     switch (actionBox.type) {
-      case 'maps':
-        this.renderActionBox(actionBox);
+      case 'pickup-location':
+        Api.getPickupLocation(this.props(), (err, res) => {
+          if (err) this.handleError(err);
+          if (res) {
+              res.gmapApiKey = _settings.gmap_api_key;
+              res.type = actionBox.type;
+              res.address = actionBox.address;
+            this.renderActionBox(res);
+          }
+        });
         break;
       case 'vote-courier':
         this.renderActionBox(actionBox);

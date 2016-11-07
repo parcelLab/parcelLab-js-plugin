@@ -1,19 +1,25 @@
-
-  {{#equals type "maps"}}
-  <div class="pl-box" style="margin-bottom:25px;">
-    <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
-      <div class="pl-box-body pl-box-maps" style="{{{generateMapBG address}}}">
-        <div class="pl-box-action-info">
-          <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
-          {{address}}
-        </div>
-        <div class="pl-address-info">
-          <div>{{address}}</div>
-        </div>
+  {{#equals type "pickup-location"}}
+    {{#if address}}
+      <div class="pl-box" style="margin-bottom:25px;">
+        <div class="pl-box-body">
+            <div id="pl-map-pickup-location"></div>
+          </div>
+          {{ generatePickupLocationMap gmapApiKey address }}
       </div>
-    </a>
-  </div>
+      <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">      
+            <div class="pl-box-action-info">
+              <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
+              {{address}}
+            </div>
+          </div>
+       </a>
+    {{/if}}
+
+    {{#if msg}}
+      <pre>{{msg}}</pre>
+    {{/if}
   {{/equals}}
+
 
   {{#equals type "vote-courier"}}
   <div class="pl-box" style="margin-bottom:25px;">
