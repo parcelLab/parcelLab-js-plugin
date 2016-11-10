@@ -1,24 +1,23 @@
-  {{#equals type "pickup-location"}}
-    {{#if address}}
-      <div class="pl-box" style="margin-bottom:25px;">
-        <div class="pl-box-body">
-            <div id="pl-map-pickup-location"></div>
-          </div>
-          {{ generatePickupLocationMap address }}
+{{#equals type "pickup-location"}}
+  {{#if address}}
+    <div class="pl-box" style="margin-bottom:25px;">
+      <div class="pl-box-body">
+        <div id="pl-map-pickup-location"></div>
       </div>
-      <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">      
-            <div class="pl-box-action-info">
-              <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
-              {{address}}
-            </div>
-          </div>
-       </a>
-    {{/if}}
+      {{ generatePickupLocationMap address }}
+    </div>
+    <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">      
+      <div class="pl-box-action-info">
+        <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
+        {{address}}
+      </div>
+    </a>
+  {{/if}}
 
-    {{#if msg}}
-      <pre>{{msg}}</pre>
-    {{/if}}
-  {{/equals}}
+  {{#if msg}}
+    <pre>{{msg}}</pre>
+  {{/if}}
+{{/equals}}
 
 
   {{#equals type "vote-courier"}}

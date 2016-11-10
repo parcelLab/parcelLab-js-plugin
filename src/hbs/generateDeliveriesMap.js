@@ -7,7 +7,7 @@ module.exports = function (startTime, endTime, deliveryLocation, nearbyDeliverie
     s.type = 'text/javascript';
     s.src = src;
     s.onload = s.onreadystatechange = function () {
-      if (!r && (!this.readyState || this.readyState == 'complete')) {
+      if (!r && (!this.readyState || this.readyState === 'complete')) {
         r = true;
         callback();
       }
