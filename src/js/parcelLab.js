@@ -99,7 +99,6 @@ class ParcelLab {
         Api.getPickupLocation(this.props(), (err, res) => {
           if (err) this.handleError(err);
           if (res) {
-              res.gmapApiKey = _settings.gmap_api_key;
               res.type = actionBox.type;
               res.address = actionBox.address;
             this.renderActionBox(res);
@@ -119,7 +118,6 @@ class ParcelLab {
           }
 
           if (res) {
-            res.gmapApiKey = _settings.gmap_api_key;
             if (!res.label &&
               this.checkpoints.header[0] &&
               this.checkpoints.header[0].actionBox)

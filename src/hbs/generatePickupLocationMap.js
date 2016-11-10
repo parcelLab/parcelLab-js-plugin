@@ -1,4 +1,5 @@
-module.exports = function (gmapApiKey, address) {
+module.exports = function (address) {
+    const GOOGLE_API_KEY = require('../settings').google_api_key;
     function loadScript(src, callback)
     {
         var s, r, t;
@@ -16,7 +17,7 @@ module.exports = function (gmapApiKey, address) {
         t.parentNode.insertBefore(s, t);
     }
 
-    loadScript("//maps.googleapis.com/maps/api/js?key=" + gmapApiKey, function () {
+    loadScript("//maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY, function () {
         geoCodeAddress(address, function (err, coord) {
             if (!err) {
                 loadMap(coord);

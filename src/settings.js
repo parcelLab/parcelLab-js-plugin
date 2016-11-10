@@ -8,7 +8,7 @@ module.exports = {
   sender_endpoint: 'sender',
   version_url: 'https://cdn.parcellab.com/js/v2/version.txt',
   default_root_node: '#parcelLab-trace-wrapper',
-  gmap_api_key: require('raw!../GOOGLE_API_KEY').trim(),
+  google_api_key: require('raw!../GOOGLE_API_KEY').trim(),
   defualt_opts: {
     show_shopInfos: false,
   },

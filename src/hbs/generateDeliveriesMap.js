@@ -1,4 +1,6 @@
-module.exports = function (gmapApiKey, startTime, endTime, deliveryLocation, nearbyDeliveries) {
+module.exports = function (startTime, endTime, deliveryLocation, nearbyDeliveries) {
+    const GOOGLE_API_KEY = require('../settings').google_api_key;
+
     var map;
     function loadScript(src, callback)
     {
@@ -17,7 +19,7 @@ module.exports = function (gmapApiKey, startTime, endTime, deliveryLocation, nea
         t.parentNode.insertBefore(s, t);
     }
 
-    loadScript("//maps.googleapis.com/maps/api/js?key=" + gmapApiKey, function () {
+    loadScript("//maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY, function () {
         loadScript("//cdn.parcellab.com/js/markerLabel.js", function () {
             loadMap();
         });
