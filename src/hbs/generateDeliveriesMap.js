@@ -18,7 +18,7 @@ module.exports = function (gmapApiKey, startTime, endTime, deliveryLocation, nea
     }
 
     loadScript("//maps.googleapis.com/maps/api/js?key=" + gmapApiKey, function () {
-        loadScript("js/lib/markerLabel.js", function () {
+        loadScript("//cdn.parcellab.com/js/markerLabel.js", function () {
             loadMap();
         });
     });
