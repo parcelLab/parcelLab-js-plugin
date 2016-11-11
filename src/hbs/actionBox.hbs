@@ -66,12 +66,18 @@
       </div>
     {{/if}}
 
-    <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
-      <div class="pl-box-body">
-        <div id="pl-prediction-map"></div>
-      </div>
-    </div>
-    {{generateDeliveriesMap startTime endTime deliveryLocation nearbyDeliveries}}
+    {{#if startTime}}
+      {{#if endTime}}
+        {{#if deliveryLocation}}
+          <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
+            <div class="pl-box-body">
+              <div id="pl-prediction-map"></div>
+            </div>
+          </div>
+          {{generateDeliveriesMap startTime endTime deliveryLocation nearbyDeliveries}}
+        {{/if}}
+      {{/if}}
+    {{/if}}
 
     {{#with caption}}
       <div class="pl-prediction-caption" style="margin-bottom:25px;">
