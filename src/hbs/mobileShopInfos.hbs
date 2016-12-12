@@ -13,9 +13,11 @@
     {{/with}}
     {{{generateContactLink contact.pubEmail true}}}
     <br />
-    <a href="{{contact.website}}" target="_blank" class="btn btn-default btn-block">
-      <i class="fa fa-fw fa-globe"></i> {{contact.website}}
+    {{#with contact.website}}
+    <a href="{{this}}" target="_blank" class="btn btn-default btn-block">
+      <i class="fa fa-fw fa-globe"></i> {{trimUrl this}}
     </a>
+    {{/with}}
     <br />
     <div style="text-align: center; margin-top:40px;">
       {{#each social}}

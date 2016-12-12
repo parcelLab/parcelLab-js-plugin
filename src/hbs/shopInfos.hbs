@@ -27,7 +27,7 @@
       {{{generateContactLink contact.pubEmail false}}}
       <br />
       {{#with contact.website}}
-        <a class="one-liner" href="{{this}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{this}}</a>
+        <a href="{{this}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{trimUrl this}}</a>
       {{/with}}
       <br />
       <div style="text-align: center; margin-top:40px;">
