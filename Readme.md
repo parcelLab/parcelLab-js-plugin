@@ -27,6 +27,14 @@ After adding the script you will have a new `ParcelLab` class in your global sco
 </body>  
 ```
 
+### Without action box
+
+If you want to use the plugin in a non-customer facing website (e.g. internal page for customer support), it is recommended to hide the action box like so:
+
+```html
+<style> div#pl-action-box-container { display: none; } </style>
+```
+
 ## Integrate delivery time prediction
 *Please note: Delivery time prediction is currently only supported for deliveries to Germany.*
 
