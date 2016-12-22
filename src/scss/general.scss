@@ -102,6 +102,15 @@
   height: auto;
 }
 
+#pl-shop-info-container .pl-box-body>a,
+#pl-mobile-shop-info-container .pl-box-body>a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+}
+
 .pl-opening-hours-box {
   border: 0px;
   border-top: 1px #ddd dashed;
