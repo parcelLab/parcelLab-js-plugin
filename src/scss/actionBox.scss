@@ -172,3 +172,17 @@ h3 {
   color: #aaa;
   font-size:13px;
 }
+#pl-map {
+  height: 250px;
+  width:100%;
+}
+.pl-maps-markerLabels{
+    background-color:rgba(255,255,255,.8);
+    color:#333;
+    padding:6px;
+    border:none;
+    opacity:1!important;
+    white-space:nowrap;
+    margin-left:-30px!important;
+    font-weight:400
+}
