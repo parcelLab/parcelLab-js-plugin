@@ -102,11 +102,50 @@
   height: auto;
 }
 
-#pl-shop-info-container .pl-box-body>a,
-#pl-mobile-shop-info-container .pl-box-body>a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  display: inline-block
+.pl-opening-hours-box {
+  border: 0px;
+  border-top: 1px #ddd dashed;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  .pl-box-heading {
+    font-size:1em;
+    padding:10px 20px;
+    border: 0px;
+  }
+
+  .pl-box-body {
+    padding:10px 0;
+
+    &:not(.pl-open) {
+      @media(max-width: 749px) {
+        display: none;
+      }
+    }
+  }
+
+  .opening-hours-entry {
+
+    &, &>div {
+      font-size: 11px;
+
+      @media(max-width: 749px) {
+        font-size: 14px;
+      }
+    }
+
+    padding: 0 20px;
+
+    .pl-week-day-col {
+      float: left;
+      width: 50%;
+    }
+    .pl-hours-col {
+      float: left;
+      width: 50%;
+    }
+
+    &.highlighted-entry {
+      background-color: #eee;
+    }
+  }
 }

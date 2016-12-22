@@ -1,19 +1,30 @@
-
-  {{#equals type "maps"}}
-  <div class="pl-box" style="margin-bottom:25px;">
-    <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
-      <div class="pl-box-body pl-box-maps" style="{{{generateMapBG address}}}">
-        <div class="pl-box-action-info">
-          <i class="fa fa-road fa-2x" style="margin-bottom: 10px;"></i>
-          {{address}}
-        </div>
-        <div class="pl-address-info">
-          <div>{{address}}</div>
-        </div>
+{{#equals type "pickup-location"}}
+  <!-- Map -->
+  {{#if address}}
+    <div class="pl-box" style="margin-bottom:25px;">
+      <div class="pl-box-body" style="padding:0;">
+        <div id="pl-pickup-location-map"></div>
       </div>
-    </a>
-  </div>
-  {{/equals}}
+      <!-- {{ generatePickupLocationMap address }} -->
+      <div class="pl-box-footer" align="left" style="padding:10px 20px;">
+        <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
+          <div class="pl-box-action-info">
+            {{address}}
+            <i class="fa fa-road"></i>
+          </div>
+        </a>
+      </div>
+
+      <div class="pl-box-body" style="padding:0;">
+        <!-- Opening hours -->
+        {{#if openingHours}}
+          {{{ generateOpeningHours openingHours lang.code}}}
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+{{/equals}}
+
 
   {{#equals type "vote-courier"}}
   <div class="pl-box" style="margin-bottom:25px;">
@@ -39,11 +50,13 @@
         </div>
       {{/if}}
 
-      <div class="pl-box-body pl-box-cal-body pl-box-prediction">
-        <div class="pl-cal-week-day">{{dayOfWeek}}</div>
-        <div class="pl-cal-day">{{dateOfMonth}}</div>
-        <div class="pl-cal-month">{{month}}</div>
-      </div>
+    {{#if dayOfWeek}}
+        <div class="pl-box-body pl-box-cal-body pl-box-prediction">
+            <div class="pl-cal-week-day">{{dayOfWeek}}</div>
+            <div class="pl-cal-day">{{dateOfMonth}}</div>
+            <div class="pl-cal-month">{{month}}</div>
+        </div>
+      {{/if}}
     </div>
 
     {{#if startTime}}
@@ -57,6 +70,19 @@
           {{/with}}
         </div>
       </div>
+    {{/if}}
+
+    {{#if startTime}}
+      {{#if endTime}}
+        {{#if deliveryLocation}}
+          <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
+            <div class="pl-box-body">
+              <div id="pl-prediction-map"></div>
+            </div>
+          </div>
+          {{generateDeliveriesMap startTime endTime deliveryLocation nearbyDeliveries}}
+        {{/if}}
+      {{/if}}
     {{/if}}
 
     {{#with caption}}

@@ -185,6 +185,9 @@ var translations = {
       OutForDelivery: 'The package will arrive <b>today</b>.',
       DestinationDeliveryCenter: 'The package will arrive <b>tomorrow</b>.',
     },
+    openingHours: 'Openinghours',
+    weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    alwaysOpened: '24h opened.',
     error: {
       delivery: 'Unfortunately, this delivery is not available.',
     },
@@ -197,6 +200,9 @@ var translations = {
       OutForDelivery: 'Die Ware wird noch <b>heute</b> geliefert.',
       DestinationDeliveryCenter: 'Die Ware wird <b>morgen</b> geliefert.',
     },
+    openingHours: 'Öffnungszeiten',
+    weekDays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+    alwaysOpened: 'Durchgehend geöffnet.',
     error: {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
     },
@@ -337,7 +343,7 @@ var langIds = {
     value: 'help',
     subTarget: 'data',
     sub: 'text_help_btn',
-  }
+  },
 };
 
 var listenBlocks = [{
