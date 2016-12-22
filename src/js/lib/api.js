@@ -3,6 +3,7 @@ const BASE_URL = _settings.base_url;
 const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint;
 const VOTE_ENDPOINT = _settings.vote_endpoint;
 const SENDER_ENDPOINT = _settings.sender_endpoint;
+const PICKUP_LOCATION_ENDPOINT = _settings.pickup_location_endpoint;
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint;
 const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint;
 const VERSION_URL = _settings.version_url;
@@ -148,6 +149,10 @@ exports.toURL = _toURL;
 
 exports.getCheckpoints = function (propsObj, callback) {
   _get(_toURL(BASE_URL, CHECKPOINTS_ENDPOINT, _objToQueryArr(propsObj)), callback);
+};
+
+exports.getPickupLocation = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, PICKUP_LOCATION_ENDPOINT, _objToQueryArr(propsObj)), callback);
 };
 
 exports.getPrediction = function (propsObj, callback) {

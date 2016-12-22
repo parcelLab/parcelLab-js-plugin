@@ -95,8 +95,15 @@ class ParcelLab {
     var actionBox = this.checkpoints.header[0].actionBox;
     if (!actionBox || !actionBox.type) return;
     switch (actionBox.type) {
-      case 'maps':
-        this.renderActionBox(actionBox);
+      case 'pickup-location':
+        Api.getPickupLocation(this.props(), (err, res) => {
+          if (err) this.handleError(err);
+          if (res) {
+            res.type = actionBox.type;
+            res.address = actionBox.address;
+            this.renderActionBox(res);
+          }
+        });
         break;
       case 'vote-courier':
         this.renderActionBox(actionBox);
@@ -110,7 +117,7 @@ class ParcelLab {
             if (res.length === 1) res = res[0].prediction;
           }
 
-          if (res && res.dateOfMonth && res.month) {
+          if (res) {
             if (!res.label &&
               this.checkpoints.header[0] &&
               this.checkpoints.header[0].actionBox)
@@ -313,7 +320,15 @@ class ParcelLab {
 
   renderActionBox(data) {
     this.switchLayout(false);
+    data.lang = this.lang; // pickup-loc HACK: add lang
     this.$find('#pl-action-box-container').html(templates.actionBox(data));
+
+    // pickup-loc HACK: reveal opening hours
+    var _this = this;
+    _this.$find('.pl-toggle-opening-hours').on('click', function (e) {
+      e.preventDefault();
+      _this.$find('.pl-opening-hours-box>.pl-box-body').toggleClass('pl-open');
+    });
   }
 
   renderShopInfos(data) {

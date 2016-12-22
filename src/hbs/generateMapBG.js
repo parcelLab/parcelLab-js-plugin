@@ -1,5 +1,6 @@
 module.exports = function (address) {
-  const GOOGLE_API_KEY = require('raw!../../GOOGLE_API_KEY').trim();
+  const GOOGLE_API_KEY = require('../settings').google_api_key;
+
   var encAdress = encodeURIComponent(address);
   var imgLink = `http://maps.googleapis.com/maps/api/staticmap? \
     center=${encAdress}

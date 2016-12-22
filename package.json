@@ -38,6 +38,7 @@
     "npm-run-all": "^3.0.0",
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
+    "serve": "^1.4.0",
     "webpack": "^1.13.0"
   },
   "dependencies": {
