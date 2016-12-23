@@ -27,6 +27,15 @@ After adding the script you will have a new `ParcelLab` class in your global sco
 </body>  
 ```
 
+### Enabling parcelLab default styles
+To enable the defaulut styles for the plugin, just add the class `parcellab-styles` to the root container (in this case `#pl-trace`) - or just simply pass `styles: true` to the options when creating a ParcelLab instance.
+```html
+<script type="text/javascript">
+  var parcelLab = new ParcelLab('#pl-trace', { styles: true });
+  parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"
+</script>
+```
+
 ### Without action box
 
 If you want to use the plugin in a non-customer facing website (e.g. internal page for customer support), it is recommended to hide the action box like so:
@@ -72,7 +81,7 @@ After adding the script, there will be a new `ParcelLabPrediction` class in the 
       suffix: 'Werktage', // text to display right of the prediction
       offset: 1, // offset in days to add to the predicted delivery time
       infoCaption: '#infoLabel', // where to display the info caption
-      language: 'de', // language in which to display the info caption in 
+      language: 'de', // language in which to display the info caption in
     });
     prediction.initialize(); // <~ this display the prediction in a dom-elem with id="#deliveryTime"
   </script>

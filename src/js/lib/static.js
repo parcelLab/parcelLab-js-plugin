@@ -185,7 +185,7 @@ var translations = {
       OutForDelivery: 'The package will arrive <b>today</b>.',
       DestinationDeliveryCenter: 'The package will arrive <b>tomorrow</b>.',
     },
-    openingHours: 'Openinghours',
+    openingHours: 'Opening hours',
     weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     alwaysOpened: '24h opened.',
     closesIn: 'Closes in about ',
