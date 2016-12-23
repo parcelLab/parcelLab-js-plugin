@@ -11,5 +11,6 @@ module.exports = {
   google_api_key: require('raw!../GOOGLE_API_KEY').trim(),
   defualt_opts: {
     show_shopInfos: false,
+    styles: false,
   },
 };

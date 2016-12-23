@@ -50,6 +50,8 @@ class ParcelLab {
     this.initLanguage();
     this.userId = this.getUrlQuery('u');
 
+    if (this.options.styles) this.initStyles();
+
     if (this.propsCheck() === false) return this.showError(); // check yourself before you ...
 
     // do a self update
@@ -78,6 +80,10 @@ class ParcelLab {
       this.handleWarning('Could not detect user language ... fallback to [EN]!');
       this.lang = statics.languages.en;
     }
+  }
+
+  initStyles() {
+    this.$find().addClass('parcellab-styles');
   }
 
   initShopInfos() {

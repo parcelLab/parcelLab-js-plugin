@@ -39,6 +39,45 @@ function renderOpeningHourEntry(openingHour, weekDays, fallBack) {
   `;
 }
 
+function generateRemainingOpeningTimeText(openingHours, lang) {
+  var result = '';
+  var now = new Date();
+  var opHours = null;
+  var closing = null;
+
+  openingHours.forEach((oh)=> {
+    if (oh.open.day === now.getDay()) opHours = oh;
+  });
+
+  if (opHours && opHours.close && opHours.close.time) {
+    result += translate('closesIn', lang);
+    var remaining = null;
+    if (opHours.close.day === now.getDay()) {
+      // closes today
+      closing = new Date();
+      closing.setHours(opHours.close.time.substring(0, 2));
+      closing.setMinutes(opHours.close.time.substring(2));
+      remaining = Math.abs(now - closing) / 36e5;
+      result += `${Math.round(remaining)} h`;
+    } else {
+      // close next day
+      closing = new Date();
+      closing.setHours(opHours.close.time.substring(0, 2));
+      closing.setHours(opHours.close.time.substring(0, 2));
+      closing.setMinutes(opHours.close.time.substring(2));
+      var ref = new Date(closing);
+      closing.setDate(ref.getDate() + 1); // add 1 day
+      remaining = Math.abs(now - closing) / 36e5;
+      result += `${Math.round(remaining)} h`;
+    }
+  } else if (opHours && opHours.open && opHours.open.time === '0000') {
+    // open 24h
+    result = translate('alwaysOpened', lang);
+  }
+
+  return result;
+}
+
 module.exports = function (openingHours, lang) {
   console.log(openingHours);
   if (!lang || typeof lang !== 'string') lang = 'USA'; // HACK
@@ -46,6 +85,7 @@ module.exports = function (openingHours, lang) {
   var weekDays = translate('weekDays', lang);
   var openingHourEntries = [];
   var alwaysOpenedText = translate('alwaysOpened', lang);
+  var mobileText = '';
 
   // check if open 24h
   var alwaysOpened = openingHours.filter((oh)=>
@@ -55,16 +95,22 @@ module.exports = function (openingHours, lang) {
   if (alwaysOpened) {
     openingHourEntries.push(
       `<div class="opening-hours-entry">${alwaysOpenedText}</div>`);
+    mobileText = alwaysOpenedText;
   } else {
     openingHours.forEach((ohEl)=> {
       openingHourEntries.push(renderOpeningHourEntry(ohEl, weekDays, alwaysOpenedText));
     });
+    mobileText = generateRemainingOpeningTimeText(openingHours, lang);
   }
 
   return `
   <div class="pl-box pl-opening-hours-box">
     <div class="pl-box-heading pl-toggle-opening-hours">
-      ${openingHoursText}
+      <span class="hide-on-mobile">
+        ${openingHoursText}
+        ${!alwaysOpened ? `<br><span class="pl-closes-in">(${mobileText})</span>` : ''}
+      </span>
+      <span class="hide-on-desktop">${mobileText}</span>
     </div>
     <div class="pl-box-body">
       ${openingHourEntries.join('\n')}
