@@ -189,6 +189,7 @@ var translations = {
     weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     alwaysOpened: '24h opened.',
     closesIn: 'Closes in about ',
+    opensIn: 'Opens in about ',
     error: {
       delivery: 'Unfortunately, this delivery is not available.',
     },
@@ -205,6 +206,7 @@ var translations = {
     weekDays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
     alwaysOpened: 'Durchgehend geöffnet.',
     closesIn: 'Schließt in ungefähr ',
+    opensIn: 'Öffnet in ungefähr ',
     error: {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
     },
