@@ -21,18 +21,18 @@
         </address>
       {{/with}}
       {{#with contact.phone}}
-        {{{generatePhoneLink this false}}}
+        {{{[generate/PhoneLink] this false}}}
         <br />
       {{/with}}
-      {{{generateContactLink contact.pubEmail false}}}
+      {{{[generate/ContactLink] contact.pubEmail false}}}
       <br />
       {{#with contact.website}}
-        <a href="{{this}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{trimUrl this}}</a>
+        <a href="{{this}}" target="_blank"><i class="fa fa-fw fa-globe"></i> {{[helpers/trimUrl] this}}</a>
       {{/with}}
       <br />
       <div style="text-align: center; margin-top:40px;">
         {{#each social}}
-          {{{generateSocialLink @key this}}}
+          {{{[generate/SocialLink] @key this}}}
         {{/each}}
       </div>
 

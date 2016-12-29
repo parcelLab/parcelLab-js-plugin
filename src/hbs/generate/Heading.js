@@ -1,4 +1,4 @@
-const { translate } = require('../js/lib/translator.js');
+const { translate } = require('../../js/lib/translator.js');
 /**
  * generates heading out of api raw data
  * @param  {Object} props parcelLab instance props

@@ -1,4 +1,4 @@
-const translate = require('../js/lib/translator').translate;
+const translate = require('../../js/lib/translator').translate;
 
 var currentWorkingDay = new Date().getDay();
 

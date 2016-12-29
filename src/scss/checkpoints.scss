@@ -73,22 +73,8 @@ a:hover, a:focus {
   color: #000000;
 }
 
-.pl-btn {
-  padding: 5px 10px;
-  line-height: 1.5;
-  border-radius: 3px;
+.pl-btn.pl-tab {
   margin-top: 30px;
-  background: white;
-  border: 1px solid #B2B2B2 !important;
-  font-size: 1rem;
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-  // cursor: pointer;
-}
-
-.pl-btn-block {
-  width: 100%;
 }
 
 div.pl-tab {

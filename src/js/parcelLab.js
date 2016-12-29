@@ -7,6 +7,7 @@ if (typeof window.jQuery === 'function')
 // libs
 const Api = require('./lib/api');
 const statics = require('./lib/static');
+const { translate } = require('./lib/translator.js');
 const templates = require('../hbs');
 const _settings = require('../settings');
 
@@ -27,8 +28,8 @@ class ParcelLab {
       if (_$(rootNodeQuery).get(0)) {
         this.rootNodeQuery = rootNodeQuery;
         this._langCode = navigator.language || navigator.userLanguage;
-        if (!opts && typeof opts !== 'object') opts = DEFAULT_OPTS;
-        this.options = opts;
+        if (!opts && typeof opts !== 'object') this.options = DEFAULT_OPTS;
+        else this.initOpts(opts);
       } else {
         console.error('🙀 Could not find the rootNode ~> ' + rootNodeQuery);
       }
@@ -80,6 +81,18 @@ class ParcelLab {
       this.handleWarning('Could not detect user language ... fallback to [EN]!');
       this.lang = statics.languages.en;
     }
+  }
+
+  initOpts(opts) {
+    for (var key in DEFAULT_OPTS) {
+      if (DEFAULT_OPTS.hasOwnProperty(key)) {
+        if (!opts[key]) opts[key] = DEFAULT_OPTS[key];
+      }
+    }
+
+    if (opts.show_searchForm && !opts.userId) console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!');
+
+    this.options = opts;
   }
 
   initStyles() {
@@ -251,11 +264,16 @@ class ParcelLab {
   }
 
   showError() {
-    this.innerHTML(`
-      <div class="pl-alert pl-alert-danger">
-        ${statics.translations[this.lang.code].error.delivery}
-      </div>
-    `);
+    var langCode = this.lang.code;
+    var ctx = {
+      message: statics.translations[langCode].error.delivery,
+      showSearchForm: this.options.show_searchForm && this.options.userId,
+      inputPlaceholder: translate('searchOrder', langCode),
+      buttonText: translate('search', langCode),
+    };
+
+    this.innerHTML(templates.error(ctx));
+    this.bindEvents();
   }
 
   bindEvents() {
@@ -301,6 +319,23 @@ class ParcelLab {
         }
       });
     });
+
+    // tracking search form
+    _this.$find('#pl-ts-search').on('click', function (e) {
+      e.preventDefault();
+      var orderNo = _this.$find('#pl-ts-trackingno').val();
+      var userId = _this.options.userId;
+      var langVal = _this.lang.name;
+
+      var props = [
+        ['orderNo', orderNo],
+        ['u', userId],
+        ['lang', langVal],
+      ];
+      var searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('');
+      window.location.search = searchQuery;
+    });
+
   }
 
   switchLayout(full) {

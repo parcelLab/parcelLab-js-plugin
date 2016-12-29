@@ -193,6 +193,8 @@ var translations = {
     error: {
       delivery: 'Unfortunately, this delivery is not available.',
     },
+    searchOrder: 'Search order',
+    search: 'Search',
   },
   DEU: {
     delivery: 'Lieferung',
@@ -210,6 +212,8 @@ var translations = {
     error: {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
     },
+    searchOrder: 'Bestellung suchen',
+    search: 'Suchen',
   },
   ESP: {
     delivery: 'Entrega',

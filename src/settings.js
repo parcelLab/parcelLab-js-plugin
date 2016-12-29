@@ -12,5 +12,7 @@ module.exports = {
   defualt_opts: {
     show_shopInfos: false,
     styles: false,
+    show_searchForm: false,
+    userId: null,
   },
 };

@@ -20,20 +20,20 @@
   <main class="pl-main pl-box pl-col pl-col-12">
 
       <div class="pl-box-heading" style="margin-bottom: 15px;">
-        {{generateHeading data props}}
+        {{[generate/Heading] data props}}
       </div>
 
       <!-- Tabs -->
       <div class="pl-container" style="padding: 0 25px;">
-        {{#tabbify data props}}
+        {{#[helpers/tabbify] data props}}
           {{> tab}}
-        {{/tabbify}}
+        {{/[helpers/tabbify]}}
       </div>
 
 
 
       <!-- Trackings-Container -->
-      {{#trackify data props}}
+      {{#[helpers/trackify] data props}}
         <div class="parcel_lab_tracking {{#unless visible}}hidden{{/unless}}" id="pl-t-{{id}}">
           <div class="pl-box-body">
 
@@ -45,10 +45,10 @@
 
             </div>
           <div class="pl-box-footer">
-            {{{generateFurtherInfosText this ../this}}}
+            {{{[generate/FurtherInfosText] this ../this}}}
           </div>
         </div>
-      {{/trackify}}
+      {{/[helpers/trackify]}}
 
   </main>
 

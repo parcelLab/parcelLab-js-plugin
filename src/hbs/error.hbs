@@ -1,0 +1,26 @@
+{{#if showSearchForm}}
+  <div class="pl-container">
+    <div class="pl-box">
+      <div class="pl-box-heading">
+        <div class="pl-alert pl-alert-danger">
+          {{message}}
+        </div>
+      </div>
+      <div class="pl-box-body" style="padding: 20px;">
+        <div class="pl-col-row">
+          <div class="pl-col pl-col-8" style="margin-bottom:10px;">
+            <input id="pl-ts-trackingno" type="text" placeholder="{{inputPlaceholder}}"  class="pl-form-input pl-btn-block">
+          </div>
+
+          <div class="pl-col pl-col-4" style="margin-bottom:10px;">
+            <button id="pl-ts-search" class="pl-cta-button pl-btn-block">{{buttonText}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="pl-alert pl-alert-danger">
+    {{message}}
+  </div>
+{{/if}}

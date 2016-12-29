@@ -1,5 +1,6 @@
+const GOOGLE_API_KEY = require('../../settings').google_api_key;
+
 module.exports = function (startTime, endTime, deliveryLocation, nearbyDeliveries) {
-  const GOOGLE_API_KEY = require('../settings').google_api_key;
 
   function loadScript(src, callback) {
     var r = false;

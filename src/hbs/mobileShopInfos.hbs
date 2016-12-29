@@ -8,20 +8,20 @@
       </address>
     {{/with}}
     {{#with contact.phone}}
-      {{{generatePhoneLink this true}}}
+      {{{[generate/PhoneLink] this true}}}
       <br />
     {{/with}}
-    {{{generateContactLink contact.pubEmail true}}}
+    {{{[generate/ContactLink] contact.pubEmail true}}}
     <br />
     {{#with contact.website}}
     <a href="{{this}}" target="_blank" class="btn btn-default btn-block">
-      <i class="fa fa-fw fa-globe"></i> {{trimUrl this}}
+      <i class="fa fa-fw fa-globe"></i> {{[helpers/trimUrl] this}}
     </a>
     {{/with}}
     <br />
     <div style="text-align: center; margin-top:40px;">
       {{#each social}}
-        {{{generateSocialLink @key this}}}
+        {{{[generate/SocialLink] @key this}}}
       {{/each}}
     </div>
   </div>

@@ -1,13 +1,14 @@
-{{#equals type "pickup-location"}}
+{{#[helpers/equals] type "pickup-location"}}
   <!-- Map -->
   {{#if address}}
     <div class="pl-box" style="margin-bottom:25px;">
       <div class="pl-box-body" style="padding:0;">
         <div id="pl-pickup-location-map"></div>
       </div>
-      <!-- {{ generatePickupLocationMap address }} -->
+      <!-- {{[generate/PickupLocationMap] address }} -->
+
       <div class="pl-box-footer" align="left" style="padding:10px 20px;">
-        <a href="{{generateMapsLink address}}" title="{{address}}" target="_blank">
+        <a href="{{[generate/MapsLink] address}}" title="{{address}}" target="_blank">
           <div class="pl-box-action-info">
             {{address}}
             <i class="fa fa-road"></i>
@@ -18,15 +19,15 @@
       <div class="pl-box-body" style="padding:0;">
         <!-- Opening hours -->
         {{#if openingHours}}
-          {{{ generateOpeningHours openingHours lang.code}}}
+          {{{ [generate/OpeningHours] openingHours lang.code}}}
         {{/if}}
       </div>
     </div>
   {{/if}}
-{{/equals}}
+{{/[helpers/equals]}}
 
 
-  {{#equals type "vote-courier"}}
+  {{#[helpers/equals] type "vote-courier"}}
   <div class="pl-box" style="margin-bottom:25px;">
     <div class="pl-box-body" style="padding: 15px;">
       {{#if label}}<h3 style="text-align:center;">{{label}}</h3>{{/if}}
@@ -40,9 +41,9 @@
       </div>
     </div>
   </div>
-  {{/equals}}
+  {{/[helpers/equals]}}
 
-  {{#equals type "prediction"}}
+  {{#[helpers/equals] type "prediction"}}
     <div class="pl-box" style="margin-bottom: 10px;">
       {{#if label}}
         <div class="pl-box-heading pl-box-cal-heading">
@@ -80,7 +81,7 @@
               <div id="pl-prediction-map"></div>
             </div>
           </div>
-          {{generateDeliveriesMap startTime endTime deliveryLocation nearbyDeliveries}}
+          {{[generate/DeliveriesMap] startTime endTime deliveryLocation nearbyDeliveries}}
         {{/if}}
       {{/if}}
     {{/if}}
@@ -90,4 +91,4 @@
         <i class="fa fa-info"></i> &nbsp; {{this}}
       </small>
     {{/with}}
-  {{/equals}}
+  {{/[helpers/equals]}}

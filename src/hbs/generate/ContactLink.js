@@ -1,4 +1,4 @@
-var trimUrl = require('./trimUrl');
+var trimUrl = require('../helpers/trimUrl');
 
 module.exports = function generateContactLink(link, buttonify) {
   var style = buttonify ? ' class="btn btn-default btn-block"' : '';

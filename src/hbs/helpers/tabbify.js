@@ -1,4 +1,4 @@
-var statics = require('../js/lib/static');
+var statics = require('../../js/lib/static');
 
 /**
  * generates tabs HTML out of api raw data

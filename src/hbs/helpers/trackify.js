@@ -1,5 +1,5 @@
-const T = require('../js/lib/translator.js');
-const statics = require('../js/lib/static');
+const T = require('../../js/lib/translator.js');
+const statics = require('../../js/lib/static');
 
 /**
  * generates tracking HTML out of api raw data
