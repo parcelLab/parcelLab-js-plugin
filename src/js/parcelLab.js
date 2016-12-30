@@ -60,7 +60,7 @@ class ParcelLab {
 
     // get checkpoints
     Api.getCheckpoints(this.props(), (err, res) => {
-      if (err) return this.handleError(err);
+      if (err) return this.handleError(err, true);
       else if (res && res.header && res.body) {
         this.checkpoints = res;
         this.renderLayout(this.checkpoints);
@@ -175,13 +175,15 @@ class ParcelLab {
     return _$(buildSelector(sel));
   }
 
-  handleError(err) {
+  handleError(err, showError) {
     if (typeof err === 'string')
       console.error(`🙀  ${err}`);
     else if (typeof err === 'object') {
       Raven.captureException(err);
       console.error(`🙀  ${err.message}`);
     }
+
+    if (showError) this.showError();
   }
 
   handleWarning(err) {
