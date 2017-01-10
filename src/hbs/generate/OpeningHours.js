@@ -12,18 +12,18 @@ function formatHourElement(hel) {
   } else return hel;
 }
 
-function minutesOpen(opHours) {
+function minutesOpen(ophObj) {
   var now = new Date();
   var closing = new Date();
 
-  if (opHours.close.day === now.getDay()) {
-    closing.setHours(opHours.close.time.substring(0, 2));
-    closing.setMinutes(opHours.close.time.substring(2));
-  } else if (opHours.close.day === now.getDay() + 1) {
+  if (ophObj.close.day === now.getDay()) {
+    closing.setHours(ophObj.close.time.substring(0, 2));
+    closing.setMinutes(ophObj.close.time.substring(2));
+  } else if (ophObj.close.day === now.getDay() + 1) {
     var ref = new Date(closing);
     closing.setDate(ref.getDate() + 1); // add 1 day
-    closing.setHours(opHours.close.time.substring(0, 2));
-    closing.setMinutes(opHours.close.time.substring(2));
+    closing.setHours(ophObj.close.time.substring(0, 2));
+    closing.setMinutes(ophObj.close.time.substring(2));
   } else {
     throw new Error('Cant determine minutesOpen');
   }
@@ -31,33 +31,86 @@ function minutesOpen(opHours) {
   return (closing - now) / 1000 / 60;
 }
 
+function dateifyOPHours(ophObj) {
+  try {
+    var now = new Date();
+    var ref = null;
+    var res = {
+      open: new Date(),
+      close: new Date(),
+    };
+
+    // open
+    if (ophObj.open.day === now.getDay()) {
+      res.open.setHours(ophObj.open.time.substring(0, 2));
+      res.open.setMinutes(ophObj.open.time.substring(2));
+    } else if (ophObj.open.day === now.getDay() + 1) {
+      ref = new Date(res.open);
+      res.open.setDate(ref.getDate() + 1); // add 1 day
+      res.open.setHours(ophObj.open.time.substring(0, 2));
+      res.open.setMinutes(ophObj.open.time.substring(2));
+    }
+
+    // close
+    if (ophObj.close.day === now.getDay()) {
+      res.close.setHours(ophObj.close.time.substring(0, 2));
+      res.close.setMinutes(ophObj.close.time.substring(2));
+    } else if (ophObj.close.day === now.getDay() + 1) {
+      ref = new Date(res.close);
+      res.close.setDate(ref.getDate() + 1); // add 1 day
+      res.close.setHours(ophObj.close.time.substring(0, 2));
+      res.close.setMinutes(ophObj.close.time.substring(2));
+    }
+
+    return res;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}
+
+function getCurrentTimeSlot(openingHours) {
+  var todayTimeSlots = openingHours.filter((ophObj)=> ophObj.open.day === currentWorkingDay);
+  var slot = null;
+  if (todayTimeSlots.length > 1) {
+    var now = new Date();
+
+    todayTimeSlots.forEach((ts)=> {
+      var dts = dateifyOPHours(ts);
+      if (dts && (dts.open < now) && (dts.close > now)) slot = ts;
+    });
+
+  } else if (todayTimeSlots.length === 1) slot = todayTimeSlots[0];
+  return slot;
+}
+
 //////////////////////
 // render functions //
 //////////////////////
 
-function renderOpeningHourEntry(openingHour, weekDays, fallBack) {
-  var weekDay = weekDays[openingHour.open.day];
+function renderOpeningHourEntry(ophObj, weekDays, fallBack, hideWeekDay) {
+  var weekDay = weekDays[ophObj.open.day];
   var highlightClass = '';
   var fromTill = '-';
 
   // check if opening and closing times available
-  if (openingHour.open && openingHour.close) {
-    fromTill = formatHourElement(openingHour.open.time);
+  if (ophObj.open && ophObj.close) {
+    fromTill = formatHourElement(ophObj.open.time);
     fromTill += ' - ';
-    fromTill += formatHourElement(openingHour.close.time);
+    fromTill += formatHourElement(ophObj.close.time);
   }
 
   // check if open 24h
-  if (openingHour.open && !openingHour.close && openingHour.open.time === '0000') {
+  if (ophObj.open && !ophObj.close && ophObj.open.time === '0000') {
     fromTill = fallBack;
   }
 
-  if (openingHour.open.day === currentWorkingDay) highlightClass = 'highlighted-entry';
+  if (ophObj.open.day === currentWorkingDay) highlightClass = 'highlighted-entry';
 
   return `
     <div class="pl-col-row opening-hours-entry ${highlightClass}">
       <div class="pl-week-day-col">
-        ${weekDay}:
+        ${(!hideWeekDay) ? weekDay + ':' : '&nbsp;'}
       </div>
       <div class="pl-hours-col">
         ${fromTill}
@@ -66,16 +119,44 @@ function renderOpeningHourEntry(openingHour, weekDays, fallBack) {
   `;
 }
 
+function renderOpeningHoursList(openingHours, lang) {
+  var weekDays = translate('weekDays', lang);
+  var openingHourEntries = [];
+  var sortedOPHours = {};
+  var alwaysOpenedText = translate('alwaysOpened', lang);
+
+  // sort opHours
+  openingHours.forEach((ophObj)=> {
+    if (sortedOPHours[ophObj.open.day]) sortedOPHours[ophObj.open.day].push(ophObj);
+    else sortedOPHours[ophObj.open.day] = [ophObj];
+  });
+
+  for (var key in sortedOPHours) {
+    if (sortedOPHours.hasOwnProperty(key)) {
+      var ophDay = sortedOPHours[key];
+      if (ophDay.length > 1) {
+        // push first with weekDay text
+        openingHourEntries.push(renderOpeningHourEntry(ophDay[0], weekDays, alwaysOpenedText));
+
+        // and remaining without weekday text
+        ophDay.slice(1).forEach((ophObj)=> {
+          openingHourEntries.push(renderOpeningHourEntry(ophObj, weekDays, alwaysOpenedText, true));
+        });
+      } else if (ophDay.length === 1)
+        openingHourEntries.push(renderOpeningHourEntry(ophDay[0], weekDays, alwaysOpenedText));
+    }
+  }
+
+  return openingHourEntries.join('');
+}
+
 function renderRemainingOpeningTimeText(openingHours, lang) {
   var result = '';
-  var now = new Date();
   var opHours = null;
 
   try {
     // find openingHours for today
-    openingHours.forEach((oh)=> {
-      if (oh.open.day === now.getDay()) opHours = oh;
-    });
+    opHours = getCurrentTimeSlot(openingHours);
 
     if (opHours) {
       if (!opHours.close && opHours.open && opHours.open.time === '0000') // 24 h open!
@@ -98,12 +179,10 @@ function renderRemainingOpeningTimeText(openingHours, lang) {
 }
 
 module.exports = function (openingHours, lang) {
-  console.log(openingHours);
   if (!lang || typeof lang !== 'string') lang = 'USA'; // HACK
   var openingHoursText = translate('openingHours', lang);
-  var weekDays = translate('weekDays', lang);
-  var openingHourEntries = [];
   var alwaysOpenedText = translate('alwaysOpened', lang);
+  var openingHourEntries = [];
   var mobileText = '';
 
   // check if open 24h
@@ -112,13 +191,10 @@ module.exports = function (openingHours, lang) {
   ).length === 0;
 
   if (alwaysOpened) {
-    openingHourEntries.push(
-      `<div class="opening-hours-entry">${alwaysOpenedText}</div>`);
+    openingHourEntries = `<div class="opening-hours-entry">${alwaysOpenedText}</div>`;
     mobileText = alwaysOpenedText;
   } else {
-    openingHours.forEach((ohEl)=> {
-      openingHourEntries.push(renderOpeningHourEntry(ohEl, weekDays, alwaysOpenedText));
-    });
+    openingHourEntries = renderOpeningHoursList(openingHours, lang);
     mobileText = renderRemainingOpeningTimeText(openingHours, lang);
   }
 
@@ -135,7 +211,7 @@ module.exports = function (openingHours, lang) {
       </span>
     </div>
     <div class="pl-box-body">
-      ${openingHourEntries.join('\n')}
+      ${openingHourEntries}
     </div>
   </div>
   `;
