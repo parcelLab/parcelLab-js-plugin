@@ -9,6 +9,7 @@ module.exports = {
   version_url: 'https://cdn.parcellab.com/js/v2/version.txt',
   default_root_node: '#parcelLab-trace-wrapper',
   google_api_key: require('raw!../GOOGLE_API_KEY').trim(),
+  mapShortenAddressForCouriers: ['ups-express', 'ups'],
   defualt_opts: {
     show_shopInfos: false,
     styles: false,

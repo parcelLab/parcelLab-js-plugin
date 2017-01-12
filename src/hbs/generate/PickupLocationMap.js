@@ -1,7 +1,7 @@
 const GOOGLE_API_KEY = require('../../settings').google_api_key;
+const SHORTEN_ADDRESS_FOR = require('../../settings').mapShortenAddressForCouriers;
 
 module.exports = function (address, ctx) {
-  const shortenAddressForCouriers = ['ups-express'];
   const courier = ctx.data.root.courier;
 
   function loadScript(src, callback) {
@@ -32,7 +32,7 @@ module.exports = function (address, ctx) {
   }
 
   function shortenAddress(address) {
-    if ((shortenAddressForCouriers.indexOf(courier) >= 0) && (address.match(/,/g).length >= 2)) {
+    if ((SHORTEN_ADDRESS_FOR.indexOf(courier) >= 0) && (address.match(/,/g).length >= 2)) {
       address = address.split(',').slice(1).join(',').trim();
     }
 
