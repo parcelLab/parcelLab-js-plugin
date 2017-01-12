@@ -4,8 +4,12 @@ var translate = function (word, lang='USA') {
   if (statics.translations[lang] && statics.translations[lang][word]) {
     return statics.translations[lang][word];
   } else {
-    console.error('🙀  Can not translate ' + word + ' into ' + lang);
-    return word;
+    console.warn('Can not translate "' + word + '" into ' + lang);
+
+    // try to translate to USA
+    if (lang !== 'USA' && statics.translations.USA[word]) {
+      return statics.translations.USA[word];
+    } else return word;
   }
 };
 

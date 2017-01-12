@@ -174,6 +174,24 @@ var languages = {
     code: 'FIN',
     icon: 'https://cdn.parcellab.com/img/flags/fi.png',
   },
+  pt: {
+    name: 'pt',
+    label: 'Português',
+    code: 'POR',
+    icon: 'https://cdn.parcellab.com/img/flags/pt.png',
+  },
+  pl: {
+    name: 'pl',
+    label: 'Polski',
+    code: 'POL',
+    icon: 'https://cdn.parcellab.com/img/flags/pl.png',
+  },
+  ro: {
+    name: 'ro',
+    label: 'Român',
+    code: 'RON',
+    icon: 'https://cdn.parcellab.com/img/flags/ro.png',
+  },
 };
 
 var translations = {
@@ -311,7 +329,42 @@ var translations = {
       delivery: 'Dessverre er denne leveransen ikke tilgjengelig.',
     },
   },
-
+  POR: {
+    delivery: 'Entrega',
+    more: 'Ver mais...',
+    orderNo: 'Ordem',
+    predictions: {
+      OutForDelivery: 'O pacote chegará hoje.',
+      DestinationDeliveryCenter: 'O pacote chegará amanhã.',
+    },
+    error: {
+      delivery: 'Infelizmente, esta entrega não está disponível.',
+    },
+  },
+  POL: {
+    delivery: 'Dostawa',
+    more: 'Pokaż więcej...',
+    orderNo: 'Zamówienie',
+    predictions: {
+      OutForDelivery: 'Pakiet przybędzie <b>dziś</b>.',
+      DestinationDeliveryCenter: 'Pakiet przybędzie <b>jutro</b>.',
+    },
+    error: {
+      delivery: 'Niestety, ta dostawa nie jest dostępna.',
+    },
+  },
+  RON: {
+    delivery: 'Livrare',
+    more: 'Arată mai multe...',
+    orderNo: 'Comandă',
+    predictions: {
+      OutForDelivery: 'Pachetul va sosi <b>astăzi</b>.',
+      DestinationDeliveryCenter: 'Pachetul va sosi <b>mâine</b>.',
+    },
+    error: {
+      delivery: 'Din păcate, această livrare nu este disponibil.',
+    },
+  },
 };
 
 var langIds = {
