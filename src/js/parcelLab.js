@@ -364,6 +364,7 @@ class ParcelLab {
   renderActionBox(data) {
     this.switchLayout(false);
     data.lang = this.lang; // pickup-loc HACK: add lang
+    data.courier = this.courier; // pickup-loc HACK: add courier
     this.$find('#pl-action-box-container').html(templates.actionBox(data));
 
     // pickup-loc HACK: reveal opening hours
