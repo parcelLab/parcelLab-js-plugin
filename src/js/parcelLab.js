@@ -67,6 +67,7 @@ class ParcelLab {
         this.initActionBox();
         if (this.options.show_shopInfos) this.initShopInfos();
         this.bindEvents();
+        this.bindLinkListener();
       } else {
         this.showError();
       }
@@ -338,6 +339,20 @@ class ParcelLab {
       window.location.search = searchQuery;
     });
 
+  }
+
+  bindLinkListener() {
+    var fire = (e)=> {
+      Api.saveUserActivity(e.target.href, this.props(), err => {
+        void 0; // psht...
+      });
+      return true;
+    };
+
+    for (var i = 0; i < document.links.length; i++) {
+      var el = document.links[i];
+      el.onclick = fire;
+    }
   }
 
   switchLayout(full) {

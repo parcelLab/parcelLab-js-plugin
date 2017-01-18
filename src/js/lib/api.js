@@ -6,6 +6,7 @@ const SENDER_ENDPOINT = _settings.sender_endpoint;
 const PICKUP_LOCATION_ENDPOINT = _settings.pickup_location_endpoint;
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint;
 const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint;
+const USER_ACTIVITY_ENDPOINT = _settings.user_activity_endpoint;
 const VERSION_URL = _settings.version_url;
 
 // API calls for all the modules
@@ -76,14 +77,17 @@ function _get(url, callback) {
 
 function _post(url, data, callback) {
   if (!data) data = {};
-  if (window && window.fetch) {
-    window.fetch(url, { method: 'POST', body: JSON.stringify(data), })
+  if (window && window.fetch) { // use fetch api
+    var headers = {};
+    if (typeof data === 'object') headers['Content-Type'] = 'application/json';
+    window.fetch(url, { method: 'POST', headers, body: JSON.stringify(data), })
     .then(res => handleFetchResponse(res))
     .then(json => callback(null, json))
     .catch(err => callback(err));
-  } else {
+  } else { // use XMLHttpRequest // TODO : send json
     var request = new XMLHttpRequest();
     request.open('POST', url);
+    if (typeof data === 'object') request.setRequestHeader('Content-Type', 'application/json');
     request.onreadystatechange = function () {
       if (request.readyState === status.DONE) {
         handleRequestResponse(request, callback);
@@ -184,4 +188,10 @@ exports.voteCourier = function (vote, propsObj, callback) {
   if (['up', 'down'].indexOf(vote) < 0) callback(new Error('Wrong argument for vote!'));
   var url = _toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _objToQueryArr(propsObj));
   _post(url, {}, callback);
+};
+
+exports.saveUserActivity = function (link, propsObj, callback) {
+  var url = _toURL(BASE_URL, USER_ACTIVITY_ENDPOINT, _objToQueryArr(propsObj));
+  var data = { link: link, };
+  _post(url, data, callback);
 };

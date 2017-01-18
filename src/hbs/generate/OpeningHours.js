@@ -139,9 +139,11 @@ function renderOpeningHoursList(openingHours, lang) {
         openingHourEntries.push(renderOpeningHourEntry(ophDay[0], weekDays, alwaysOpenedText));
 
         // and remaining without weekday text
-        ophDay.slice(1).forEach((ophObj)=> {
+        var remaining = ophDay.slice(1);
+        for (var i = 0; i < remaining.length; i++) {
+          let ophObj = remaining[i];
           openingHourEntries.push(renderOpeningHourEntry(ophObj, weekDays, alwaysOpenedText, true));
-        });
+        }
       } else if (ophDay.length === 1)
         openingHourEntries.push(renderOpeningHourEntry(ophDay[0], weekDays, alwaysOpenedText));
     }
