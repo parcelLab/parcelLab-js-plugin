@@ -33,13 +33,13 @@ module.exports = function (data, props, opts) {
         checkpoint: checkpoint,
         more: T.translate('more', props.lang.code),
       };
-      var ts = new Date(checkpoint.timestamp);
+      var ts = checkpoint.timestamp ?  new Date(checkpoint.timestamp) : null;
       if (aceptedStatus.indexOf(checkpoint.status) >= 0 && i === (checkpoints.length - 1))
         tracking.prediction = {
           text: T.translate('predictions', props.lang.code)[checkpoint.status],
           status: checkpoint.status,
         };
-      cp.dateText = T.date(ts, i !== 0, props.lang.code);
+      if (ts) cp.dateText = T.date(ts, i !== 0, props.lang.code);
 
       cp.transitStatus = statics.transitStates[checkpoint.status];
       if (typeof cp.transitStatus === 'undefined')
