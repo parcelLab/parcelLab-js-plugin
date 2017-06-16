@@ -296,7 +296,7 @@ var translations = {
   SWE: {
     delivery: 'Leverans',
     more: 'Se mer...',
-    orderNo: 'Beställa',
+    orderNo: 'Beställning',
     predictions: {
       OutForDelivery: 'Paketet kommer fram <b>i dag</b>.',
       DestinationDeliveryCenter: 'Paketet kommer fram <b>i morgon</b>.',
