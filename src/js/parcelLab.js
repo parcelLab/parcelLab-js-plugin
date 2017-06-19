@@ -165,7 +165,7 @@ class ParcelLab {
 
       return { header, body };
     } catch (error) {
-      console.log('💩  Could not sort checkpoints...')
+      console.log('💩  Could not sort checkpoints... ', error);
       return checkpoints;
     }
   }
@@ -364,7 +364,7 @@ class ParcelLab {
 
   bindLinkListener() {
     var fire = (e)=> {
-      Api.saveUserActivity(e.target.href, this.props(), err => {
+      Api.saveUserActivity(e.target.href, this.props(),  () => {
         void 0; // psht...
       });
       return true;
