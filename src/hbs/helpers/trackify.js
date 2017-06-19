@@ -12,6 +12,7 @@ module.exports = function (data, props, opts) {
   var trackings = [];
   var aceptedStatus = 'OutForDelivery DestinationDeliveryCenter';
   var content = { trackings: [] };
+  var { selectedTrackingNo } = props;
   trackings = data.header.map(function (hObj, index) {
 
     var tracking = {
@@ -19,8 +20,12 @@ module.exports = function (data, props, opts) {
       checkpoints: [],
     };
 
-    // tracking.checkpoints = data.body[tHead.id];
-    tracking.visible = index === 0;
+    if (selectedTrackingNo) {
+      tracking.visible = hObj.tracking_number === selectedTrackingNo;
+    } else {
+      tracking.visible = index === 0;
+    }
+
     tracking.subHeading = true;
     if (!tracking.visible) content.hidden = 'hidden';
     var checkpoints = data.body[hObj.id].filter(function (elem) {

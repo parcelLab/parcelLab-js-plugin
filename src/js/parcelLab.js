@@ -48,6 +48,7 @@ class ParcelLab {
     this.orderNo = this.getUrlQuery('orderNo');
     this.trackingNo = this.getUrlQuery('trackingNo');
     this.courier = this.getUrlQuery('courier');
+    this.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo');
     this.initLanguage();
     this.userId = this.getUrlQuery('u');
 
@@ -394,6 +395,7 @@ class ParcelLab {
       data: data,
       props: this.props(),
     };
+    ctx.props.selectedTrackingNo = this.selectedTrackingNo;
     this.innerHTML(templates.layout(ctx));
   }
 

@@ -9,7 +9,7 @@ var statics = require('../../js/lib/static');
  */
 module.exports  = function (data, props, opts) {
   var { header } = data;
-  var { lang } = props;
+  var { lang, selectedTrackingNo } = props;
   var colSize = header.length === 2 ? 6 : 4;
   var tabs = [];
   header.forEach(function (tracking, index) {
@@ -19,7 +19,13 @@ module.exports  = function (data, props, opts) {
       courier: tracking.courier,
       lang: lang.code,
     };
-    template.active = index === 0 ? 'active' : '';
+
+    if (selectedTrackingNo) {
+      if (tracking.tracking_number === selectedTrackingNo) template.active = 'active';
+    } else {
+      template.active = index === 0 ? 'active' : '';
+    }
+
     template.transitStatus = statics.transitStates[tracking.last_delivery_status.code];
     template.href = tracking.id;
     template.object = JSON.stringify(info);
