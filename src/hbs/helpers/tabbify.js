@@ -10,7 +10,7 @@ var statics = require('../../js/lib/static');
 module.exports  = function (data, props, opts) {
   var { header } = data;
   var { lang } = props;
-  var colSize = header.length === 3 ? 4 : 6;
+  var colSize = header.length === 2 ? 6 : 4;
   var tabs = [];
   header.forEach(function (tracking, index) {
     var template = { size: colSize };
@@ -19,9 +19,6 @@ module.exports  = function (data, props, opts) {
       courier: tracking.courier,
       lang: lang.code,
     };
-    template.signalColourGreen = !tracking.delayed && !tracking.exception ? '#679A34' : '#AAA';
-    template.signalColourOrange = tracking.delayed ? '#F68423' : '#AAA';
-    template.signalColourRed = tracking.exception ? '#CE0711' : '#AAA';
     template.active = index === 0 ? 'active' : '';
     template.transitStatus = statics.transitStates[tracking.last_delivery_status.code];
     template.href = tracking.id;

@@ -17,18 +17,21 @@
   </aside>
 
 
-  <main class="pl-main pl-box pl-col pl-col-12">
-
-      <div class="pl-box-heading" style="margin-bottom: 15px;">
+  <main class="pl-main pl-col pl-col-12">
+    <div class="pl-box">
+      <div class="pl-box-heading">
         {{[generate/Heading] data props}}
       </div>
 
       <!-- Tabs -->
-      <div class="pl-container" style="padding: 0 25px;">
-        {{#[helpers/tabbify] data props}}
-          {{> tab}}
-        {{/[helpers/tabbify]}}
-      </div>
+      {{#[helpers/equals] data.header.length 1}}
+      {{else}}
+        <div class="pl-container pl-tab-container">
+          {{#[helpers/tabbify] data props}}
+            {{> tab}}
+          {{/[helpers/tabbify]}}
+        </div>
+      {{/[helpers/equals]}}
 
 
 
@@ -49,7 +52,7 @@
           </div>
         </div>
       {{/[helpers/trackify]}}
-
+    </div>
   </main>
 
 </div>

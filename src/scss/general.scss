@@ -51,21 +51,20 @@
 /* BREAKPOINT ~> For devices larger than ... */
 @media (min-width: 750px) {
   .pl-col {
-    margin-left: 4%; }
-  .pl-col:first-child {
-    margin-left: 0; }
-  .pl-col-1                  { width: 4.66666666667%; }
-  .pl-col-2                  { width: 13.3333333333%; }
-  .pl-col-3                  { width: 22%;            }
-  .pl-col-4                  { width: 30.6666666667%; }
-  .pl-col-5                  { width: 39.3333333333%; }
-  .pl-col-6                  { width: 48%;            }
-  .pl-col-7                  { width: 56.6666666667%; }
-  .pl-col-8                  { width: 65.3333333333%; }
-  .pl-col-9                  { width: 74.0%;          }
-  .pl-col-10                 { width: 82.6666666667%; }
-  .pl-col-11                 { width: 91.3333333333%; }
-  .pl-col-12                 { width: 100%; margin-left: 0; }
+    margin-left: 0;
+  }
+  .pl-col-1                  { width: 8.33333333%;  }
+  .pl-col-2                  { width: 16.66666667%  }
+  .pl-col-3                  { width: 22%;          }
+  .pl-col-4                  { width: 33.33333333%; }
+  .pl-col-5                  { width: 41.66666667%  }
+  .pl-col-6                  { width: 50%;          }
+  .pl-col-7                  { width: 58.33333333%; }
+  .pl-col-8                  { width: 66.66666667%; }
+  .pl-col-9                  { width: 75%;          }
+  .pl-col-10                 { width: 83.33333333%; }
+  .pl-col-11                 { width: 91.66666667%; }
+  .pl-col-12                 { width: 100%;         }
 
 }
 .pl-container:after {

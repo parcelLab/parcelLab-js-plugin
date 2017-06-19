@@ -16,6 +16,12 @@
   }
 }
 
+.pl-main {
+  div.pl-box>div>div.pl-box-body {
+    padding-top: 25px;
+  }
+}
+
 div.pl-row {
   margin: 0;
   background-image: url("https://cdn.parcellab.com/img/traceline.png");
@@ -50,8 +56,7 @@ div.pl-alert {
 
 div.pl-icon {
   float: left;
-  margin-top: 0px;
-  margin-right: 15px;
+  margin: 0 15px 0 0;
   &>.fa-stack > *{
     color: #AAA;
   }
@@ -73,12 +78,13 @@ a:hover, a:focus {
   color: #000000;
 }
 
-.pl-btn.pl-tab {
-  margin-top: 30px;
+div.pl-tab-container {
+  border-bottom: 1px #ddd dashed;
+  max-width: unset;
 }
 
 div.pl-tab {
-  margin: 0px 0 15px;
+  margin: 0px;
   padding: 8px;
   opacity: 0.5;
   &:hover {
@@ -93,11 +99,39 @@ div.pl-tab {
   div + div {
     text-align: left;
   }
-  .pl-status {
-    display: block;
-    float: right;
-    margin-right: 4px;
+
+  div.pl-tab-content {
+    width: 100%;
+    position: relative;
+    div.pl-tab-text {
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 40px;
+      
+      span.pl-tab-text-tno {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      span.pl-tab-text-status {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 12px;
+      }
+    }
+    div.pl-status {
+      position: absolute;
+      top: 0;
+      right: 0;
+      div.pl-icon {
+        margin: 0;
+        float: unset;
+      }
+    }
   }
+
 }
 
 div.pl-prediction {

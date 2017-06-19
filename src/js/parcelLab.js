@@ -62,7 +62,7 @@ class ParcelLab {
     Api.getCheckpoints(this.props(), (err, res) => {
       if (err) return this.handleError(err, true);
       else if (res && res.header && res.body) {
-        this.checkpoints = res;
+        this.checkpoints = this.sortCheckpoints(res);
         this.renderLayout(this.checkpoints);
         this.initActionBox();
         if (this.options.show_shopInfos) this.initShopInfos();
@@ -146,6 +146,27 @@ class ParcelLab {
           }
         });
         break;
+    }
+  }
+
+  sortCheckpoints(checkpoints) {
+    try {
+      let { header, body } = checkpoints;
+
+      if (header && header.length > 1) {
+        header = header.sort((x, y) => {
+          let xTime = x && x.id ? body[x.id][body.length - 1] : null;
+          let yTime = y && y.id ? body[y.id][body.length - 1] : null;
+          let xMS = xTime ? new Date(xTime) : null;
+          let yMS = yTime ? new Date(yTime) : null;
+          return xMS > yMS ? -1 : 1;
+        });
+      }
+
+      return { header, body };
+    } catch (error) {
+      console.log('💩  Could not sort checkpoints...')
+      return checkpoints;
     }
   }
 
