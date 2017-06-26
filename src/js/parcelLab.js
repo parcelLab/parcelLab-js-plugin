@@ -1,4 +1,5 @@
 // deps
+require('./lib/polyfills.js')
 const Raven = require('raven-js');
 var _$ = require('cash-dom');
 if (typeof window.jQuery === 'function')
