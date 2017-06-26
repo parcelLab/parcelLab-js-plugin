@@ -39,6 +39,10 @@ module.exports  = function (data, props, opts) {
 
   var res = '';
   if (tabs.length > 1) {
+    if (!(tabs.find(t => t.template.active))) { // fallback to first if no selectedTrackingNo
+      tabs[0].template.active = 'active';
+    }
+
     tabs.map((tab)=> {
       res += opts.fn(tab);
     });
