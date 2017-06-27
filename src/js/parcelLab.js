@@ -52,6 +52,7 @@ class ParcelLab {
     this.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo');
     this.initLanguage();
     this.userId = this.getUrlQuery('u');
+    this.secureHash = this.getUrlQuery('s');
 
     if (this.options.styles) this.initStyles();
 
@@ -179,6 +180,7 @@ class ParcelLab {
       courier: this.courier,
       userId: this.userId,
       lang: this.lang,
+      s: this.secureHash,
     };
   }
 

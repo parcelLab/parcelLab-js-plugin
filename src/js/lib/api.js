@@ -138,6 +138,8 @@ function _objToQueryArr(propsObj) {
   }
 
   if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.code });
+  if (propsObj.s) result.push({ name: 's', value: propsObj.s });
+
   return result;
 }
 
