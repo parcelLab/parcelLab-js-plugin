@@ -247,14 +247,14 @@ var translations = {
   },
   FRA: {
     delivery: 'Livraison',
-    more: 'Montre plus...',
+    more: 'Voir les étapes précédentes...',
     orderNo: 'Commande',
     predictions: {
       OutForDelivery: 'Le colis arrivera <b>aujourd\'hui</b>.',
       DestinationDeliveryCenter: 'Le colis arrivera <b>demain</b>.',
     },
     error: {
-      delivery: 'Malheureusement , cette livraison ne sont pas disponibles.',
+      delivery: 'Malheureusement, ce numéro de colis ou de commande n\'est pas valide.',
     },
   },
   ITA: {

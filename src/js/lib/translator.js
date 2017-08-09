@@ -14,9 +14,11 @@ var translate = function (word, lang='USA') {
 };
 
 var date = function (ts, time, code) {
-  return code === 'DEU' ?
-      dateToStringDe(ts, time) :
-      dateToStringEn(ts, time);
+  var res = '';
+  if (['DEU', 'AUT', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time);
+  else if (['FRA', 'fr'].indexOf(code) > -1) res = dateToStringFr(ts, time);
+  else res = dateToStringEn(ts, time);
+  return res;
 };
 
 /**
@@ -58,6 +60,19 @@ function dateToStringEn(ts, showTime) {
     if (ts.getHours() < 12) result += ' a.m.';
     else result += ' p.m.';
   }
+  return result;
+}
+
+/**
+ * Converts the date into French format.
+ * @param  {Date} ts, timestamp or date.
+ * @param  {Boolean} showTime, sets if the time also will be shown.
+ * @returns {String} the date with french format.
+ */
+function dateToStringFr(ts, showTime) {
+  var result = '';
+  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero(ts.getMonth() + 1, 2) + '.' + ts.getFullYear();
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + 'h' + padWithZero(ts.getMinutes(), 2);
   return result;
 }
 
