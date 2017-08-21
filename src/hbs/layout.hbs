@@ -14,6 +14,9 @@
   <aside  style="display: none;" class="pl-box-aside pl-col pl-col-4">
     <div id="pl-shop-info-container"></div>
     <div id="pl-action-box-container"></div>
+    <div id="pl-reroute-link-container">
+      {{{[generate/RerouteLinkShort] data props}}}
+    </div>
   </aside>
 
 
@@ -48,6 +51,8 @@
 
             </div>
           <div class="pl-box-footer">
+             {{{[generate/RerouteLink] this ../this}}}
+
             {{{[generate/FurtherInfosText] this ../this}}}
           </div>
         </div>
