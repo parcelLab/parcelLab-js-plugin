@@ -399,6 +399,7 @@ class ParcelLab {
       props: this.props(),
     };
     ctx.props.selectedTrackingNo = this.selectedTrackingNo;
+    ctx.props.rerouteButton = this.options.rerouteButton || null;
     this.innerHTML(templates.layout(ctx));
   }
 

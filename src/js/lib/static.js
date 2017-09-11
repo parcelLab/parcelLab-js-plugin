@@ -278,7 +278,7 @@ var translations = {
       DestinationDeliveryCenter: 'Het pakket komt <b>morgen</b>.',
     },
     error: {
-      delivery: 'Desværre er dette leverance er ikke tilgængelig.',
+      delivery: 'Helaas is dit de levering is niet beschikbaar.',
     },
   },
   DNK: {

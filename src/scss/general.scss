@@ -236,3 +236,54 @@ textarea.pl-form-input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none; }
+
+.pl-reroute-link {
+  margin-bottom: 15px;
+  display: block;
+  text-decoration: none;
+  border: 1px solid #D1D1D1;
+  color: #333;
+  text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px; 
+  transition: .1s all linear;
+
+  &:hover {
+    transform: scale(1.015);
+    transition: .1s all linear;
+  }
+
+  @media(max-width: 768px) {
+    font-size: 15px;
+  }
+}
+
+.pl-reroute-link-short {
+  display: block;
+  text-decoration: none;
+  border: 1px solid #D1D1D1;
+  color: #333;
+  text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+  transition: .1s all linear;
+  margin-bottom: 15px;
+
+  small {
+    opacity: .7;
+    font-size: .8em;
+  }
+
+  &:hover {
+    transform: scale(1.015);
+    transition: .1s all linear;
+  }
+
+  @media(max-width: 768px) {
+  }
+}
+
+.pl-reduced-margin {
+  margin-bottom: 15px;
+}
