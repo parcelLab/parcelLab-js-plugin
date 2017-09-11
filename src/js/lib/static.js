@@ -217,7 +217,7 @@ var translations = {
   DEU: {
     delivery: 'Lieferung',
     more: 'Mehr anzeigen...',
-    orderNo: 'Auftrag',
+    orderNo: 'Bestellung',
     predictions: {
       OutForDelivery: 'Die Ware wird noch <b>heute</b> geliefert.',
       DestinationDeliveryCenter: 'Die Ware wird <b>morgen</b> geliefert.',
