@@ -79,6 +79,7 @@ class ParcelLab {
 
   initLanguage() {
     if (this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang');
+    else if (this.getUrlQuery('language')) this._langCode = this.getUrlQuery('language');
     if (statics.languages[this._langCode]) {
       this.lang = statics.languages[this._langCode];
     } else {
