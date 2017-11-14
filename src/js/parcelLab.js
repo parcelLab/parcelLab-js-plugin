@@ -95,7 +95,8 @@ class ParcelLab {
       }
     }
 
-    if (opts.show_searchForm && !opts.userId) console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!');
+    if (opts.show_searchForm && !opts.userId) 
+      console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!');
 
     this.options = opts;
   }
@@ -297,6 +298,7 @@ class ParcelLab {
     var ctx = {
       message: statics.translations[langCode].error.delivery,
       showSearchForm: this.options.show_searchForm && this.options.userId,
+      hasParams: this.orderNo || this.trackingNo,
       inputPlaceholder: translate('searchOrder', langCode),
       buttonText: translate('search', langCode),
     };

@@ -1,11 +1,13 @@
 {{#if showSearchForm}}
   <div class="pl-container">
     <div class="pl-box">
+      {{#if hasParams}}
       <div class="pl-box-heading">
         <div class="pl-alert pl-alert-danger">
           {{message}}
         </div>
       </div>
+      {{/if}}
       <div class="pl-box-body" style="padding: 20px;">
         <div class="pl-col-row">
           <div class="pl-col pl-col-8" style="margin-bottom:10px;">
