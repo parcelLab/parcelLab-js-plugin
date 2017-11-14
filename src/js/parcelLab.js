@@ -298,10 +298,11 @@ class ParcelLab {
     var ctx = {
       message: statics.translations[langCode].error.delivery,
       showSearchForm: this.options.show_searchForm && this.options.userId,
-      hasParams: this.orderNo || this.trackingNo,
+      showMessage: this.orderNo || this.trackingNo,
       inputPlaceholder: translate('searchOrder', langCode),
       buttonText: translate('search', langCode),
     };
+    if (!ctx.showSearchForm) ctx.showMessage = true; 
 
     this.innerHTML(templates.error(ctx));
     this.bindEvents();
