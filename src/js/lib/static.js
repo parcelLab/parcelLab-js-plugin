@@ -271,8 +271,8 @@ var translations = {
   },
   NLD: {
     delivery: 'Levering',
-    more: 'Vis mere...',
-    orderNo: 'Bestille',
+    more: 'Bekijk meer...',
+    orderNo: 'Bestelling',
     predictions: {
       OutForDelivery: 'Het pakket zal <b>vandaag</b> aankomen.',
       DestinationDeliveryCenter: 'Het pakket komt <b>morgen</b>.',
