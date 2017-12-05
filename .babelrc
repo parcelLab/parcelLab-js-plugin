@@ -1,6 +1,14 @@
 {
   "sourceMaps": true,
   "presets": [
-    "es2015-minimal"
+    [
+      "env",
+      {
+        "targets": { "ie": 10 }
+      }
+    ]
   ],
+  "plugins": [
+    "transform-object-rest-spread"
+  ]
 }

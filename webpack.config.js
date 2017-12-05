@@ -1,5 +1,5 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractCSS = new ExtractTextPlugin('./build/parcelLab.min.css');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const extractCSS = new ExtractTextPlugin('./build/parcelLab.min.css')
 
 module.exports = {
   entry: './src/js/index.js',
@@ -22,10 +22,6 @@ module.exports = {
         loader: 'json',
       },
       {
-        test: /\.hbs$/,
-        loader: 'handlebars',
-      },
-      {
         test: /\.(xml|html|txt|md)$/,
         loader: 'raw',
       },
@@ -37,4 +33,4 @@ module.exports = {
     ],
   },
   plugins: [extractCSS],
-};
+}
