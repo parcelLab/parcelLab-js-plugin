@@ -1,17 +1,15 @@
 const html = require('yo-yo')
-const store = require('../store')
-const actions = require('../store/actions')
 const RerouteLink = require('./RerouteLink')
 const Heading = require('./Heading')
 const Tabs = require('./Tabs')
 const TrackingBody = require('./trackingBody')
 
-const App = state => {
+const App = (state, emit) => {
   if (!state.checkpoints) return html`<div>Loading...</div>`
   const rerouteLink = RerouteLink(state)
   const heading = Heading(state)
   const tabs = Tabs(state)
-  const trackingBody = TrackingBody(state)
+  const trackingBody = TrackingBody(state, emit)
 
   return html`
     <div>

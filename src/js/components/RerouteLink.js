@@ -3,8 +3,10 @@ const html = require('yo-yo')
 function generateRerouteCaption(courier) {
   if (courier && courier.rerouteurl_label_info) {
     return html`
-      <br>
-      <small>${courier.rerouteurl_label_info}</small>
+      <div>
+        <br>
+        <small>${courier.rerouteurl_label_info}</small>
+      </div>
     `
   } else return ''
 }

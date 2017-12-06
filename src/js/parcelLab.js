@@ -3,7 +3,6 @@ require('./lib/polyfills.js')
 const Raven = require('raven-js')
 const html = require('yo-yo')
 const store = require('./store')
-const { setState, fetchCheckpoints, fetchShopInfos } = require('./store/actions')
 const App = require('./components/App')
 
 // libs
@@ -58,15 +57,15 @@ class ParcelLab {
     this.selfUpdate()
 
     // set up store
-    store(setState({ query: this.props(), options: this.options, activeTracking: 0 }))
+    store.set({ query: this.props(), options: this.options, activeTracking: 0 })
     this.setupStore(store)
 
     // render app
-    this.el = App(store.getState())
+    this.el = App(store.get(), store.emit)
     document.querySelector(this.rootNodeQuery).appendChild(this.el)
 
-    store(fetchCheckpoints())
-    if (this.options.show_shopInfos) store(fetchShopInfos())
+    store.emit('fetchCheckpoints')
+    if (this.options.show_shopInfos) store.emit('fetchShopInfos')
   }
 
   initLanguage() {
@@ -170,42 +169,45 @@ class ParcelLab {
 
   setupStore(store) {
     // update app on ~all~ state changes
-    store.on('SET_STATE', (action, state) => {
-      console.log(state)
-      const newApp = App(state)
+    store.subscribe(state => {
+      const newApp = App(state, store.emit)
       html.update(this.el, newApp)
     })
 
     // fetch checkpoints
-    store.on('FETCH_CHECKPOINTS', (action, state) => {
-      Api.getCheckpoints(state.query, (err, res) => {
-        if (err) store(setState({ apiError: err, }))
-        else store(setState({ checkpoints: res }))
+    store.on('fetchCheckpoints', () => {
+      Api.getCheckpoints(store.get().query, (err, res) => {
+        if (err) store.set({ apiError: err, })
+        else store.set({ checkpoints: res })
       })
     })
 
     // fetch shop infos
-    store.on('FETCH_SHOP_INFOS', (action, state) => {
-      Api.getShopInfos(state.query, (err, res) => {
-        if (err) store(setState({ apiError: err }))
-        else store(setState({ shopInfos: res }))
+    store.on('fetchShopInfos', () => {
+      Api.getShopInfos(store.get().query, (err, res) => {
+        if (err) store.get({ apiError: err })
+        else store.get({ shopInfos: res })
       })
     })
 
     // fetch pickup location
-    store.on('FETCH_PICKUP_LOCATION', (action, state) => {
-      Api.getPickupLocation(state.query, (err, res) => {
-        if (err) store(setState({ apiError: err }))
-        else store(setState({ pickupLocation: res }))
+    store.on('fetchPickupLocation', () => {
+      Api.getPickupLocation(store.get().query, (err, res) => {
+        if (err) store.get({ apiError: err })
+        else store.get({ pickupLocation: res })
       })
     })
 
     // fetch prediction
-    store.on('FETCH_PREDICTION', (action, state) => {
-      Api.getPrediction(state.query, (err, res) => {
-        if (err) store(setState({ apiError: err }))
-        else store(setState({ pickupLocation: res }))
+    store.on('fetchPrediction', () => {
+      Api.getPrediction(store.get().query, (err, res) => {
+        if (err) store.get({ apiError: err })
+        else store.get({ pickupLocation: res })
       })
+    })
+
+    store.on('showAllCheckpoints', () => {
+      store.set({ showAllCheckpoints: true })
     })
   }
 }

@@ -21,7 +21,7 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   return cp
 }).filter(cp => true && cp.shown).reverse()
 
-const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints }) => {
+const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints }, emit) => {
   if (!checkpoints) return null
   const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
   const tHeader = checkpoints.header[activeTracking]
@@ -31,7 +31,7 @@ const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints }
   let moreButton = null
 
   if (tCheckpoints.length > 3 && !showAllCheckpoints) {
-    moreButton = MoreButton(T.translate('more', query.lang.code))
+    moreButton = MoreButton(T.translate('more', query.lang.code), emit)
     tCheckpoints = tCheckpoints.slice(0, 3)
   }
     

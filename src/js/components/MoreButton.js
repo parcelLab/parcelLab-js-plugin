@@ -1,9 +1,7 @@
 const html = require('yo-yo')
-const store = require('../store')
-const { setState } = require('../store/actions')
 
-const MoreButton = text => html`
-  <div class="pl-row pl-alert pl-action pl-show-more-button" onclick=${() => store(setState({ showAllCheckpoints: true }))}>
+const MoreButton = (text, emit) => html`
+  <div class="pl-row pl-alert pl-action pl-show-more-button" onclick=${() => emit('showAllCheckpoints')}>
     <div class="pl-icon">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x" style="color:#eee;"></i>
