@@ -58,7 +58,7 @@ class ParcelLab {
     this.selfUpdate()
 
     // set up store
-    store(setState({ query: this.props(), options: this.options }))
+    store(setState({ query: this.props(), options: this.options, activeTracking: 0 }))
     this.setupStore(store)
 
     // render app
@@ -172,13 +172,14 @@ class ParcelLab {
     // update app on ~all~ state changes
     store.on('SET_STATE', (action, state) => {
       console.log(state)
-      html.update(this.el, App(state))
+      const newApp = App(state)
+      html.update(this.el, newApp)
     })
 
     // fetch checkpoints
     store.on('FETCH_CHECKPOINTS', (action, state) => {
       Api.getCheckpoints(state.query, (err, res) => {
-        if (err) store(setState({ apiError: err }))
+        if (err) store(setState({ apiError: err, }))
         else store(setState({ checkpoints: res }))
       })
     })
@@ -194,6 +195,14 @@ class ParcelLab {
     // fetch pickup location
     store.on('FETCH_PICKUP_LOCATION', (action, state) => {
       Api.getPickupLocation(state.query, (err, res) => {
+        if (err) store(setState({ apiError: err }))
+        else store(setState({ pickupLocation: res }))
+      })
+    })
+
+    // fetch prediction
+    store.on('FETCH_PREDICTION', (action, state) => {
+      Api.getPrediction(state.query, (err, res) => {
         if (err) store(setState({ apiError: err }))
         else store(setState({ pickupLocation: res }))
       })
