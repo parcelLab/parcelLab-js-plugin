@@ -3,6 +3,8 @@ const T = require('../lib/translator.js')
 const statics = require('../lib/static')
 const Checkpoint = require('./Checkpoint')
 const MoreButton = require('./MoreButton')
+const RerouteLink = require('./RerouteLink')
+const FurtherInfos = require('./FurtherInfos')
 
 const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   const ts = cp.timestamp ? new Date(cp.timestamp) : null
@@ -21,16 +23,18 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   return cp
 }).filter(cp => true && cp.shown).reverse()
 
-const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints }, emit) => {
+const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints, options }, emit) => {
   if (!checkpoints) return null
   const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
+  const rerouteLink = (options.rerouteButton &&options.rerouteButton === 'right') ? RerouteLink(tHeader) : null
+  const furtherInfos = FurtherInfos(tHeader)
+  
   let tCheckpoints = prepareCheckpoints(tBody, query)
-
   let moreButton = null
 
-  if (tCheckpoints.length > 3 && !showAllCheckpoints) {
+  if (tCheckpoints.length > 3 && !showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
     moreButton = MoreButton(T.translate('more', query.lang.code), emit)
     tCheckpoints = tCheckpoints.slice(0, 3)
   }
@@ -47,8 +51,8 @@ const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints }
 
         </div>
       <div class="pl-box-footer">
-          {{{[generate/RerouteLink] this ../this}}}
-        {{{[generate/FurtherInfosText] this ../this}}}
+        ${ rerouteLink }
+        ${ furtherInfos }
       </div>
     </div>
   `

@@ -121,7 +121,9 @@ function _toURL(baseUrl, endpoint, queryArr) {
 
 function _objToQueryArr(propsObj) {
   var result = [];
-  if (propsObj.trackingNo) {
+  if (propsObj.id) {
+    result.push({ name: 'id', value: propsObj.id })
+  } else if (propsObj.trackingNo) {
     // query for checkpoints by trackingNo
     if (propsObj.trackingNo) result.push({ name: 'trackingNo', value: propsObj.trackingNo });
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier });

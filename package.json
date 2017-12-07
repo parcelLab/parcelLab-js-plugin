@@ -44,6 +44,7 @@
     "country-language": "^0.1.7",
     "countryjs": "^1.5.2",
     "nanobus": "^4.3.1",
+    "nanostore": "^1.0.0",
     "raven-js": "^3.5.1",
     "yo-yo": "^1.4.1"
   }

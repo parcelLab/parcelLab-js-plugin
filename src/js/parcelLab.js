@@ -2,7 +2,7 @@
 require('./lib/polyfills.js')
 const Raven = require('raven-js')
 const html = require('yo-yo')
-const store = require('./store')
+const Store = require('nanostore')
 const App = require('./components/App')
 
 // libs
@@ -57,7 +57,7 @@ class ParcelLab {
     this.selfUpdate()
 
     // set up store
-    store.set({ query: this.props(), options: this.options, activeTracking: 0 })
+    const store = new Store({ query: this.props(), options: this.options, activeTracking: 0 })
     this.setupStore(store)
 
     // render app
@@ -168,46 +168,97 @@ class ParcelLab {
   }
 
   setupStore(store) {
+    this.store = store
+
     // update app on ~all~ state changes
-    store.subscribe(state => {
+    this.store.subscribe(state => {
+      console.log(state)
       const newApp = App(state, store.emit)
       html.update(this.el, newApp)
     })
 
     // fetch checkpoints
-    store.on('fetchCheckpoints', () => {
+    this.store.on('fetchCheckpoints', () => {
       Api.getCheckpoints(store.get().query, (err, res) => {
-        if (err) store.set({ apiError: err, })
-        else store.set({ checkpoints: res })
+        if (err) store.set({ fetchCheckpoints_failed: err, })
+        else {
+          store.set({ checkpoints: res })
+          store.emit('fetchActionBoxData')
+        }
       })
     })
 
+    this.store.on('fetchActionBoxData', () => {
+      const { checkpoints } = store.get()
+      if (checkpoints && checkpoints.header && checkpoints.header.length > 0) {
+        checkpoints.header.forEach(cph => {
+          const { actionBox } = cph
+          if (actionBox.type === 'pickup-location') {
+            store.emit('fetchPickupLocation', cph.id)
+          }
+          if (actionBox.type === 'prediction') {
+            store.emit('fetchPrediction', cph.id)
+          }
+        })
+      }
+    })
+
     // fetch shop infos
-    store.on('fetchShopInfos', () => {
+    this.store.on('fetchShopInfos', () => {
       Api.getShopInfos(store.get().query, (err, res) => {
-        if (err) store.get({ apiError: err })
-        else store.get({ shopInfos: res })
+        if (err) this.store.get({ fetchShopInfos_failed: err })
+        else this.store.get({ shopInfos: res })
       })
     })
 
     // fetch pickup location
-    store.on('fetchPickupLocation', () => {
-      Api.getPickupLocation(store.get().query, (err, res) => {
-        if (err) store.get({ apiError: err })
-        else store.get({ pickupLocation: res })
+    this.store.on('fetchPickupLocation', id => {
+      console.log('fetching pickup location for ', id)
+      Api.getPickupLocation({...store.get().query, id}, (err, res) => {
+        if (err) this.store.get({ fetchPickupLocation_failed: err })
+        else if (res) {
+          const state = this.store.get()
+          state.checkpoints.header = state.checkpoints.header.map(cph => {
+            if (cph.id === id) cph.actionBox.data = res
+            return cph
+          })
+          this.store.set(state)
+        }
       })
     })
 
     // fetch prediction
-    store.on('fetchPrediction', () => {
-      Api.getPrediction(store.get().query, (err, res) => {
-        if (err) store.get({ apiError: err })
-        else store.get({ pickupLocation: res })
+    this.store.on('fetchPrediction', id => {
+      Api.getPrediction({ ...store.get().query, id }, (err, res) => {
+        if (err) this.store.get({ fetchPrediction_failed: err })
+        else if (res) {
+          const data = res[0]
+          const state = this.store.get()
+          state.checkpoints.header = state.checkpoints.header.map(cph => {
+            if (cph.id === data._ref) cph.actionBox.data = data.prediction
+            return cph
+          })
+          this.store.set(state)
+        }
       })
     })
 
-    store.on('showAllCheckpoints', () => {
-      store.set({ showAllCheckpoints: true })
+    this.store.on('showAllCheckpoints', () => {
+      this.store.set({ showAllCheckpoints: true })
+    })
+
+    this.store.on('voteCourier', (v, tid) => {
+      const state = this.store.get()
+      Api.voteCourier(v, { ...store.query, id: tid }, (err, res) => {
+        state.checkpoints.header = state.checkpoints.header.map(cph => {
+          if (cph.id === tid) {
+            if (err) cph.actionBox.voteErr = err
+            else if (res) cph.actionBox.voteSuccess = res
+          }
+          return cph
+        })
+        this.store.set(state)
+      })
     })
   }
 }
