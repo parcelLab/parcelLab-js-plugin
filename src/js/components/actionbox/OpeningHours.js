@@ -182,7 +182,7 @@ function renderRemainingOpeningTimeText(openingHours, lang) {
   }
 }
 
-module.exports = function (openingHours, lang) {
+const OpeningHours = function (openingHours, lang, emit) {
   if (!lang || typeof lang !== 'string') lang = 'USA' // HACK
 
   const openingHoursText = document.createElement('span')
@@ -206,23 +206,26 @@ module.exports = function (openingHours, lang) {
     mobileText = renderRemainingOpeningTimeText(openingHours, lang)
   }
 
-  const openingHoursCaption = (!alwaysOpened && mobileText) ? html`<span class="pl-closes-in">(${mobileText})</span>` : ''
+  const openingHoursCaption = (!alwaysOpened && mobileText) ? html`<span class="pl-closes-in">(${mobileText})</span>` : null
 
   return html`
   <div class="pl-box pl-opening-hours-box">
-    <div class="pl-box-heading pl-toggle-opening-hours">
+    <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('openOpeningHours')}>
       <span class="hide-on-mobile">
         ${ openingHoursText }
+        ${ openingHoursCaption ? html`<br>` : null }
         ${ openingHoursCaption }
       </span>
       <span class="hide-on-desktop">
-        ${mobileText || openingHoursText}
+        ${ mobileText || openingHoursText }
         <i style="float:right;" class="fa fa-chevron-down"></i>
       </span>
     </div>
     <div class="pl-box-body">
-      ${openingHourEntries}
+      ${ openingHourEntries }
     </div>
   </div>
   `
 }
+
+module.exports = OpeningHours

@@ -260,6 +260,11 @@ class ParcelLab {
         this.store.set(state)
       })
     })
+
+    this.store.on('openOpeningHours', () => {
+      console.log('yop opened')
+      this.store.set({ openingHoursOpen: true })
+    })
   }
 }
 

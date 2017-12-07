@@ -8,7 +8,7 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
 
     switch (tHeader.actionBox.type) {
       case 'pickup-location':
-        if (tHeader.actionBox.data) return PickupLocation(tHeader, query.lang)
+        if (tHeader.actionBox.data) return PickupLocation(tHeader, query.lang, emit)
         else return null
       case 'vote-courier':
         return VoteCourier(tHeader, emit)
