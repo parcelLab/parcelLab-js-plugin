@@ -8,6 +8,7 @@ const App = require('./components/App')
 // libs
 const Api = require('./lib/api')
 const statics = require('./lib/static')
+const { checkQuery } = require('./lib/helpers')
 const _settings = require('../settings')
 
 // settings
@@ -52,20 +53,25 @@ class ParcelLab {
     this.initLanguage()
 
     if (this.options.styles) this.initStyles()
-
+    
     // do a self update
     this.selfUpdate()
-
+    
     // set up store
-    const store = new Store({ query: this.props(), options: this.options, activeTracking: 0 })
+    const queryOK = checkQuery(this.props())
+    const initialState = { query: this.props(), options: this.options, activeTracking: 0 }
+    if (!queryOK) initialState['query_err'] = true
+    const store = new Store(initialState)
     this.setupStore(store)
 
     // render app
     this.el = App(store.get(), store.emit)
     document.querySelector(this.rootNodeQuery).appendChild(this.el)
 
-    store.emit('fetchCheckpoints')
-    if (this.options.show_shopInfos) store.emit('fetchShopInfos')
+    if (queryOK) {
+      store.emit('fetchCheckpoints')
+      if (this.options.show_shopInfos) store.emit('fetchShopInfos')
+    }
   }
 
   initLanguage() {
@@ -182,7 +188,8 @@ class ParcelLab {
       Api.getCheckpoints(store.get().query, (err, res) => {
         if (err) store.set({ fetchCheckpoints_failed: err, })
         else {
-          store.set({ checkpoints: res })
+          const checkpoints = res || []
+          store.set({ checkpoints })
           store.emit('fetchActionBoxData')
         }
       })
@@ -270,6 +277,20 @@ class ParcelLab {
         return cph
       })
       this.store.set(state)
+    })
+
+    this.store.on('searchOrder', input => {
+      const state = this.store.get()
+      const userId = state.options.userId
+      const langVal = state.query.lang.name
+
+      const props = [
+        ['orderNo', input],
+        ['u', userId],
+        ['lang', langVal],
+      ]
+      const searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
+      window.location.search = searchQuery
     })
   }
 }

@@ -12,3 +12,9 @@ exports.trimURL = function (url) {
     return result
   }
 }
+
+exports.checkQuery = function (query) {
+  if (query.trackingNo && query.courier) return true
+  else if (query.orderNo && query.userId) return true
+  else return false
+}

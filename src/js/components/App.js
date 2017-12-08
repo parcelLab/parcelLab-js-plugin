@@ -6,9 +6,23 @@ const Tabs = require('./Tabs')
 const TrackingBody = require('./trackingBody')
 const ShopInfos = require('./ShopInfos')
 const MobileShopInfos = require('./MobileShopInfos')
+const Search = require('./Search')
+const Alert = require('./Alert')
+const Loading = () => html`
+  <div style="width: 100%;text-align:center;"> Loading... </div>
+`
 
 const App = (state, emit) => {
-  if (!state.checkpoints) return html`<div>Loading...</div>`
+  // query not sufficient
+  if (state.query_err || state.fetchCheckpoints_failed) {
+    if (state.options.show_searchForm)
+      return Search(state, emit)
+    else
+      return Alert(state)
+  }
+
+  if (!state.checkpoints) return Loading()
+
   const rerouteLinkShort = RerouteLinkShort(state)
   const heading = Heading(state)
   const actionBox = ActionBox(state, emit)
@@ -18,6 +32,7 @@ const App = (state, emit) => {
   const mobileShopInfos = (state.options.show_shopInfos && state.shopInfos) ? MobileShopInfos(state) : null
 
   const layout = (rerouteLinkShort || actionBox) ? ['4', '8'] : ['0', '12']
+
 
   return html`
     <div>
