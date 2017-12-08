@@ -182,7 +182,9 @@ function renderRemainingOpeningTimeText(openingHours, lang) {
   }
 }
 
-const OpeningHours = function (openingHours, lang, emit) {
+const OpeningHours = function ({ id, actionBox }, lang, emit) {
+  const { boxOpen } = actionBox
+  const { openingHours } = actionBox.data
   if (!lang || typeof lang !== 'string') lang = 'USA' // HACK
 
   const openingHoursText = document.createElement('span')
@@ -210,7 +212,7 @@ const OpeningHours = function (openingHours, lang, emit) {
 
   return html`
   <div class="pl-box pl-opening-hours-box">
-    <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('openOpeningHours')}>
+    <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('openOpeningHours', id)}>
       <span class="hide-on-mobile">
         ${ openingHoursText }
         ${ openingHoursCaption ? html`<br>` : null }
@@ -221,7 +223,7 @@ const OpeningHours = function (openingHours, lang, emit) {
         <i style="float:right;" class="fa fa-chevron-down"></i>
       </span>
     </div>
-    <div class="pl-box-body">
+    <div class="pl-box-body ${ boxOpen ? 'pl-open' : '' }">
       ${ openingHourEntries }
     </div>
   </div>

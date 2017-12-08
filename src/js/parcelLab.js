@@ -206,8 +206,8 @@ class ParcelLab {
     // fetch shop infos
     this.store.on('fetchShopInfos', () => {
       Api.getShopInfos(store.get().query, (err, res) => {
-        if (err) this.store.get({ fetchShopInfos_failed: err })
-        else this.store.get({ shopInfos: res })
+        if (err) this.store.set({ fetchShopInfos_failed: err })
+        else this.store.set({ shopInfos: res })
       })
     })
 
@@ -215,7 +215,7 @@ class ParcelLab {
     this.store.on('fetchPickupLocation', id => {
       console.log('fetching pickup location for ', id)
       Api.getPickupLocation({...store.get().query, id}, (err, res) => {
-        if (err) this.store.get({ fetchPickupLocation_failed: err })
+        if (err) this.store.set({ fetchPickupLocation_failed: err })
         else if (res) {
           const state = this.store.get()
           state.checkpoints.header = state.checkpoints.header.map(cph => {
@@ -230,7 +230,7 @@ class ParcelLab {
     // fetch prediction
     this.store.on('fetchPrediction', id => {
       Api.getPrediction({ ...store.get().query, id }, (err, res) => {
-        if (err) this.store.get({ fetchPrediction_failed: err })
+        if (err) this.store.set({ fetchPrediction_failed: err })
         else if (res) {
           const data = res[0]
           const state = this.store.get()
@@ -261,9 +261,15 @@ class ParcelLab {
       })
     })
 
-    this.store.on('openOpeningHours', () => {
-      console.log('yop opened')
-      this.store.set({ openingHoursOpen: true })
+    this.store.on('openOpeningHours', tid => {
+      const state = this.store.get()
+      state.checkpoints.header = state.checkpoints.header.map(cph => {
+        if (cph.id === tid) {
+          cph.actionBox.boxOpen = true
+        }
+        return cph
+      })
+      this.store.set(state)
     })
   }
 }

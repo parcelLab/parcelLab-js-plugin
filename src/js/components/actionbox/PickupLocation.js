@@ -4,10 +4,10 @@ const initiatePickupLocationMap = require('./initiatePickupLocationMap')
 
 const MapsLink = address => `https://www.google.com/maps/place/${ encodeURIComponent(address) }/`
 
-const PickupLocation = ({ actionBox, courier }, lang, emit) => {
+const PickupLocation = ({ id, actionBox, courier }, lang, emit) => {
   if (!actionBox.address) return null
 
-  const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours(actionBox.data.openingHours, lang.code, emit) : null
+  const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.code, emit) : null
 
   setTimeout(() => {
     initiatePickupLocationMap('pl-pickup-location-map', actionBox.address, courier)

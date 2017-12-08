@@ -4,6 +4,8 @@ const Heading = require('./Heading')
 const ActionBox = require('./actionbox')
 const Tabs = require('./Tabs')
 const TrackingBody = require('./trackingBody')
+const ShopInfos = require('./ShopInfos')
+const MobileShopInfos = require('./MobileShopInfos')
 
 const App = (state, emit) => {
   if (!state.checkpoints) return html`<div>Loading...</div>`
@@ -12,6 +14,8 @@ const App = (state, emit) => {
   const actionBox = ActionBox(state, emit)
   const tabs = Tabs(state)
   const trackingBody = TrackingBody(state, emit)
+  const shopInfos = (state.options.show_shopInfos && state.shopInfos) ? ShopInfos(state) : null
+  const mobileShopInfos = (state.options.show_shopInfos && state.shopInfos) ? MobileShopInfos(state) : null
 
   const layout = (rerouteLinkShort || actionBox) ? ['4', '8'] : ['0', '12']
 
@@ -20,7 +24,9 @@ const App = (state, emit) => {
       <div class="pl-col-row">
 
         <aside  style="display: none;" class="pl-box-aside pl-col pl-col-${layout[0]}">
-          <div id="pl-shop-info-container"></div>
+          <div id="pl-shop-info-container">
+            ${ shopInfos }
+          </div>
 
           <div id="pl-action-box-container">
             ${ actionBox }
@@ -37,17 +43,17 @@ const App = (state, emit) => {
               ${ heading }
             </div>
 
-            <!-- Tabs -->
             ${ tabs }
 
-            <!-- Trackings-Container -->
             ${ trackingBody }
           </div>
         </main>
 
       </div>
 
-      <div id="pl-mobile-shop-info-container" class="hide-on-desktop"></div>
+      <div id="pl-mobile-shop-info-container" class="hide-on-desktop">
+        ${ mobileShopInfos }
+      </div>
     </div>
   `
 }
