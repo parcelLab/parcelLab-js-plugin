@@ -26,7 +26,7 @@ const App = (state, emit) => {
   const rerouteLinkShort = RerouteLinkShort(state)
   const heading = Heading(state)
   const actionBox = ActionBox(state, emit)
-  const tabs = Tabs(state)
+  const tabs = Tabs(state, emit)
   const trackingBody = TrackingBody(state, emit)
   const shopInfos = (state.options.show_shopInfos && state.shopInfos) ? ShopInfos(state) : null
   const mobileShopInfos = (state.options.show_shopInfos && state.shopInfos) ? MobileShopInfos(state) : null

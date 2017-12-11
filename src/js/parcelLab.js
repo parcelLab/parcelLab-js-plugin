@@ -185,12 +185,12 @@ class ParcelLab {
 
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
-      Api.getCheckpoints(store.get().query, (err, res) => {
-        if (err) store.set({ fetchCheckpoints_failed: err, })
+      Api.getCheckpoints(this.store.get().query, (err, res) => {
+        if (err) this.store.set({ fetchCheckpoints_failed: err, })
         else {
           const checkpoints = res || []
-          store.set({ checkpoints })
-          store.emit('fetchActionBoxData')
+          this.store.set({ checkpoints })
+          this.store.emit('fetchActionBoxData')
         }
       })
     })
@@ -248,6 +248,15 @@ class ParcelLab {
           this.store.set(state)
         }
       })
+    })
+
+    this.store.on('setActiveTracking', id => {
+      const state = this.store.get()
+      state.checkpoints.header.forEach((cph, ind) => {
+        if (cph.id === id) state.activeTracking = ind
+      })
+      state.showAllCheckpoints = false
+      store.set(state)
     })
 
     this.store.on('showAllCheckpoints', () => {
