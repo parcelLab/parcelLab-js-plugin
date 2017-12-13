@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const initiateDeliveriesMap = require('./initiateDeliveriesMap')
 
 const Label = text => html`

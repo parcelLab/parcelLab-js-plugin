@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 
 const Tab = (tab, emit) => {
   const handleClick = e => {

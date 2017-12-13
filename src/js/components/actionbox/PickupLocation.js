@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const OpeningHours = require('./OpeningHours')
 const initiatePickupLocationMap = require('./initiatePickupLocationMap')
 
@@ -10,11 +10,12 @@ const PickupLocation = ({ id, actionBox, courier }, lang, emit) => {
   const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.code, emit) : null
 
   setTimeout(() => {
-    initiatePickupLocationMap('pl-pickup-location-map', actionBox.address, courier)
+    if (document.getElementById('pl-pickup-location-map').children.length < 1)
+      initiatePickupLocationMap('pl-pickup-location-map', actionBox.address, courier)
   }, 10)
 
   return html`
-    <div class="pl-box" style="margin-bottom:15px;">
+    <div id="pl-loc-${id}" class="pl-box" style="margin-bottom:15px;">
       <div class="pl-box-body" style="padding:0;">
         <div id="pl-pickup-location-map"></div>
       </div>

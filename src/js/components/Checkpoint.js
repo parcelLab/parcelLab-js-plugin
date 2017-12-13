@@ -1,10 +1,5 @@
-const html = require('yo-yo')
-
-function toHTMLElem(str) {
-  const el = document.createElement('span')
-  el.innerHTML = str
-  return el
-}
+const html = require('bel')
+const raw = require('bel/raw')
 
 const Checkpoint = cp => html`
   <div class="pl-row pl-alert pl-${cp.alert}">
@@ -16,7 +11,7 @@ const Checkpoint = cp => html`
     </div>
     <div class="pl-text">
       <small>${ cp.dateText}  ${cp.locationText}</small><br />
-      <b>${ cp.status_text}</b>: ${ toHTMLElem(cp.status_details) }
+      <b>${ cp.status_text}</b>: ${ raw(cp.status_details) }
     </div>
   </div>
 `

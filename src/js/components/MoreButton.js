@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 
 const MoreButton = (text, emit) => html`
   <div class="pl-row pl-alert pl-action pl-show-more-button" onclick=${() => emit('showAllCheckpoints')}>

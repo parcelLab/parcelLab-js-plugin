@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const trimUrl = require('../lib/helpers').trimURL
 
 const ContactLink = (link, buttonify) => {

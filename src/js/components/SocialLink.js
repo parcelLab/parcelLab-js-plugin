@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const colors = {
   facebook: '#3b5999',
   instagram: '#3f729b',

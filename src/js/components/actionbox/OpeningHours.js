@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const translate = require('../../lib/translator').translate
 
 const currentWorkingDay = new Date().getDay()
@@ -185,6 +185,7 @@ function renderRemainingOpeningTimeText(openingHours, lang) {
 const OpeningHours = function ({ id, actionBox }, lang, emit) {
   const { boxOpen } = actionBox
   const { openingHours } = actionBox.data
+  console.log(openingHours); // TODO alway open text not shown ...
   if (!lang || typeof lang !== 'string') lang = 'USA' // HACK
 
   const openingHoursText = document.createElement('span')

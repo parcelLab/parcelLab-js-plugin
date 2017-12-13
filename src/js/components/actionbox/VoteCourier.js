@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 
 const VoteCourier = ({ actionBox, id }, emit) => {
   const { label, voteSuccess, voteErr } = actionBox

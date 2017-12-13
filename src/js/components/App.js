@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const RerouteLinkShort = require('./RerouteLinkShort')
 const Heading = require('./Heading')
 const ActionBox = require('./actionbox')
@@ -8,9 +8,7 @@ const ShopInfos = require('./ShopInfos')
 const MobileShopInfos = require('./MobileShopInfos')
 const Search = require('./Search')
 const Alert = require('./Alert')
-const Loading = () => html`
-  <div style="width: 100%;text-align:center;"> Loading... </div>
-`
+const Loading = require('./Loading')
 
 const App = (state, emit) => {
   // query not sufficient

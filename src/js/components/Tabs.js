@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const Tab = require('./Tab')
 const statics = require('../../js/lib/static')
 

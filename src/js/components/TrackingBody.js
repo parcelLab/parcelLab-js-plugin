@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const T = require('../lib/translator.js')
 const statics = require('../lib/static')
 const Checkpoint = require('./Checkpoint')

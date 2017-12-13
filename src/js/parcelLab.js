@@ -1,7 +1,7 @@
 // deps
 require('./lib/polyfills.js')
 const Raven = require('raven-js')
-const html = require('yo-yo')
+const updateHTML = require('nanomorph')
 const Store = require('nanostore')
 const App = require('./components/App')
 
@@ -80,7 +80,7 @@ class ParcelLab {
     if (statics.languages[this._langCode]) {
       this.lang = statics.languages[this._langCode]
     } else {
-      this.handleWarning('Could not detect user language ... fallback to [EN]!')
+      console.log('⚠️  Could not detect user language ... fallback to [EN]!')
       this.lang = statics.languages.en
     }
   }
@@ -180,7 +180,7 @@ class ParcelLab {
     this.store.subscribe(state => {
       console.log(state)
       const newApp = App(state, store.emit)
-      html.update(this.el, newApp)
+      updateHTML(this.el, newApp)
     })
 
     // fetch checkpoints

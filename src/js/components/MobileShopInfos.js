@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 const ContactLink = require('./ContactLink')
 const PhoneLink = require('./PhoneLink')
 const { trimURL } = require('./../lib/helpers')

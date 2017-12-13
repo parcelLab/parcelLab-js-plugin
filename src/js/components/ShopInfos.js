@@ -1,17 +1,18 @@
-const html = require('yo-yo')
+const html = require('bel')
+const raw = require('bel/raw')
 const ContactLink = require('./ContactLink')
 const PhoneLink = require('./PhoneLink')
 const { trimURL } = require('./../lib/helpers')
 const SocialLink = require('./SocialLink')
 
 module.exports = function ShopInfos({ shopInfos }) {
-  const nameFull = document.createElement('span')
-  nameFull.innerHTML = shopInfos.name.full
-
   let address = null
   if (shopInfos.address) {
-    address = document.createElement('address')
-    address.innerHTML = `${shopInfos.address.street}<br>${shopInfos.address.zip_code} ${shopInfos.address.city}<br>`
+    address = html`
+      <address>
+        ${ raw(shopInfos.address.street)}<br>${raw(shopInfos.address.zip_code)} ${raw(shopInfos.address.city) }<br>
+      </address>
+    `
   }
 
   const phoneLink = shopInfos.contact.phone ? PhoneLink(shopInfos.contact.phone, false) : null
@@ -41,7 +42,7 @@ module.exports = function ShopInfos({ shopInfos }) {
         </a>
 
 
-          ${ nameFull}
+          ${ shopInfos.name ? raw(shopInfos.name.full) : null }
           ${ address}
           ${ phoneLink}
           ${ contactLink}

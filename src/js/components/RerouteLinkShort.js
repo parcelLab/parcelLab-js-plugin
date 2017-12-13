@@ -1,4 +1,4 @@
-const html = require('yo-yo')
+const html = require('bel')
 
 function generateRerouteCaption(courier) {
   if (courier && courier.rerouteurl_label_info) {
