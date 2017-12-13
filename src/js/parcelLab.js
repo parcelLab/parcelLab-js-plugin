@@ -77,9 +77,13 @@ class ParcelLab {
   initLanguage() {
     if (!this._langCode && this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang')
     else if (!this._langCode && this.getUrlQuery('language')) this._langCode = this.getUrlQuery('language')
-    if (statics.languages[this._langCode]) {
-      this.lang = statics.languages[this._langCode]
-    } else {
+    try {
+      if (this._langCode.indexOf('-') > 0) this._langCode = this._langCode.split('-')[0]
+      if (statics.languages[this._langCode])
+        this.lang = statics.languages[this._langCode]
+      else
+        throw new Error('whoops no lang found')
+    } catch (err) {
       console.log('⚠️  Could not detect user language ... fallback to [EN]!')
       this.lang = statics.languages.en
     }

@@ -1,4 +1,5 @@
 const html = require('bel')
+const raw = require('bel/raw')
 const translate = require('../../lib/translator').translate
 
 const currentWorkingDay = new Date().getDay()
@@ -107,12 +108,11 @@ function renderOpeningHourEntry(ophObj, weekDays, fallBack, hideWeekDay) {
   }
 
   if (ophObj.open.day === currentWorkingDay) highlightClass = 'highlighted-entry'
-  const spacer = document.createElement('span')
-  spacer.innerHTML = '&nbsp;'
+
   return html`
     <div class="pl-col-row opening-hours-entry ${highlightClass}">
       <div class="pl-week-day-col">
-        ${ (!hideWeekDay) ? weekDay + ':' : spacer }
+        ${ (!hideWeekDay) ? weekDay + ':' : raw('&nbsp;') }
       </div>
       <div class="pl-hours-col">
         ${ fromTill }
@@ -185,14 +185,11 @@ function renderRemainingOpeningTimeText(openingHours, lang) {
 const OpeningHours = function ({ id, actionBox }, lang, emit) {
   const { boxOpen } = actionBox
   const { openingHours } = actionBox.data
-  console.log(openingHours); // TODO alway open text not shown ...
+
   if (!lang || typeof lang !== 'string') lang = 'USA' // HACK
 
-  const openingHoursText = document.createElement('span')
-  openingHoursText.innerHTML = translate('openingHours', lang)
-  const alwaysOpenedText = document.createElement('span')
-  alwaysOpenedText.innerHTML = translate('alwaysOpened', lang)
-
+  const openingHoursText = raw(translate('openingHours', lang))
+  
   let openingHourEntries = []
   let mobileText = ''
 
@@ -202,8 +199,9 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
   ).length === 0
 
   if (alwaysOpened) {
-    openingHourEntries = html`<div class="opening-hours-entry">${ alwaysOpenedText }</div>`
-    mobileText = alwaysOpenedText
+    openingHourEntries = html`<div class="opening-hours-entry">${ raw(translate('alwaysOpened', lang)) }</div>`
+    console.log(openingHourEntries)
+    mobileText = raw(translate('alwaysOpened', lang))
   } else {
     openingHourEntries = renderOpeningHoursList(openingHours, lang)
     mobileText = renderRemainingOpeningTimeText(openingHours, lang)
