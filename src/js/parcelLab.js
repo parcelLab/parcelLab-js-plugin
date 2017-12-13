@@ -60,8 +60,8 @@ class ParcelLab {
     this.selfUpdate()
     
     // set up store
-    const queryOK = checkQuery(this.props())
-    const initialState = { query: this.props(), options: this.options, activeTracking: 0 }
+    const queryOK = checkQuery(this.getProps())
+    const initialState = { query: this.getProps(), options: this.options, activeTracking: 0 }
     if (!queryOK) initialState['query_err'] = true
     const store = new Store(initialState)
     this.setupStore(store)
@@ -108,7 +108,7 @@ class ParcelLab {
     document.querySelector(this.rootNodeQuery).classList.add('parcellab-styles')
   }
 
-  props() {
+  getProps() {
     return {
       trackingNo: this.trackingNo,
       orderNo: this.orderNo,
@@ -177,6 +177,38 @@ class ParcelLab {
     if (!results) return null
     if (!results[2]) return ''
     return decodeURIComponent(results[2].replace(/\+/g, ' '))
+  }
+
+  sortCheckpoints(checkpoints={}) {
+    try {
+      let { header } = checkpoints
+      const { body } = checkpoints
+
+      if (header && header.length > 1) {
+        header = header.sort((x, y) => {
+          const xTime = x && x.id ? body[x.id][body.length - 1] : null
+          const yTime = y && y.id ? body[y.id][body.length - 1] : null
+          const xMS = xTime ? new Date(xTime) : null
+          const yMS = yTime ? new Date(yTime) : null
+          return xMS > yMS ? -1 : 1
+        })
+      }
+
+      return { header, body }
+    } catch (error) {
+      console.log('💩  Could not sort checkpoints... ', error)
+      return checkpoints
+    }
+  }
+
+  findSelectedTrackingIndex({ header }) {
+    const { selectedTrackingNo } = this.options
+    if (selectedTrackingNo && header) {
+      for (let i = 0; i < header.length; i++) {
+        const elem = header[i]
+        if (elem.tracking_number === selectedTrackingNo) return i
+      }
+    } else return 0
   }
 
   setupStore(store) {
@@ -309,38 +341,6 @@ class ParcelLab {
       const searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
       window.location.search = searchQuery
     })
-  }
-
-
-  sortCheckpoints(checkpoints) {
-    try {
-      let { header, body } = checkpoints
-
-      if (header && header.length > 1) {
-        header = header.sort((x, y) => {
-          const xTime = x && x.id ? body[x.id][body.length - 1] : null
-          const yTime = y && y.id ? body[y.id][body.length - 1] : null
-          const xMS = xTime ? new Date(xTime) : null
-          const yMS = yTime ? new Date(yTime) : null
-          return xMS > yMS ? -1 : 1
-        })
-      }
-
-      return { header, body }
-    } catch (error) {
-      console.log('💩  Could not sort checkpoints... ', error)
-      return checkpoints
-    }
-  }
-
-  findSelectedTrackingIndex({ header }) {
-    const { selectedTrackingNo } = this.options
-    if (selectedTrackingNo && header) {
-      for (let i = 0; i < header.length; i++) {
-        const elem = header[i]
-        if (elem.tracking_number === selectedTrackingNo) return i
-      }
-    } else return 0
   }
 }
 

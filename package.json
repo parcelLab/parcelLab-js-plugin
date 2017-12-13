@@ -46,7 +46,7 @@
     "countryjs": "^1.5.2",
     "nanobus": "^4.3.1",
     "nanomorph": "^5.1.3",
-    "nanostore": "^1.0.0",
+    "nanostore": "^1.2.0",
     "raven-js": "^3.5.1"
   }
 }
