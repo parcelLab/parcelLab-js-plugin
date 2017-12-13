@@ -4,7 +4,7 @@ const { translations } = require('../lib/static')
 const Alert = ({ query }) => {
   const langCode = query.lang.code
   const messageText = translations[langCode].error.delivery
-  html`
+  return html`
     <div class="pl-alert pl-alert-danger">
       ${ messageText }
     </div>
