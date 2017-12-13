@@ -8,12 +8,7 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
     switch (tHeader.actionBox.type) {
       case 'pickup-location':
         if (tHeader.actionBox.data) {
-          const elem = PickupLocation(tHeader, query.lang, emit)
-          elem.isSameNode = function (target) { // dont rerender map if it is still the same tid
-            const targetId = target.id ? target.id.split('-')[2] : null
-            return tHeader.id === targetId
-          }
-          return elem
+          return PickupLocation(tHeader, query.lang, emit)
         }
         else return null
       case 'vote-courier':

@@ -187,8 +187,6 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
   const { openingHours } = actionBox.data
 
   if (!lang || typeof lang !== 'string') lang = 'USA' // HACK
-
-  const openingHoursText = raw(translate('openingHours', lang))
   
   let openingHourEntries = []
   let mobileText = ''
@@ -200,7 +198,6 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
 
   if (alwaysOpened) {
     openingHourEntries = html`<div class="opening-hours-entry">${ raw(translate('alwaysOpened', lang)) }</div>`
-    console.log(openingHourEntries)
     mobileText = raw(translate('alwaysOpened', lang))
   } else {
     openingHourEntries = renderOpeningHoursList(openingHours, lang)
@@ -211,14 +208,14 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
 
   return html`
   <div class="pl-box pl-opening-hours-box">
-    <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('openOpeningHours', id)}>
+    <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('toggleOpeningHours', id)}>
       <span class="hide-on-mobile">
-        ${ openingHoursText }
+        ${ raw(translate('openingHours', lang)) }
         ${ openingHoursCaption ? html`<br>` : null }
         ${ openingHoursCaption }
       </span>
       <span class="hide-on-desktop">
-        ${ mobileText || openingHoursText }
+        ${ mobileText || raw(translate('openingHours', lang)) }
         <i style="float:right;" class="fa fa-chevron-down"></i>
       </span>
     </div>

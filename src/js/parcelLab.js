@@ -281,11 +281,11 @@ class ParcelLab {
       })
     })
 
-    this.store.on('openOpeningHours', tid => {
+    this.store.on('toggleOpeningHours', tid => {
       const state = this.store.get()
       state.checkpoints.header = state.checkpoints.header.map(cph => {
         if (cph.id === tid) {
-          cph.actionBox.boxOpen = true
+          cph.actionBox.boxOpen = !cph.actionBox.boxOpen
         }
         return cph
       })

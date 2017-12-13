@@ -4,20 +4,29 @@ const initiatePickupLocationMap = require('./initiatePickupLocationMap')
 
 const MapsLink = address => `https://www.google.com/maps/place/${ encodeURIComponent(address) }/`
 
+const Map = (id, actionBox, courier) => {
+  setTimeout(() => {
+    if (document.getElementById('pl-pickup-location-map').children.length < 1)
+      initiatePickupLocationMap('pl-pickup-location-map', actionBox.address, courier)
+  }, 10)
+  const elem = html`<div id="pl-pickup-location-map" data-tid="${id}"></div>`
+
+  elem.isSameNode = function (target) { // dont rerender map if it is still the same tid
+    return id === target.dataset['tid']
+  }
+
+  return elem
+}
+
 const PickupLocation = ({ id, actionBox, courier }, lang, emit) => {
   if (!actionBox.address) return null
 
   const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.code, emit) : null
 
-  setTimeout(() => {
-    if (document.getElementById('pl-pickup-location-map').children.length < 1)
-      initiatePickupLocationMap('pl-pickup-location-map', actionBox.address, courier)
-  }, 10)
-
   return html`
-    <div id="pl-loc-${id}" class="pl-box" style="margin-bottom:15px;">
+    <div class="pl-box" style="margin-bottom:15px;">
       <div class="pl-box-body" style="padding:0;">
-        <div id="pl-pickup-location-map"></div>
+        ${ Map(id, actionBox, courier) }
       </div>
 
       <div class="pl-box-footer" align="left" style="padding:10px 20px;">
