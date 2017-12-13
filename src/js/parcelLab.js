@@ -53,6 +53,8 @@ class ParcelLab {
     this.initLanguage()
 
     if (this.options.styles) this.initStyles()
+    if (!this.options.selectedTrackingNo) 
+      this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
     
     // do a self update
     this.selfUpdate()
@@ -192,8 +194,10 @@ class ParcelLab {
       Api.getCheckpoints(this.store.get().query, (err, res) => {
         if (err) this.store.set({ fetchCheckpoints_failed: err, })
         else {
-          const checkpoints = res || []
-          this.store.set({ checkpoints })
+          let checkpoints = res || []
+          checkpoints = this.sortCheckpoints(checkpoints)
+          const activeTracking = this.findSelectedTrackingIndex(checkpoints)
+          this.store.set({ checkpoints, activeTracking })
           this.store.emit('fetchActionBoxData')
         }
       })
@@ -305,6 +309,38 @@ class ParcelLab {
       const searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
       window.location.search = searchQuery
     })
+  }
+
+
+  sortCheckpoints(checkpoints) {
+    try {
+      let { header, body } = checkpoints
+
+      if (header && header.length > 1) {
+        header = header.sort((x, y) => {
+          const xTime = x && x.id ? body[x.id][body.length - 1] : null
+          const yTime = y && y.id ? body[y.id][body.length - 1] : null
+          const xMS = xTime ? new Date(xTime) : null
+          const yMS = yTime ? new Date(yTime) : null
+          return xMS > yMS ? -1 : 1
+        })
+      }
+
+      return { header, body }
+    } catch (error) {
+      console.log('💩  Could not sort checkpoints... ', error)
+      return checkpoints
+    }
+  }
+
+  findSelectedTrackingIndex({ header }) {
+    const { selectedTrackingNo } = this.options
+    if (selectedTrackingNo && header) {
+      for (let i = 0; i < header.length; i++) {
+        const elem = header[i]
+        if (elem.tracking_number === selectedTrackingNo) return i
+      }
+    } else return 0
   }
 }
 
