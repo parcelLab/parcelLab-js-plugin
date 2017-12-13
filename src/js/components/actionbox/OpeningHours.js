@@ -112,7 +112,7 @@ function renderOpeningHourEntry(ophObj, weekDays, fallBack, hideWeekDay) {
   return html`
     <div class="pl-col-row opening-hours-entry ${highlightClass}">
       <div class="pl-week-day-col">
-        ${ (!hideWeekDay) ? weekDay + ':' : raw('&nbsp;') }
+        ${ (!hideWeekDay) ? weekDay + ':' : raw('<span>&nbsp;</span>') }
       </div>
       <div class="pl-hours-col">
         ${ fromTill }
