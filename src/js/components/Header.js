@@ -11,7 +11,7 @@ const Header = (state, emit) => {
     return html`
     <div class="pl-header">
       <div class="pl-col-row">
-        <div class="pl-order-no">
+        <div class="pl-order-no ${ !tabs ? 'pl-no-tabs' : ''}">
           ${ translate('orderNo', query.lang.code) } ${ query.orderNo }
         </div>
         ${ tabs ? html`
