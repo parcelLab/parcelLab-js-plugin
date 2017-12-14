@@ -7,7 +7,7 @@ const Tab = (tab, emit) => {
   }
 
   return html`
-    <div class="pl-col pl-col-${tab.colSize}" style="padding:10px;" onclick="${handleClick}">
+    <div class="pl-col pl-col-${tab.colSize}" onclick="${handleClick}">
       <div class="pl-tab pl-btn pl-btn-default pl-${tab.active ? 'active' : 'not-active' }">
         <div class="pl-tab-content">
           <div class="pl-tab-text">
