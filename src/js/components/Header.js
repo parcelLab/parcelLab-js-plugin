@@ -14,9 +14,11 @@ const Header = (state, emit) => {
         <div class="pl-order-no">
           ${ translate('orderNo', query.lang.code) } ${ query.orderNo }
         </div>
-        <div class="pl-order-sub">
-          ${ translate('containsOf', query.lang.code) } ${ header.length } ${ translate('deliveries', query.lang.code) }
-        </div>
+        ${ tabs ? html`
+          <div class="pl-order-sub">
+            ${ translate('containsOf', query.lang.code)} ${header.length} ${translate('deliveries', query.lang.code) }
+          </div>
+          ` : null }
       </div>
       ${ tabs ? html`<div class="pl-col-row">${ tabs }</div>` : null }
     </div>

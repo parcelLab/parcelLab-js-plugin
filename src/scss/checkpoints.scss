@@ -78,6 +78,14 @@ a:hover, a:focus {
   color: #000000;
 }
 
+div.pl-main-box {
+  padding-bottom: 15px;
+  &.pl-box-no-border {
+    padding: 0;
+    border: none;
+  }
+}
+
 div.pl-header {
   div.pl-order-no {
     font-size: 1.5rem;

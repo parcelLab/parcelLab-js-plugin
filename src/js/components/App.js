@@ -36,32 +36,37 @@ const App = (state, emit) => {
     <div>
       ${ header }
 
-      <div class="pl-col-row">
+      <div class="pl-box pl-main-box ${ header ? '' : 'pl-box-no-border' }">
 
-        <aside  style="display: none;" class="pl-box-aside pl-col pl-col-${layout[0]}">
-          <div id="pl-shop-info-container">
-            ${ shopInfos }
+        <div class="pl-box-heading" style="border-bottom: none;">
+          ${ trackingHeading }
+        </div>
+
+        <div class="pl-box-body">
+          <div class="pl-col-row">
+            <aside  style="display: none;" class="pl-box-aside pl-col pl-col-${layout[0]}">
+              <div id="pl-shop-info-container">
+                ${ shopInfos}
+              </div>
+
+              <div id="pl-action-box-container">
+                ${ actionBox}
+              </div>
+              <div id="pl-reroute-link-container">
+                ${ rerouteLinkShort}
+              </div>
+            </aside>
+
+
+            <main class="pl-main pl-col pl-col-${layout[1]}">
+              <div class="pl-box">
+
+                ${ trackingBody }
+              </div>
+            </main>
           </div>
-
-          <div id="pl-action-box-container">
-            ${ actionBox }
-          </div>
-          <div id="pl-reroute-link-container">
-            ${ rerouteLinkShort }
-          </div>
-        </aside>
-
-
-        <main class="pl-main pl-col pl-col-${layout[1]}">
-          <div class="pl-box">
-            <div class="pl-box-heading">
-              ${ trackingHeading }
-            </div>
-
-            ${ trackingBody }
-          </div>
-        </main>
-
+        </div>
+      
       </div>
 
       <div id="pl-mobile-shop-info-container" class="hide-on-desktop">
