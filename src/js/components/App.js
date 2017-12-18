@@ -2,6 +2,7 @@ const html = require('bel')
 const Header = require('./Header')
 const RerouteLinkShort = require('./RerouteLinkShort')
 const TrackingHeading = require('./TrackingHeading')
+const Subheading = require('./Subheading')
 const ActionBox = require('./actionbox')
 const TrackingBody = require('./trackingBody')
 const ShopInfos = require('./ShopInfos')
@@ -24,6 +25,7 @@ const App = (state, emit) => {
   const header = Header(state, emit)
   const rerouteLinkShort = RerouteLinkShort(state)
   const trackingHeading = TrackingHeading(state)
+  const subHeading = Subheading(state)
   const actionBox = ActionBox(state, emit)
   const trackingBody = TrackingBody(state, emit)
   const shopInfos = (state.options.show_shopInfos && state.shopInfos) ? ShopInfos(state) : null
@@ -40,6 +42,7 @@ const App = (state, emit) => {
 
         <div class="pl-box-heading" style="border-bottom: none;">
           ${ trackingHeading }
+          ${ subHeading }
         </div>
 
         <div class="pl-box-body">

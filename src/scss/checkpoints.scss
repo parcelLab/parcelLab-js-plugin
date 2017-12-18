@@ -89,14 +89,11 @@ div.pl-main-box {
 div.pl-header {
   div.pl-order-no {
     font-size: 1.5rem;
-    &.pl-no-tabs {
-      opacity: .6;
-      padding-left: 25px;
-    }
   }
   div.pl-order-sub {
     font-size: 0.8rem;
     opacity: .6;
+    margin-bottom: 15px;
   }
   margin-bottom: 15px;
 }
@@ -111,6 +108,10 @@ div.pl-tab-container {
   & > div {
     padding: 0 15px;
   }
+}
+
+div.pl-order-subheading {
+  opacity: .6;
 }
 
 div.pl-tab {
