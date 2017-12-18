@@ -234,8 +234,8 @@ var translations = {
     },
     searchOrder: 'Bestellung suchen',
     search: 'Suchen',
-    containsOf: 'Besteht aus',
-    deliveries: 'Lieferung(en)',
+    containsOf: 'besteht aus',
+    deliveries: 'Lieferungen',
   },
   ESP: {
     delivery: 'Entrega',

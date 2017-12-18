@@ -38,7 +38,7 @@ const App = (state, emit) => {
     <div>
       ${ header }
 
-      <div class="pl-box pl-main-box ${ header ? '' : 'pl-box-no-border' }">
+      <div class="pl-box pl-main-box">
 
         <div class="pl-box-heading" style="border-bottom: none;">
           ${ trackingHeading }

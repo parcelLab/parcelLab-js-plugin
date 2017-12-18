@@ -7,8 +7,7 @@ const Subheading = state => {
     return html`
       <div class="pl-order-subheading">
         ${ translate('orderNo', state.query.lang.code) } ${ state.query.orderNo }
-      </div>
-    `
+      </div>`
   else return null
 }
 
