@@ -79,6 +79,7 @@ class ParcelLab {
     this._langCode = navigator.language || navigator.userLanguage
     if (this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang')
     else if (this.getUrlQuery('language')) this._langCode = this.getUrlQuery('language')
+    else if (this.options.lang) this._langCode = this.options.lang
     try {
       if (this._langCode.indexOf('-') > 0) this._langCode = this._langCode.split('-')[0]
       if (statics.languages[this._langCode])
