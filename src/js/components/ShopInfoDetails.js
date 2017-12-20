@@ -5,7 +5,7 @@ const { trimURL } = require('./../lib/helpers')
 const SocialLink = require('./SocialLink')
 
 
-module.exports = function MobileShopInfos({ shopInfos }) {
+module.exports = function ShopInfoDetails({ shopInfos }) {
   const nameFull = document.createElement('span')
   nameFull.innerHTML = shopInfos.name.full
 
@@ -27,23 +27,23 @@ module.exports = function MobileShopInfos({ shopInfos }) {
 
 
   return html`
-    <div class="pl-box hide-on-desktop" style="margin: 25px 0; padding: 20px 0px;">
-      <div class="pl-box-body">
+    <div class="pl-shop-footer">
+
+      <div class="pl-shop-details">
         ${ nameFull }
         ${ address }
 
-        ${ phoneLink }
-        ${ contactLink}
-        <br />
-        ${ shopInfos.contact.website ? html`<a href="${shopInfos.contact.website}" target="_blank" class="btn btn-default btn-block">
+        <div>${ phoneLink }</div>
+        <div>${ contactLink}</div>
+        <div>${ shopInfos.contact.website ? html`<a href="${shopInfos.contact.website}" target="_blank" class="pl-contact-btn">
           <i class="fa fa-fw fa-globe"></i> ${trimURL(shopInfos.contact.website)}
-        </a>` : ''}
-        <br />
+        </a>` : ''}</div>
+      </div>
 
-        <div style="text-align: center; margin-top:40px;">
+        <div style="text-align: center; margin:20px 0;">
           ${ socialLinks }
         </div>
-      </div>
+
     </div>
     
   `

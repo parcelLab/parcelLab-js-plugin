@@ -5,8 +5,8 @@ const TrackingHeading = require('./TrackingHeading')
 const Subheading = require('./Subheading')
 const ActionBox = require('./actionbox')
 const TrackingBody = require('./trackingBody')
-const ShopInfos = require('./ShopInfos')
-const MobileShopInfos = require('./MobileShopInfos')
+const ShopInfoHeader = require('./ShopInfoHeader')
+const ShopInfoDetails = require('./ShopInfoDetails')
 const Search = require('./Search')
 const Alert = require('./Alert')
 const Loading = require('./Loading')
@@ -28,14 +28,18 @@ const App = (state, emit) => {
   const subHeading = Subheading(state)
   const actionBox = ActionBox(state, emit)
   const trackingBody = TrackingBody(state, emit)
-  const shopInfos = (state.options.show_shopInfos && state.shopInfos) ? ShopInfos(state) : null
-  const mobileShopInfos = (state.options.show_shopInfos && state.shopInfos) ? MobileShopInfos(state) : null
+  const shopInfoHeader = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoHeader(state) : null
+  const shopInfoDetails = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoDetails(state) : null
 
   const layout = (rerouteLinkShort || actionBox) ? ['4', '8'] : ['0', '12']
 
 
   return html`
     <div>
+      <div id="pl-shop-info-container">
+        ${ shopInfoHeader }
+      </div>
+
       ${ header }
 
       <div class="pl-box pl-main-box">
@@ -48,9 +52,6 @@ const App = (state, emit) => {
         <div class="pl-box-body">
           <div class="pl-col-row">
             <aside  style="display: none;" class="pl-box-aside pl-col pl-col-${layout[0]}">
-              <div id="pl-shop-info-container">
-                ${ shopInfos}
-              </div>
 
               <div id="pl-action-box-container">
                 ${ actionBox}
@@ -72,8 +73,8 @@ const App = (state, emit) => {
       
       </div>
 
-      <div id="pl-mobile-shop-info-container" class="hide-on-desktop">
-        ${ mobileShopInfos }
+      <div id="pl-shop-info-details-container">
+        ${ shopInfoDetails }
       </div>
     </div>
   `

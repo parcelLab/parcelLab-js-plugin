@@ -2,7 +2,7 @@ const html = require('bel')
 const trimUrl = require('../lib/helpers').trimURL
 
 const ContactLink = (link, buttonify) => {
-  const classes = buttonify ? 'btn btn-default btn-block' : ''
+  const classes = buttonify ? 'pl-contact-btn' : ''
 
   if (/\S+@\S+\.\S+/.test(link))
     return html`<a href="mailto:${link}" class="${classes}"><i class="fa fa-fw fa-envelope-o"></i> ${link}</a>`

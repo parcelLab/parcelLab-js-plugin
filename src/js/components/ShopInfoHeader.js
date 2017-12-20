@@ -5,7 +5,7 @@ const PhoneLink = require('./PhoneLink')
 const { trimURL } = require('./../lib/helpers')
 const SocialLink = require('./SocialLink')
 
-module.exports = function ShopInfos({ shopInfos }) {
+module.exports = function ShopInfoHeader({ shopInfos }) {
   let address = null
   if (shopInfos.address) {
     address = html`
@@ -28,34 +28,22 @@ module.exports = function ShopInfos({ shopInfos }) {
   return [
 
     html`
-    <div class="hide-on-desktop" style="margin-bottom:25px;">
+    <div class="hide-on-desktop" style="margin-bottom:25px;text-align: center;">
       <a href='${shopInfos.contact.website}' target="_blank">
           <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px; max-height:80px;" />
       </a>
     </div>`,
 
     html`
-    <div class="pl-box hide-on-mobile" style="margin-bottom: 25px; padding: 20px 0px;">
-      <div class="pl-box-body">
+    <div class="hide-on-mobile" style="margin-bottom: 25px; position: relative;">
+      <div>
         <a  href='${shopInfos.contact.website}' target="_blank">
-            <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px;" />
-        </a>
+            <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px; max-height: 50px;" />
+        </a>        
+      </div>
 
-
-          ${ shopInfos.name ? raw(shopInfos.name.full) : null }
-          ${ address}
-          ${ phoneLink}
-          ${ contactLink}
-
-          <br />
-
-          ${ shopInfos.contact.website ? html`<a href="${shopInfos.contact.website}" target="_blank"><i class="fa fa-fw fa-globe"></i> ${trimURL(shopInfos.contact.website)}</a>` : ''}
-          <br />
-
-          <div style="text-align: center; margin-top:40px;">
-            ${ socialLinks }
-          </div>
-
+      <div style="text-align: center; position: absolute; right: 0px; top: 0px;">
+        ${ socialLinks }
       </div>
     </div>`
   ]
