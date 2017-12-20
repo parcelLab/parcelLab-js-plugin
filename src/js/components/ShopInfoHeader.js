@@ -38,7 +38,7 @@ module.exports = function ShopInfoHeader({ shopInfos }) {
     <div class="hide-on-mobile" style="margin-bottom: 25px; position: relative;">
       <div>
         <a  href='${shopInfos.contact.website}' target="_blank">
-            <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px; max-height: 50px;" />
+            <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px; max-height: 90px;" />
         </a>        
       </div>
 
