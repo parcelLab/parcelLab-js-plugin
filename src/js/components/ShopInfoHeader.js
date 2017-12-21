@@ -42,7 +42,7 @@ module.exports = function ShopInfoHeader({ shopInfos }) {
         </a>        
       </div>
 
-      <div style="text-align: center; position: absolute; right: 0px; top: 0px;">
+      <div style="text-align: center; position: absolute; right: 5px; top: 25px;">
         ${ socialLinks }
       </div>
     </div>`
