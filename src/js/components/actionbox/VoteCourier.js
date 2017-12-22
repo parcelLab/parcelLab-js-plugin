@@ -4,10 +4,10 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   const { label, voteSuccess, voteErr } = actionBox
   let body = html`
     <div class="rating-body">
-      <div class="pl-courier-vote up" onclick=${() => emit('voteCourier', 'up', id)}>
+      <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCourier', 'up', id)}>
         <i class="fa fa-thumbs-o-up"></i>
       </div>
-      <div class="pl-courier-vote down" onclick=${() => emit('voteCourier', 'down', id)}>
+      <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCourier', 'down', id)}>
         <i class="fa fa-thumbs-o-down"></i>
       </div>
     </div>

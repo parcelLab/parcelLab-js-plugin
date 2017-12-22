@@ -19,9 +19,10 @@ const App = (state, emit) => {
       return Search(state, emit)
     else
       return Alert(state)
-  }
 
-  if (!state.checkpoints) return Loading()
+  } else if (state.checkpoints && state.checkpoints.header.length === 0) { // tracking w/ no cps
+    return Alert(state)
+  } else if (!state.checkpoints) return Loading() // still loading
 
   const header = Header(state, emit)
   const rerouteLinkShort = RerouteLinkShort(state)
