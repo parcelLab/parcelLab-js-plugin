@@ -345,3 +345,37 @@ textarea.pl-form-input {
   color: rgb(56, 56, 56);
 
 }
+
+.pl-note-box {
+  padding: 15px 25px;
+  border: 1px solid #d3d3d3;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  position: relative;
+  .pl-close-note-box {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    font-size: 20px;
+    color: #d3d3d3;
+    transition: all .2s linear;
+    &:hover {
+      transform: rotate(180deg);
+      transition: all .2s linear;
+    }
+  }
+  .pl-note-close-text {
+    position:absolute;
+    font-size: 10px;
+    bottom: 2px;
+    left: 0px;
+    color: #d3d3d3;
+    opacity: .6;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -36,6 +36,21 @@ To enable the defaulut styles for the plugin, just add the class `parcellab-styl
 </script>
 ```
 
+### Options
+You can define options by passing an Object as second argument, when creating a new ParcelLab Object.
+`new ParcelLab('#pl-trace', options)`
+These are the available options:
+- styles : Boolean (see above)
+- rerouteButton : 'left' | 'right' (defines where to render the reroute button if possible)
+- show_searchForm :  Boolean (activates a search form, which will be rendered if tracking was not found or no trackingNo/orderNo was given, needs userId)
+- userId : String (other was to pass userId - instead of in url)
+- trackingNo : String (other was to pass trackingNo - instead of in url)
+- orderNo : String (other was to pass orderNo - instead of in url)
+- courier : String (other was to pass courier - instead of in url)
+- selectedTrackingNo : String (other was to pass selectedTrackingNo - instead of in url)
+- show_note : String (renders a note box on top - useful for showing important information)
+
+
 ### Without action box
 
 If you want to use the plugin in a non-customer facing website (e.g. internal page for customer support), it is recommended to hide the action box like so:

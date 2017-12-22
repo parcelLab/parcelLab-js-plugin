@@ -9,6 +9,7 @@ const ShopInfoHeader = require('./ShopInfoHeader')
 const ShopInfoDetails = require('./ShopInfoDetails')
 const Search = require('./Search')
 const Alert = require('./Alert')
+const Note = require('./Note')
 const Loading = require('./Loading')
 
 const App = (state, emit) => {
@@ -30,6 +31,7 @@ const App = (state, emit) => {
   const trackingBody = TrackingBody(state, emit)
   const shopInfoHeader = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoHeader(state) : null
   const shopInfoDetails = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoDetails(state) : null
+  const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
 
   const layout = (rerouteLinkShort || actionBox) ? ['4', '8'] : ['0', '12']
 
@@ -40,6 +42,7 @@ const App = (state, emit) => {
         ${ shopInfoHeader }
       </div>
 
+      ${ note }
       ${ header }
 
       <div class="pl-box pl-main-box">

@@ -342,6 +342,10 @@ class ParcelLab {
       const searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
       window.location.search = searchQuery
     })
+
+    this.store.on('hideNote', () => {
+      this.store.set({ hideNote: true })
+    })
   }
 }
 

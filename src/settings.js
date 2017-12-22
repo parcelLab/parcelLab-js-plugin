@@ -16,5 +16,6 @@ module.exports = {
     styles: false,
     show_searchForm: false,
     userId: null,
+    show_note: null,
   },
 };
