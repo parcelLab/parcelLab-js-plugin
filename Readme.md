@@ -43,11 +43,11 @@ These are the available options:
 - styles : Boolean (see above)
 - rerouteButton : 'left' | 'right' (defines where to render the reroute button if possible)
 - show_searchForm :  Boolean (activates a search form, which will be rendered if tracking was not found or no trackingNo/orderNo was given, needs userId)
-- userId : String (other was to pass userId - instead of in url)
-- trackingNo : String (other was to pass trackingNo - instead of in url)
-- orderNo : String (other was to pass orderNo - instead of in url)
-- courier : String (other was to pass courier - instead of in url)
-- selectedTrackingNo : String (other was to pass selectedTrackingNo - instead of in url)
+- userId : String (other way to pass userId - instead of in url)
+- trackingNo : String (other way to pass trackingNo - instead of in url)
+- orderNo : String (other way to pass orderNo - instead of in url)
+- courier : String (other way to pass courier - instead of in url)
+- selectedTrackingNo : String (other way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
 
 
