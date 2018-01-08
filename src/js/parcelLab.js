@@ -280,7 +280,7 @@ class ParcelLab {
     this.store.on('fetchPrediction', id => {
       Api.getPrediction({ ...store.get().query, id }, (err, res) => {
         if (err) this.store.set({ fetchPrediction_failed: err })
-        else if (res) {
+        else if (res && res.length > 0) {
           const data = res[0]
           const state = this.store.get()
           state.checkpoints.header = state.checkpoints.header.map(cph => {
