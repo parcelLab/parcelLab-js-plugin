@@ -10,7 +10,7 @@ const Checkpoint = cp => html`
       </span>
     </div>
     <div class="pl-text">
-      <small>${ cp.dateText}  ${cp.locationText}</small><br />
+      <small>${ cp.dateText }  ${ cp.locationText }</small><br />
       <b>${ cp.status_text}</b>: ${ raw(cp.status_details) }
     </div>
   </div>

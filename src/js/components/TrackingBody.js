@@ -6,8 +6,8 @@ const MoreButton = require('./MoreButton')
 const RerouteLink = require('./RerouteLink')
 const FurtherInfos = require('./FurtherInfos')
 
-const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
-  const ts = cp.timestamp ? new Date(cp.timestamp) : null
+const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
+  const ts = (cp.timestamp && cp.timestamp) ? new Date(cp.timestamp) : null
   if (ts) cp.dateText = T.date(ts, i !== 0, query.lang.code)
 
   cp.transitStatus = statics.transitStates[cp.status]
@@ -23,8 +23,10 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   return cp
 }).filter(cp => true && cp.shown).reverse()
 
-const TrackingBody = ({ checkpoints, activeTracking, query, showAllCheckpoints, options }, emit) => {
+const TrackingBody = (state, emit) => {
+  const { checkpoints, activeTracking, query, showAllCheckpoints, options } = state
   if (!checkpoints) return null
+
   const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
