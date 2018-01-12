@@ -6,9 +6,16 @@ const MoreButton = require('./MoreButton')
 const RerouteLink = require('./RerouteLink')
 const FurtherInfos = require('./FurtherInfos')
 
+const showTimeOnCheckpoint = (d, i) => {
+  if (!d || i === 0) return false
+  else if (d.getUTCHours() === 0 && d.getUTCMinutes() === 0 && d.getUTCMilliseconds() === 0)
+    return false
+  else return true
+}
+
 const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
-  const ts = (cp.timestamp && cp.timestamp) ? new Date(cp.timestamp) : null
-  if (ts) cp.dateText = T.date(ts, i !== 0, query.lang.code)
+  const ts = cp.timestamp ? new Date(cp.timestamp) : null
+  if (ts) cp.dateText = T.date(ts, showTimeOnCheckpoint(ts, i), query.lang.code)
 
   cp.transitStatus = statics.transitStates[cp.status]
   if (typeof cp.transitStatus === 'undefined')
