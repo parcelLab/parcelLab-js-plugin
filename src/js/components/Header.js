@@ -5,9 +5,12 @@ const Tabs = require('./Tabs')
 const OrderStats = header => {
   if (header) {
     const orderStats = {}
+
     header.filter(h => h.last_delivery_status).forEach(({ last_delivery_status }) => {
-      if (orderStats[last_delivery_status.status]) orderStats[last_delivery_status.status] + 1
-      else orderStats[last_delivery_status.status] = 1
+      if (orderStats[last_delivery_status.status])
+        orderStats[last_delivery_status.status]++
+      else
+        orderStats[last_delivery_status.status] = 1
     })
 
     if (Object.keys(orderStats).length > 0) {
