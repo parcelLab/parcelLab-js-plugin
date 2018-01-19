@@ -206,7 +206,7 @@ h3 {
   width: 100%;
   background-size: cover;
   background-position: center;
-  background-image: url('https://s3.eu-central-1.amazonaws.com/parcellab-cdn/img/pseudo-map.jpg');
+  background-image: url('https://s3.eu-central-1.amazonaws.com/parcellab-cdn/img/action-box/pseudo-map.jpg');
   background-repeat: no-repeat;
   overflow: hidden;
 
@@ -234,4 +234,10 @@ h3 {
     padding: 70px 5px 0 5px;
     font-size: 18px;
   }
+}
+
+.pl-box-seperator {
+  font-size: 10px;
+  background-color:#eee;
+  padding:10px 25px;
 }
