@@ -1,4 +1,5 @@
 const html = require('bel')
+const Icon = require('./Icon')
 
 const Tab = (tab, emit) => {
   const handleClick = e => {
@@ -8,7 +9,7 @@ const Tab = (tab, emit) => {
 
   return html`
     <div class="pl-col pl-col-${tab.colSize}" onclick="${handleClick}">
-      <div class="pl-tab pl-btn pl-btn-default pl-${tab.active ? 'active' : 'not-active' }">
+      <div class="pl-tab pl-button pl-space-bottom pl-is-fullwidth pl-${tab.active ? 'active' : 'not-active' }">
         <div class="pl-tab-content">
           <div class="pl-tab-text">
             <span class="pl-tab-text-tno">
@@ -23,11 +24,7 @@ const Tab = (tab, emit) => {
           
           <div class="pl-status">
             <div class="pl-icon">
-              <span class="fa-stack fa-lg">
-                ${ tab.transitStatus.color ? html`<i class="fa fa-circle fa-stack-2x" style="opacity:.2; color: ${tab.transitStatus.color}"></i>` : html`<i class="fa fa-circle fa-stack-2x" style="opacity:.4;"></i>` }
-                <i class="fa fa-${tab.transitStatus.icon} fa-stack-1x" style="color: 
-                ${tab.transitStatus.color}"></i>
-              </span>
+              ${ Icon(tab.transitStatus.icon, tab.transitStatus.color ? tab.transitStatus.color.replace('#', '')  : undefined )}
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@ const App = (state, emit) => {
       ${ note }
       ${ header }
 
-      <div class="pl-box pl-main-box">
+      <div id="pl-main-box" class="pl-box">
 
         <div class="pl-box-heading" style="border-bottom: none;">
           ${ trackingHeading }
@@ -55,23 +55,24 @@ const App = (state, emit) => {
 
         <div class="pl-box-body">
           <div class="pl-col-row">
-            <aside  style="display: none;" class="pl-box-aside pl-col pl-col-${layout[0]}">
 
-              <div id="pl-action-box-container">
-                ${ actionBox}
+            <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
+
+              <div id="pl-action-box-container" class="pl-space-bottom">
+                ${ actionBox }
               </div>
-              <div id="pl-reroute-link-container">
-                ${ rerouteLinkShort}
-              </div>
-            </aside>
+
+              ${ rerouteLinkShort }
+            </div>
 
 
             <main class="pl-main pl-col pl-col-${layout[1]}">
-              <div class="pl-box">
-
-                ${ trackingBody }
-              </div>
+              ${ trackingBody }
             </main>
+
+
+
+
           </div>
         </div>
       

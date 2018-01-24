@@ -40,7 +40,7 @@ module.exports = function ShopInfoDetails({ shopInfos }) {
         </a>` : ''}</div>
       </div>
 
-        <div style="text-align: center; margin:20px 0;">
+        <div class="pl-social-link-list" style="text-align: center; margin:30px 0;">
           ${ socialLinks }
         </div>
 

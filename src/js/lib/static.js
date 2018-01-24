@@ -1,12 +1,12 @@
 var transitStates = {
   OrderProcessed: {
-    icon: 'shopping-cart',
+    icon: 'bundle',
   },
   PickUpScheduled: {
     icon: 'share',
   },
   Upgrade: {
-    icon: 'magic',
+    icon: 'wand',
     color: '#3378B9',
   },
   InboundScan: {
@@ -31,20 +31,20 @@ var transitStates = {
     icon: 'truck',
   },
   Rerouted: {
-    icon: 'map-signs',
+    icon: 'compass',
   },
   FailedAttemptFirst: {
-    icon: 'sticky-note-o',
+    icon: 'error-standard',
     color: '#E59400',
     alert: 'warning',
   },
   FailedAttemptSecond: {
-    icon: 'sticky-note-o',
+    icon: 'error-standard',
     color: '#E59400',
     alert: 'warning',
   },
   FailedAttemptFinal: {
-    icon: 'sticky-note',
+    icon: 'error-standard',
     color: '#DB524B',
     alert: 'danger',
   },
@@ -59,26 +59,26 @@ var transitStates = {
     alert: 'success',
   },
   Delivered: {
-    icon: 'check-circle',
+    icon: 'success-standard',
     color: '#58B957',
     alert: 'success',
   },
   Exception: {
-    icon: 'warning',
+    icon: 'warning-standard',
     color: '#DB524B',
     alert: 'danger',
   },
   Stored: {
-    icon: 'building',
+    icon: 'install',
     percentage: '50',
   },
   Return: {
-    icon: 'warning',
+    icon: 'warning-standard',
     color: '#DB524B',
     alert: 'danger',
   },
   default: {
-    icon: 'info-circle',
+    icon: 'info-standard',
   },
 };
 

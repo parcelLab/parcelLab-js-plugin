@@ -207,7 +207,7 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
   const openingHoursCaption = (!alwaysOpened && mobileText) ? html`<span class="pl-closes-in">(${mobileText})</span>` : null
 
   return html`
-  <div class="pl-box pl-opening-hours-box">
+  <div class="pl-opening-hours-box">
     <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('toggleOpeningHours', id)}>
       <span class="hide-on-mobile">
         ${ raw(translate('openingHours', lang)) }
@@ -216,7 +216,7 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
       </span>
       <span class="hide-on-desktop">
         ${ mobileText || raw(translate('openingHours', lang)) }
-        <i style="float:right;" class="fa fa-chevron-down"></i>
+        <img src="https://icongr.am/clarity/menu.svg?size=18" style="float:right;">
       </span>
     </div>
     <div class="pl-box-body ${ boxOpen ? 'pl-open' : '' }">

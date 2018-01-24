@@ -5,6 +5,7 @@ const Checkpoint = require('./Checkpoint')
 const MoreButton = require('./MoreButton')
 const RerouteLink = require('./RerouteLink')
 const FurtherInfos = require('./FurtherInfos')
+const IconState = require('./IconState')
 
 const showTimeOnCheckpoint = (d, i) => {
   if (!d || i === 0) return false
@@ -24,7 +25,7 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
   cp.transitStatusColor = cp.transitStatus.color
   cp.locationText = cp.location ? ' (' + cp.location + ')' : ''
   cp.alert = i === checkpoints.length - 1 ?
-    'alert-' + (cp.transitStatus.alert ?
+    'checkpoint-' + (cp.transitStatus.alert ?
       cp.transitStatus.alert : 'info') : ''
 
   return cp
@@ -37,6 +38,7 @@ const TrackingBody = (state, emit) => {
   const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
+  const iconState = IconState({ checkpoints, activeTracking })
   const rerouteLink = (options.rerouteButton &&options.rerouteButton === 'right') ? RerouteLink(tHeader) : null
   const furtherInfos = FurtherInfos(tHeader)
   
@@ -50,20 +52,21 @@ const TrackingBody = (state, emit) => {
     
 
   return html`
-    <div class="parcel_lab_tracking" id="pl-t-${tHeader.id}">
+  <div>
+    <div id="pl-t-${tHeader.id}" class="pl-box">
       <div class="pl-box-body">
-
-          <div class="pl-padded">
-            ${ tCheckpoints.map(tCp => Checkpoint(tCp)) }
-            ${ moreButton }
-          </div>
-
-        </div>
-      <div class="pl-box-footer">
-        ${ rerouteLink }
-        ${ furtherInfos }
+        ${ iconState }
+        ${ tCheckpoints.map(tCp => Checkpoint(tCp)) }
+        ${ moreButton }
       </div>
     </div>
+
+    <div class="pl-spaced-list pl-space-top">
+      ${ rerouteLink }
+      
+      ${ furtherInfos }
+    </div>
+  </div>
   `
 }
 

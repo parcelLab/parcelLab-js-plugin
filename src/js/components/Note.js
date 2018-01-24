@@ -6,9 +6,9 @@ const Note = (state, emit) => {
   }
 
   return html`
-    <div class="pl-note-box">
+    <div class="pl-box pl-note-box pl-space-bottom">
       <div class="pl-close-note-box hide-on-mobile" onclick="${handleClick}">
-        <i class="fa fa-times"></i>
+        <img src="https://icongr.am/clarity/times.svg?size=20">
       </div>
       ${ state.options.show_note }
       <div class="pl-note-close-text hide-on-desktop" onclick="${handleClick}">

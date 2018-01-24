@@ -27,11 +27,11 @@ const Search = ({ query, query_err }, emit) => {
         <div class="pl-box-body" style="padding: 20px;">
           <div class="pl-col-row">
             <div class="pl-col pl-col-8" style="margin-bottom:10px;">
-              <input id="pl-ts-trackingno" type="text" placeholder="${inputPlaceholder}"  class="pl-form-input pl-btn-block">
+              <input id="pl-ts-trackingno" type="text" placeholder="${inputPlaceholder}"  class="pl-form-input pl-is-fullwidth">
             </div>
 
             <div class="pl-col pl-col-4" style="margin-bottom:10px;">
-              <button id="pl-ts-search" class="pl-cta-button pl-btn-block" onclick="${handleClick}">
+              <button id="pl-ts-search" class="pl-button pl-is-fullwidth" onclick="${handleClick}">
                 ${buttonText}
               </button>
             </div>

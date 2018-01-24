@@ -4,9 +4,6 @@
   // font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   line-height: 1.42857;
 }
-.hidden {
-  display: none;
-}
 
 .hide-on-mobile {
   @media(max-width: 749px) {
@@ -71,30 +68,33 @@
   content: "";
   display: table;
   clear: both; }
+
 .pl-box {
-  border: 1px #ddd solid;
-  border-radius: 5px;
+  border-radius: 4px;
+  box-shadow: 0 0 2px rgba(0,0,0,.4);
   background-color: #fff;
   padding:0;
+  box-sizing: border-box;
   .pl-box-heading {
     border-bottom: 1px #ddd dashed;
-    font-weight: 300;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 25px;
   }
+  .pl-box-status-heading {
+    font-weight: 300;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    border-bottom: 1px #ddd dashed;
+  }
   .pl-box-body {
-    padding: 0 25px;
+    padding: 25px;
   }
   .pl-box-footer {
     border-top: 1px #ddd dashed;
     padding: 10px 25px;
   }
 }
-.pl-loading {
-  padding:25px 0;
-  text-align: center;
-  font-size: 2em;
-}
+
 .pl-img-responsive {
   display: block;
   max-width: 100%;
@@ -110,101 +110,49 @@
   display: inline-block;
 }
 
-.pl-opening-hours-box {
-  border: 0px;
-  border-top: 1px #ddd dashed;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-
-  .pl-closes-in {
-    font-size: 12px;
-  }
-
-  .pl-box-heading {
-    font-size:1em;
-    padding:10px 20px;
-    border: 0px;
-  }
-
-  .pl-box-body {
-    padding:10px 0;
-
-    &:not(.pl-open) {
-      @media(max-width: 749px) {
-        display: none;
-      }
-    }
-  }
-
-  .opening-hours-entry {
-
-    &, &>div {
-      font-size: 11px;
-
-      @media(max-width: 749px) {
-        font-size: 14px;
-      }
-    }
-
-    padding: 0 20px;
-
-    .pl-week-day-col {
-      float: left;
-      width: 50%;
-    }
-    .pl-hours-col {
-      float: left;
-      width: 50%;
-    }
-
-    &.highlighted-entry {
-      background-color: #eee;
-    }
-  }
-}
-
-.pl-input {
-  border-radius: 3px;
-  background: white;
-  border: 1px solid #B2B2B2 !important;
-  font-size: 1rem;
+.pl-button {
   color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-  width: 100%;
-}
-
-.pl-btn {
-  padding: 5px 10px;
-  line-height: 1.5;
-  border-radius: 3px;
-  background: white;
-  border: 1px solid #B2B2B2 !important;
-  font-size: 1rem;
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-  // cursor: pointer;
-}
-
-.pl-btn-block {
-  width: 100%;
-}
-
-button.pl-cta-button {
-  display: inline-block;
-  height: 35px;
-  padding: 0 30px;
-  color: #fff;
-  text-align: center;
-  letter-spacing: .1rem;
-  text-decoration: none;
-  white-space: nowrap;
-  background-color: #bbb;
+  padding: 1rem 2.5rem;
+  background: #e6e6e6;
   border-radius: 4px;
-  border: 1px solid #bbb;
-  cursor: pointer;
+  border: 0;
+  font-size: 1rem;
+  line-height: 1;
+  text-align: center;
+  transition: opacity .2s ease;
+  text-decoration: none;
+  transform: scale(1);
+  display: inline-block;
   box-sizing: border-box;
+  &:active {
+    transform: scale(.98);
+  }
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.pl-is-fullwidth {
+  width: 100%;
+}
+
+.pl-spaced-list {
+  padding: 0;
+  margin: 0;
+  & > *:not(:first-child) {
+    margin-top: 15px;
+  }
+}
+
+.pl-space-top {
+  margin-top: 15px;
+}
+.pl-space-bottom {
+  margin-bottom: 15px;
+}
+
+.pl-space-right {
+  margin-right: 15px;
 }
 
 input[type="email"].pl-form-input,
@@ -237,8 +185,7 @@ textarea.pl-form-input {
      -moz-appearance: none;
           appearance: none; }
 
-.pl-reroute-link {
-  margin-bottom: 15px;
+.pl-cta-link {
   display: block;
   text-decoration: none;
   border: 1px solid #D1D1D1;
@@ -246,17 +193,21 @@ textarea.pl-form-input {
   text-align: center;
   padding: 10px;
   border-radius: 3px;
-  font-size: 16px; 
   transition: .1s all linear;
-
+  
   &:hover {
     transform: scale(1.015);
     transition: .1s all linear;
   }
 
-  @media(max-width: 768px) {
-    font-size: 15px;
+  &.pl-cta-primary {
+    background-color: #333;
+    color: #fff;
   }
+}
+
+.pl-reroute-link {
+  margin-bottom: 15px;
 }
 
 .pl-reroute-link-short {
@@ -280,8 +231,6 @@ textarea.pl-form-input {
     transition: .1s all linear;
   }
 
-  @media(max-width: 768px) {
-  }
 }
 
 .pl-reduced-margin {
@@ -326,7 +275,7 @@ textarea.pl-form-input {
             transform: scale(1); } }
 
 .pl-shop-footer {
-  margin-top: 25px;
+  margin-top: 30px;
   .pl-shop-details {
     text-align: center;
     address {
@@ -348,10 +297,6 @@ textarea.pl-form-input {
 
 .pl-note-box {
   padding: 15px 25px;
-  border: 1px solid #d3d3d3;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-bottom: 15px;
   position: relative;
   .pl-close-note-box {
     position: absolute;

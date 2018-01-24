@@ -5,16 +5,16 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   let body = html`
     <div class="rating-body">
       <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCourier', 'up', id)}>
-        <i class="fa fa-thumbs-o-up"></i>
+        <img src="https://icongr.am/clarity/thumbs-up.svg?size=30&color=dddddd" class="">
       </div>
       <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCourier', 'down', id)}>
-        <i class="fa fa-thumbs-o-down"></i>
+        <img src="https://icongr.am/clarity/thumbs-down.svg?size=30&color=dddddd" class="">
       </div>
     </div>
   `
   if (voteSuccess) body = html`
     <div class="rating-body">
-      <i class="fa fa-check fa-2x"></i>
+      <img src="https://icongr.am/clarity/check.svg?size=30&color=dddddd" class="">
     </div>
   `
 
@@ -28,7 +28,7 @@ const VoteCourier = ({ actionBox, id }, emit) => {
 
 
   return html`
-  <div class="pl-box" style="margin-bottom:25px;">
+  <div class="pl-box">
     <div class="pl-box-body" style="padding: 15px;">
       ${ label ? html`<h3 style="text-align:center;">${ label }</h3>` : ''}
       ${ body }

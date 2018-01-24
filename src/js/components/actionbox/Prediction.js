@@ -16,10 +16,11 @@ const Calendar = (dayOfWeek, dateOfMonth, month) => html`
 `
 
 const TimeBox = (startTime, endTime, timeCaption) => html`
-  <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
+  <div class="pl-box pl-box-time">
     <div class="pl-box-body">
       <div class="pl-time-data">
-        <i class="fa fa-clock-o"></i> ${startTime} ${endTime ? ' - ' + endTime : '' }
+        <img src="https://icongr.am/clarity/clock.svg?size=20" class="pl-space-right">
+        ${startTime} ${endTime ? ' - ' + endTime : '' }
       </div>
       ${ timeCaption ? html`<small class="pl-time-caption">${timeCaption}</small>` : ''}
     </div>
@@ -35,7 +36,7 @@ const LocationMap = ({ startTime, endTime, deliveryLocation, nearbyDeliveries })
   }, 10)
   
   return html`
-    <div class="pl-box pl-box-time" style="margin-bottom: 10px;">
+    <div class="pl-box pl-box-time">
       <div class="pl-box-body">
         <div id="pl-prediction-map"></div>
       </div>
@@ -44,8 +45,8 @@ const LocationMap = ({ startTime, endTime, deliveryLocation, nearbyDeliveries })
 }
 
 const Caption = text => html`
-  <div class="pl-prediction-caption" style="margin-bottom:25px;">
-    <i class="fa fa-info" style="margin-right: 5px;"></i> ${text}
+  <div class="pl-prediction-caption">
+    ${text}
   </small>
 `
 
@@ -61,8 +62,8 @@ const Prediction = ({ actionBox }) => {
 
 
   return html`
-    <div>
-      <div class="pl-box" style="margin-bottom: 10px;">
+    <div class="pl-spaced-list">
+      <div class="pl-box">
         ${ heading }
         ${ calendar }
       </div>

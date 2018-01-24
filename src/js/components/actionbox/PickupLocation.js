@@ -24,17 +24,14 @@ const PickupLocation = ({ id, actionBox, courier }, lang, emit) => {
   const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.code, emit) : null
 
   return html`
-    <div class="pl-box" style="margin-bottom:15px;">
+    <div class="pl-box">
       <div class="pl-box-body" style="padding:0;">
         ${ Map(id, actionBox, courier) }
       </div>
 
-      <div class="pl-box-footer" align="left" style="padding:10px 20px;">
-        <a href="${ MapsLink(actionBox.address) }" title="${ actionBox.address }" target="_blank">
-          <div class="pl-box-action-info">
-            ${ actionBox.address }
-            <i class="fa fa-road"></i>
-          </div>
+      <div style="padding:10px 20px;">
+        <a href="${ MapsLink(actionBox.address) }" title="${ actionBox.address }" target="_blank" class="pl-button pl-is-fullwidth">
+          ${ actionBox.address }
         </a>
       </div>
 

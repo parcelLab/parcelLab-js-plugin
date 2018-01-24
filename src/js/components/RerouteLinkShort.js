@@ -4,7 +4,6 @@ function generateRerouteCaption(courier) {
   if (courier && courier.rerouteurl_label_info) {
     return html`
       <div>
-        <br>
         <small>${courier.rerouteurl_label_info}</small>
       </div>
     `
@@ -24,8 +23,7 @@ const RerouteLinkShort = ({ checkpoints, activeTracking, options }) => {
     options.rerouteButton &&
     options.rerouteButton === 'left') {
     return html`
-      <a href="${courier.rerouteurl}" target="_blank" class="pl-reroute-link-short">
-        <span class="fa fa-calendar-check-o" style="margin-right: 5px;"></span>    
+      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth pl-space-top">
         ${courier.rerouteurl_label_short}
         ${generateRerouteCaption(courier)}
       </a>
