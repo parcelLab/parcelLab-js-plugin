@@ -1,6 +1,7 @@
 const html = require('bel')
 const raw = require('bel/raw')
 const translate = require('../../lib/translator').translate
+const Icon = require('../Icon')
 
 const currentWorkingDay = new Date().getDay()
 
@@ -206,6 +207,9 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
 
   const openingHoursCaption = (!alwaysOpened && mobileText) ? html`<span class="pl-closes-in">(${mobileText})</span>` : null
 
+  const mobileIcon = Icon('menu', undefined, '18')
+  mobileIcon.style.float = 'right'
+
   return html`
   <div class="pl-opening-hours-box">
     <div class="pl-box-heading pl-toggle-opening-hours" onclick=${() => emit('toggleOpeningHours', id)}>
@@ -216,7 +220,7 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
       </span>
       <span class="hide-on-desktop">
         ${ mobileText || raw(translate('openingHours', lang)) }
-        <img src="https://icongr.am/clarity/menu.svg?size=18" style="float:right;">
+        ${ mobileIcon }
       </span>
     </div>
     <div class="pl-box-body ${ boxOpen ? 'pl-open' : '' }">

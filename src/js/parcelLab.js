@@ -45,6 +45,7 @@ class ParcelLab {
     }).install()
 
     this.orderNo = this.options.orderNo || this.getUrlQuery('orderNo')
+    this.xid = this.options.xid || this.getUrlQuery('xid')
     this.trackingNo = this.options.trackingNo || this.getUrlQuery('trackingNo')
     this.courier = this.options.courier || this.getUrlQuery('courier')
     this.userId = this.options.userId || this.getUrlQuery('u')
@@ -113,6 +114,7 @@ class ParcelLab {
     return {
       trackingNo: this.trackingNo,
       orderNo: this.orderNo,
+      xid: this.xid,
       courier: this.courier,
       userId: this.userId,
       lang: this.lang,

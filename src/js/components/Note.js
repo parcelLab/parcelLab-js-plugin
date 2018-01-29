@@ -1,4 +1,6 @@
-import html from 'bel'
+const html = require('bel')
+const Icon = require('./Icon')
+
 
 const Note = (state, emit) => {
   const handleClick = () => {
@@ -8,7 +10,7 @@ const Note = (state, emit) => {
   return html`
     <div class="pl-box pl-note-box pl-space-bottom">
       <div class="pl-close-note-box hide-on-mobile" onclick="${handleClick}">
-        <img src="https://icongr.am/clarity/times.svg?size=20">
+        ${ Icon('times', undefined, '20') }
       </div>
       ${ state.options.show_note }
       <div class="pl-note-close-text hide-on-desktop" onclick="${handleClick}">

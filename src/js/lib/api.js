@@ -132,6 +132,9 @@ function _objToQueryArr(propsObj) {
     if (propsObj.orderNo) result.push({ name: 'orderNo', value: propsObj.orderNo });
     if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId });
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier }); // why not?
+  } else if (propsObj.xid) {
+    if (propsObj.xid) result.push({ name: 'xid', value: propsObj.xid });
+    if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId });
   } else if (propsObj.location) {
     // query for a shop prediction
     if (propsObj.location) result.push({ name: 'location', value: propsObj.location });

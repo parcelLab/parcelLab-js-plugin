@@ -1,20 +1,21 @@
 const html = require('bel')
+const Icon = require('../Icon')
 
 const VoteCourier = ({ actionBox, id }, emit) => {
   const { label, voteSuccess, voteErr } = actionBox
   let body = html`
     <div class="rating-body">
       <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCourier', 'up', id)}>
-        <img src="https://icongr.am/clarity/thumbs-up.svg?size=30&color=dddddd" class="">
+        ${ Icon('thumbs-up', 'dddddd', '30') }
       </div>
       <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCourier', 'down', id)}>
-        <img src="https://icongr.am/clarity/thumbs-down.svg?size=30&color=dddddd" class="">
+        ${ Icon('thumbs-down', 'dddddd', '30') }
       </div>
     </div>
   `
   if (voteSuccess) body = html`
     <div class="rating-body">
-      <img src="https://icongr.am/clarity/check.svg?size=30&color=dddddd" class="">
+      ${ Icon('check', 'dddddd', '30') }
     </div>
   `
 

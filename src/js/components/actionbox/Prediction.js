@@ -1,5 +1,6 @@
 const html = require('bel')
 const initiateDeliveriesMap = require('./initiateDeliveriesMap')
+const Icon = require('../Icon')
 
 const Label = text => html`
   <div class="pl-box-heading pl-box-cal-heading">
@@ -15,17 +16,22 @@ const Calendar = (dayOfWeek, dateOfMonth, month) => html`
   </div>
 `
 
-const TimeBox = (startTime, endTime, timeCaption) => html`
-  <div class="pl-box pl-box-time">
-    <div class="pl-box-body">
-      <div class="pl-time-data">
-        <img src="https://icongr.am/clarity/clock.svg?size=20" class="pl-space-right">
-        ${startTime} ${endTime ? ' - ' + endTime : '' }
+const TimeBox = (startTime, endTime, timeCaption) => {
+  const icon = Icon('clock', undefined, '20')
+  icon.classList.add('pl-space-right')
+  
+  return html`
+    <div class="pl-box pl-box-time">
+      <div class="pl-box-body">
+        <div class="pl-time-data">
+          ${ icon }
+          ${startTime} ${endTime ? ' - ' + endTime : '' }
+        </div>
+        ${ timeCaption ? html`<small class="pl-time-caption">${timeCaption}</small>` : ''}
       </div>
-      ${ timeCaption ? html`<small class="pl-time-caption">${timeCaption}</small>` : ''}
     </div>
-  </div>
-`
+    `
+}
 
 const LocationMap = ({ startTime, endTime, deliveryLocation, nearbyDeliveries }) => {
   if (!startTime || !deliveryLocation) return null

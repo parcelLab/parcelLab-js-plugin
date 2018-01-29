@@ -16,5 +16,6 @@ exports.trimURL = function (url) {
 exports.checkQuery = function (query) {
   if (query.trackingNo && query.courier) return true
   else if (query.orderNo && query.userId) return true
+  else if (query.xid && query.userId) return true
   else return false
 }
