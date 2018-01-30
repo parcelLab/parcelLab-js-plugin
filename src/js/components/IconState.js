@@ -16,7 +16,7 @@ const IconState = ({ checkpoints, activeTracking }) => {
   let firstIcon = null
   let secondIcon = null
   let thirdIcon = null
-  console.log(currentCp.status)
+
   switch (currentCp.status) {
     case 'OrderProcessed':
       firstIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
@@ -40,14 +40,16 @@ const IconState = ({ checkpoints, activeTracking }) => {
   }
 
   return html`
-      <div class="pl-col-row pl-icon-state">
-        <div class="pl-col pl-col-4 ${ showOnMobile !== 1 ? 'hide-on-mobile' : ''}" align="center">
+      <div class="pl-icon-hr-container">
+        <div class="pl-icon-hr"></div>
+
+        <div class="pl-hr-icon pl-hr-icon-left">
           ${ firstIcon }
         </div>
-        <div class="pl-col pl-col-4 ${ showOnMobile !== 2 ? 'hide-on-mobile' : ''}" align="center">
+        <div class="pl-hr-icon pl-hr-icon-center">
           ${ secondIcon }
         </div>
-        <div class="pl-col pl-col-4 ${ showOnMobile !== 3 ? 'hide-on-mobile' : ''}" align="center">
+        <div class="pl-hr-icon pl-hr-icon-right">
           ${ thirdIcon }
         </div>
       </div>

@@ -145,7 +145,36 @@ div.pl-more-infos {
   border-radius: 5px;
 }
 
-div.pl-icon-state {
-  max-width: 600px;
+div.pl-icon-hr-container {
+  position: relative;
+  max-width: 500px;
+  height:32px;
   margin: 0 auto 50px auto;
+  .pl-icon-hr {
+    width: 100%;
+    border-bottom: 1px dashed #eee;
+    position: absolute;
+    top: 16px;
+  }
+  .pl-hr-icon {
+    background-color: #fff;
+    &-left {
+      position: absolute;
+      left:0;
+      top: 0;
+    }
+    &-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    &-center {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      width: 32px;
+    }
+  }
 }
