@@ -27,3 +27,12 @@ deploy:
 	aws s3 cp ./VERSION_TAG s3://parcellab-cdn/js/v2/version.txt;
 	cf-invalidate E3R5S2BJQI4RDS css/v2/parcelLab.min.css js/v2/parcelLab.min.js js/v2/version.txt;
 	@echo '🕶  Deployed files! Deal with it...';
+
+deploy-v3:
+	@echo '🤖  Deploying this stuff - v3! ';
+	@make bundle;
+	aws s3 cp ./build/parcelLab.min.css s3://parcellab-cdn/css/v3/parcelLab.min.css;
+	aws s3 cp ./build/parcelLab.min.js s3://parcellab-cdn/js/v3/parcelLab.min.js;
+	cf-invalidate E3R5S2BJQI4RDS css/v3/parcelLab.min.css js/v3/parcelLab.min.js;
+	@echo '🕶  Deployed files! Deal with it...';
+	
