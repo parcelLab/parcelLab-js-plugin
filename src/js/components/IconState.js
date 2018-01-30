@@ -12,7 +12,6 @@ const IconState = ({ checkpoints, activeTracking }) => {
   if (!transitStatus) transitStatus = statics.transitStates.default
   if (transitStatus.color) transitStatus.color = transitStatus.color.replace('#', '')
 
-  let showOnMobile = 2
   let firstIcon = null
   let secondIcon = null
   let thirdIcon = null
@@ -22,14 +21,12 @@ const IconState = ({ checkpoints, activeTracking }) => {
       firstIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
       secondIcon = Icon('truck', 'eeeeee')
       thirdIcon = Icon('success-standard', 'eeeeee')
-      showOnMobile = 1
       break
       
     case 'Delivered':
       firstIcon = Icon('bundle', 'eeeeee')
       secondIcon = Icon('truck', 'eeeeee')
       thirdIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
-      showOnMobile = 3
       break
       
     default:
