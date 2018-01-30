@@ -17,8 +17,11 @@ const Calendar = (dayOfWeek, dateOfMonth, month) => html`
 `
 
 const TimeBox = (startTime, endTime, timeCaption) => {
-  const icon = Icon('clock', undefined, '20')
+  const icon = Icon('clock', undefined, '25')
   icon.classList.add('pl-space-right')
+  icon.style.display = 'inline-block'
+  icon.style.verticalAlign = 'bottom'
+  icon.style.marginBottom = '3px'
   
   return html`
     <div class="pl-box pl-box-time">
