@@ -1,4 +1,5 @@
 const html = require('bel')
+const ReturnIcon = require('./svg/Return')
 
 const Returned = ({ actionBox }) => {
   if (!actionBox.label) return null
@@ -6,7 +7,7 @@ const Returned = ({ actionBox }) => {
   return html`
     <div class="pl-box">
       <div class="pl-box-body" style="padding: 30px 25px; text-align: center;">
-        <img src="https://png.icons8.com/cotton/128/000000/rotate.png">
+        ${ ReturnIcon() }
       </div>
 
       <div class="pl-box-footer" align="center">
