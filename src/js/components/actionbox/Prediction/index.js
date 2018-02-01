@@ -1,10 +1,10 @@
 const html = require('bel')
 const initiateDeliveriesMap = require('./initiateDeliveriesMap')
-const Icon = require('../Icon')
+const Icon = require('../../Icon')
 
 const Label = text => html`
   <div class="pl-box-heading pl-box-cal-heading">
-    <h3 style="text-align:center;">${text}</h3>
+    ${text}
   </div>
 `
 
@@ -22,13 +22,13 @@ const TimeBox = (startTime, endTime, timeCaption) => {
   icon.style.display = 'inline-block'
   icon.style.verticalAlign = 'bottom'
   icon.style.marginBottom = '3px'
-  
+
   return html`
     <div class="pl-box pl-box-time">
       <div class="pl-box-body">
         <div class="pl-time-data">
-          ${ icon }
-          ${startTime} ${endTime ? ' - ' + endTime : '' }
+          ${ icon}
+          ${startTime} ${endTime ? ' - ' + endTime : ''}
         </div>
         ${ timeCaption ? html`<small class="pl-time-caption">${timeCaption}</small>` : ''}
       </div>
@@ -43,7 +43,7 @@ const LocationMap = ({ startTime, endTime, deliveryLocation, nearbyDeliveries })
   setTimeout(() => {
     initiateDeliveriesMap(elemId, startTime, endTime, deliveryLocation, nearbyDeliveries)
   }, 10)
-  
+
   return html`
     <div class="pl-box pl-box-time">
       <div class="pl-box-body">
@@ -72,16 +72,16 @@ const Prediction = ({ actionBox }) => {
 
   return html`
     <div class="pl-spaced-list">
-      <div class="pl-box">
-        ${ heading }
-        ${ calendar }
+      <div class="pl-box pl-action-box pl-box-calendar">
+        ${ heading}
+        ${ calendar}
       </div>
 
-      ${ timeBox }
+      ${ timeBox}
 
-      ${ locationMap }
+      ${ locationMap}
 
-      ${ caption }
+      ${ caption}
     </div>
   `
 }

@@ -1,4 +1,4 @@
-const GOOGLE_API_KEY = require('../../../settings').google_api_key
+const GOOGLE_API_KEY = require('../../../../settings').google_api_key
 
 function loadScript(src, callback) {
   let r = false

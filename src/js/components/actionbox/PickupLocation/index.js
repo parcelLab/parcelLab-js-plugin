@@ -2,7 +2,7 @@ const html = require('bel')
 const OpeningHours = require('./OpeningHours')
 const initiatePickupLocationMap = require('./initiatePickupLocationMap')
 
-const MapsLink = address => `https://www.google.com/maps/place/${ encodeURIComponent(address) }/`
+const MapsLink = address => `https://www.google.com/maps/place/${encodeURIComponent(address)}/`
 
 const Map = (id, actionBox, courier) => {
   setTimeout(() => {
@@ -18,25 +18,32 @@ const Map = (id, actionBox, courier) => {
   return elem
 }
 
-const PickupLocation = ({ id, actionBox, courier }, lang, emit) => {
+const PickupLocation = ({ id, actionBox, courier, last_delivery_status }, lang, emit) => {
   if (!actionBox.address) return null
 
   const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.code, emit) : null
+  
+  const heading = last_delivery_status ? html`
+    <div class="pl-box-heading pl-box-location-heading">
+      ${ last_delivery_status.status }
+    </div>
+  ` : null
 
   return html`
-    <div class="pl-box">
-      <div class="pl-box-body" style="padding:0;">
-        ${ Map(id, actionBox, courier) }
+    <div class="pl-box pl-action-box pl-box-location">
+      ${ heading }
+      <div class="pl-box-body pl-box-location-body">
+        ${ Map(id, actionBox, courier)}
+
+        <div class="pl-location-link-container">
+          <a href="${ MapsLink(actionBox.address)}" title="${actionBox.address}" target="_blank" class="pl-button pl-is-fullwidth pl-location-link">
+            ${ actionBox.address}
+          </a>
+        </div>
       </div>
 
-      <div style="padding:10px 20px;">
-        <a href="${ MapsLink(actionBox.address) }" title="${ actionBox.address }" target="_blank" class="pl-button pl-is-fullwidth">
-          ${ actionBox.address }
-        </a>
-      </div>
-
-      <div class="pl-box-body" style="padding:0;">
-        ${ openingHours }
+      <div class="pl-box-body">
+        ${ openingHours}
       </div>
     </div>
   `

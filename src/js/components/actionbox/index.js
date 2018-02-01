@@ -5,22 +5,22 @@ const PickupLocationUnknown = require('./PickupLocationUnknown')
 const OrderProcessed = require('./OrderProcessed')
 const NextAction = require('./NextAction')
 const Returned = require('./Returned')
+const Fallback = require('./Fallback')
 
 const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
 
   if (tHeader && tHeader.actionBox) {
+    // tHeader.actionBox.type = 'fallback' // TEST ONLY REMOVE THIS JOOO
     switch (tHeader.actionBox.type) {
       case 'pickup-location':
-        if (tHeader.actionBox.data) {
-          return PickupLocation(tHeader, query.lang, emit)
-        }
-        else return null
+        if (tHeader.actionBox.data) return PickupLocation(tHeader, query.lang, emit)
+        else return Fallback(tHeader)
       case 'vote-courier':
-        return VoteCourier(tHeader, emit)
+        return [Fallback(tHeader), VoteCourier(tHeader, emit)]
       case  'prediction':
         if (tHeader.actionBox.data) return Prediction(tHeader)
-        else return null
+        else return Fallback(tHeader)
       case 'pickup-location-unknown':
         return PickupLocationUnknown(tHeader)
       case 'order-processed':
@@ -30,7 +30,7 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
       case 'returned':
         return Returned(tHeader)
       default:
-        return null
+        return Fallback(tHeader)
     }
 
   }

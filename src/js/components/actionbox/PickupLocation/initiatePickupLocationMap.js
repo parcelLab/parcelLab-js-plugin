@@ -1,5 +1,5 @@
-const GOOGLE_API_KEY = require('../../../settings').google_api_key
-const SHORTEN_ADDRESS_FOR = require('../../../settings').mapShortenAddressForCouriers
+const GOOGLE_API_KEY = require('../../../../settings').google_api_key
+const SHORTEN_ADDRESS_FOR = require('../../../../settings').mapShortenAddressForCouriers
 
 module.exports = function (elId, address, courier) {
 

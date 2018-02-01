@@ -76,21 +76,15 @@
   padding:0;
   box-sizing: border-box;
   .pl-box-heading {
-    border-bottom: 1px #ddd dashed;
+    border-bottom: 1px solid #dedede;
     font-size: 1.5em;
     padding: 25px;
-  }
-  .pl-box-status-heading {
-    font-weight: 300;
-    padding: 10px 25px;
-    text-transform: uppercase;
-    border-bottom: 1px #ddd dashed;
   }
   .pl-box-body {
     padding: 25px;
   }
   .pl-box-footer {
-    border-top: 1px #ddd dashed;
+    border-top: 1px solid #dedede;
     padding: 10px 25px;
   }
 }

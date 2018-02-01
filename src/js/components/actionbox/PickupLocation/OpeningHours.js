@@ -1,7 +1,7 @@
 const html = require('bel')
 const raw = require('bel/raw')
-const translate = require('../../lib/translator').translate
-const Icon = require('../Icon')
+const translate = require('../../../lib/translator').translate
+const Icon = require('../../Icon')
 
 const currentWorkingDay = new Date().getDay()
 
@@ -108,10 +108,10 @@ function renderOpeningHourEntry(ophObj, weekDays, fallBack, hideWeekDay) {
     fromTill = fallBack
   }
 
-  if (ophObj.open.day === currentWorkingDay) highlightClass = 'highlighted-entry'
+  if (ophObj.open.day === currentWorkingDay) highlightClass = 'pl-highlighted-entry'
 
   return html`
-    <div class="pl-col-row opening-hours-entry ${highlightClass}">
+    <div class="pl-col-row pl-opening-hours-entry ${highlightClass}">
       <div class="pl-week-day-col">
         ${ (!hideWeekDay) ? weekDay + ':' : raw('<span>&nbsp;</span>') }
       </div>
@@ -198,7 +198,7 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
   ).length === 0
 
   if (alwaysOpened) {
-    openingHourEntries = html`<div class="opening-hours-entry">${ raw(translate('alwaysOpened', lang)) }</div>`
+    openingHourEntries = html`<div class="pl-opening-hours-entry">${ raw(translate('alwaysOpened', lang)) }</div>`
     mobileText = raw(translate('alwaysOpened', lang))
   } else {
     openingHourEntries = renderOpeningHoursList(openingHours, lang)
