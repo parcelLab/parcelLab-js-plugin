@@ -76,16 +76,18 @@
   padding:0;
   box-sizing: border-box;
   .pl-box-heading {
-    border-bottom: 1px solid #dedede;
     font-size: 1.5em;
     padding: 25px;
+    text-align: center;
+    @media(max-width: 1000px) {
+      font-size: 1.3em;
+    }    
   }
   .pl-box-body {
     padding: 25px;
   }
   .pl-box-footer {
-    border-top: 1px solid #dedede;
-    padding: 10px 25px;
+    padding: 25px;
   }
 }
 

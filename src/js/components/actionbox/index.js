@@ -11,7 +11,7 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
 
   if (tHeader && tHeader.actionBox) {
-    // tHeader.actionBox.type = 'fallback' // TEST ONLY REMOVE THIS JOOO
+
     switch (tHeader.actionBox.type) {
       case 'pickup-location':
         if (tHeader.actionBox.data) return PickupLocation(tHeader, query.lang, emit)

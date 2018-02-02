@@ -5,15 +5,17 @@ const NextAction = ({ actionBox }) => {
   if (!actionBox.label) return null
 
   return html`
-    <div class="pl-box">
-      <div class="pl-box-body" style="padding: 30px 25px; text-align: center;">
+    <div class="pl-box pl-action-box pl-box-icon-status">
+
+      <div class="pl-box-heading">
+        ${ actionBox.label}        
+      </div>
+
+      <div class="pl-box-body">
         ${ CancelIcon() }
       </div>
 
-      <div class="pl-box-seperator">
-        ${ actionBox.label}
-      </div>
-      <div class="pl-box-body" style="padding:10px 25px;">
+      <div class="pl-box-footer">
         <div>${ actionBox.caption }</div>
       </div>
     </div>

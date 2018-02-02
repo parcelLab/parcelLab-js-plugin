@@ -11,12 +11,12 @@ module.exports = function Fallback(tHeader) {
   const icon = transitState ? Icon(transitState.icon, iconColor, '80') : null
 
   return html`
-    <div class="pl-box pl-action-box">
+    <div class="pl-box pl-action-box pl-box-icon-status">
       <div class="pl-box-heading">
         ${ status }
       </div>
 
-      <div class="pl-box-body" align="center">
+      <div class="pl-box-body">
         ${ icon }
       </div>
 

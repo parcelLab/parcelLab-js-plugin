@@ -5,13 +5,13 @@ const Returned = ({ actionBox }) => {
   if (!actionBox.label) return null
 
   return html`
-    <div class="pl-box">
-      <div class="pl-box-body" style="padding: 30px 25px; text-align: center;">
-        ${ ReturnIcon() }
+    <div class="pl-box pl-action-box pl-box-icon-status">
+      <div class="pl-box-heading">
+        ${ actionBox.label }
       </div>
 
-      <div class="pl-box-footer" align="center">
-        ${ actionBox.label }
+      <div class="pl-box-body">
+        ${ ReturnIcon() }
       </div>
     </div>
   `
