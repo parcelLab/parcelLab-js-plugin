@@ -31,7 +31,7 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
   return cp
 }).filter(cp => true && cp.shown).reverse()
 
-const TrackingBody = (state, emit) => {
+const TrackingTrace = (state, emit) => {
   const { checkpoints, activeTracking, query, showAllCheckpoints, options } = state
   if (!checkpoints) return null
 
@@ -53,7 +53,7 @@ const TrackingBody = (state, emit) => {
 
   return html`
   <div>
-    <div id="pl-t-${tHeader.id}" class="pl-box">
+    <div id="pl-t-${tHeader.id}" class="pl-box pl-box-trace">
       <div class="pl-box-body">
         ${ iconState }
         ${ tCheckpoints.map(tCp => Checkpoint(tCp)) }
@@ -70,4 +70,4 @@ const TrackingBody = (state, emit) => {
   `
 }
 
-module.exports = TrackingBody
+module.exports = TrackingTrace

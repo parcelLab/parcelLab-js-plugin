@@ -4,7 +4,7 @@ const RerouteLinkShort = require('./RerouteLinkShort')
 const TrackingHeading = require('./TrackingHeading')
 const Subheading = require('./Subheading')
 const ActionBox = require('./actionbox')
-const TrackingBody = require('./trackingBody')
+const TrackingTrace = require('./TrackingTrace')
 const ShopInfoHeader = require('./ShopInfoHeader')
 const ShopInfoDetails = require('./ShopInfoDetails')
 const Search = require('./Search')
@@ -29,7 +29,7 @@ const App = (state, emit) => {
   const trackingHeading = TrackingHeading(state)
   const subHeading = Subheading(state)
   const actionBox = ActionBox(state, emit)
-  const trackingBody = TrackingBody(state, emit)
+  const trace = TrackingTrace(state, emit)
   const shopInfoHeader = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoHeader(state) : null
   const shopInfoDetails = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoDetails(state) : null
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
@@ -44,38 +44,31 @@ const App = (state, emit) => {
       </div>
 
       ${ note }
+
       ${ header }
 
       <div id="pl-main-box" class="pl-box">
 
-        <div class="pl-box-heading" style="border-bottom: none;">
+        <div id="pl-tracking-heading" class="pl-box-heading">
           ${ trackingHeading }
           ${ subHeading }
         </div>
 
-        <div class="pl-box-body">
+        <div id="pl-tracking-body" class="pl-box-body">
           <div class="pl-col-row">
-
             <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
-
               <div id="pl-action-box-container" class="pl-space-bottom">
-                ${ actionBox }
+                ${ actionBox}
               </div>
 
-              ${ rerouteLinkShort }
+              ${ rerouteLinkShort}
             </div>
 
-
-            <main class="pl-main pl-col pl-col-${layout[1]}">
-              ${ trackingBody }
-            </main>
-
-
-
-
+            <div class="pl-main pl-col pl-col-${layout[1]}">
+              ${ trace }
+            </div>
           </div>
-        </div>
-      
+        </div> 
       </div>
 
       <div id="pl-shop-info-details-container">

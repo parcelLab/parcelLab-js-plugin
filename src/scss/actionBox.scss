@@ -53,7 +53,7 @@ h3 {
     font-size: 1.8em;
     flex-grow: 1;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 3px;
     transition: all .2s linear;
     padding: 5px 0;
     &>img {
@@ -116,7 +116,7 @@ h3 {
       font-size: 14px;
       padding: 5px 10px;
       background: rgba(0, 0, 0, 0.55);
-      border-radius: 5px;
+      border-radius: 4px;
       margin-bottom: 8px;
       width: 100%;
       white-space: nowrap;
@@ -128,7 +128,7 @@ h3 {
   .pl-box-action-info {
     padding: 20px;
     background-color:rgba(50, 50, 50, 0.7);
-    border-radius: 5px;
+    border-radius: 4px;
     height: 100%;
     width: 100%;
     visibility: none;
@@ -146,8 +146,8 @@ h3 {
 .pl-box-calendar {
   .pl-box-heading {
     background-color: rgb(209, 74, 74);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     border-color: #eee !important;
     color: #eee;
   }

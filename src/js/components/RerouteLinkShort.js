@@ -23,7 +23,7 @@ const RerouteLinkShort = ({ checkpoints, activeTracking, options }) => {
     options.rerouteButton &&
     options.rerouteButton === 'left') {
     return html`
-      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth pl-space-top">
+      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth pl-space-bottom">
         ${courier.rerouteurl_label_short}
         ${generateRerouteCaption(courier)}
       </a>

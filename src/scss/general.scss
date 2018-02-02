@@ -271,7 +271,8 @@ textarea.pl-form-input {
             transform: scale(1); } }
 
 .pl-shop-footer {
-  margin-top: 30px;
+  margin-top: 50px;
+  padding-top: 25px;
   .pl-shop-details {
     text-align: center;
     address {
@@ -285,7 +286,7 @@ textarea.pl-form-input {
   text-decoration: none;
   margin-bottom: 5px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 0 5px;
   color: rgb(56, 56, 56);
 
@@ -320,3 +321,29 @@ textarea.pl-form-input {
     text-overflow: ellipsis;
   }
 }
+
+#pl-main-box {
+
+  #pl-tracking-heading {
+    opacity: .3;
+    font-size: 1em;
+    font-weight: 200;
+    padding: 25 25 0;
+    // text-align: left;
+  }
+
+  #pl-tracking-body {
+  }
+
+  @media(max-width: 749px) {
+    box-shadow: none;
+
+    #pl-tracking-heading {
+      padding: 15 0 5;
+    }
+    #pl-tracking-body {
+      padding: 25 0;
+    }
+  }
+}
+
