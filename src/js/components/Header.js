@@ -34,7 +34,7 @@ const Header = (state, emit) => {
         </div>
 
           <div class="pl-order-sub">
-            ${ translate('containsOf', query.lang.code)} ${header.length} ${translate('deliveries', query.lang.code) }
+            ${translate('containsOf', query.lang.code)} ${header.length} ${translate('deliveries', query.lang.code)}
 
             ${ orderStatsText ? `(${ orderStatsText })` : null }
           </div>

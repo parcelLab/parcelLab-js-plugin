@@ -1,5 +1,5 @@
 const html = require('bel')
-const CancelIcon = require('./svg/Cancel')
+const CancelIcon = require('../svg/Cancel')
 
 const NextAction = ({ actionBox }) => {
   if (!actionBox.label) return null

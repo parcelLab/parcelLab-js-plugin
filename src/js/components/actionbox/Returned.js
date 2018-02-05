@@ -1,5 +1,5 @@
 const html = require('bel')
-const ReturnIcon = require('./svg/Return')
+const ReturnIcon = require('../svg/Return')
 
 const Returned = ({ actionBox }) => {
   if (!actionBox.label) return null

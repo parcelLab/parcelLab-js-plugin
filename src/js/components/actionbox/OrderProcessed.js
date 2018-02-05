@@ -1,5 +1,5 @@
 const html = require('bel')
-const BoxIcon = require('./svg/Box')
+const BoxIcon = require('../svg/Box')
 
 const OrderProcessed = ({ actionBox }) => {
 
