@@ -6,5 +6,5 @@ const html = require('bel')
 module.exports = function Icon(iconName, hexColor='333333', size='32') {
   const path = `https://icongr.am/clarity/${iconName}.svg?color=${hexColor}`
 
-  return html`<img src="${path}" class="pl-img-responsive" style="max-width: ${size};" />`
+  return html`<img src="${path}" class="pl-img-responsive" style="max-width: ${size}px;" />`
 }
