@@ -1,95 +1,95 @@
-var transitStates = {
+const transitStates = {
   OrderProcessed: {
-    icon: 'bundle',
+    icon: 'order_processed',
   },
   PickUpScheduled: {
-    icon: 'share',
+    icon: 'info_truck',
   },
   Upgrade: {
-    icon: 'wand',
+    icon: 'info_truck',
     color: '#3378B9',
   },
   InboundScan: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   InTransit: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   ExportHub: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   ImportHub: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   DestinationDeliveryCenter: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   DestinationDeliveryDepot: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   OutForDelivery: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   Rerouted: {
-    icon: 'compass',
+    icon: 'warning_truck',
   },
   FailedAttemptFirst: {
-    icon: 'error-standard',
+    icon: 'warning_truck',
     color: '#E59400',
     alert: 'warning',
   },
   FailedAttemptSecond: {
-    icon: 'error-standard',
+    icon: 'warning_truck',
     color: '#E59400',
     alert: 'warning',
   },
   FailedAttemptFinal: {
-    icon: 'error-standard',
+    icon: 'warning_truck',
     color: '#DB524B',
     alert: 'danger',
   },
   PickupReadyToday: {
-    icon: 'map-marker',
+    icon: 'map',
     color: '#58B957',
-    alert: 'success',
+    alert: 'success_standard',
   },
   PickupReadyNextDay: {
-    icon: 'map-marker',
+    icon: 'map',
     color: '#58B957',
-    alert: 'success',
+    alert: 'success_standard',
   },
   Delivered: {
-    icon: 'success-standard',
+    icon: 'success_standard',
     color: '#58B957',
     alert: 'success',
   },
   Exception: {
-    icon: 'warning-standard',
+    icon: 'warning_truck',
     color: '#DB524B',
     alert: 'danger',
   },
   Stored: {
-    icon: 'install',
+    icon: 'info_truck',
     percentage: '50',
   },
   Return: {
-    icon: 'warning-standard',
+    icon: 'return',
     color: '#DB524B',
     alert: 'danger',
   },
   default: {
-    icon: 'info-standard',
+    icon: 'info_truck',
   },
-};
+}
 
-var courierNames = {
+const courierNames = {
   'dhl-germany': 'DHL',
   'hermes-de': 'Hermes',
   'dpd-de': 'DPD',
   ups: 'UPS',
-};
+}
 
-var socialIcons = {
+const socialIcons = {
   twitter: {
     color: '#55acee',
   },
@@ -111,9 +111,9 @@ var socialIcons = {
   pinterest: {
     color: '#bd081c',
   },
-};
+}
 
-var languages = {
+const languages = {
   de: {
     name: 'de',
     label: 'Deutsch',
@@ -192,9 +192,9 @@ var languages = {
     code: 'RON',
     icon: 'https://cdn.parcellab.com/img/flags/ro.png',
   },
-};
+}
 
-var translations = {
+const translations = {
   USA: {
     delivery: 'Delivery',
     more: 'Show more...',
@@ -369,9 +369,9 @@ var translations = {
       delivery: 'Din păcate, această livrare nu este disponibil.',
     },
   },
-};
+}
 
-var langIds = {
+const langIds = {
   '#result-ticket': {
     type: 'empty',
     value: 'empty',
@@ -409,9 +409,9 @@ var langIds = {
     subTarget: 'data',
     sub: 'text_help_btn',
   },
-};
+}
 
-var listenBlocks = [{
+const listenBlocks = [{
   name: '#footnote',
   type: 'parcellab',
 }, {
@@ -425,14 +425,14 @@ var listenBlocks = [{
 }, {
   name: '#parcelLab-faq',
   type: 'faq',
-}, ];
+}, ]
 
 module.exports = {
-  listenBlocks: listenBlocks,
-  translations: translations,
-  languages: languages,
-  socialIcons: socialIcons,
-  courierNames: courierNames,
-  transitStates: transitStates,
-  langIds: langIds,
-};
+  listenBlocks,
+  translations,
+  languages,
+  socialIcons,
+  courierNames,
+  transitStates,
+  langIds,
+}

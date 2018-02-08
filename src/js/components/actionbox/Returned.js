@@ -1,5 +1,5 @@
 const html = require('bel')
-const ReturnIcon = require('../svg/Return')
+const Icon = require('../Icon')
 
 const Returned = ({ actionBox }) => {
   if (!actionBox.label) return null
@@ -11,7 +11,7 @@ const Returned = ({ actionBox }) => {
       </div>
 
       <div class="pl-box-body">
-        ${ ReturnIcon() }
+        ${ Icon('return', null, '80') }
       </div>
     </div>
   `

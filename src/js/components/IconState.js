@@ -19,20 +19,20 @@ const IconState = ({ checkpoints, activeTracking }) => {
   switch (currentCp.status) {
     case 'OrderProcessed':
       firstIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
-      secondIcon = Icon('truck', 'eeeeee')
-      thirdIcon = Icon('success-standard', 'eeeeee')
+      secondIcon = Icon('in_transit', 'eeeeee')
+      thirdIcon = Icon('success_standard', 'eeeeee')
       break
       
     case 'Delivered':
-      firstIcon = Icon('bundle', 'eeeeee')
-      secondIcon = Icon('truck', 'eeeeee')
+      firstIcon = Icon('order_processed', 'eeeeee')
+      secondIcon = Icon('in_transit', 'eeeeee')
       thirdIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
       break
       
     default:
-      firstIcon = Icon('bundle', 'eeeeee')
+      firstIcon = Icon('order_processed', 'eeeeee')
       secondIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
-      thirdIcon = Icon('success-standard', 'eeeeee')
+      thirdIcon = Icon('success_standard', 'eeeeee')
       
   }
 

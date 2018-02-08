@@ -6,16 +6,16 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   let body = html`
     <div class="pl-rating-body">
       <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCourier', 'up', id)}>
-        ${ Icon('thumbs-up', 'dddddd', '30') }
+        ${ Icon('thumbs_up', 'dddddd', '30') }
       </div>
       <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCourier', 'down', id)}>
-        ${ Icon('thumbs-down', 'dddddd', '30') }
+        ${ Icon('thumbs_down', 'dddddd', '30') }
       </div>
     </div>
   `
   if (voteSuccess) body = html`
     <div class="pl-rating-body">
-      ${ Icon('check', 'dddddd', '30') }
+      ${ Icon('success_standard', 'dddddd', '30') }
     </div>
   `
 

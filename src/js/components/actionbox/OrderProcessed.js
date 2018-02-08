@@ -1,5 +1,5 @@
 const html = require('bel')
-const BoxIcon = require('../svg/Box')
+const Icon = require('../Icon')
 
 const OrderProcessed = ({ actionBox }) => {
 
@@ -11,7 +11,7 @@ const OrderProcessed = ({ actionBox }) => {
 
     
       <div class="pl-box-body">
-        ${ BoxIcon() }
+        ${ Icon('order_processed', null, '80') }
       </div>
     </div>
   `  

@@ -1,5 +1,5 @@
 const html = require('bel')
-const CancelIcon = require('../svg/Cancel')
+const Icon = require('../Icon')
 
 const NextAction = ({ actionBox }) => {
   if (!actionBox.label) return null
@@ -8,11 +8,11 @@ const NextAction = ({ actionBox }) => {
     <div class="pl-box pl-action-box pl-box-icon-status">
 
       <div class="pl-box-heading">
-        ${ actionBox.label}        
+        ${ actionBox.label }        
       </div>
 
       <div class="pl-box-body">
-        ${ CancelIcon() }
+        ${ Icon('error', null, '80') }
       </div>
 
       <div class="pl-box-footer">
