@@ -1,7 +1,6 @@
 const html = require('bel')
-
-// const base = 'https://icon.parcellab.com/'
-const base = 'http://icon.parcellab.com/'
+const { icon_url } = require('../../settings')
+const base = icon_url
 
 module.exports = function Icon(iconName, color, size) {
   size = size || '32'

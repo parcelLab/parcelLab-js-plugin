@@ -1,5 +1,6 @@
 module.exports = {
   base_url: 'https://api.parcellab.com/',
+  icon_url: 'https://icon.parcellab.com/',
   checkpoints_endpoint: 'v2/checkpoints',
   vote_endpoint: 'v2/vote-courier/',
   pickup_location_endpoint: 'pickup-location',
@@ -18,4 +19,4 @@ module.exports = {
     userId: null,
     show_note: null,
   },
-};
+}
