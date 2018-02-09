@@ -4,7 +4,7 @@ const base = icon_url
 
 module.exports = function Icon(iconName, color, size) {
   size = size || '32'
-  color = color || '#333333'
+  color = color || window.parcelLab_styles.iconColor
   color = color.replace('#', '')
   const path = `${base}${iconName}?color=${ color }`
 

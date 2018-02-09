@@ -15,6 +15,7 @@ const _settings = require('../settings')
 const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim()
 const DEFAULT_ROOT_NODE = _settings.default_root_node
 const DEFAULT_OPTS = _settings.defualt_opts
+const DEFAULT_STYLES = _settings.default_styles
 
 /**
  * {class} ParcelLab
@@ -53,6 +54,7 @@ class ParcelLab {
     this.initLanguage()
 
     if (this.options.styles) this.initStyles()
+    this.setGlobalStyles(this.options.customStyles)
     if (!this.options.selectedTrackingNo) 
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
     
@@ -108,6 +110,16 @@ class ParcelLab {
 
   initStyles() {
     document.querySelector(this.rootNodeQuery).classList.add('parcellab-styles')
+  }
+
+  setGlobalStyles(customStyles={}) {
+    for (const key in DEFAULT_STYLES) {
+      if (DEFAULT_STYLES.hasOwnProperty(key)) {
+        if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
+      }
+    }
+
+    window.parcelLab_styles = customStyles
   }
 
   getProps() {

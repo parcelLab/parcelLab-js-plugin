@@ -17,7 +17,7 @@ const Calendar = (dayOfWeek, dateOfMonth, month) => html`
 `
 
 const TimeBox = (startTime, endTime, timeCaption) => {
-  const icon = Icon('clock', undefined, '25')
+  const icon = Icon('clock', '#000', '25')
   icon.classList.add('pl-space-right')
   icon.style.display = 'inline-block'
   icon.style.verticalAlign = 'bottom'

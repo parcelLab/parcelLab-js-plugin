@@ -19,4 +19,11 @@ module.exports = {
     userId: null,
     show_note: null,
   },
+  default_styles: {
+    borderColor: '#eeeeee',
+    borderRadius: '4px',
+    iconColor: '#333333',
+    primaryColor: '#e6e6e6',
+    highlightColor: '#e6e6e6',
+  },
 }

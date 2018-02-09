@@ -1,3 +1,5 @@
+![parcelLab JS Plugin](./logo-code.png)
+
 # parcelLab Javascript Plugin
 JavaScript to integrate a shop frontend (or any webpage) with parcelLab. This plugin can be used to retrieve and display the checkpoints of a tracking (delivery status page), or display an estimated delivery date for a given destination and courier (delivery time prediction) — on any given webpage.
 
@@ -41,6 +43,7 @@ You can define options by passing an Object as second argument, when creating a 
 `new ParcelLab('#pl-trace', options)`
 These are the available options:
 - styles : Boolean (see above)
+- customStyles : Object (see below)
 - rerouteButton : 'left' | 'right' (defines where to render the reroute button if possible)
 - show_searchForm :  Boolean (activates a search form, which will be rendered if tracking was not found or no trackingNo/orderNo was given, needs userId)
 - userId : String (other way to pass userId - instead of in url)
@@ -50,6 +53,30 @@ These are the available options:
 - selectedTrackingNo : String (other way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
 
+### Custom styling
+You can customize the buttons and the boxes of the plugin by simply passing the Object 'customStyles' in the options.  
+Possible customStyle options:
+```javascript
+options.customStyles = {
+  borderColor: '#eeeeee', // sets border color for the boxes (default: #eeeeee)
+  borderRadius: '4px', // sets the border radius for the boxes and buttons (default: 4px)
+  iconColor: '#333333', // sets the icon standard color (default: #333333)
+  primaryColor: '#e6e6e6', // sets background color for buttons (default: #e6e6e6)
+  highlightColor: '#e6e6e6', // sets background color for highlighted elements (default: #e6e6e6)
+};
+```
+#### ⚠️  If you need more customizing, use a custom stylesheet.
+
+## Custom styling example
+In this example we will set the box and button border-radius to 0px and make the buttons black.
+```html
+<script type="text/javascript">
+  var custom = { borderRadius: '0px', primaryColor: '#000000', iconColor: '#000000' };
+
+  var parcelLab = new ParcelLab('#pl-trace', { styles: true, customStyles: custom });
+  parcelLab.initialize();
+</script>
+```
 
 ### Without action box
 

@@ -207,7 +207,7 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
 
   const openingHoursCaption = (!alwaysOpened && mobileText) ? html`<span class="pl-closes-in">(${mobileText})</span>` : null
 
-  const mobileIcon = Icon('menu', undefined, '18')
+  const mobileIcon = Icon('menu', '#000', '18')
   mobileIcon.style.float = 'right'
 
   return html`

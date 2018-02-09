@@ -1,6 +1,14 @@
 const html = require('bel')
 const Icon = require('./Icon')
 const statics = require('../lib/static')
+const INACTIVE_OPACITY = '.2'
+
+const makeOpacity = (elem, opacity='1') => {
+  if (elem && elem.style) {
+    elem.style.opacity = opacity
+  }
+  return elem
+}
 
 const IconState = ({ checkpoints, activeTracking }) => {
   const tHeader = checkpoints.header[activeTracking]
@@ -18,21 +26,21 @@ const IconState = ({ checkpoints, activeTracking }) => {
 
   switch (currentCp.status) {
     case 'OrderProcessed':
-      firstIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
-      secondIcon = Icon('in_transit', 'eeeeee')
-      thirdIcon = Icon('success_standard', 'eeeeee')
+      firstIcon = Icon(transitStatus.icon, transitStatus.color || null)
+      secondIcon = makeOpacity(Icon('in_transit'), INACTIVE_OPACITY)
+      thirdIcon = makeOpacity(Icon('success_standard'), INACTIVE_OPACITY)
       break
       
     case 'Delivered':
-      firstIcon = Icon('order_processed', 'eeeeee')
-      secondIcon = Icon('in_transit', 'eeeeee')
-      thirdIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
+      firstIcon = makeOpacity(Icon('order_processed'), INACTIVE_OPACITY)
+      secondIcon = makeOpacity(Icon('in_transit'), INACTIVE_OPACITY)
+      thirdIcon = Icon(transitStatus.icon, transitStatus.color || null)
       break
       
     default:
-      firstIcon = Icon('order_processed', 'eeeeee')
-      secondIcon = Icon(transitStatus.icon, transitStatus.color || undefined)
-      thirdIcon = Icon('success_standard', 'eeeeee')
+      firstIcon = makeOpacity(Icon('order_processed'), INACTIVE_OPACITY)
+      secondIcon = Icon(transitStatus.icon, transitStatus.color || null)
+      thirdIcon = makeOpacity(Icon('success_standard'), INACTIVE_OPACITY)
       
   }
 
