@@ -22,8 +22,8 @@ module.exports = {
   default_styles: {
     borderColor: '#eeeeee',
     borderRadius: '4px',
-    iconColor: '#333333',
-    primaryColor: '#e6e6e6',
-    highlightColor: '#e6e6e6',
+    iconColor: '#333',
+    buttonColor: '#333',
+    buttonBackground: '#e6e6e6',
   },
 }

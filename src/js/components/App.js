@@ -11,6 +11,7 @@ const Search = require('./Search')
 const Alert = require('./Alert')
 const Note = require('./Note')
 const Loading = require('./Loading')
+const StylesSet = require('./StyleSet')
 
 const App = (state, emit) => {
   // query not sufficient
@@ -35,10 +36,13 @@ const App = (state, emit) => {
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
 
   const layout = (rerouteLinkShort || actionBox) ? ['4', '8'] : ['0', '12']
+  const styleSet = StylesSet()
 
 
   return html`
     <div>
+      ${ styleSet }
+
       <div id="pl-shop-info-container">
         ${ shopInfoHeader }
       </div>

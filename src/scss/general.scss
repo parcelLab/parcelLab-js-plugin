@@ -70,8 +70,6 @@
   clear: both; }
 
 .pl-box {
-  border-radius: 4px;
-  box-shadow: 0 0 2px rgba(0,0,0,.4);
   background-color: #fff;
   padding:0;
   box-sizing: border-box;
@@ -107,10 +105,7 @@
 }
 
 .pl-button {
-  color: #333;
   padding: 1em 2.5em;
-  background: #e6e6e6;
-  border-radius: 4px;
   border: 0;
   font-size: 1em;
   line-height: 1;
@@ -164,7 +159,6 @@ select.pl-form-input {
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #fff;
   border: 1px solid #D1D1D1;
-  border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box; }
 
@@ -181,52 +175,8 @@ textarea.pl-form-input {
      -moz-appearance: none;
           appearance: none; }
 
-.pl-cta-link {
-  display: block;
-  text-decoration: none;
-  border: 1px solid #D1D1D1;
-  color: #333;
-  text-align: center;
-  padding: 10px;
-  border-radius: 3px;
-  transition: .1s all linear;
-  
-  &:hover {
-    transform: scale(1.015);
-    transition: .1s all linear;
-  }
-
-  &.pl-cta-primary {
-    background-color: #333;
-    color: #fff;
-  }
-}
-
 .pl-reroute-link {
   margin-bottom: 15px;
-}
-
-.pl-reroute-link-short {
-  display: block;
-  text-decoration: none;
-  border: 1px solid #D1D1D1;
-  color: #333;
-  text-align: center;
-  padding: 10px;
-  border-radius: 3px;
-  transition: .1s all linear;
-  margin-bottom: 15px;
-
-  small {
-    opacity: .7;
-    font-size: .8em;
-  }
-
-  &:hover {
-    transform: scale(1.015);
-    transition: .1s all linear;
-  }
-
 }
 
 .pl-reduced-margin {
@@ -285,7 +235,7 @@ textarea.pl-form-input {
   text-decoration: none;
   margin-bottom: 5px;
   border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0 5px;
   color: rgb(56, 56, 56);
 

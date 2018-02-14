@@ -60,9 +60,8 @@ Possible customStyle options:
 options.customStyles = {
   borderColor: '#eeeeee', // sets border color for the boxes (default: #eeeeee)
   borderRadius: '4px', // sets the border radius for the boxes and buttons (default: 4px)
-  iconColor: '#333333', // sets the icon standard color (default: #333333)
-  primaryColor: '#e6e6e6', // sets background color for buttons (default: #e6e6e6)
-  highlightColor: '#e6e6e6', // sets background color for highlighted elements (default: #e6e6e6)
+  buttonColor: '#333', // sets text color for buttons (default: #333)
+  buttonBackground: '#e6e6e6', // sets background color for buttons (default: #e6e6e6)
 };
 ```
 #### ⚠️  If you need more customizing, use a custom stylesheet.
@@ -71,7 +70,7 @@ options.customStyles = {
 In this example we will set the box and button border-radius to 0px and make the buttons black.
 ```html
 <script type="text/javascript">
-  var custom = { borderRadius: '0px', primaryColor: '#000000', iconColor: '#000000' };
+  var custom = { borderRadius: '0px', buttonBackground: '#000000', buttonColor: '#fff' };
 
   var parcelLab = new ParcelLab('#pl-trace', { styles: true, customStyles: custom });
   parcelLab.initialize();
