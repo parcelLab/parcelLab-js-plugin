@@ -1,4 +1,5 @@
 const html = require('bel')
+const Icon = require('./Icon')
 
 function generateRerouteCaption(courier) {
   if (courier && courier.rerouteurl_label_info) {
@@ -22,10 +23,21 @@ const RerouteLinkShort = ({ checkpoints, activeTracking, options }) => {
     courier.rerouteurl_label_short &&
     options.rerouteButton &&
     options.rerouteButton === 'left') {
+
+    const icon = Icon('event', window.parcelLab_styles.buttonColor, 28)
+    icon.style.margin = '0 auto 10px'
+
     return html`
       <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth pl-space-bottom">
-        ${courier.rerouteurl_label_short}
-        ${generateRerouteCaption(courier)}
+        <div>
+          ${ icon }
+        </div>
+        <div>
+          ${courier.rerouteurl_label_short}
+        </div>
+        <div style="font-size:.75em;">
+          ${courier.rerouteurl_label_info}
+        </div>
       </a>
     `
   }
