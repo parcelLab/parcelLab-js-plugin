@@ -24,7 +24,7 @@ const Tab = (tab, emit) => {
           
           <div class="pl-status">
             <div class="pl-icon">
-              ${ Icon(tab.transitStatus.icon, tab.transitStatus.color ? tab.transitStatus.color.replace('#', '')  : undefined )}
+              ${Icon(tab.transitStatus.icon, window.parcelLab_styles.buttonColor)}
             </div>
           </div>
         </div>

@@ -1,15 +1,15 @@
 const html = require('bel')
 const Icon = require('./Icon')
 
-function generateRerouteCaption(courier) {
-  if (courier && courier.rerouteurl_label_info) {
-    return html`
-      <div>
-        <small>${courier.rerouteurl_label_info}</small>
-      </div>
-    `
-  } else return ''
-}
+// function generateRerouteCaption(courier) {
+//   if (courier && courier.rerouteurl_label_info) {
+//     return html`
+//       <div>
+//         <small>${courier.rerouteurl_label_info}</small>
+//       </div>
+//     `
+//   } else return ''
+// }
 
 const RerouteLinkShort = ({ checkpoints, activeTracking, options }) => {
   if (!checkpoints) return null
