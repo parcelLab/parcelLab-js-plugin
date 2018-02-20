@@ -1,14 +1,23 @@
 const html = require('bel')
 const Icon = require('./Icon')
 const statics = require('../lib/static')
-const INACTIVE_OPACITY = '.3'
 
-const makeOpacity = (elem, opacity='1') => {
-  if (elem && elem.style) {
-    elem.style.opacity = opacity
+const makeInactive = elem => {
+  if (elem && elem.classList) {
+    elem.classList.add('pl-state-icon-inactive')
   }
+
   return elem
 }
+
+const makeActive = elem => {
+  if (elem && elem.classList) {
+    elem.classList.add('pl-state-icon-active')
+  }
+
+  return elem
+}
+
 
 const IconState = ({ checkpoints, activeTracking }) => {
   const tHeader = checkpoints.header[activeTracking]
@@ -25,21 +34,21 @@ const IconState = ({ checkpoints, activeTracking }) => {
 
   switch (currentCp.status) {
     case 'OrderProcessed':
-      firstIcon = Icon(transitStatus.icon)
-      secondIcon = makeOpacity(Icon('in_transit'), INACTIVE_OPACITY)
-      thirdIcon = makeOpacity(Icon('success_standard'), INACTIVE_OPACITY)
+      firstIcon = makeActive(Icon(transitStatus.icon))
+      secondIcon = makeInactive(Icon('in_transit'))
+      thirdIcon = makeInactive(Icon('success_standard'))
       break
       
     case 'Delivered':
-      firstIcon = makeOpacity(Icon('order_processed'), INACTIVE_OPACITY)
-      secondIcon = makeOpacity(Icon('in_transit'), INACTIVE_OPACITY)
-      thirdIcon = Icon(transitStatus.icon)
+      firstIcon = makeInactive(Icon('order_processed'))
+      secondIcon = makeInactive(Icon('in_transit'))
+      thirdIcon = makeActive(Icon(transitStatus.icon))
       break
       
     default:
-      firstIcon = makeOpacity(Icon('order_processed'), INACTIVE_OPACITY)
-      secondIcon = Icon(transitStatus.icon)
-      thirdIcon = makeOpacity(Icon('success_standard'), INACTIVE_OPACITY)
+      firstIcon = makeInactive(Icon('order_processed'))
+      secondIcon = makeActive(Icon(transitStatus.icon))
+      thirdIcon = makeInactive(Icon('success_standard'))
       
   }
 

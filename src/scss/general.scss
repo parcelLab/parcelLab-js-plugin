@@ -299,3 +299,16 @@ textarea.pl-form-input {
   }
 }
 
+.pl-state-icon-active {
+  opacity: 1;
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+}
+
+.pl-state-icon-inactive {
+  opacity: .3;
+  transform: scale(.9);
+  -webkit-transform: scale(.9);
+  -moz-transform: scale(.9);
+}
