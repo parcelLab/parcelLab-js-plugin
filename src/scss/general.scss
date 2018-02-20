@@ -271,35 +271,6 @@ textarea.pl-form-input {
   }
 }
 
-#pl-main-box {
-
-  #pl-tracking-heading {
-    // opacity: .3;
-    color: #aaa;
-    font-size: 1em;
-    font-weight: 200;
-    padding: 25 25 0;
-    // text-align: left;
-  }
-
-  #pl-tracking-body {
-  }
-
-  @media(max-width: 749px) {
-    border: none;
-    box-shadow: none;
-
-    #pl-tracking-heading {
-      padding: 15 0 5;
-    }
-
-    #pl-tracking-body {
-      padding-left: 0px !important;
-      padding-right: 0px !important;
-    }
-  }
-}
-
 .pl-state-icon-active {
   opacity: 1;
   transform: scale(1.2);
