@@ -22,7 +22,6 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
   if (typeof cp.transitStatus === 'undefined')
     cp.transitStatus = statics.transitStates.default
 
-  cp.transitStatusColor = cp.transitStatus.color
   cp.locationText = cp.location ? ' (' + cp.location + ')' : ''
   cp.alert = i === checkpoints.length - 1 ?
     'checkpoint-' + (cp.transitStatus.alert ?
@@ -35,7 +34,7 @@ const TrackingTrace = (state, emit) => {
   const { checkpoints, activeTracking, query, showAllCheckpoints, options } = state
   if (!checkpoints) return null
 
-  const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
+  // const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
   const iconState = IconState({ checkpoints, activeTracking })

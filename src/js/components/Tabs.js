@@ -21,7 +21,6 @@ const Tabs =  ({ checkpoints, activeTracking, query }, emit)=> {
     
     if (typeof tabData.transitStatus === 'undefined')
       tabData.transitStatus = statics.transitStates.default
-    tabData.transitStatusColor = tabData.transitStatus.color
 
     return Tab(tabData, emit)
   })

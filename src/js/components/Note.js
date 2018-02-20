@@ -10,7 +10,7 @@ const Note = (state, emit) => {
   return html`
     <div class="pl-box pl-note-box pl-space-bottom">
       <div class="pl-close-note-box hide-on-mobile" onclick="${handleClick}">
-        ${ Icon('times', undefined, '20') }
+        ${ Icon('times', '#aaa', '20') }
       </div>
       ${ state.options.show_note }
       <div class="pl-note-close-text hide-on-desktop" onclick="${handleClick}">
