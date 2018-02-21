@@ -197,7 +197,7 @@ exports.voteCourier = function (vote, propsObj, callback) {
   _post(url, {}, callback)
 }
 
-exports.saveUserActivity = function (link, propsObj, callback) {
+exports.saveUAct = function (link, propsObj, callback) {
   const url = _toURL(BASE_URL, USER_ACTIVITY_ENDPOINT, _objToQueryArr(propsObj))
   const data = { link: link, }
   _post(url, data, callback)
