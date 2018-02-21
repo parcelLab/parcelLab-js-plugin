@@ -7,6 +7,18 @@ const Tab = (tab, emit) => {
     emit('setActiveTracking', tab.id)
   }
 
+  // change default tab status to prediction if possible
+  if (tab.actionBox &&
+    tab.actionBox.type === 'prediction' &&
+    tab.actionBox.data &&
+    tab.actionBox.data.label &&
+    tab.actionBox.data.dateOfMonth &&
+    tab.actionBox.data.month)  {
+
+    const { label, dateOfMonth, month } = tab.actionBox.data
+    tab.statusText = `${label} ${dateOfMonth} ${month}`
+  }
+
   return html`
     <div class="pl-col pl-col-${tab.colSize}" onclick="${handleClick}">
       <div class="pl-tab pl-button pl-space-bottom pl-is-fullwidth pl-${tab.active ? 'active' : 'not-active' }">

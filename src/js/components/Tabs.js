@@ -17,6 +17,7 @@ const Tabs =  ({ checkpoints, activeTracking, query }, emit)=> {
       transitStatus: statics.transitStates[cph.last_delivery_status.code],
       statusText: cph.last_delivery_status ? cph.last_delivery_status.status : null,
       id: cph.id,
+      actionBox: cph.actionBox,
     }
     
     if (typeof tabData.transitStatus === 'undefined')
