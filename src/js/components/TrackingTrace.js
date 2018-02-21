@@ -39,7 +39,7 @@ const TrackingTrace = (state, emit) => {
   const tBody = checkpoints.body[tHeader.id]
   const iconState = IconState({ checkpoints, activeTracking })
   const rerouteLink = (options.rerouteButton &&options.rerouteButton === 'right') ? RerouteLink(tHeader) : null
-  const furtherInfos = FurtherInfos(tHeader)
+  const furtherInfos = FurtherInfos(tHeader, query.lang.code)
   
   let tCheckpoints = prepareCheckpoints(tBody, query)
   let moreButton = null
