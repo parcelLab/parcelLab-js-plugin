@@ -14,6 +14,7 @@
     "rules": {
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
+        "arrow-parens": "off",
         "no-undef": "warn",
         "no-unreachable": "warn",
         "no-unused-vars": "warn",

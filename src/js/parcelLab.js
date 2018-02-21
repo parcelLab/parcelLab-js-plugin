@@ -76,6 +76,8 @@ class ParcelLab {
       store.emit('fetchCheckpoints')
       if (this.options.show_shopInfos) store.emit('fetchShopInfos')
     }
+
+    this.setupMaraudersMap()
   }
 
   initLanguage() {
@@ -361,6 +363,21 @@ class ParcelLab {
     this.store.on('hideNote', () => {
       this.store.set({ hideNote: true })
     })
+  }
+
+  setupMaraudersMap() {
+    const listener = (evt) => {
+      if (evt && evt.target.tagName === 'A' && evt.target.href) {
+        const state = this.store.get()
+
+        Api.saveUserActivity(evt.target.href, { ...state.query }, () => {
+          return true
+        })
+        
+        return true
+      } else return true
+    }
+    document.onclick = listener
   }
 }
 
