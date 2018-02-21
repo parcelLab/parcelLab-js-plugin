@@ -26,7 +26,7 @@ const Tabs =  ({ checkpoints, activeTracking, query }, emit)=> {
   })
 
   return html`
-    <div class="pl-container pl-tab-container">
+    <div class="pl-container pl-tab-container pl-space-bottom">
       ${ tabs }
     </div>
   `
