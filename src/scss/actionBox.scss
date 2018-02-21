@@ -143,24 +143,19 @@ h3 {
 };
 
 .pl-box-calendar {
-  .pl-box-heading {
-    background-color: rgb(209, 74, 74);
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-color: #eee !important;
-    color: #eee;
-  }
   .pl-box-body {
     text-align: center;
     font-size: 20px;
     position: relative;
-    .pl-cal-day {
-      font-weight: bold;;
-      font-size: 50px;
-    }
+    padding-top: 0;
     .pl-cal-week-day {
       font-weight: 200;
-      font-size: 15px;
+      font-size: 20px;
+      color: #ff5959;
+    }
+    .pl-cal-day {
+      font-weight: bold;;
+      font-size: 70px;
     }
     .pl-cal-month {
       font-weight: 200;
