@@ -3,7 +3,7 @@ const transitStates = {
     icon: 'order_processed',
   },
   PickUpScheduled: {
-    icon: 'info_truck',
+    icon: 'order_processed',
   },
   Upgrade: {
     icon: 'info_truck',

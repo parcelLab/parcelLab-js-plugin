@@ -34,6 +34,7 @@ const IconState = ({ checkpoints, activeTracking }) => {
 
   switch (currentCp.status) {
     case 'OrderProcessed':
+    case 'PickUpScheduled':
       firstIcon = makeActive(Icon(transitStatus.icon))
       secondIcon = makeInactive(Icon('in_transit'))
       thirdIcon = makeInactive(Icon('success_standard'))

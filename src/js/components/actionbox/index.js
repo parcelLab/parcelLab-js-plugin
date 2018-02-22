@@ -19,7 +19,9 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
       case 'vote-courier':
         return [Fallback(tHeader), VoteCourier(tHeader, emit)]
       case  'prediction':
-        if (tHeader.actionBox.data) return Prediction(tHeader)
+        if (tHeader.actionBox.data &&
+          (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
+          return Prediction(tHeader)
         else return Fallback(tHeader)
       case 'pickup-location-unknown':
         return PickupLocationUnknown(tHeader)
