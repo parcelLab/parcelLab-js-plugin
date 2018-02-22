@@ -281,9 +281,11 @@ h3 {
   .pl-box-body {
     position: relative;
     padding: 0;
+    border-radius: inherit;
   }
 
   #pl-pseudo-map {
+    border-radius: inherit;
     height: auto;
     width: 100%;
     background-size: cover;
