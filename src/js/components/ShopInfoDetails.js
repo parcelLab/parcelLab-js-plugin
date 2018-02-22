@@ -33,7 +33,7 @@ module.exports = function ShopInfoDetails({ shopInfos }) {
         ${ nameFull }
         ${ address }
 
-        <div>${ phoneLink }</div>
+        <div class="pl-space-top">${ phoneLink }</div>
         <div>${ contactLink}</div>
         <div>${ shopInfos.contact.website ? html`<a href="${shopInfos.contact.website}" target="_blank" class="pl-contact-btn">
           <i class="fa fa-fw fa-globe"></i> ${trimURL(shopInfos.contact.website)}
