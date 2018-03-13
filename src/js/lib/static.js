@@ -215,6 +215,7 @@ const translations = {
     search: 'Search',
     containsOf: 'consists of',
     deliveries: 'deliveries',
+    showPickuplocation: 'Show pickup location',
   },
   DEU: {
     delivery: 'Lieferung',
@@ -236,6 +237,7 @@ const translations = {
     search: 'Suchen',
     containsOf: 'besteht aus',
     deliveries: 'Lieferungen',
+    showPickuplocation: 'Abholort anzeigen',
   },
   ESP: {
     delivery: 'Entrega',
@@ -248,6 +250,7 @@ const translations = {
     error: {
       delivery: 'Desafortunadamente el paquete no esta disponible.',
     },
+    showPickuplocation: 'Lugar de recogida',
   },
   FRA: {
     delivery: 'Livraison',
@@ -260,6 +263,7 @@ const translations = {
     error: {
       delivery: 'Malheureusement, ce numéro de colis ou de commande n\'est pas valide.',
     },
+    showPickuplocation: 'Lieu de ramassage',
   },
   ITA: {
     delivery: 'Consegna',
@@ -272,6 +276,7 @@ const translations = {
     error: {
       delivery: 'Purtroppo , questa consegna non è disponibile .',
     },
+    showPickuplocation: 'Posto di raccolta',
   },
   NLD: {
     delivery: 'Levering',
@@ -284,6 +289,7 @@ const translations = {
     error: {
       delivery: 'Helaas is dit de levering is niet beschikbaar.',
     },
+    showPickuplocation: 'Ophaalplaats',
   },
   DNK: {
     delivery: 'Levering',

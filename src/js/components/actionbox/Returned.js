@@ -13,6 +13,10 @@ const Returned = ({ actionBox }) => {
       <div class="pl-box-body">
         ${ Icon('return', null, '80') }
       </div>
+
+      <div class="pl-box-footer">
+        ${ actionBox.caption }
+      </div>
     </div>
   `
 }

@@ -24,7 +24,7 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
           return Prediction(tHeader)
         else return Fallback(tHeader)
       case 'pickup-location-unknown':
-        return PickupLocationUnknown(tHeader)
+        return PickupLocationUnknown(tHeader, query.lang)
       case 'order-processed':
         return OrderProcessed(tHeader)
       case 'next-action':
