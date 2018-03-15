@@ -14,9 +14,9 @@ module.exports = function ShopInfoDetails({ shopInfos }) {
     address = document.createElement('address')
     address.innerHTML = `${shopInfos.address.street}<br>${shopInfos.address.zip_code} ${shopInfos.address.city}<br>`
   }
+  const phoneLink = (shopInfos.contact && shopInfos.contact.phone) ? PhoneLink(shopInfos.contact.phone, true) : null
+  const contactLink = (shopInfos.contact && shopInfos.contact.pubEmail) ? ContactLink(shopInfos.contact.pubEmail, true) : null
 
-  const phoneLink = shopInfos.contact.phone ? PhoneLink(shopInfos.contact.phone, true) : null
-  const contactLink = shopInfos.contact.pubEmail ? ContactLink(shopInfos.contact.pubEmail, true) : null
   const socialLinks = []
   for (const key in shopInfos.social) {
     if (shopInfos.social.hasOwnProperty(key)) {

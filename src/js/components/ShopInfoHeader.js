@@ -1,22 +1,7 @@
 const html = require('bel')
-const raw = require('bel/raw')
-const ContactLink = require('./ContactLink')
-const PhoneLink = require('./PhoneLink')
-const { trimURL } = require('./../lib/helpers')
 const SocialLink = require('./SocialLink')
 
 module.exports = function ShopInfoHeader({ shopInfos }) {
-  let address = null
-  if (shopInfos.address) {
-    address = html`
-      <address>
-        ${ raw(shopInfos.address.street)}<br>${raw(shopInfos.address.zip_code)} ${raw(shopInfos.address.city) }<br>
-      </address>
-    `
-  }
-
-  const phoneLink = shopInfos.contact.phone ? PhoneLink(shopInfos.contact.phone, false) : null
-  const contactLink = shopInfos.contact.pubEmail ? ContactLink(shopInfos.contact.pubEmail, false) : null
   const socialLinks = []
   for (const key in shopInfos.social) {
     if (shopInfos.social.hasOwnProperty(key)) {
