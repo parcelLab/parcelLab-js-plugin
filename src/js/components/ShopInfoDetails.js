@@ -7,7 +7,7 @@ const SocialLink = require('./SocialLink')
 
 module.exports = function ShopInfoDetails({ shopInfos }) {
   const nameFull = document.createElement('span')
-  nameFull.innerHTML = shopInfos.name.full
+  nameFull.innerHTML = shopInfos.name ? shopInfos.name.full : ''
 
   let address = null
   if (shopInfos.address) {

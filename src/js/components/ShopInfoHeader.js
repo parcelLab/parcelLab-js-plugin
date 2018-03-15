@@ -15,7 +15,7 @@ module.exports = function ShopInfoHeader({ shopInfos }) {
     html`
     ${(shopInfos.contact && shopInfos.contact.website) ? html`<div class="hide-on-desktop" style="margin-bottom:25px;text-align: center;">
       <a href='${shopInfos.contact.website}' target="_blank">
-          <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px; max-height:80px;" />
+          <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name ? shopInfos.name.full : ''}" class="img-responsive" style="margin-bottom: 6px; max-height:80px;" />
       </a>
     </div>`: null}`,
 
@@ -23,7 +23,7 @@ module.exports = function ShopInfoHeader({ shopInfos }) {
     <div class="hide-on-mobile" style="margin-bottom: 25px; position: relative;">
       ${ (shopInfos.contact && shopInfos.contact.website) ? html`<div>
         <a  href='${shopInfos.contact.website}' target="_blank">
-            <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name.full}" class="img-responsive" style="margin-bottom: 6px; max-height: 90px;" />
+            <img src="${shopInfos.customisation.logoUrl}" alt="${shopInfos.name ? shopInfos.name.full : null}" class="img-responsive" style="margin-bottom: 6px; max-height: 90px;" />
         </a>        
       </div>` : null}
 
