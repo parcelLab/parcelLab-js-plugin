@@ -2,6 +2,9 @@ const transitStates = {
   OrderProcessed: {
     icon: 'order_processed',
   },
+  Pending: {
+    icon: 'order_processed',
+  },
   PickUpScheduled: {
     icon: 'order_processed',
   },
