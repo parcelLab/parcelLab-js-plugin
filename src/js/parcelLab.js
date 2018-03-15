@@ -55,8 +55,15 @@ class ParcelLab {
 
     if (this.options.styles) this.initStyles()
     this.setGlobalStyles(this.options.customStyles)
-    if (!this.options.selectedTrackingNo) 
+
+    if (this.getUrlQuery('selectedTrackingNo'))
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
+    if (this.getUrlQuery('show_shopInfos'))
+      this.options.show_shopInfos = this.getUrlQuery('show_shopInfos')
+    if (this.getUrlQuery('show_searchForm'))
+      this.options.show_searchForm = this.getUrlQuery('show_searchForm')
+    if (this.getUrlQuery('rerouteButton'))
+      this.options.rerouteButton = this.getUrlQuery('rerouteButton')
     
     // do a self update
     this.selfUpdate()
@@ -114,7 +121,19 @@ class ParcelLab {
     document.querySelector(this.rootNodeQuery).classList.add('parcellab-styles')
   }
 
-  setGlobalStyles(customStyles={}) {
+  setGlobalStyles(customStyles) {
+    if (!customStyles) {
+      customStyles = {}
+      if (this.getUrlQuery('borderColor'))
+        customStyles.borderColor = `#${this.getUrlQuery('borderColor')}`
+      if (this.getUrlQuery('borderRadius'))
+        customStyles.borderRadius = this.getUrlQuery('borderRadius')
+      if (this.getUrlQuery('buttonColor'))
+        customStyles.buttonColor = `#${this.getUrlQuery('buttonColor')}`
+      if (this.getUrlQuery('buttonBackground'))
+        customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+    }
+
     for (const key in DEFAULT_STYLES) {
       if (DEFAULT_STYLES.hasOwnProperty(key)) {
         if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]

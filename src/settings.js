@@ -18,6 +18,7 @@ module.exports = {
     show_searchForm: false,
     userId: null,
     show_note: null,
+    rerouteButton: null,
   },
   default_styles: {
     borderColor: '#eeeeee',
