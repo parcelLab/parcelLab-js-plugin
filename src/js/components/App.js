@@ -5,6 +5,7 @@ const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
 const ShopInfoHeader = require('./ShopInfoHeader')
 const ShopInfoDetails = require('./ShopInfoDetails')
+const Banner = require('./Banner')
 const Search = require('./Search')
 const Alert = require('./Alert')
 const Note = require('./Note')
@@ -32,8 +33,12 @@ const App = (state, emit) => {
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
 
   let layout = ['4', '8']
+  let banner = null
   if (!actionBox) layout = ['0', '12']
-  if (actionBox && state.options.banner_image) layout = ['4', '4', '4']
+  if (actionBox && state.options.banner_image && state.options.banner_link) {
+    layout = ['4', '4', '4']
+    banner = Banner(state)
+  }
 
   const styleSet = StylesSet()
 
@@ -65,9 +70,7 @@ const App = (state, emit) => {
             ${ trace }
           </div>
 
-          ${ layout[2] ? html`<div class="pl-box-aside-right pl-col pl-col-${layout[2]}">
-            <img class="pl-img-responsive" src="${ state.options.banner_image }" style="border:none;">
-            </div>` : null }
+          ${ banner }
         </div>
 
       </div>
