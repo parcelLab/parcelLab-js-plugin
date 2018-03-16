@@ -31,7 +31,10 @@ const App = (state, emit) => {
   const shopInfoDetails = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoDetails(state) : null
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
 
-  const layout = (rerouteLinkShort || actionBox) ? ['4', '8'] : ['0', '12']
+  let layout = ['4', '8']
+  if (!actionBox) layout = ['0', '12']
+  if (actionBox && state.options.banner_image) layout = ['4', '4', '4']
+
   const styleSet = StylesSet()
 
 
@@ -61,6 +64,10 @@ const App = (state, emit) => {
           <div class="pl-main pl-col pl-col-${layout[1]}">
             ${ trace }
           </div>
+
+          ${ layout[2] ? html`<div class="pl-box-aside-right pl-col pl-col-${layout[2]}">
+            <img class="pl-img-responsive" src="${ state.options.banner_image }" style="border:none;">
+            </div>` : null }
         </div>
 
       </div>

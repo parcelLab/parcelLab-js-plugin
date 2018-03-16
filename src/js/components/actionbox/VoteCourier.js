@@ -28,14 +28,23 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   `
 
 
-  return html`
-  <div class="pl-box pl-space-top">
-    <div class="pl-box-body">
-      ${ label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${label }</b></div>` : ''}
-      ${ body }
-    </div>
-  </div>
-  `
+  return [
+    html`
+      <div class="pl-box pl-space-top">
+        <div class="pl-box-body">
+          ${ label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${label }</b></div>` : ''}
+          ${ body }
+        </div>
+      </div>
+    `,
+    html`
+      <div class="pl-space-top pl-space-bottom">
+        <a href="//parcellab.com" style="color: #aaa;text-align: center;display: block;text-decoration: none;font-size: 11px;letter-spacing: 1px;" target="_blank">
+          powered by parcelLab.com
+        </a>
+      </div>
+    `,
+  ]
 }
 
 module.exports = VoteCourier
