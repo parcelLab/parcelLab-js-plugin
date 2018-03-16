@@ -64,6 +64,8 @@ class ParcelLab {
       this.options.show_searchForm = this.getUrlQuery('show_searchForm')
     if (this.getUrlQuery('rerouteButton'))
       this.options.rerouteButton = this.getUrlQuery('rerouteButton')
+    if (this.getUrlQuery('banner_image'))
+      this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
     
     // do a self update
     this.selfUpdate()
