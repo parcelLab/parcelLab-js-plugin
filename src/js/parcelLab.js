@@ -358,13 +358,13 @@ class ParcelLab {
       })
     })
 
-    this.store.on('voteParcelLab', (v, tid) => {
+    this.store.on('voteCommunication', (v, tid) => {
       const state = this.store.get()
-      Api.voteParcelLab(v, { ...store.query, id: tid }, (err, res) => {
+      Api.voteCommunication(v, { ...store.query, id: tid }, (err, res) => {
         state.checkpoints.header = state.checkpoints.header.map(cph => {
           if (cph.id === tid) {
-            if (err) cph.actionBox.voteParcelLabErr = err
-            else if (res) cph.actionBox.voteParcelLabSuccess = res
+            if (err) cph.actionBox.voteCommunicationErr = err
+            else if (res) cph.actionBox.voteCommunicationSuccess = res
           }
           return cph
         })

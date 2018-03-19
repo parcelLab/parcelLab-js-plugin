@@ -47,24 +47,24 @@ const VoteCourier = ({ actionBox, id }, emit) => {
 }
 
 const VoteParcelLab = ({ actionBox, id }, emit) => {
-  const { label_communication, voteParcelLabSuccess, voteParcelLabErr } = actionBox
+  const { label_communication, voteCommunicationSuccess, voteCommunicationErr } = actionBox
   let body = html`
     <div class="pl-rating-body">
-      <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteParcelLab', 'up', id)}>
+      <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCommunication', 'up', id)}>
         ${ Icon('thumbs_up', 'aaa', '30') }
       </div>
-      <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteParcelLab', 'down', id)}>
+      <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCommunication', 'down', id)}>
         ${ Icon('thumbs_down', 'aaa', '30') }
       </div>
     </div>
   `
-  if (voteParcelLabSuccess) body = html`
+  if (voteCommunicationSuccess) body = html`
     <div class="pl-rating-body">
       ${ Icon('success_standard', 'aaa', '30') }
     </div>
   `
 
-  if (voteParcelLabErr) body = html`
+  if (voteCommunicationErr) body = html`
     <div class="pl-rating-body">
       <small style="text-align:center;">
         An Error occurred, we are very sorry 😥
