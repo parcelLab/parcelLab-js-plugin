@@ -2,6 +2,7 @@ const _settings = require('../../settings')
 const BASE_URL = _settings.base_url
 const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint
 const VOTE_ENDPOINT = _settings.vote_endpoint
+const VOTE_COMMUNICATION_ENDPOINT = _settings.vote_communication_endpoint
 const SENDER_ENDPOINT = _settings.sender_endpoint
 const PICKUP_LOCATION_ENDPOINT = _settings.pickup_location_endpoint
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint
@@ -194,6 +195,12 @@ exports.getShopInfos = function (propsObj, callback) {
 exports.voteCourier = function (vote, propsObj, callback) {
   if (['up', 'down'].indexOf(vote) < 0) callback(new Error('Wrong argument for vote!'))
   const url = _toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _objToQueryArr(propsObj))
+  _post(url, {}, callback)
+}
+
+exports.voteCommunication = function (vote, propsObj, callback) {
+  if (['up', 'down'].indexOf(vote) < 0) callback(new Error('Wrong argument for vote!'))
+  const url = _toURL(BASE_URL, `${VOTE_COMMUNICATION_ENDPOINT}${vote}`, _objToQueryArr(propsObj))
   _post(url, {}, callback)
 }
 

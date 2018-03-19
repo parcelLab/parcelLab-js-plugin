@@ -3,6 +3,7 @@ module.exports = {
   icon_url: 'https://icon.parcellab.com/',
   checkpoints_endpoint: 'v2/checkpoints',
   vote_endpoint: 'v2/vote-courier/',
+  vote_communication_endpoint: 'v2/vote-communication/',
   pickup_location_endpoint: 'pickup-location',
   prediction_endpoint: 'prediction/tracking',
   shop_prediction_endpoint: 'prediction',
