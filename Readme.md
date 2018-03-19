@@ -52,6 +52,10 @@ These are the available options:
 - courier : String (other way to pass courier - instead of in url)
 - selectedTrackingNo : String (other way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
+- banner_image : Banner to render on the right
+- banner_link : Link for banner image
+
+All options can also be passed in via URL search query.
 
 ### Custom styling
 You can customize the buttons and the boxes of the plugin by simply passing the Object 'customStyles' in the options.  
@@ -65,6 +69,11 @@ options.customStyles = {
   iconColor: '#000' // sets color for the status icons (default: #000)
 };
 ```
+
+The customStyles attr can also be passed in via URL search query (without 'customStyles' parent key).  
+Just drop the '#' from hex colors.  
+For example  `www.versand-status.de/?trackingNo=...&borderRadius=2px&buttonColor=e6e6e6`
+
 #### ⚠️  If you need more customizing, use a custom stylesheet.
 
 ## Custom styling example
