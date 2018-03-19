@@ -349,8 +349,22 @@ class ParcelLab {
       Api.voteCourier(v, { ...store.query, id: tid }, (err, res) => {
         state.checkpoints.header = state.checkpoints.header.map(cph => {
           if (cph.id === tid) {
-            if (err) cph.actionBox.voteErr = err
-            else if (res) cph.actionBox.voteSuccess = res
+            if (err) cph.actionBox.voteCourierErr = err
+            else if (res) cph.actionBox.voteCourierSuccess = res
+          }
+          return cph
+        })
+        this.store.set(state)
+      })
+    })
+
+    this.store.on('voteParcelLab', (v, tid) => {
+      const state = this.store.get()
+      Api.voteParcelLab(v, { ...store.query, id: tid }, (err, res) => {
+        state.checkpoints.header = state.checkpoints.header.map(cph => {
+          if (cph.id === tid) {
+            if (err) cph.actionBox.voteParcelLabErr = err
+            else if (res) cph.actionBox.voteParcelLabSuccess = res
           }
           return cph
         })
