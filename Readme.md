@@ -66,12 +66,13 @@ options.customStyles = {
   borderRadius: '4px', // sets the border radius for the boxes and buttons (default: 4px)
   buttonColor: '#333', // sets text color for buttons (default: #333)
   buttonBackground: '#e6e6e6', // sets background color for buttons (default: #e6e6e6)
-  iconColor: '#000' // sets color for the status icons (default: #000)
+  iconColor: '#000', // sets color for the status icons (default: #000)
+  margin: '0px 0px', // sets mnargin for #pl-main-box (default: 0px)
 };
 ```
 
 The customStyles attr can also be passed in via URL search query (without 'customStyles' parent key).  
-Just drop the '#' from hex colors.  
+Just drop the '#' from hex colors and/or encode as URI component.  
 For example  `www.versand-status.de/?trackingNo=...&borderRadius=2px&buttonColor=e6e6e6`
 
 #### ⚠️  If you need more customizing, use a custom stylesheet.

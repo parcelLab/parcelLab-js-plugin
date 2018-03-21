@@ -136,6 +136,10 @@ class ParcelLab {
         customStyles.buttonColor = `#${this.getUrlQuery('buttonColor')}`
       if (this.getUrlQuery('buttonBackground'))
         customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+      if (this.getUrlQuery('buttonBackground'))
+        customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+      if (this.getUrlQuery('margin'))
+        customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
     }
 
     for (const key in DEFAULT_STYLES) {

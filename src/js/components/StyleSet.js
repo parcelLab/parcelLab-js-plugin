@@ -4,6 +4,10 @@ const html = require('bel')
 module.exports = function StyleSet() {
   return html`
     <style>
+      .parcelLab-style #pl-main-box, .parcellab-style #pl-main-box, .parcelLab-styles #pl-main-box, .parcellab-styles #pl-main-box
+      {
+        margin: ${window.parcelLab_styles.margin};
+      }
       .parcelLab-style .pl-box, .parcellab-style .pl-box, .parcelLab-styles .pl-box, .parcellab-styles .pl-box
       {
         border: 1px solid ${window.parcelLab_styles.borderColor};
