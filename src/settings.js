@@ -15,7 +15,7 @@ module.exports = {
   mapShortenAddressForCouriers: ['ups-express', 'ups'],
   defualt_opts: {
     show_shopInfos: false,
-    styles: false,
+    styles: true,
     show_searchForm: false,
     userId: null,
     show_note: null,

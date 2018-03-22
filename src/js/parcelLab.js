@@ -53,8 +53,10 @@ class ParcelLab {
     this.secureHash = this.options.secureHash || this.getUrlQuery('s')
     this.initLanguage()
 
-    if (this.options.styles) this.initStyles()
-    this.setGlobalStyles(this.options.customStyles)
+    if (this.options.styles) {
+      this.initStyles()
+      this.setGlobalStyles(this.options.customStyles)
+    }
 
     if (this.getUrlQuery('selectedTrackingNo'))
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')

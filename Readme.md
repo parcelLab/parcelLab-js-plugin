@@ -5,7 +5,7 @@ JavaScript to integrate a shop frontend (or any webpage) with parcelLab. This pl
 
 ## Integrate delivery status page
 ### Adding to your webpage
-Just add the following files (`parcelLab.min.js` and `fontawesome.min.css` and `parcelLab.min.css`) to your webpage. Then just initialize a new parcelLab object.
+Just add the following files (`parcelLab.min.js` and `parcelLab.min.css`) to your webpage.  
 
 A recent version of these scripts is always available at the parcelLab CDN (see example below).
 
@@ -17,32 +17,33 @@ After adding the script you will have a new `ParcelLab` class in your global sco
 <head>
   ...
   <link href="https://cdn.parcellab.com/css/v2/parcelLab.min.css" rel="stylesheet">
-  <link href="https://cdn.parcellab.com/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+  ...
+  <div id="pl-trace"><!-- the plugin will be rendered here --></div>
   ...
   <script src="https://cdn.parcellab.com/js/v2/parcelLab.min.js" charset="utf-8"></script>
   <script type="text/javascript">
     var parcelLab = new ParcelLab('#pl-trace');
-    parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"
+    parcelLab.initialize();
   </script>
 </body>  
 ```
 
-### Enabling parcelLab default styles
-To enable the defaulut styles for the plugin, just add the class `parcellab-styles` to the root container (in this case `#pl-trace`) - or just simply pass `styles: true` to the options when creating a ParcelLab instance.
-```html
-<script type="text/javascript">
-  var parcelLab = new ParcelLab('#pl-trace', { styles: true });
-  parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"
-</script>
-```
-
 ### Options
 You can define options by passing an Object as second argument, when creating a new ParcelLab Object.
-`new ParcelLab('#pl-trace', options)`
+```html
+  ...
+  <script type="text/javascript">
+    var options = { rerouteButton: 'left', show_searchForm: 'true' };
+    var parcelLab = new ParcelLab('#pl-trace', options);
+    parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"  
+  </script>
+  ...
+```
+
 These are the available options:
-- styles : Boolean (see above)
+- styles : Boolean (`false` will disable the default css for custom styling)
 - customStyles : Object (see below)
 - rerouteButton : 'left' | 'right' (defines where to render the reroute button if possible)
 - show_searchForm :  Boolean (activates a search form, which will be rendered if tracking was not found or no trackingNo/orderNo was given, needs userId)
@@ -52,10 +53,12 @@ These are the available options:
 - courier : String (other way to pass courier - instead of in url)
 - selectedTrackingNo : String (other way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
-- banner_image : Banner to render on the right
-- banner_link : Link for banner image
+- banner_image : String (Banner to render on the right)
+- banner_link : String (Link for banner image)
 
-All options can also be passed in via URL search query.
+All options can also be set via URL search query.  
+Just drop the '#' from hex colors and/or encode as URI component if needed.  
+`www.yourshop.com/tracking/page/path?trackingNo=xyz&courier=dhl-germany`  
 
 ### Custom styling
 You can customize the buttons and the boxes of the plugin by simply passing the Object 'customStyles' in the options.  
@@ -72,7 +75,7 @@ options.customStyles = {
 ```
 
 The customStyles attr can also be passed in via URL search query (without 'customStyles' parent key).  
-Just drop the '#' from hex colors and/or encode as URI component.  
+Just drop the '#' from hex colors and/or encode as URI component if needed.  
 For example  `www.versand-status.de/?trackingNo=...&borderRadius=2px&buttonColor=e6e6e6`
 
 #### ⚠️  If you need more customizing, use a custom stylesheet.
