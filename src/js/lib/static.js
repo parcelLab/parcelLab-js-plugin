@@ -195,6 +195,12 @@ const languages = {
     code: 'RON',
     icon: 'https://cdn.parcellab.com/img/flags/ro.png',
   },
+  cs: {
+    name: 'cs',
+    label: 'Češka',
+    code: 'CES',
+    icon: 'https://cdn.parcellab.com/img/flags/cz.png',
+  },
 }
 
 const translations = {
