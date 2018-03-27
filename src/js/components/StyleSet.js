@@ -4,7 +4,7 @@ const html = require('bel')
 module.exports = function StyleSet() {
   return html`
     <style>
-      .parcelLab-style #pl-main-box, .parcellab-style #pl-main-box, .parcelLab-styles #pl-main-box, .parcellab-styles #pl-main-box
+      .parcelLab-style #pl-plugin-wrapper, .parcellab-style #pl-plugin-wrapper, .parcelLab-styles #pl-plugin-wrapper, .parcellab-styles #pl-plugin-wrapper
       {
         margin: ${window.parcelLab_styles.margin};
       }

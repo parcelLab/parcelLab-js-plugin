@@ -44,7 +44,7 @@ const App = (state, emit) => {
 
 
   return html`
-    <div>
+    <div id="pl-plugin-wrapper">
       ${ styleSet }
 
       <div id="pl-shop-info-container">
