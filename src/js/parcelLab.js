@@ -49,8 +49,8 @@ class ParcelLab {
     this.xid = this.options.xid || this.getUrlQuery('xid')
     this.trackingNo = this.options.trackingNo || this.getUrlQuery('trackingNo')
     this.courier = this.options.courier || this.getUrlQuery('courier')
-    this.userId = this.options.userId || this.getUrlQuery('u')
-    this.secureHash = this.options.secureHash || this.getUrlQuery('s')
+    this.userId = this.options.userId || this.getUrlQuery('u') || this.getUrlQuery('userId')
+    this.secureHash = this.options.secureHash || this.getUrlQuery('s') || this.getUrlQuery('s')
     this.initLanguage()
 
     if (this.options.styles) {

@@ -3,10 +3,10 @@ const { translate } = require('../lib/translator')
 const { translations } = require('../lib/static')
 
 const Search = ({ query, query_err }, emit) => {
-  const langCode = query.lang.code
-  const inputPlaceholder = translate('searchOrder', langCode)
-  const buttonText = translate('search', langCode)
-  const messageText = translations[langCode].error.delivery
+  const langName = query.lang.name
+  const inputPlaceholder = translate('searchOrder', langName)
+  const buttonText = translate('search', langName)
+  const messageText = translations[langName].error.delivery
   const message = !query_err ? html`
     <div class="pl-box-heading">
         <div class="pl-alert pl-alert-danger">

@@ -143,7 +143,7 @@ function _objToQueryArr(propsObj) {
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier })
   }
 
-  if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.code })
+  if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.name })
   if (propsObj.s) result.push({ name: 's', value: propsObj.s })
 
   return result

@@ -21,7 +21,7 @@ const Map = (id, actionBox, courier) => {
 const PickupLocation = ({ id, actionBox, courier, last_delivery_status }, lang, emit) => {
   if (!actionBox.address) return null
 
-  const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.code, emit) : null
+  const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.name, emit) : null
   
   const heading = last_delivery_status ? html`
     <div class="pl-box-heading pl-box-location-heading">

@@ -16,7 +16,7 @@ const showTimeOnCheckpoint = (d, i) => {
 
 const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
   const ts = cp.timestamp ? new Date(cp.timestamp) : null
-  if (ts) cp.dateText = T.date(ts, showTimeOnCheckpoint(ts, i), query.lang.code)
+  if (ts) cp.dateText = T.date(ts, showTimeOnCheckpoint(ts, i), query.lang.name)
 
   cp.transitStatus = statics.transitStates[cp.status]
   if (typeof cp.transitStatus === 'undefined')
@@ -39,13 +39,13 @@ const TrackingTrace = (state, emit) => {
   const tBody = checkpoints.body[tHeader.id]
   const iconState = IconState({ checkpoints, activeTracking })
   const rerouteLink = (options.rerouteButton &&options.rerouteButton === 'right') ? RerouteLink(tHeader) : null
-  const furtherInfos = FurtherInfos(tHeader, query.lang.code)
+  const furtherInfos = FurtherInfos(tHeader, query.lang.name)
   
   let tCheckpoints = prepareCheckpoints(tBody, query)
   let moreButton = null
 
   if (tCheckpoints.length > 3 && !showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
-    moreButton = MoreButton(T.translate('more', query.lang.code), emit)
+    moreButton = MoreButton(T.translate('more', query.lang.name), emit)
     tCheckpoints = tCheckpoints.slice(0, 3)
   }
     
