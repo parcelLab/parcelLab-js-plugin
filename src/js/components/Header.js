@@ -54,7 +54,6 @@ const Header = (state, emit) => {
           </div>
 
           <div class="pl-order-sub">
-            ${translate('containsOf', query.lang.name)} ${header.length} ${translate('deliveries', query.lang.name)}
           </div>
 
         </div>
