@@ -21,7 +21,7 @@ const Tab = (tab, emit) => {
 
   return html`
     <div class="pl-col pl-col-${tab.colSize}" onclick="${handleClick}">
-      <div class="pl-tab pl-button pl-space-bottom pl-is-fullwidth pl-${tab.active ? 'active' : 'not-active' }">
+      <div class="pl-tab pl-tab-${tab.transitCode} pl-button pl-space-bottom pl-is-fullwidth pl-${tab.active ? 'active' : 'not-active' }">
         <div class="pl-tab-content">
           <div class="pl-tab-text">
             <span class="pl-tab-text-tno">

@@ -1,14 +1,14 @@
 const statics = require('./static')
 
-const translate = function (word, lang='USA') {
+const translate = function (word, lang='en') {
   if (statics.translations[lang] && statics.translations[lang][word]) {
     return statics.translations[lang][word]
   } else {
     console.warn('Can not translate "' + word + '" into ' + lang)
 
-    // try to translate to USA
-    if (lang !== 'USA' && statics.translations.USA[word]) {
-      return statics.translations.USA[word]
+    // try to translate to en
+    if (lang !== 'en' && statics.translations.en[word]) {
+      return statics.translations.en[word]
     } else return word
   }
 }

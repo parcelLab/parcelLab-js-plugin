@@ -49,8 +49,8 @@ class ParcelLab {
     this.xid = this.options.xid || this.getUrlQuery('xid')
     this.trackingNo = this.options.trackingNo || this.getUrlQuery('trackingNo')
     this.courier = this.options.courier || this.getUrlQuery('courier')
-    this.userId = this.options.userId || this.getUrlQuery('u')
-    this.secureHash = this.options.secureHash || this.getUrlQuery('s')
+    this.userId = this.options.userId || this.getUrlQuery('u') || this.getUrlQuery('userId')
+    this.secureHash = this.options.secureHash || this.getUrlQuery('s') || this.getUrlQuery('s')
     this.initLanguage()
 
     if (this.options.styles) {
@@ -86,6 +86,7 @@ class ParcelLab {
     document.querySelector(this.rootNodeQuery).appendChild(this.el)
 
     if (queryOK) {
+      this.__cphash = ''
       store.emit('fetchCheckpoints')
       if (this.options.show_shopInfos) store.emit('fetchShopInfos')
     }
@@ -270,14 +271,27 @@ class ParcelLab {
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
       Api.getCheckpoints(this.store.get().query, (err, res) => {
-        // if (err) console.error(err)
         if (err) this.store.set({ fetchCheckpoints_failed: err, })
         else {
-          let checkpoints = res || []
-          checkpoints = this.sortCheckpoints(checkpoints)
-          const activeTracking = this.findSelectedTrackingIndex(checkpoints)
-          this.store.set({ checkpoints, activeTracking })
-          this.store.emit('fetchActionBoxData')
+          if (res && res._rt) { // refetch checkpoints after 3 sek
+            window.setTimeout(() => {
+              this.store.emit('fetchCheckpoints')
+            }, 3000)
+          }
+
+          if (this.__cphash && this.__cphash === this._generateCPhash(res)) {
+            // nothing changed after refetch . dont update state
+            console.log('👌')
+            return null
+          } else {
+            console.log('☝️')
+            this.__cphash = this._generateCPhash(res)
+            let checkpoints = res || {}
+            checkpoints = this.sortCheckpoints(checkpoints)
+            const activeTracking = this.findSelectedTrackingIndex(checkpoints)
+            this.store.set({ checkpoints, activeTracking })
+            this.store.emit('fetchActionBoxData')
+          }
         }
       })
     })
@@ -421,6 +435,14 @@ class ParcelLab {
       } else return true
     }
     document.onclick = listener
+  }
+
+  _generateCPhash(obj={}) {
+    if (typeof obj === 'object' && obj.header && obj.body) {
+      const {header, body} = obj
+      return JSON.stringify({ header, body }).length
+    }
+    else return false
   }
 }
 

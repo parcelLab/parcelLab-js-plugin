@@ -31,11 +31,11 @@ const Header = (state, emit) => {
     <div class="pl-header">
       <div class="pl-col-row">
         <div class="pl-order-no">
-          ${ translate('orderNo', query.lang.code) } ${ query.orderNo }
+          ${ translate('orderNo', query.lang.name) } ${ query.orderNo }
         </div>
 
           <div class="pl-order-sub">
-            ${translate('containsOf', query.lang.code)} ${header.length} ${translate('deliveries', query.lang.code)}
+            ${translate('containsOf', query.lang.name)} ${header.length} ${translate('deliveries', query.lang.name)}
 
             ${ orderStatsText ? `(${ orderStatsText })` : null }
           </div>
@@ -50,11 +50,10 @@ const Header = (state, emit) => {
       <div class="pl-header">
         <div class="pl-col-row">
           <div class="pl-order-no">
-            ${translate('orderNo', query.lang.code)} ${query.orderNo}
+            ${translate('orderNo', query.lang.name)} ${query.orderNo}
           </div>
 
           <div class="pl-order-sub">
-            ${translate('containsOf', query.lang.code)} ${header.length} ${translate('deliveries', query.lang.code)}
           </div>
 
         </div>

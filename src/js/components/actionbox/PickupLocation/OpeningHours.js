@@ -187,7 +187,7 @@ const OpeningHours = function ({ id, actionBox }, lang, emit) {
   const { boxOpen } = actionBox
   const { openingHours } = actionBox.data
 
-  if (!lang || typeof lang !== 'string') lang = 'USA' // HACK
+  if (!lang || typeof lang !== 'string') lang = 'en' // HACK
   
   let openingHourEntries = []
   let mobileText = ''

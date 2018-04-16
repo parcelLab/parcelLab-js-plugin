@@ -6,7 +6,7 @@ const Subheading = state => {
   if (noTabs && state.query.orderNo) 
     return html`
       <div class="pl-order-subheading">
-        ${ translate('orderNo', state.query.lang.code) } ${ state.query.orderNo }
+        ${ translate('orderNo', state.query.lang.name) } ${ state.query.orderNo }
       </div>`
   else return null
 }

@@ -34,9 +34,9 @@ function handleJSON(text) {
 
 function handleFetchResponse(res) {
   if (!res) throw new Error('Cant parse empty handleFetchResponse')
-  if (!res.headers) return res.text()
+  if (!res.headers) return res
   if (res.status >= 200 && res.status < 300) {
-    return res.text()
+    return res
   } else {
     if (res.status === 404) return null // HACK: for tracking not found
     else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`)
@@ -60,10 +60,12 @@ function _get(url, callback) {
   if (window && window.fetch) {
     window.fetch(url)
       .then(res => handleFetchResponse(res))
+      .then(res => res.text())
       .then(res =>  handleJSON(res))
       .then(res => callback(null, res))
       .catch(err => callback(err))
   } else {
+    // Fallback if no fetch available
     const request = new XMLHttpRequest()
     request.open('GET', url)
     request.onreadystatechange = function () {
@@ -83,6 +85,7 @@ function _post(url, data, callback) {
     if (typeof data === 'object') headers['Content-Type'] = 'application/json'
     window.fetch(url, { method: 'POST', headers, body: JSON.stringify(data), })
       .then(res => handleFetchResponse(res))
+      .then(res => res.text())
       .then(json => callback(null, json))
       .catch(err => callback(err))
   } else { // use XMLHttpRequest // TODO : send json
@@ -143,7 +146,7 @@ function _objToQueryArr(propsObj) {
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier })
   }
 
-  if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.code })
+  if (propsObj.lang) result.push({ name: 'lang', value: propsObj.lang.name })
   if (propsObj.s) result.push({ name: 's', value: propsObj.s })
 
   return result

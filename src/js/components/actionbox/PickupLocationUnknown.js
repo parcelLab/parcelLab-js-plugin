@@ -5,7 +5,6 @@ const PickupLocationUnknown = ({ actionBox, courier, last_delivery_status }, lan
   if (!courier || !courier.trackingurl) return null
 
   const status = last_delivery_status ? last_delivery_status.status : null
-  console.log(lang)
   return html`
     <div class="pl-box pl-action-box pl-box-pseudo-map">
       <div class="pl-box-heading">
@@ -17,7 +16,7 @@ const PickupLocationUnknown = ({ actionBox, courier, last_delivery_status }, lan
            <a href="${courier.trackingurl}" title="${actionBox.label}" target="_blank">          
              <div class="pl-pseudo-map-text">
                <span>
-                 ${ translate('showPickuplocation', lang.code) }
+                 ${ translate('showPickuplocation', lang.name) }
                </span>
              </div>
            </a>
