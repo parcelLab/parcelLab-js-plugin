@@ -7,7 +7,7 @@ const NextAction = require('./NextAction')
 const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 
-const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
+const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
 
   if (tHeader && tHeader.actionBox) {
@@ -17,7 +17,7 @@ const ActionBox = ({ checkpoints, activeTracking, query }, emit) => {
         if (tHeader.actionBox.data) return PickupLocation(tHeader, query.lang, emit)
         else return Fallback(tHeader)
       case 'vote-courier':
-        return [Fallback(tHeader), VoteCourier(tHeader, emit)]
+        return [Fallback(tHeader), VoteCourier(tHeader, options, emit)]
       case  'prediction':
         if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))

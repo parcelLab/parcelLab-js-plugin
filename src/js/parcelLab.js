@@ -70,6 +70,8 @@ class ParcelLab {
       this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
     if (this.getUrlQuery('banner_link'))
       this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link'))
+    if (this.getUrlQuery('pwrdBy_parcelLab'))
+      this.options.disableBranding = true
     
     // do a self update
     this.selfUpdate()

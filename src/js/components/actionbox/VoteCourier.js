@@ -82,10 +82,10 @@ const VoteParcelLab = ({ actionBox, id }, emit) => {
     `
 }
 
-module.exports = function Vote(tHeader, emit) {
+module.exports = function Vote(tHeader, options, emit) {
   return [
     VoteCourier(tHeader, emit),
     VoteParcelLab(tHeader, emit),
-    Branding(tHeader, emit),
+    options.disableBranding ? null : Branding(tHeader, emit),
   ]
 }
