@@ -16,13 +16,13 @@ After adding the script you will have a new `ParcelLab` class in your global sco
 ```html
 <head>
   ...
-  <link href="https://cdn.parcellab.com/css/v2/parcelLab.min.css" rel="stylesheet">
+  <link href="https://cdn.parcellab.com/css/v3/parcelLab.min.css" rel="stylesheet">
 </head>
 <body>
   ...
   <div id="pl-trace"><!-- the plugin will be rendered here --></div>
   ...
-  <script src="https://cdn.parcellab.com/js/v2/parcelLab.min.js" charset="utf-8"></script>
+  <script src="https://cdn.parcellab.com/js/v3/parcelLab.min.js" charset="utf-8"></script>
   <script type="text/javascript">
     var parcelLab = new ParcelLab('#pl-trace');
     parcelLab.initialize();
