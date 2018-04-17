@@ -8,7 +8,7 @@
     "start": "npm-run-all -p dev:*",
     "test": "make test",
     "build": "make bundle",
-    "deploy": "make deploy",
+    "deploy": "make deploy && make deploy-v3",
     "dev:serve-test": "serve test/ -p 4000",
     "dev:serve-bundle": "serve build/ -p 4001",
     "dev:watch-build": "webpack -d --progress --colors --watch"
