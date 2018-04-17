@@ -460,7 +460,7 @@ const translations = {
       'Keskiviikko',
       'Torstai',
       'Perjantai',
-      'Lautai',',
+      'Lautai',
     ],
     alwaysOpened: 'Avoinna koko päivän',
     closesIn: 'sulkeutuu',
