@@ -1,49 +1,33 @@
-.pl-action {
-  color: #eee;
-  .pl-show-more-text {
-    line-height:38px;
-    color:#aaa;
-    transition: all .2s linear;
-  }
-  &:hover {
-    cursor: default;
-    // cursor: pointer;
-    color: #bbb !important;
-    .pl-show-more-text {
-      transition: all .2s linear;
-      color: #58B957;
-    }
+#pl-show-more-button {
+  color:#aaa;
+  background-color: transparent;
+  padding-bottom: 0;
+  &:focus {
+    outline: 0;
   }
 }
 
-.pl-main {
-  div.pl-box>div>div.pl-box-body {
-    padding-top: 25px;
-  }
-}
 
-div.pl-row {
-  margin: 0;
-  background-image: url("https://cdn.parcellab.com/img/traceline.png");
-  background-repeat: repeat-y;
-  background-position: 33px -2px;
-  &:first-of-type {
-    background-image: url("https://cdn.parcellab.com/img/traceline-first.png");
+div.pl-checkpoint {
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #eee;
+  &.pl-checkpoint-success {
+    // background-color: #dff0d8;
+    // border-color: #d6e9c6;
   }
-  &:last-of-type {
-    background-position: 33px -2px;
-    background-repeat: no-repeat;
-    padding-top: 15px;
+  &.pl-checkpoint-danger {
+    // background-color: #f2dede;
+    // border-color: #ebccd1;
   }
-  &:last-of-type:first-of-type {
-    background: none;
+  small {
+    opacity: .6;
   }
 }
 
 div.pl-alert {
   padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  border: 1px solid #eee;
   &.pl-alert-success {
     background-color: #dff0d8;
     border-color: #d6e9c6;
@@ -52,18 +36,14 @@ div.pl-alert {
     background-color: #f2dede;
     border-color: #ebccd1;
   }
+  small {
+    opacity: .6;
+  }
 }
 
 div.pl-icon {
   float: left;
   margin: 0 15px 0 0;
-  &>.fa-stack > *{
-    color: #AAA;
-  }
-}
-
-div.pl-text{
-  display: table-cell;
 }
 
 a.lang-select:hover {
@@ -78,22 +58,46 @@ a:hover, a:focus {
   color: #000000;
 }
 
+
+div.pl-header {
+  div.pl-order-no {
+    font-size: 1.5em;
+    opacity: .6;
+  }
+  div.pl-order-sub {
+    font-size: 0.8em;
+    opacity: .6;
+    margin-bottom: 15px;
+  }
+  overflow-x: hidden;
+}
+
 div.pl-tab-container {
-  border-bottom: 1px #ddd dashed;
   max-width: unset;
+  width: unset;
+  margin-top: 0;
+  margin-left: -15px;
+  margin-right: -15px;
+  
+  & > div {
+    padding: 0 15px;
+  }
+}
+
+div.pl-order-subheading {
+  opacity: .6;
 }
 
 div.pl-tab {
-  margin: 0px;
-  padding: 8px;
+  padding: 10px 25px;
   opacity: 0.5;
+  text-align: left;
   &:hover {
     // cursor: pointer;
     cursor: default;
     opacity: 0.8;
   }
   &.pl-active {
-    background: whitesmoke;
     opacity: 1;
   }
   div + div {
@@ -134,21 +138,39 @@ div.pl-tab {
 
 }
 
-div.pl-prediction {
-  margin-bottom: 12px;
-  .no-background {
-    background-image: none !important;
-    padding-top: 0;
-    padding-bottom: 1px;
+div.pl-icon-hr-container {
+  position: relative;
+  max-width: 500px;
+  height:32px;
+  margin: 0 auto 50px auto;
+  .pl-icon-hr {
+    width: 100%;
+    border-bottom: 1px dashed #eee;
+    position: absolute;
+    top: 16px;
   }
-  p {
-    margin-top: 10px;
-    margin-bottom: 14px;
+  .pl-hr-icon {
+    background-color: #fff;
+    width: 50px;
+    &>img {
+      margin: 0 auto;
+    }
+    &-left {
+      position: absolute;
+      left:0;
+      top: 0;
+    }
+    &-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    &-center {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
-}
-
-div.pl-more-infos {
-  border: 1px #ddd dashed;
-  padding: 10px 15px;
-  border-radius: 5px;
 }

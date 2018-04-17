@@ -1,95 +1,98 @@
-var transitStates = {
+const transitStates = {
   OrderProcessed: {
-    icon: 'shopping-cart',
+    icon: 'order_processed',
+  },
+  Pending: {
+    icon: 'order_processed',
   },
   PickUpScheduled: {
-    icon: 'share',
+    icon: 'order_processed',
   },
   Upgrade: {
-    icon: 'magic',
+    icon: 'info_truck',
     color: '#3378B9',
   },
   InboundScan: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   InTransit: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   ExportHub: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   ImportHub: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   DestinationDeliveryCenter: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   DestinationDeliveryDepot: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   OutForDelivery: {
-    icon: 'truck',
+    icon: 'in_transit',
   },
   Rerouted: {
-    icon: 'map-signs',
+    icon: 'warning_truck',
   },
   FailedAttemptFirst: {
-    icon: 'sticky-note-o',
+    icon: 'warning_truck',
     color: '#E59400',
     alert: 'warning',
   },
   FailedAttemptSecond: {
-    icon: 'sticky-note-o',
+    icon: 'warning_truck',
     color: '#E59400',
     alert: 'warning',
   },
   FailedAttemptFinal: {
-    icon: 'sticky-note',
+    icon: 'warning_truck',
     color: '#DB524B',
     alert: 'danger',
   },
   PickupReadyToday: {
-    icon: 'map-marker',
+    icon: 'map',
     color: '#58B957',
-    alert: 'success',
+    alert: 'success_standard',
   },
   PickupReadyNextDay: {
-    icon: 'map-marker',
+    icon: 'map',
     color: '#58B957',
-    alert: 'success',
+    alert: 'success_standard',
   },
   Delivered: {
-    icon: 'check-circle',
+    icon: 'success_standard',
     color: '#58B957',
     alert: 'success',
   },
   Exception: {
-    icon: 'warning',
+    icon: 'warning_truck',
     color: '#DB524B',
     alert: 'danger',
   },
   Stored: {
-    icon: 'building',
+    icon: 'info_truck',
     percentage: '50',
   },
   Return: {
-    icon: 'warning',
+    icon: 'return',
     color: '#DB524B',
     alert: 'danger',
   },
   default: {
-    icon: 'info-circle',
+    icon: 'info_truck',
   },
-};
+}
 
-var courierNames = {
+const courierNames = {
   'dhl-germany': 'DHL',
   'hermes-de': 'Hermes',
   'dpd-de': 'DPD',
   ups: 'UPS',
-};
+}
 
-var socialIcons = {
+const socialIcons = {
   twitter: {
     color: '#55acee',
   },
@@ -111,9 +114,9 @@ var socialIcons = {
   pinterest: {
     color: '#bd081c',
   },
-};
+}
 
-var languages = {
+const languages = {
   de: {
     name: 'de',
     label: 'Deutsch',
@@ -192,10 +195,16 @@ var languages = {
     code: 'RON',
     icon: 'https://cdn.parcellab.com/img/flags/ro.png',
   },
-};
+  cs: {
+    name: 'cs',
+    label: 'Češka',
+    code: 'CES',
+    icon: 'https://cdn.parcellab.com/img/flags/cz.png',
+  },
+}
 
-var translations = {
-  USA: {
+const translations = {
+  en: {
     delivery: 'Delivery',
     more: 'Show more...',
     orderNo: 'Order',
@@ -204,17 +213,28 @@ var translations = {
       DestinationDeliveryCenter: 'The package will arrive <b>tomorrow</b>.',
     },
     openingHours: 'Opening hours',
-    weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    alwaysOpened: '24h opened.',
-    closesIn: 'Closes in about ',
-    opensIn: 'Opens in about ',
+    weekDays: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
+    alwaysOpened: '24h opened',
+    closesIn: 'Closes in about',
+    opensIn: 'Opens in about',
     error: {
       delivery: 'Unfortunately, this delivery is not available.',
     },
     searchOrder: 'Search order',
     search: 'Search',
+    containsOf: 'consists of',
+    deliveries: 'deliveries',
+    showPickuplocation: 'Show pickup location',
   },
-  DEU: {
+  de: {
     delivery: 'Lieferung',
     more: 'Mehr anzeigen...',
     orderNo: 'Bestellung',
@@ -223,17 +243,28 @@ var translations = {
       DestinationDeliveryCenter: 'Die Ware wird <b>morgen</b> geliefert.',
     },
     openingHours: 'Öffnungszeiten',
-    weekDays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-    alwaysOpened: 'Durchgehend geöffnet.',
-    closesIn: 'Schließt in ungefähr ',
-    opensIn: 'Öffnet in ungefähr ',
+    weekDays: [
+      'Sonntag',
+      'Montag',
+      'Dienstag',
+      'Mittwoch',
+      'Donnerstag',
+      'Freitag',
+      'Samstag',
+    ],
+    alwaysOpened: 'Durchgehend geöffnet',
+    closesIn: 'Schließt in ungefähr',
+    opensIn: 'Öffnet in ungefähr',
     error: {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
     },
     searchOrder: 'Bestellung suchen',
     search: 'Suchen',
+    containsOf: 'besteht aus',
+    deliveries: 'Lieferungen',
+    showPickuplocation: 'Abholort anzeigen',
   },
-  ESP: {
+  es: {
     delivery: 'Entrega',
     more: 'Ver más...',
     orderNo: 'Número de Orden',
@@ -241,59 +272,149 @@ var translations = {
       OutForDelivery: 'El paquete llegará <b>Hoy</b>.',
       DestinationDeliveryCenter: 'El paquete llegará <b>Mañana</b>.',
     },
+    openingHours: 'Horario de apertura',
+    weekDays: [
+      'Domingo',
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado',
+    ],
+    alwaysOpened: 'Abierto todo el día',
+    closesIn: 'se cierra en',
+    opensIn: 'abre en',
     error: {
-      delivery: 'Desafortunadamente el paquete no esta disponible.',
+      delivery: 'Desafortunadamente tu paquete no esta disponible.',
     },
+    searchOrder: 'Búsqueda del envío',
+    search: 'Buscar',
+    containsOf: 'consiste en',
+    deliveries: 'entregas',
+    showPickuplocation: 'Lugar de recogida',
   },
-  FRA: {
+  fr: {
     delivery: 'Livraison',
     more: 'Voir les étapes précédentes...',
     orderNo: 'Commande',
     predictions: {
-      OutForDelivery: 'Le colis arrivera <b>aujourd\'hui</b>.',
+      OutForDelivery: "Le colis arrivera <b>aujourd'hui</b>.",
       DestinationDeliveryCenter: 'Le colis arrivera <b>demain</b>.',
     },
+    openingHours: "Heures d'ouverture",
+    weekDays: [
+      'Dimanche',
+      'Lundi',
+      'Mardi',
+      'Mercredi',
+      'Jeudi',
+      'Vendredi',
+      'Samedi',
+    ],
+    alwaysOpened: 'Ouvert toute la journée',
+    closesIn: 'ferme en',
+    opensIn: 'ouvre dans',
     error: {
-      delivery: 'Malheureusement, ce numéro de colis ou de commande n\'est pas valide.',
+      delivery: "Malheureusement, ce numéro de colis ou de commande n'est pas valide.",
     },
+    searchOrder: 'Rechercher la commande',
+    search: 'Chercher',
+    containsOf: 'consiste en',
+    deliveries: 'livraisons',
+    showPickuplocation: 'Lieu de retrait',
   },
-  ITA: {
+  it: {
     delivery: 'Consegna',
     more: 'Mostra di più...',
-    orderNo: 'Ordine',
+    orderNo: 'Numero ordine',
     predictions: {
       OutForDelivery: 'Il pacchetto arriverà <b>oggi</b>.',
       DestinationDeliveryCenter: 'Il pacchetto arriverà <b>domani</b>.',
     },
+    openingHours: 'Orari di apertura',
+    weekDays: [
+      'Domenica',
+      'Lunedi',
+      'Martedì',
+      'Mercoledì',
+      'Giovedi',
+      'Venerdì',
+      'Sabato',
+    ],
+    alwaysOpened: 'Aperto tutto il giorno',
+    closesIn: 'chiude alle',
+    opensIn: 'Apre alle',
     error: {
-      delivery: 'Purtroppo , questa consegna non è disponibile .',
+      delivery: 'Purtroppo non abbiamo dati per questa consegna',
     },
+    searchOrder: "cerca l'ordine",
+    search: 'Ricerca',
+    containsOf: 'consiste in',
+    deliveries: 'consegne',
+    showPickuplocation: 'Mostra punto di ritiro',
   },
-  NLD: {
+  nl: {
     delivery: 'Levering',
-    more: 'Vis mere...',
-    orderNo: 'Bestille',
+    more: 'Bekijk meer...',
+    orderNo: 'Bestelling',
     predictions: {
       OutForDelivery: 'Het pakket zal <b>vandaag</b> aankomen.',
       DestinationDeliveryCenter: 'Het pakket komt <b>morgen</b>.',
     },
+    openingHours: 'Openingstijden',
+    weekDays: [
+      'Zondag',
+      'Maandag',
+      'Dinsdag',
+      'Woensdag',
+      'Donderdag',
+      'Vrijdag',
+      'Zaterdag',
+    ],
+    alwaysOpened: 'De hele dag geopend',
+    closesIn: 'Sluit om',
+    opensIn: 'Opent om',
     error: {
-      delivery: 'Helaas is dit de levering is niet beschikbaar.',
+      delivery: 'Helaas is de levering niet bekend.',
     },
+    searchOrder: 'Zoek order',
+    search: 'Zoeken',
+    containsOf: 'bestaat uit',
+    deliveries: 'leveringen',
+    showPickuplocation: 'Afhaalpunt',
   },
-  DNK: {
+  da: {
     delivery: 'Levering',
     more: 'Se mere...',
-    orderNo: 'Bestilling',
+    orderNo: 'Ordre',
     predictions: {
-      OutForDelivery: 'Den pakke ankommer <b>i dag</b>.',
-      DestinationDeliveryCenter: 'Den pakke ankommer <b>i morgen</b>.',
+      OutForDelivery: 'Pakken ankommer <b>i dag</b>.',
+      DestinationDeliveryCenter: 'Pakken ankommer <b>i morgen</b>.',
     },
+    openingHours: 'Åbningstider',
+    weekDays: [
+      'Søndag',
+      'Mandag',
+      'Tirsdag',
+      'Onsdag',
+      'Torsdag',
+      'Fredag',
+      'Lørdag',
+    ],
+    alwaysOpened: 'Døgnåbent',
+    closesIn: 'Lukker om',
+    opensIn: 'Åbner om',
     error: {
-      delivery: 'Desværre er dette leverance er ikke tilgængelig.',
+      delivery: 'Beklageligvis er leveringen ikke tilgængelig.',
     },
+    searchOrder: 'Søg ordre',
+    search: 'Søg',
+    containsOf: 'består af',
+    deliveries: 'leveringer',
+    showPickuplocation: 'Vis leveringssted',
   },
-  SWE: {
+  sv: {
     delivery: 'Leverans',
     more: 'Se mer...',
     orderNo: 'Beställning',
@@ -301,35 +422,89 @@ var translations = {
       OutForDelivery: 'Paketet kommer fram <b>i dag</b>.',
       DestinationDeliveryCenter: 'Paketet kommer fram <b>i morgon</b>.',
     },
+    openingHours: 'Öppettider',
+    weekDays: [
+      'Söndag',
+      'Måndag',
+      'Tisdag',
+      'Onsdag',
+      'Torsdag',
+      'Fredag',
+      'Lörda',,
+    ],
+    alwaysOpened: 'Öppet hela dagen',
+    closesIn: 'stänger om',
+    opensIn: 'öppnas om',
     error: {
-      delivery: 'Tyvärr är inte denna leverans.',
+      delivery: 'Tyvärr är inte denna leverans tillgänglig.',
     },
+    searchOrder: 'Sök order',
+    search: 'Sök',
+    containsOf: 'består av',
+    deliveries: 'leveranser',
+    showPickuplocation: 'Visa leveranstid',
   },
-  FIN: {
+  fi: {
     delivery: 'Toimitus',
     more: 'Katso lisää...',
-    orderNo: 'Tilata',
+    orderNo: 'Tilaus',
     predictions: {
       OutForDelivery: 'Paketti saapuu <b>tänään</b>.',
       DestinationDeliveryCenter: 'Paketti saapuu <b>huomenna</b>.',
     },
+    openingHours: 'Aukioloajat',
+    weekDays: [
+      'Sunnuntai',
+      'Maanantai',
+      'Tiistai',
+      'Keskiviikko',
+      'Torstai',
+      'Perjantai',
+      'Lautai',
+    ],
+    alwaysOpened: 'Avoinna koko päivän',
+    closesIn: 'sulkeutuu',
+    opensIn: 'avautuu',
     error: {
-      delivery: 'Valitettavasti tämä toimitus ei ole käytettävissä.',
+      delivery: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.',
     },
+    searchOrder: 'Hae tilausta',
+    search: 'Hae',
+    containsOf: 'koostuu',
+    deliveries: 'toimituksesta',
+    showPickuplocation: 'Näytä noutopiste',
   },
-  NOR: {
+  no: {
     delivery: 'Levering',
     more: 'Se mer...',
-    orderNo: 'Rekkefølge',
+    orderNo: 'Bestilling',
     predictions: {
-      OutForDelivery: 'Pakken kommer <b>i dag</b>.',
-      DestinationDeliveryCenter: 'Pakken kommer <b>i morgen</b>.',
+      OutForDelivery: 'Pakken kommer fram <b>i dag</b>.',
+      DestinationDeliveryCenter: 'Pakken kommer fram <b>i morgen</b>.',
     },
+    openingHours: 'Åpningstider',
+    weekDays: [
+      'Søndag',
+      'Mandag',
+      'Tirsdag',
+      'Onsdag',
+      'Torsdag',
+      'Fredag',
+      'Lørdag',
+    ],
+    alwaysOpened: 'Åpent hele dagen',
+    closesIn: 'stenger om',
+    opensIn: 'åpner om',
     error: {
       delivery: 'Dessverre er denne leveransen ikke tilgjengelig.',
     },
+    searchOrder: 'Søk etter bestilling',
+    search: 'Søk',
+    containsOf: 'inneholder',
+    deliveries: 'leveranser',
+    showPickuplocation: 'vis hentested',
   },
-  POR: {
+  pt: {
     delivery: 'Entrega',
     more: 'Ver mais...',
     orderNo: 'Ordem',
@@ -337,23 +512,59 @@ var translations = {
       OutForDelivery: 'O pacote chegará hoje.',
       DestinationDeliveryCenter: 'O pacote chegará amanhã.',
     },
+    openingHours: 'horário de funcionamento',
+    weekDays: [
+      'Domingo',
+      'Segunda-feira',
+      'Terça',
+      'quarta-feira',
+      'quinta-feira',
+      'Sexta-feira',
+      'Sábado',
+    ],
+    alwaysOpened: 'Aberto o dia inteiro',
+    closesIn: 'fecha em',
+    opensIn: 'abre em',
     error: {
       delivery: 'Infelizmente, esta entrega não está disponível.',
     },
+    searchOrder: 'ordem de pesquisa',
+    search: 'Pesquisa',
+    containsOf: 'consiste em',
+    deliveries: 'entregas',
+    showPickuplocation: 'Opsamlingssted',
   },
-  POL: {
+  pl: {
     delivery: 'Dostawa',
     more: 'Pokaż więcej...',
     orderNo: 'Zamówienie',
     predictions: {
-      OutForDelivery: 'Pakiet przybędzie <b>dziś</b>.',
-      DestinationDeliveryCenter: 'Pakiet przybędzie <b>jutro</b>.',
+      OutForDelivery: 'Paczka zostanie doręczona jeszcze <b>dziś</b>.',
+      DestinationDeliveryCenter: 'Paczka zostanie doręczona <b>jutro</b>.',
     },
+    openingHours: 'Godziny otwarcia',
+    weekDays: [
+      'Niedziela',
+      'Poniedziałek',
+      'Wtorek',
+      'Środa',
+      'Czwartek',
+      'Piątek',
+      'Sobota',
+    ],
+    alwaysOpened: 'Otwarte bez przerw',
+    closesIn: 'zamyka za',
+    opensIn: 'otwiera za',
     error: {
-      delivery: 'Niestety, ta dostawa nie jest dostępna.',
+      delivery: 'Niestety, ta paczka nie znajduje się w systemie.',
     },
+    searchOrder: 'szukaj zamówienia',
+    search: 'Szukaj',
+    containsOf: 'składa się z',
+    deliveries: 'dostawy',
+    showPickuplocation: 'Pokaż punkt odbioru',
   },
-  RON: {
+  ro: {
     delivery: 'Livrare',
     more: 'Arată mai multe...',
     orderNo: 'Comandă',
@@ -361,13 +572,61 @@ var translations = {
       OutForDelivery: 'Pachetul va sosi <b>astăzi</b>.',
       DestinationDeliveryCenter: 'Pachetul va sosi <b>mâine</b>.',
     },
+    openingHours: 'Ore de deschidere',
+    weekDays: [
+      'Duminică',
+      'Luni',
+      'Marţi',
+      'Miercuri',
+      'Joi',
+      'Vineri',
+      'Sâmbătă',
+    ],
+    alwaysOpened: 'Deschis toată ziua',
+    closesIn: 'Se închide în',
+    opensIn: 'Se va deschide',
     error: {
       delivery: 'Din păcate, această livrare nu este disponibil.',
     },
+    searchOrder: 'ordinea de căutare',
+    search: 'Căutare',
+    containsOf: 'este format din',
+    deliveries: 'livrări',
+    showPickuplocation: 'Noutopaikka',
   },
-};
+  cs: {
+    delivery: 'Doručení',
+    more: 'Ukázat více...',
+    orderNo: 'Objednávka',
+    predictions: {
+      OutForDelivery: 'Zásilka bude doručena <b>dnes</b>.',
+      DestinationDeliveryCenter: 'Zásilka bude doručena <b>zítra</b>.',
+    },
+    openingHours: 'Otevírací doba',
+    weekDays: [
+      'Neděle',
+      'Pondělí',
+      'Úterý',
+      'Středa',
+      'Čtvrtek',
+      'Pátek',
+      'Sobota',
+    ],
+    alwaysOpened: '24h otevřeno',
+    closesIn: 'Zavírá za',
+    opensIn: 'Otevírá za',
+    error: {
+      delivery: 'Tato zásilka se bohužel nenachází v systému.',
+    },
+    searchOrder: 'Hledat objednávku',
+    search: 'Hledat',
+    containsOf: 'Skládá se z',
+    deliveries: 'Doručení',
+    showPickuplocation: 'Zobrazit výdejní místo',
+  },
+}
 
-var langIds = {
+const langIds = {
   '#result-ticket': {
     type: 'empty',
     value: 'empty',
@@ -405,9 +664,9 @@ var langIds = {
     subTarget: 'data',
     sub: 'text_help_btn',
   },
-};
+}
 
-var listenBlocks = [{
+const listenBlocks = [{
   name: '#footnote',
   type: 'parcellab',
 }, {
@@ -421,14 +680,14 @@ var listenBlocks = [{
 }, {
   name: '#parcelLab-faq',
   type: 'faq',
-}, ];
+}, ]
 
 module.exports = {
-  listenBlocks: listenBlocks,
-  translations: translations,
-  languages: languages,
-  socialIcons: socialIcons,
-  courierNames: courierNames,
-  transitStates: transitStates,
-  langIds: langIds,
-};
+  listenBlocks,
+  translations,
+  languages,
+  socialIcons,
+  courierNames,
+  transitStates,
+  langIds,
+}

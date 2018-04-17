@@ -2,7 +2,8 @@
   <head>
     <link rel="stylesheet" href="//localhost:4001/parcelLab.min.css">
     <script src="//localhost:4001/parcelLab.min.js"></script>
-    <link href="//cdn.parcellab.com/css/font-awesome.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
         font-family: Helvetica;
@@ -12,11 +13,18 @@
   <body>
     <div id="app-root"></div>
 
+    
     <script>
       var pl = new ParcelLab('#app-root', { 
-        styles: true, rerouteButton: 'left',
-        show_searchForm: true, userId: 1612147,
-       })
+        styles: true, 
+        rerouteButton: 'right',
+        // banner_image: 'https://via.placeholder.com/300x400',
+        // customStyles: { borderRadius: '0px', buttonBackground: '#000000', buttonColor: '#fff' },
+        // show_shopInfos: true,
+        // show_note: 'Alle Sendungen die vor dem blabla bestellt wurden werden vor dem 24. versendet.',
+        // show_searchForm: true,
+        // userId: 22,
+      })
       pl.initialize()
     </script>
   </body>

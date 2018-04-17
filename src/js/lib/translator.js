@@ -1,25 +1,26 @@
-const statics = require('./static');
+const statics = require('./static')
 
-var translate = function (word, lang='USA') {
+const translate = function (word, lang='en') {
   if (statics.translations[lang] && statics.translations[lang][word]) {
-    return statics.translations[lang][word];
+    return statics.translations[lang][word]
   } else {
-    console.warn('Can not translate "' + word + '" into ' + lang);
+    console.warn('Can not translate "' + word + '" into ' + lang)
 
-    // try to translate to USA
-    if (lang !== 'USA' && statics.translations.USA[word]) {
-      return statics.translations.USA[word];
-    } else return word;
+    // try to translate to en
+    if (lang !== 'en' && statics.translations.en[word]) {
+      return statics.translations.en[word]
+    } else return word
   }
-};
+}
 
-var date = function (ts, time, code) {
-  var res = '';
-  if (['DEU', 'AUT', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time);
-  else if (['FRA', 'fr'].indexOf(code) > -1) res = dateToStringFr(ts, time);
-  else res = dateToStringEn(ts, time);
-  return res;
-};
+const date = function (ts, time, code) {
+  let res = ''
+  if (['DEU', 'AUT', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time)
+  else if (['FRA', 'fr'].indexOf(code) > -1) res = dateToStringFr(ts, time)
+  else if (['SWE', 'sv'].indexOf(code) > -1) res = dateToStringFr(ts, time)
+  else res = dateToStringEn(ts, time)
+  return res
+}
 
 /**
  * Add cero before the given string.
@@ -28,9 +29,9 @@ var date = function (ts, time, code) {
  * @return {String} the formatted string.
  */
 function padWithZero(s, size) {
-  s = s + '';
-  while (s.length < size) s = '0' + s;
-  return s;
+  s = s + ''
+  while (s.length < size) s = '0' + s
+  return s
 }
 
 /**
@@ -40,10 +41,10 @@ function padWithZero(s, size) {
  * * @returns {String} the date with german format.
  */
 function dateToStringDe(ts, showTime) {
-  var result = '';
-  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear();
-  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2) + ' Uhr';
-  return result;
+  let result = ''
+  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2) + ' Uhr'
+  return result
 }
 
 /**
@@ -53,14 +54,14 @@ function dateToStringDe(ts, showTime) {
  * @returns {String} the date with english format.
  */
 function dateToStringEn(ts, showTime) {
-  var result = '';
-  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear();
+  let result = ''
+  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
   if (showTime) {
-    result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2);
-    if (ts.getHours() < 12) result += ' a.m.';
-    else result += ' p.m.';
+    result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
+    if (ts.getHours() < 12) result += ' a.m.'
+    else result += ' p.m.'
   }
-  return result;
+  return result
 }
 
 /**
@@ -70,10 +71,23 @@ function dateToStringEn(ts, showTime) {
  * @returns {String} the date with french format.
  */
 function dateToStringFr(ts, showTime) {
-  var result = '';
-  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero(ts.getMonth() + 1, 2) + '.' + ts.getFullYear();
-  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + 'h' + padWithZero(ts.getMinutes(), 2);
-  return result;
+  let result = ''
+  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero(ts.getMonth() + 1, 2) + '.' + ts.getFullYear()
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + 'h' + padWithZero(ts.getMinutes(), 2)
+  return result
 }
 
-module.exports = { translate, date };
+/**
+ * Converts the date into ISO format.
+ * @param  {Date} ts, timestamp or date.
+ * @param  {Boolean} showTime, sets if the time also will be shown.
+ * @returns {String} the date with french format.
+ */
+function dateToStringIso(ts, showTime) {
+  let result = ''
+  result += ts.getFullYear() + '-' + padWithZero(ts.getMonth() + 1, 2) + '-' + padWithZero(ts.getDate(), 2)
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
+  return result
+}
+
+module.exports = { translate, date }

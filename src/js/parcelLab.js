@@ -1,21 +1,21 @@
 // deps
 require('./lib/polyfills.js')
-const Raven = require('raven-js');
-var _$ = require('cash-dom');
-if (typeof window.jQuery === 'function')
-  _$ = window.jQuery;
+const Raven = require('raven-js')
+const updateHTML = require('nanomorph')
+const Store = require('nanostore')
+const App = require('./components/App')
 
 // libs
-const Api = require('./lib/api');
-const statics = require('./lib/static');
-const { translate } = require('./lib/translator.js');
-const templates = require('../hbs');
-const _settings = require('../settings');
+const Api = require('./lib/api')
+const statics = require('./lib/static')
+const { checkQuery } = require('./lib/helpers')
+const _settings = require('../settings')
 
 // settings
-const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim();
-const DEFAULT_ROOT_NODE = _settings.default_root_node;
-const DEFAULT_OPTS = _settings.defualt_opts;
+const CURRENT_VERSION_TAG = require('raw!../../VERSION_TAG').trim()
+const DEFAULT_ROOT_NODE = _settings.default_root_node
+const DEFAULT_OPTS = _settings.defualt_opts
+const DEFAULT_STYLES = _settings.default_styles
 
 /**
  * {class} ParcelLab
@@ -24,15 +24,14 @@ const DEFAULT_OPTS = _settings.defualt_opts;
  */
 class ParcelLab {
   constructor(rootNodeQuery, opts) {
-    if (!rootNodeQuery) rootNodeQuery = DEFAULT_ROOT_NODE;
+    if (!rootNodeQuery) rootNodeQuery = DEFAULT_ROOT_NODE
     if (rootNodeQuery && typeof rootNodeQuery === 'string') {
-      if (_$(rootNodeQuery).get(0)) {
-        this.rootNodeQuery = rootNodeQuery;
-        this._langCode = navigator.language || navigator.userLanguage;
-        if (!opts && typeof opts !== 'object') this.options = DEFAULT_OPTS;
-        else this.initOpts(opts);
+      if (document.querySelector(rootNodeQuery)) {
+        this.rootNodeQuery = rootNodeQuery
+        if (!opts && typeof opts !== 'object') this.options = DEFAULT_OPTS
+        else this.initOpts(opts)
       } else {
-        console.error('🙀 Could not find the rootNode ~> ' + rootNodeQuery);
+        console.error('🙀 Could not find the rootNode ~> ' + rootNodeQuery)
       }
     }
   }
@@ -44,389 +43,409 @@ class ParcelLab {
   initialize() {
     Raven.config('https://2b7ac8796fe140b8b8908749849ff1ce@app.getsentry.com/94336', {
       whitelistUrls: [/cdn\.parcellab\.com/],
-    }).install();
-    this.loading();
-    this.orderNo = this.getUrlQuery('orderNo');
-    this.trackingNo = this.getUrlQuery('trackingNo');
-    this.courier = this.getUrlQuery('courier');
-    this.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo');
-    this.initLanguage();
-    this.userId = this.getUrlQuery('u');
-    this.secureHash = this.getUrlQuery('s');
+    }).install()
 
-    if (this.options.styles) this.initStyles();
+    this.orderNo = this.options.orderNo || this.getUrlQuery('orderNo')
+    this.xid = this.options.xid || this.getUrlQuery('xid')
+    this.trackingNo = this.options.trackingNo || this.getUrlQuery('trackingNo')
+    this.courier = this.options.courier || this.getUrlQuery('courier')
+    this.userId = this.options.userId || this.getUrlQuery('u') || this.getUrlQuery('userId')
+    this.secureHash = this.options.secureHash || this.getUrlQuery('s') || this.getUrlQuery('s')
+    this.initLanguage()
 
-    if (this.propsCheck() === false) return this.showError(); // check yourself before you ...
+    if (this.options.styles) {
+      this.initStyles()
+      this.setGlobalStyles(this.options.customStyles)
+    }
 
+    if (this.getUrlQuery('selectedTrackingNo'))
+      this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
+    if (this.getUrlQuery('show_shopInfos'))
+      this.options.show_shopInfos = this.getUrlQuery('show_shopInfos')
+    if (this.getUrlQuery('show_searchForm'))
+      this.options.show_searchForm = this.getUrlQuery('show_searchForm')
+    if (this.getUrlQuery('rerouteButton'))
+      this.options.rerouteButton = this.getUrlQuery('rerouteButton')
+    if (this.getUrlQuery('banner_image'))
+      this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
+    if (this.getUrlQuery('banner_link'))
+      this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link'))
+    if (this.getUrlQuery('pwrdBy_parcelLab'))
+      this.options.disableBranding = true
+    
     // do a self update
-    this.selfUpdate();
+    this.selfUpdate()
+    
+    // set up store
+    const queryOK = checkQuery(this.getProps())
+    const initialState = { query: this.getProps(), options: this.options, activeTracking: 0 }
+    if (!queryOK) initialState['query_err'] = true
+    const store = new Store(initialState)
+    this.setupStore(store)
 
-    // get checkpoints
-    Api.getCheckpoints(this.props(), (err, res) => {
-      if (err) return this.handleError(err, true);
-      else if (res && res.header && res.body) {
-        this.checkpoints = this.sortCheckpoints(res);
-        this.renderLayout(this.checkpoints);
-        this.initActionBox();
-        if (this.options.show_shopInfos) this.initShopInfos();
-        this.bindEvents();
-        this.bindLinkListener();
-      } else {
-        this.showError();
-      }
-    });
+    // render app
+    this.el = App(store.get(), store.emit)
+    document.querySelector(this.rootNodeQuery).appendChild(this.el)
+
+    if (queryOK) {
+      this.__cphash = ''
+      store.emit('fetchCheckpoints')
+      if (this.options.show_shopInfos) store.emit('fetchShopInfos')
+    }
+
+    this.setupMaraudersMap()
   }
 
   initLanguage() {
-    if (this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang');
-    else if (this.getUrlQuery('language')) this._langCode = this.getUrlQuery('language');
-    if (statics.languages[this._langCode]) {
-      this.lang = statics.languages[this._langCode];
-    } else {
-      this.handleWarning('Could not detect user language ... fallback to [EN]!');
-      this.lang = statics.languages.en;
+    this._langCode = navigator.language || navigator.userLanguage
+    if (this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang')
+    else if (this.getUrlQuery('language')) this._langCode = this.getUrlQuery('language')
+    else if (this.options.lang) this._langCode = this.options.lang
+    try {
+      if (this._langCode.indexOf('-') > 0) this._langCode = this._langCode.split('-')[0]
+      if (statics.languages[this._langCode])
+        this.lang = statics.languages[this._langCode]
+      else
+        throw new Error('whoops no lang found')
+    } catch (err) {
+      console.log('⚠️  Could not detect user language ... fallback to [EN]!')
+      this.lang = statics.languages.en
     }
   }
 
   initOpts(opts) {
-    for (var key in DEFAULT_OPTS) {
+    for (const key in DEFAULT_OPTS) {
       if (DEFAULT_OPTS.hasOwnProperty(key)) {
-        if (!opts[key]) opts[key] = DEFAULT_OPTS[key];
+        if (!opts[key]) opts[key] = DEFAULT_OPTS[key]
       }
     }
 
     if (opts.show_searchForm && !opts.userId) 
-      console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!');
+      console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!')
 
-    this.options = opts;
+    this.options = opts
   }
 
   initStyles() {
-    this.$find().addClass('parcellab-styles');
+    document.querySelector(this.rootNodeQuery).classList.add('parcellab-styles')
   }
 
-  initShopInfos() {
-    Api.getShopInfos(this.props(), (err, res) => {
-      if (err) return this.handleError(err);
-      if (res && res.name && res.address) {
-        this.renderShopInfos(res);
-      }
-    });
-  }
-
-  initActionBox() {
-    if (!this.checkpoints || !this.checkpoints.header) return;
-    if (this.checkpoints.header.length > 1 || !this.checkpoints.header[0]) return;
-    var actionBox = this.checkpoints.header[0].actionBox;
-    if (!actionBox || !actionBox.type) return;
-    switch (actionBox.type) {
-      case 'pickup-location':
-        Api.getPickupLocation(this.props(), (err, res) => {
-          if (err) this.handleError(err);
-          if (res) {
-            res.type = actionBox.type;
-            res.address = actionBox.address;
-            this.renderActionBox(res);
-          }
-        });
-        break;
-      case 'vote-courier':
-        this.renderActionBox(actionBox);
-        break;
-      case 'prediction':
-        Api.getPrediction(this.props(), (err, res) => {
-          if (err) this.handleError(err);
-
-          // HACK: this will be killed in newer version
-          if (res && res instanceof Array) {
-            if (res.length === 1) res = res[0].prediction;
-          }
-
-          if (res) {
-            if (!res.label &&
-              this.checkpoints.header[0] &&
-              this.checkpoints.header[0].actionBox)
-              res.label = this.checkpoints.header[0].actionBox.label; // fallback
-            this.renderActionBox(res);
-          }
-        });
-        break;
+  setGlobalStyles(customStyles) {
+    if (!customStyles) {
+      customStyles = {}
+      if (this.getUrlQuery('borderColor'))
+        customStyles.borderColor = `#${this.getUrlQuery('borderColor')}`
+      if (this.getUrlQuery('borderRadius'))
+        customStyles.borderRadius = this.getUrlQuery('borderRadius')
+      if (this.getUrlQuery('buttonColor'))
+        customStyles.buttonColor = `#${this.getUrlQuery('buttonColor')}`
+      if (this.getUrlQuery('buttonBackground'))
+        customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+      if (this.getUrlQuery('buttonBackground'))
+        customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+      if (this.getUrlQuery('margin'))
+        customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
     }
-  }
 
-  sortCheckpoints(checkpoints) {
-    try {
-      let { header, body } = checkpoints;
-
-      if (header && header.length > 1) {
-        header = header.sort((x, y) => {
-          let xTime = x && x.id ? body[x.id][body.length - 1] : null;
-          let yTime = y && y.id ? body[y.id][body.length - 1] : null;
-          let xMS = xTime ? new Date(xTime) : null;
-          let yMS = yTime ? new Date(yTime) : null;
-          return xMS > yMS ? -1 : 1;
-        });
+    for (const key in DEFAULT_STYLES) {
+      if (DEFAULT_STYLES.hasOwnProperty(key)) {
+        if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
       }
-
-      return { header, body };
-    } catch (error) {
-      console.log('💩  Could not sort checkpoints... ', error);
-      return checkpoints;
     }
+
+    window.parcelLab_styles = customStyles
   }
 
-  props() {
+  getProps() {
     return {
       trackingNo: this.trackingNo,
       orderNo: this.orderNo,
+      xid: this.xid,
       courier: this.courier,
       userId: this.userId,
       lang: this.lang,
       s: this.secureHash,
-    };
-  }
-
-  propsCheck() {
-    var result = false;
-    if (this.trackingNo && this.courier) result = true;
-    if (this.orderNo && this.userId) result = true;
-    return result;
-  }
-
-  $find(sel) {
-    var buildSelector = (sel) => {
-      var res = this.rootNodeQuery;
-      if (sel) res += ` ${sel}`;
-      return res;
-    };
-
-    return _$(buildSelector(sel));
-  }
-
-  handleError(err, showError) {
-    if (typeof err === 'string')
-      console.error(`🙀  ${err}`);
-    else if (typeof err === 'object') {
-      Raven.captureException(err);
-      console.error(`🙀  ${err.message}`);
     }
-
-    if (showError) this.showError();
-  }
-
-  handleWarning(err) {
-    if (typeof err === 'string')
-      console.log(`🐱  ${err}`);
-    else if (typeof err === 'object')
-      console.log(`🐱  ${err.message}`);
   }
 
   lsSet(key, val) {
     try {
-      localStorage.setItem(key, val);
+      localStorage.setItem(key, val)
     } catch (e) {
       if (e.name === 'NS_ERROR_FILE_CORRUPTED') {
         console.log(`😿 Sorry, it looks like your browser storage is corrupted.
         Please clear your storage by going to Tools -> Clear Recent History -> Cookies
         and set time range to 'Everything'.
-        This will remove the corrupted browser storage across all sites.`);
+        This will remove the corrupted browser storage across all sites.`)
       }
     }
   }
 
   lsGet(key) {
-    var res = null;
+    let res = null
     try {
-      res = localStorage.getItem(key);
+      res = localStorage.getItem(key)
     } catch (e) {
       if (e.name === 'NS_ERROR_FILE_CORRUPTED') {
         console.log(`😿 Sorry, it looks like your browser storage is corrupted.
         Please clear your storage by going to Tools -> Clear Recent History -> Cookies
         and set time range to 'Everything'.
-        This will remove the corrupted browser storage across all sites.`);
+        This will remove the corrupted browser storage across all sites.`)
       }
     } finally {
-      return res;
+      return res
     }
   }
 
   selfUpdate() {
-    var lastUpdate = this.lsGet('parcelLab.js.updatedAt');
+    const lastUpdate = this.lsGet('parcelLab.js.updatedAt')
 
     // check if selfUpdate was executed in the last 12 h
     if (lastUpdate && lastUpdate > Date.now() - 43200000) {
-      return;
+      return
     }
 
-    console.log('👻 Searching for new parcelLab.js version...');
+    console.log('👻 Searching for new parcelLab.js version...')
     Api.getCurrentPluginVersion((err, versionTag) => {
-      if (err) return this.lsSet('parcelLab.js.updatedAt', Date.now());
+      if (err) return this.lsSet('parcelLab.js.updatedAt', Date.now())
       else {
-        this.lsSet('parcelLab.js.updatedAt', Date.now());
+        this.lsSet('parcelLab.js.updatedAt', Date.now())
         if (versionTag && versionTag !== CURRENT_VERSION_TAG) {
-          console.log('👻 Updating plugin to version ~> ', versionTag);
-          window.location.reload(true);
+          console.log('👻 Updating plugin to version ~> ', versionTag)
+          window.location.reload(true)
         }
       }
-    });
+    })
   }
 
   getUrlQuery(key, url) {
-    if (!url) url = window.location.href;
-    key = key.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + key + '(=([^&#]*)|&|#|$)');
-    var results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    if (!url) url = window.location.href
+    key = key.replace(/[\[\]]/g, '\\$&')
+    const regex = new RegExp('[?&]' + key + '(=([^&#]*)|&|#|$)')
+    const results = regex.exec(url)
+    if (!results) return null
+    if (!results[2]) return ''
+    return decodeURIComponent(results[2].replace(/\+/g, ' '))
   }
 
-  ///////////////////////////
-  // DOM affecting methods //
-  ///////////////////////////
+  sortCheckpoints(checkpoints={}) {
+    try {
+      let { header } = checkpoints
+      const { body } = checkpoints
 
-  loading(isLoading = true) {
-    if (isLoading) {
-      this.$find().html(`<div class="pl-loading"><i class="fa fa-refresh fa-spin"></i></div>`);
-    } else {
-      this.$find().html('');
+      if (header && header.length > 1) {
+        header = header.sort((x, y) => {
+          const xTime = x && x.id ? body[x.id][body.length - 1] : null
+          const yTime = y && y.id ? body[y.id][body.length - 1] : null
+          const xMS = xTime ? new Date(xTime) : null
+          const yMS = yTime ? new Date(yTime) : null
+          return xMS > yMS ? -1 : 1
+        })
+      }
+
+      return { header, body }
+    } catch (error) {
+      console.log('💩  Could not sort checkpoints... ', error)
+      return checkpoints
     }
   }
 
-  showError() {
-    var langCode = this.lang.code;
-    var ctx = {
-      message: statics.translations[langCode].error.delivery,
-      showSearchForm: this.options.show_searchForm && this.options.userId,
-      showMessage: this.orderNo || this.trackingNo,
-      inputPlaceholder: translate('searchOrder', langCode),
-      buttonText: translate('search', langCode),
-    };
-    if (!ctx.showSearchForm) ctx.showMessage = true; 
-
-    this.innerHTML(templates.error(ctx));
-    this.bindEvents();
+  findSelectedTrackingIndex({ header }) {
+    const { selectedTrackingNo } = this.options
+    if (selectedTrackingNo && header) {
+      for (let i = 0; i < header.length; i++) {
+        const elem = header[i]
+        if (elem.tracking_number === selectedTrackingNo) return i
+      }
+    } else return 0
   }
 
-  bindEvents() {
-    var _this = this;
+  setupStore(store) {
+    this.store = store
 
-    // show more checkpoints
-    _this.$find('.pl-action.pl-show-more-button').on('click', (e) => {
-      e.preventDefault();
-      _this.$find('.pl-row.pl-alert.hidden').removeClass('hidden');
-      _this.$find('.pl-action.pl-show-more-button').remove();
-    });
+    // update app on ~all~ state changes
+    this.store.subscribe(state => {
+      console.log(state)
+      const newApp = App(state, store.emit)
+      updateHTML(this.el, newApp)
+    })
 
-    // toggle tabs
-    _this.$find('.pl-tab.pl-btn').on('click', function (e) {
-      e.preventDefault();
-      var $this = _$(this);
-      var $allTrackings = _this.$find('div.parcel_lab_tracking');
+    // fetch checkpoints
+    this.store.on('fetchCheckpoints', () => {
+      Api.getCheckpoints(this.store.get().query, (err, res) => {
+        if (err) this.store.set({ fetchCheckpoints_failed: err, })
+        else {
+          if (res && res._rt) { // refetch checkpoints after 3 sek
+            window.setTimeout(() => {
+              this.store.emit('fetchCheckpoints')
+            }, 3000)
+          }
 
-      // toggle all active
-      _this.$find('.pl-tab.pl-btn').removeClass('pl-active');
-      $this.addClass('pl-active');
-
-      // toggle all hidden
-      $allTrackings.addClass('hidden');
-      _this.$find(`#${$this.attr('href')}`).removeClass('hidden');
-    });
-
-    // vote courier
-    _this.$find('.pl-courier-vote').on('click', function (e) {
-      e.preventDefault();
-      var vote = this.dataset.vote;
-      _this.$find('.rating-body').html('<i class="fa fa-refresh fa-spin fa-2x"></i>');
-      Api.voteCourier(vote, _this.props(), (err) => {
-        if (err) {
-          _this.handleError(err);
-          _this.$('.rating-body').html(`
-            <small style="text-align:center;">
-              An Error occurred, we are very sorry 😥
-            </small>
-          `);
-        } else {
-          _this.$find('.rating-body').html('<i class="fa fa-check fa-2x"></i>');
+          if (this.__cphash && this.__cphash === this._generateCPhash(res)) {
+            // nothing changed after refetch . dont update state
+            console.log('👌')
+            return null
+          } else {
+            console.log('☝️')
+            this.__cphash = this._generateCPhash(res)
+            let checkpoints = res || {}
+            checkpoints = this.sortCheckpoints(checkpoints)
+            const activeTracking = this.findSelectedTrackingIndex(checkpoints)
+            this.store.set({ checkpoints, activeTracking })
+            this.store.emit('fetchActionBoxData')
+          }
         }
-      });
-    });
+      })
+    })
 
-    // tracking search form
-    _this.$find('#pl-ts-search').on('click', function (e) {
-      e.preventDefault();
-      var orderNo = _this.$find('#pl-ts-trackingno').val();
-      var userId = _this.options.userId;
-      var langVal = _this.lang.name;
+    this.store.on('fetchActionBoxData', () => {
+      const { checkpoints } = store.get()
+      if (checkpoints && checkpoints.header && checkpoints.header.length > 0) {
+        checkpoints.header.forEach(cph => {
+          const { actionBox } = cph
+          if (actionBox.type === 'pickup-location') {
+            store.emit('fetchPickupLocation', cph.id)
+          }
+          if (actionBox.type === 'prediction') {
+            store.emit('fetchPrediction', cph.id)
+          }
+        })
+      }
+    })
 
-      var props = [
-        ['orderNo', orderNo],
+    // fetch shop infos
+    this.store.on('fetchShopInfos', () => {
+      Api.getShopInfos(store.get().query, (err, res) => {
+        if (err) this.store.set({ fetchShopInfos_failed: err })
+        else this.store.set({ shopInfos: res })
+      })
+    })
+
+    // fetch pickup location
+    this.store.on('fetchPickupLocation', id => {
+      console.log('fetching pickup location for ', id)
+      Api.getPickupLocation({...store.get().query, id}, (err, res) => {
+        if (err) this.store.set({ fetchPickupLocation_failed: err })
+        else if (res) {
+          const state = this.store.get()
+          state.checkpoints.header = state.checkpoints.header.map(cph => {
+            if (cph.id === id) cph.actionBox.data = res
+            return cph
+          })
+          this.store.set(state)
+        }
+      })
+    })
+
+    // fetch prediction
+    this.store.on('fetchPrediction', id => {
+      Api.getPrediction({ ...store.get().query, id }, (err, res) => {
+        if (err) this.store.set({ fetchPrediction_failed: err })
+        else if (res && res.length > 0) {
+          const data = res[0]
+          const state = this.store.get()
+          state.checkpoints.header = state.checkpoints.header.map(cph => {
+            if (cph.id === data._ref) cph.actionBox.data = data.prediction
+            return cph
+          })
+          this.store.set(state)
+        }
+      })
+    })
+
+    this.store.on('setActiveTracking', id => {
+      const state = this.store.get()
+      state.checkpoints.header.forEach((cph, ind) => {
+        if (cph.id === id) state.activeTracking = ind
+      })
+      state.showAllCheckpoints = false
+      store.set(state)
+    })
+
+    this.store.on('showAllCheckpoints', () => {
+      this.store.set({ showAllCheckpoints: true })
+    })
+
+    this.store.on('voteCourier', (v, tid) => {
+      const state = this.store.get()
+      Api.voteCourier(v, { ...store.query, id: tid }, (err, res) => {
+        state.checkpoints.header = state.checkpoints.header.map(cph => {
+          if (cph.id === tid) {
+            if (err) cph.actionBox.voteCourierErr = err
+            else if (res) cph.actionBox.voteCourierSuccess = res
+          }
+          return cph
+        })
+        this.store.set(state)
+      })
+    })
+
+    this.store.on('voteCommunication', (v, tid) => {
+      const state = this.store.get()
+      Api.voteCommunication(v, { ...store.query, id: tid }, (err, res) => {
+        state.checkpoints.header = state.checkpoints.header.map(cph => {
+          if (cph.id === tid) {
+            if (err) cph.actionBox.voteCommunicationErr = err
+            else if (res) cph.actionBox.voteCommunicationSuccess = res
+          }
+          return cph
+        })
+        this.store.set(state)
+      })
+    })
+
+    this.store.on('toggleOpeningHours', tid => {
+      const state = this.store.get()
+      state.checkpoints.header = state.checkpoints.header.map(cph => {
+        if (cph.id === tid) {
+          cph.actionBox.boxOpen = !cph.actionBox.boxOpen
+        }
+        return cph
+      })
+      this.store.set(state)
+    })
+
+    this.store.on('searchOrder', input => {
+      const state = this.store.get()
+      const userId = state.options.userId
+      const langVal = state.query.lang.name
+
+      const props = [
+        ['orderNo', input],
         ['u', userId],
         ['lang', langVal],
-      ];
-      var searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('');
-      window.location.search = searchQuery;
-    });
+      ]
+      const searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
+      window.location.search = searchQuery
+    })
 
+    this.store.on('hideNote', () => {
+      this.store.set({ hideNote: true })
+    })
   }
 
-  bindLinkListener() {
-    var fire = (e)=> {
-      Api.saveUserActivity(e.target.href, this.props(),  () => {
-        void 0; // psht...
-      });
-      return true;
-    };
+  setupMaraudersMap() {
+    const listener = (evt) => {
+      if (evt && evt.target.tagName === 'A' && evt.target.href) {
+        const state = this.store.get()
 
-    for (var i = 0; i < document.links.length; i++) {
-      var el = document.links[i];
-      el.onclick = fire;
+        Api.saveUAct(evt.target.href, { ...state.query }, () => {
+          return true
+        })
+        
+        return true
+      } else return true
     }
+    document.onclick = listener
   }
 
-  switchLayout(full) {
-    if (full) {
-      this.$find('main.pl-col-8').removeClass('pl-col-8').addClass('pl-col-12');
-    } else {
-      this.$find('main.pl-col-12').removeClass('pl-col-12').addClass('pl-col-8');
+  _generateCPhash(obj={}) {
+    if (typeof obj === 'object' && obj.header && obj.body) {
+      const {header, body} = obj
+      return JSON.stringify({ header, body }).length
     }
+    else return false
   }
-
-  innerHTML(html) {
-    this.loading(false);
-    this.$find().html(html);
-  }
-
-  renderLayout(data) {
-    var ctx = {
-      data: data,
-      props: this.props(),
-    };
-    ctx.props.selectedTrackingNo = this.selectedTrackingNo;
-    ctx.props.rerouteButton = this.options.rerouteButton || null;
-    this.innerHTML(templates.layout(ctx));
-  }
-
-  renderActionBox(data) {
-    this.switchLayout(false);
-    data.lang = this.lang; // pickup-loc HACK: add lang
-    data.courier = this.courier; // pickup-loc HACK: add courier
-    this.$find('#pl-action-box-container').html(templates.actionBox(data));
-
-    // pickup-loc HACK: reveal opening hours
-    var _this = this;
-    _this.$find('.pl-toggle-opening-hours').on('click', function (e) {
-      e.preventDefault();
-      _this.$find('.pl-opening-hours-box>.pl-box-body').toggleClass('pl-open');
-    });
-  }
-
-  renderShopInfos(data) {
-    this.switchLayout(false);
-    this.$find('#pl-shop-info-container').html(templates.shopInfos(data));
-    this.$find('#pl-mobile-shop-info-container').html(templates.mobileShopInfos(data));
-  }
-
 }
 
-module.exports = ParcelLab;
+module.exports = ParcelLab
