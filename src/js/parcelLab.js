@@ -407,7 +407,7 @@ class ParcelLab {
 
     this.store.on('searchOrder', input => {
       const state = this.store.get()
-      const userId = state.options.userId
+      const userId = state.query.userId || state.options.userId
       const langVal = state.query.lang.name
 
       const props = [
