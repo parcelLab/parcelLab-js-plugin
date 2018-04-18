@@ -9,7 +9,6 @@ module.exports = {
   shop_prediction_endpoint: 'prediction',
   sender_endpoint: 'sender',
   user_activity_endpoint: 'user-activity/click',
-  version_url: 'https://cdn.parcellab.com/js/v2/version.txt',
   default_root_node: '#parcelLab-trace-wrapper',
   google_api_key: require('raw!../GOOGLE_API_KEY').trim(),
   mapShortenAddressForCouriers: ['ups-express', 'ups'],

@@ -8,7 +8,6 @@ const PICKUP_LOCATION_ENDPOINT = _settings.pickup_location_endpoint
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint
 const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint
 const USER_ACTIVITY_ENDPOINT = _settings.user_activity_endpoint
-const VERSION_URL = _settings.version_url
 
 // API calls for all the modules
 const status = {
@@ -176,18 +175,6 @@ exports.getPrediction = function (propsObj, callback) {
 
 exports.getShopPrediction = function (propsObj, callback) {
   _get(_toURL(BASE_URL, SHOP_PREDICTION_ENDPOINT, _objToQueryArr(propsObj)), callback)
-}
-
-exports.getCurrentPluginVersion = function (callback) {
-  _get(VERSION_URL, (err, vt)=> {
-    if (err)  return callback(err)
-    else if (vt && vt.length > 0) {
-      const newLineRgx = /\r?\n|\r/g
-      const spaceRgx = /\s/g
-      vt = vt.replace(newLineRgx, '').replace(spaceRgx, '')
-      callback(null, vt)
-    }
-  })
 }
 
 exports.getShopInfos = function (propsObj, callback) {
