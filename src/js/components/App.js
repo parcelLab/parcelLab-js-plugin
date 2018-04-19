@@ -8,7 +8,7 @@ const Search = require('./Search')
 const Alert = require('./Alert')
 const Note = require('./Note')
 const Loading = require('./Loading')
-const StylesSet = require('./StyleSet')
+const StyleSet = require('./StyleSet')
 
 const App = (state, emit) => {
   // query not sufficient
@@ -27,16 +27,13 @@ const App = (state, emit) => {
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
+  const banner = (state.options.banner_image && state.options.banner_link) ? Banner(state) : null
 
   let layout = ['4', '8']
-  let banner = null
   if (!actionBox) layout = ['0', '12']
-  if (actionBox && state.options.banner_image && state.options.banner_link) {
-    layout = ['4', '4', '4']
-    banner = Banner(state)
-  }
+  if (actionBox && banner) layout = ['4', '4', '4']
 
-  const styleSet = StylesSet()
+  const styleSet = StyleSet()
 
 
   return html`
