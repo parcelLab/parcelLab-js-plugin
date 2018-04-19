@@ -52,10 +52,10 @@ const App = (state, emit) => {
         <div class="pl-col-row">
           <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
             <div id="pl-action-box-container" class="pl-space-bottom">
-              ${ actionBox}
+              ${ actionBox }
             </div>
 
-            ${ rerouteLinkShort}
+            ${ rerouteLinkShort }
           </div>
 
           <div class="pl-main pl-col pl-col-${layout[1]}">
