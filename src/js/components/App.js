@@ -3,8 +3,6 @@ const Header = require('./Header')
 const RerouteLinkShort = require('./RerouteLinkShort')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
-const ShopInfoHeader = require('./ShopInfoHeader')
-const ShopInfoDetails = require('./ShopInfoDetails')
 const Banner = require('./Banner')
 const Search = require('./Search')
 const Alert = require('./Alert')
@@ -28,8 +26,6 @@ const App = (state, emit) => {
   const rerouteLinkShort = RerouteLinkShort(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
-  const shopInfoHeader = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoHeader(state) : null
-  const shopInfoDetails = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoDetails(state) : null
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
 
   let layout = ['4', '8']
@@ -46,10 +42,6 @@ const App = (state, emit) => {
   return html`
     <div id="pl-plugin-wrapper">
       ${ styleSet }
-
-      <div id="pl-shop-info-container">
-        ${ shopInfoHeader }
-      </div>
 
       ${ note }
 
@@ -73,10 +65,6 @@ const App = (state, emit) => {
           ${ banner }
         </div>
 
-      </div>
-
-      <div id="pl-shop-info-details-container">
-        ${ shopInfoDetails }
       </div>
     </div>
   `
