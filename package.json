@@ -2,8 +2,7 @@
   "name": "parcelLab-js-plugin",
   "version": "1.0.0",
   "description": "JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.",
-  "main": "src/js/index.js",
-  "browser": "build/parcelLab.min.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "parcel test/index.html -p 4000",
     "build": "parcel build src/index.js",
