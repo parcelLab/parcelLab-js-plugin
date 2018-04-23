@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel test/index.html -p 4000",
     "build": "parcel build src/index.js",
-    "deploy": "npm run build && make deploy && make deploy-v3"
+    "clean": "rm -rf .cache && rm -rf dist",
+    "deploy": "npm run clean && npm run build && make deploy && make deploy-v3"
   },
   "repository": {
     "type": "git",
