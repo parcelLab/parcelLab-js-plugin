@@ -95,15 +95,6 @@
   height: auto;
 }
 
-#pl-shop-info-container .pl-box-body>a,
-#pl-shop-info-details-container .pl-box-body>a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  display: inline-block;
-}
-
 .pl-button {
   padding: 1em 2.5em;
   border: 0;
@@ -219,33 +210,6 @@ textarea.pl-form-input {
   40% {
     -webkit-transform: scale(1);
             transform: scale(1); } }
-
-.pl-shop-footer {
-  margin-top: 25px;
-  border-top: 1px solid #eee;
-  padding-top: 25px;
-  .pl-shop-details {
-    text-align: center;
-    address {
-      font-style: normal;
-    }
-  }
-}
-.pl-contact-btn {
-  display: inline-block;
-  color: inherit;
-  text-decoration: none;
-  margin-bottom: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 0 5px;
-  color: rgb(56, 56, 56);
-  width: 250px;
-  padding: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .pl-note-box {
   padding: 15px 25px;

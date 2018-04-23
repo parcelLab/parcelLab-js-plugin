@@ -59,8 +59,6 @@ class ParcelLab {
 
     if (this.getUrlQuery('selectedTrackingNo'))
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
-    if (this.getUrlQuery('show_shopInfos'))
-      this.options.show_shopInfos = this.getUrlQuery('show_shopInfos')
     if (this.getUrlQuery('show_searchForm'))
       this.options.show_searchForm = this.getUrlQuery('show_searchForm')
     if (this.getUrlQuery('rerouteButton'))
@@ -87,7 +85,6 @@ class ParcelLab {
     if (queryOK) {
       this.__cphash = ''
       store.emit('fetchCheckpoints')
-      if (this.options.show_shopInfos) store.emit('fetchShopInfos')
     }
 
     this.setupMaraudersMap()
@@ -258,14 +255,6 @@ class ParcelLab {
           }
         })
       }
-    })
-
-    // fetch shop infos
-    this.store.on('fetchShopInfos', () => {
-      Api.getShopInfos(store.get().query, (err, res) => {
-        if (err) this.store.set({ fetchShopInfos_failed: err })
-        else this.store.set({ shopInfos: res })
-      })
     })
 
     // fetch pickup location

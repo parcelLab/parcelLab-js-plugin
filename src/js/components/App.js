@@ -3,14 +3,12 @@ const Header = require('./Header')
 const RerouteLinkShort = require('./RerouteLinkShort')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
-const ShopInfoHeader = require('./ShopInfoHeader')
-const ShopInfoDetails = require('./ShopInfoDetails')
 const Banner = require('./Banner')
 const Search = require('./Search')
 const Alert = require('./Alert')
 const Note = require('./Note')
 const Loading = require('./Loading')
-const StylesSet = require('./StyleSet')
+const StyleSet = require('./StyleSet')
 
 const App = (state, emit) => {
   // query not sufficient
@@ -28,28 +26,19 @@ const App = (state, emit) => {
   const rerouteLinkShort = RerouteLinkShort(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
-  const shopInfoHeader = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoHeader(state) : null
-  const shopInfoDetails = (state.options.show_shopInfos && state.shopInfos) ? ShopInfoDetails(state) : null
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
+  const banner = (state.options.banner_image && state.options.banner_link) ? Banner(state) : null
 
   let layout = ['4', '8']
-  let banner = null
   if (!actionBox) layout = ['0', '12']
-  if (actionBox && state.options.banner_image && state.options.banner_link) {
-    layout = ['4', '4', '4']
-    banner = Banner(state)
-  }
+  if (actionBox && banner) layout = ['4', '4', '4']
 
-  const styleSet = StylesSet()
+  const styleSet = StyleSet()
 
 
   return html`
     <div id="pl-plugin-wrapper">
       ${ styleSet }
-
-      <div id="pl-shop-info-container">
-        ${ shopInfoHeader }
-      </div>
 
       ${ note }
 
@@ -60,10 +49,10 @@ const App = (state, emit) => {
         <div class="pl-col-row">
           <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
             <div id="pl-action-box-container" class="pl-space-bottom">
-              ${ actionBox}
+              ${ actionBox }
             </div>
 
-            ${ rerouteLinkShort}
+            ${ rerouteLinkShort }
           </div>
 
           <div class="pl-main pl-col pl-col-${layout[1]}">
@@ -73,10 +62,6 @@ const App = (state, emit) => {
           ${ banner }
         </div>
 
-      </div>
-
-      <div id="pl-shop-info-details-container">
-        ${ shopInfoDetails }
       </div>
     </div>
   `
