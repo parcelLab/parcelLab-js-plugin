@@ -15,15 +15,18 @@ const translate = function (word, lang='en') {
 
 const date = function (ts, time, code) {
   let res = ''
-  if (['DEU', 'AUT', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time)
+  if (['DEU', 'AUT', 'CHE', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time)
   else if (['FRA', 'fr'].indexOf(code) > -1) res = dateToStringFr(ts, time)
-  else if (['SWE', 'sv'].indexOf(code) > -1) res = dateToStringFr(ts, time)
-  else res = dateToStringEn(ts, time)
+  else if (['BEL', 'ITA', 'it', 'ESP', 'es'].indexOf(code) > -1) res = dateToStringSlash(ts, time)
+  else if (['NOR', 'no', 'nb', 'CZE', 'cs', 'POL', 'pl'].indexOf(code) > -1) res = dateToStringDot(ts, time)
+  else if (['DNK', 'da', 'FIN', 'fi', 'NLD', 'nl'].indexOf(code) > -1) res = dateToStringDash(ts, time)
+  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = dateToStringEn(ts, time)
+  else res = dateToStringIso(ts, time)
   return res
 }
 
 /**
- * Add cero before the given string.
+ * Add zero before the given string.
  * @param  {String} s, the given number
  * @param  {Number} size, the number of zeros.
  * @return {String} the formatted string.
@@ -34,12 +37,7 @@ function padWithZero(s, size) {
   return s
 }
 
-/**
- * Converts the date into German  format.
- * @param  {Date} ts, timestamp or date.
- * @param  {Boolean} showTime, sets if the time also will be shown.
- * * @returns {String} the date with german format.
- */
+
 function dateToStringDe(ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
@@ -47,12 +45,27 @@ function dateToStringDe(ts, showTime) {
   return result
 }
 
-/**
- * Converts the date into English format.
- * @param  {Date} ts, timestamp or date.
- * @param  {Boolean} showTime, sets if the time also will be shown.
- * @returns {String} the date with english format.
- */
+function dateToStringSlash(ts, showTime) {
+  let result = ''
+  result += padWithZero(ts.getDate(), 2) + '/' + padWithZero((ts.getMonth() + 1), 2) + '/' + ts.getFullYear()
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
+  return result
+}
+
+function dateToStringDot(ts, showTime) {
+  let result = ''
+  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
+  return result
+}
+
+function dateToStringDash(ts, showTime) {
+  let result = ''
+  result += padWithZero(ts.getDate(), 2) + '-' + padWithZero((ts.getMonth() + 1), 2) + '-' + ts.getFullYear()
+  if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
+  return result
+}
+
 function dateToStringEn(ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
@@ -64,12 +77,6 @@ function dateToStringEn(ts, showTime) {
   return result
 }
 
-/**
- * Converts the date into French format.
- * @param  {Date} ts, timestamp or date.
- * @param  {Boolean} showTime, sets if the time also will be shown.
- * @returns {String} the date with french format.
- */
 function dateToStringFr(ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero(ts.getMonth() + 1, 2) + '.' + ts.getFullYear()
@@ -77,12 +84,6 @@ function dateToStringFr(ts, showTime) {
   return result
 }
 
-/**
- * Converts the date into ISO format.
- * @param  {Date} ts, timestamp or date.
- * @param  {Boolean} showTime, sets if the time also will be shown.
- * @returns {String} the date with french format.
- */
 function dateToStringIso(ts, showTime) {
   let result = ''
   result += ts.getFullYear() + '-' + padWithZero(ts.getMonth() + 1, 2) + '-' + padWithZero(ts.getDate(), 2)
