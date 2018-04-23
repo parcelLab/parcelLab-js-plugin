@@ -1,3 +1,5 @@
 node_modules
 .env
 GOOGLE_API_KEY
+dist
+.cache

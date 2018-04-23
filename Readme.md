@@ -5,9 +5,11 @@ JavaScript to integrate a shop frontend (or any webpage) with parcelLab. This pl
 
 ## Integrate delivery status page
 ### Adding to your webpage
-Just add the following files (`parcelLab.min.js` and `parcelLab.min.css`) to your webpage.  
+Just add the `parcelLab.min.css` and `parcelLab.min.js` files to your webpage.  
 
-A recent version of these scripts is always available at the parcelLab CDN (see example below).
+A recent version of these scripts is always available at the parcelLab CDN:
+- `<link href="https://cdn.parcellab.com/css/v3/parcelLab.min.css" rel="stylesheet">`
+- `<script src="https://cdn.parcellab.com/js/v3/parcelLab.min.js" charset="utf-8"></script>`
 
 ### Initializing the magic
 After adding the script you will have a new `ParcelLab` class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
@@ -145,32 +147,20 @@ After adding the script, there will be a new `ParcelLabPrediction` class in the 
 
 ## For developers
 ### Develop
-First, make sure you `npm i serve -g`, as this package is used to locally serve compiled sources when testing.
-
-Then:
 ```bash  
 $ npm run start
 ```
 
-Now, the resources are served on `localhost:4000`.
+Now, the test page is served on `localhost:4000`.
 
 ### Build
 ```bash
 $ npm run build
 ```
-Minified `parcelLab.min.js` and `parcelLab.min.css` will be in the build dir.
-
-
-### Test
-```bash
-$ npm run test
-```
+Minified `index.js` and `index.css` will be in the `dist` dir.
 
 ### Deploy
 ```bash
 $ npm run deploy
 ```
-
-### Adding dev scripts
-There are no scripts in this project. All dev cycles are maintained in the Makefile.  
-Just add a target and write your commands.
+The `index.js`and `index.css`files will be deployed as parcelLab.min.js and parcelLab.min.css on the CDN.
