@@ -44,12 +44,13 @@ class ParcelLab {
       whitelistUrls: [/cdn\.parcellab\.com/],
     }).install()
 
-    this.orderNo = this.options.orderNo || this.getUrlQuery('orderNo')
-    this.xid = this.options.xid || this.getUrlQuery('xid')
-    this.trackingNo = this.options.trackingNo || this.getUrlQuery('trackingNo')
-    this.courier = this.options.courier || this.getUrlQuery('courier')
-    this.userId = this.options.userId || this.getUrlQuery('u') || this.getUrlQuery('userId')
-    this.secureHash = this.options.secureHash || this.getUrlQuery('s') || this.getUrlQuery('s')
+    this.orderNo = this.getUrlQuery('orderNo') || this.options.orderNo
+    this.xid = this.getUrlQuery('xid') || this.options.xid 
+    this.trackingNo = this.getUrlQuery('trackingNo') || this.options.trackingNo
+    this.courier = this.getUrlQuery('courier') || this.options.courier
+    this.userId = this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
+    this.secureHash = this.getUrlQuery('s') || this.getUrlQuery('secureHash') || this.options.secureHash
+
     this.initLanguage()
 
     if (this.options.styles) {
