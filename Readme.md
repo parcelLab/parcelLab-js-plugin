@@ -55,12 +55,19 @@ These are the available options:
 - courier : String (other way to pass courier - instead of in url)
 - selectedTrackingNo : String (other way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
-- banner_image : String (Banner to render on the right)
-- banner_link : String (Link for banner image)
 
 All options can also be set via URL search query.  
 Just drop the '#' from hex colors and/or encode as URI component if needed.  
 `www.yourshop.com/tracking/page/path?trackingNo=xyz&courier=dhl-germany`  
+
+### Banner
+
+The script can render an image banner with a link, if both of the following two additional option parameters are given:
+
+- banner_image : String (Banner to render on the right)
+- banner_link : String (Link for banner image)
+
+For the `banner_image` we recommend PNG or JPG with a ratio of `0.7 : 1`, but any other format can be chosen as well. A recommended solution is `700 x 1000 px` for optimal rendering on retina screens, with texts being at least 16px high.
 
 ### Custom styling
 You can customize the buttons and the boxes of the plugin by simply passing the Object 'customStyles' in the options.  
