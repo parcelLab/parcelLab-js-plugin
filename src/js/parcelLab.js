@@ -210,9 +210,19 @@ class ParcelLab {
 
     // update app on ~all~ state changes
     this.store.subscribe(state => {
-      console.log(state)
       const newApp = App(state, store.emit)
       updateHTML(this.el, newApp)
+
+      // run optional onRendered hook
+      if (this.options.onRendered && typeof this.options.onRendered === 'function') {
+        window.setTimeout(() => {
+          try {
+            this.options.onRendered(state)
+          } catch (e) {
+            console.log('ERROR @ onRendered hook!', e.message)
+          }          
+        }, 10)
+      }
     })
 
     // fetch checkpoints

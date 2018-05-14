@@ -22,6 +22,9 @@
         // show_note: 'Alle Sendungen die vor dem blabla bestellt wurden werden vor dem 24. versendet.',
         // show_searchForm: true,
         // userId: 22,
+        onRendered: function (state) {
+          console.log('rerendered!', state)
+        }
       })
       pl.initialize()
     </script>
