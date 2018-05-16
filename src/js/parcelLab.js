@@ -362,7 +362,8 @@ class ParcelLab {
         ['u', userId],
         ['lang', langVal],
       ]
-      const searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
+      let searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
+      if (searchQuery[searchQuery.length - 1] === '&') searchQuery = searchQuery.slice(0, -1)
       window.location.search = searchQuery
     })
 
