@@ -107,14 +107,20 @@ function _toURL(baseUrl, endpoint, queryArr) {
   let url = baseUrl + endpoint + '/?'
 
   queryArr.forEach(param => {
+    // query transformations for API
     switch (param.name) {
       case 'trackingNo':
         param.name = 'tno'
+        param.value = encodeURIComponent(param.value)
         break
       case 'u':
         param.name = 'user'
         break
+      case 'orderNo':
+        param.value = encodeURIComponent(param.value)
+        break
     }
+
     url += param.name + '=' + param.value + '&'
   })
 

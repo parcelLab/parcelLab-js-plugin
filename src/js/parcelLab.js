@@ -238,10 +238,8 @@ class ParcelLab {
 
           if (this.__cphash && this.__cphash === this._generateCPhash(res)) {
             // nothing changed after refetch . dont update state
-            console.log('👌')
             return null
           } else {
-            console.log('☝️')
             this.__cphash = this._generateCPhash(res)
             let checkpoints = res || {}
             checkpoints = this.sortCheckpoints(checkpoints)
