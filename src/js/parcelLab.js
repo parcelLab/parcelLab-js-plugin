@@ -70,6 +70,8 @@ class ParcelLab {
       this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link'))
     if (this.getUrlQuery('pwrdBy_parcelLab'))
       this.options.disableBranding = true
+    if (this.getUrlQuery('disableVoting'))
+      this.options.disableVoting = true
     
     
     // set up store

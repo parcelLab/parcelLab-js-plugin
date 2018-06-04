@@ -37,7 +37,7 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   `
 
   return html`
-      <div class="pl-box pl-space-top">
+      <div class="pl-box pl-space-top pl-vote">
         <div class="pl-box-body">
           ${ label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${ label }</b></div>` : ''}
           ${ body }
@@ -73,7 +73,7 @@ const VoteParcelLab = ({ actionBox, id }, emit) => {
   `
 
   return html`
-      <div class="pl-box pl-space-top">
+      <div class="pl-box pl-space-top pl-vote">
         <div class="pl-box-body">
           ${ label_communication ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${ label_communication }</b></div>` : ''}
           ${ body }
@@ -83,7 +83,7 @@ const VoteParcelLab = ({ actionBox, id }, emit) => {
 }
 
 module.exports = function Vote(tHeader, options, emit) {
-  return [
+  return options.disableVoting ? null : [
     VoteCourier(tHeader, emit),
     VoteParcelLab(tHeader, emit),
     options.disableBranding ? null : Branding(tHeader, emit),
