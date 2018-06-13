@@ -430,7 +430,7 @@ const translations = {
       'Onsdag',
       'Torsdag',
       'Fredag',
-      'Lörda',,
+      'Lörda',
     ],
     alwaysOpened: 'Öppet hela dagen',
     closesIn: 'stänger om',

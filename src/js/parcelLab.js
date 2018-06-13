@@ -230,7 +230,7 @@ class ParcelLab {
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
       Api.getCheckpoints(this.store.get().query, (err, res) => {
-        if (err) this.store.set({ fetchCheckpoints_failed: err, })
+        if (err) this.store.set({ fetchCheckpoints_failed: err })
         else {
           if (res && res._rt) { // refetch checkpoints after 3 sek
             window.setTimeout(() => {
@@ -271,7 +271,7 @@ class ParcelLab {
     // fetch pickup location
     this.store.on('fetchPickupLocation', id => {
       console.log('fetching pickup location for ', id)
-      Api.getPickupLocation({...store.get().query, id}, (err, res) => {
+      Api.getPickupLocation({ ...store.get().query, id }, (err, res) => {
         if (err) this.store.set({ fetchPickupLocation_failed: err })
         else if (res) {
           const state = this.store.get()
@@ -389,7 +389,7 @@ class ParcelLab {
 
   _generateCPhash(obj={}) {
     if (typeof obj === 'object' && obj.header && obj.body) {
-      const {header, body} = obj
+      const { header, body } = obj
       return JSON.stringify({ header, body }).length
     }
     else return false
