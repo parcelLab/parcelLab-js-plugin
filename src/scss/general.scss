@@ -112,6 +112,12 @@
   &:hover {
     opacity: .8;
   }
+
+}
+
+// fix for btn span color
+.pl-button .pl-tab-text span {
+  color: inherit;
 }
 
 .pl-is-fullwidth {
