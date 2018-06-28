@@ -35,10 +35,8 @@ function handleFetchResponse(res) {
   if (!res.headers) return res
   if (res.status >= 200 && res.status < 300) {
     return res
-  } else {
-    if (res.status === 404) return null // HACK: for tracking not found
+  } else if (res.status === 404) return null // HACK: for tracking not found
     else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`)
-  }
 }
 
 function handleRequestResponse(request, callback) {
@@ -81,7 +79,7 @@ function _post(url, data, callback) {
   if (window && window.fetch) { // use fetch api
     const headers = {}
     if (typeof data === 'object') headers['Content-Type'] = 'application/json'
-    window.fetch(url, { method: 'POST', headers, body: JSON.stringify(data), })
+    window.fetch(url, { method: 'POST', headers, body: JSON.stringify(data) })
       .then(res => handleFetchResponse(res))
       .then(res => res.text())
       .then(json => callback(null, json))
@@ -196,6 +194,6 @@ exports.voteCommunication = function (vote, propsObj, callback) {
 
 exports.saveUAct = function (link, propsObj, callback) {
   const url = _toURL(BASE_URL, USER_ACTIVITY_ENDPOINT, _objToQueryArr(propsObj))
-  const data = { link: link, }
+  const data = { link: link }
   _post(url, data, callback)
 }
