@@ -22,7 +22,7 @@ const Search = ({ query, query_err }, emit) => {
 
   return html`
     <div class="pl-container">
-      <div class="pl-box">
+      <div class="pl-box pl-search-box">
         ${ message }
         <div class="pl-box-body" style="padding: 20px;">
           <div class="pl-col-row">
