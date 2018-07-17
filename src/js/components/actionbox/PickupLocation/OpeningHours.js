@@ -124,18 +124,19 @@ function renderOpeningHourEntry(ophObj, weekDays, fallBack, hideWeekDay) {
 
 function renderOpeningHoursList(openingHours, lang) {
   const weekDays = translate('weekDays', lang)
-  const openingHourEntries = []
-  const sortedOPHours = {}
   const alwaysOpenedText = translate('alwaysOpened', lang)
 
-  // sort opHours
-  openingHours.forEach(ophObj => {
-    if (sortedOPHours[ophObj.open.day]) sortedOPHours[ophObj.open.day].push(ophObj)
-    else sortedOPHours[ophObj.open.day] = [ophObj]
-  })
+  try { // because Object.keys not available on IE < 10
+    const sortedOPHours = {}
+    const openingHourEntries = []
 
-  for (const key in sortedOPHours) {
-    if (sortedOPHours.hasOwnProperty(key)) {
+    // sort opHours
+    openingHours.forEach(ophObj => {
+      if (sortedOPHours[ophObj.open.day]) sortedOPHours[ophObj.open.day].push(ophObj)
+      else sortedOPHours[ophObj.open.day] = [ophObj]
+    })
+
+    Object.keys(sortedOPHours).forEach(key => {
       const ophDay = sortedOPHours[key]
       if (ophDay.length > 1) {
         // push first with weekDay text
@@ -149,19 +150,21 @@ function renderOpeningHoursList(openingHours, lang) {
         }
       } else if (ophDay.length === 1)
         openingHourEntries.push(renderOpeningHourEntry(ophDay[0], weekDays, alwaysOpenedText))
-    }
-  }
+    })
 
-  return openingHourEntries
+    return openingHourEntries
+
+  } catch (e) {
+    return []
+  }
 }
 
 function renderRemainingOpeningTimeText(openingHours, lang) {
-  let result = null
-  let opHours = null
-
   try {
+    let result = null
+
     // find openingHours for today
-    opHours = getCurrentTimeSlot(openingHours)
+    let opHours = getCurrentTimeSlot(openingHours)
 
     if (opHours) {
       if (!opHours.close && opHours.open && opHours.open.time === '0000') // 24 h open!
@@ -177,9 +180,10 @@ function renderRemainingOpeningTimeText(openingHours, lang) {
         result = `${translate('closesIn', lang)} ${remainingMinutes} m`
       }
     }
-
-  } finally {
     return result
+  } catch (e) {
+    console.log(e)
+    return null
   }
 }
 
