@@ -45,11 +45,12 @@ class ParcelLab {
     }).install()
 
     this.orderNo = this.getUrlQuery('orderNo') || this.options.orderNo
-    this.xid = this.getUrlQuery('xid') || this.options.xid 
+    this.xid = this.getUrlQuery('xid') || this.options.xid
     this.trackingNo = this.getUrlQuery('trackingNo') || this.options.trackingNo
     this.courier = this.getUrlQuery('courier') || this.options.courier
     this.userId = this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
     this.secureHash = this.getUrlQuery('s') || this.getUrlQuery('secureHash') || this.options.secureHash
+    this.zip = this.getUrlQuery('zip') || this.options.zip
 
     this.initLanguage()
 
@@ -62,6 +63,8 @@ class ParcelLab {
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
     if (this.getUrlQuery('show_searchForm'))
       this.options.show_searchForm = this.getUrlQuery('show_searchForm')
+    if (this.getUrlQuery('show_zipCodeInput'))
+      this.options.show_zipCodeInput = this.getUrlQuery('show_zipCodeInput')
     if (this.getUrlQuery('rerouteButton'))
       this.options.rerouteButton = this.getUrlQuery('rerouteButton')
     if (this.getUrlQuery('banner_image'))
@@ -72,8 +75,8 @@ class ParcelLab {
       this.options.disableBranding = true
     if (this.getUrlQuery('disableVoting'))
       this.options.disableVoting = true
-    
-    
+
+
     // set up store
     const queryOK = checkQuery(this.getProps())
     const initialState = { query: this.getProps(), options: this.options, activeTracking: 0 }
@@ -111,13 +114,11 @@ class ParcelLab {
   }
 
   initOpts(opts) {
-    for (const key in DEFAULT_OPTS) {
-      if (DEFAULT_OPTS.hasOwnProperty(key)) {
-        if (!opts[key]) opts[key] = DEFAULT_OPTS[key]
-      }
-    }
+    Object.keys(DEFAULT_OPTS).forEach(key => {
+      if (!opts[key]) opts[key] = DEFAULT_OPTS[key]
+    })
 
-    if (opts.show_searchForm && !opts.userId) 
+    if (opts.show_searchForm && !opts.userId)
       console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!')
 
     this.options = opts
@@ -144,11 +145,9 @@ class ParcelLab {
         customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
     }
 
-    for (const key in DEFAULT_STYLES) {
-      if (DEFAULT_STYLES.hasOwnProperty(key)) {
-        if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
-      }
-    }
+    Object.keys(DEFAULT_STYLES).forEach(key => {
+      if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
+    })
 
     window.parcelLab_styles = customStyles
   }
@@ -162,6 +161,7 @@ class ParcelLab {
       userId: this.userId,
       lang: this.lang,
       s: this.secureHash,
+      zip: this.zip,
     }
   }
 
@@ -222,7 +222,7 @@ class ParcelLab {
             this.options.onRendered(state)
           } catch (e) {
             console.log('ERROR @ onRendered hook!', e.message)
-          }          
+          }
         }, 10)
       }
     })
@@ -352,16 +352,17 @@ class ParcelLab {
       this.store.set(state)
     })
 
-    this.store.on('searchOrder', input => {
+    this.store.on('searchOrder', (input, zip) => {
       const state = this.store.get()
       const userId = state.query.userId || state.options.userId
       const langVal = state.query.lang.name
 
       const props = [
-        ['orderNo', input],
+        ['orderNo', encodeURIComponent(input)],
         ['u', userId],
         ['lang', langVal],
       ]
+      if (zip) props.push(['zip', encodeURIComponent(zip)])
       let searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
       if (searchQuery[searchQuery.length - 1] === '&') searchQuery = searchQuery.slice(0, -1)
       window.location.search = searchQuery
@@ -380,7 +381,7 @@ class ParcelLab {
         Api.saveUAct(evt.target.href, { ...state.query }, () => {
           return true
         })
-        
+
         return true
       } else return true
     }

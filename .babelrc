@@ -6,9 +6,7 @@
       {
         "targets": { "ie": 10 }
       }
-    ]
-  ],
-  "plugins": [
-    "transform-object-rest-spread"
+    ],
+    "stage-3"
   ]
 }

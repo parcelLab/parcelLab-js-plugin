@@ -1,5 +1,5 @@
 {
-  "name": "parcelLab-js-plugin",
+  "name": "parcellab-js-plugin",
   "version": "1.0.0",
   "description": "JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.",
   "main": "src/index.js",
@@ -21,8 +21,8 @@
   "license": "MIT",
   "homepage": "https://www.parcellab.com",
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
     "eslint": "^5.1.0",
     "eslint-config-parcellab": "0.0.1",
     "node-sass": "^4.9.2",

@@ -36,7 +36,7 @@ function handleFetchResponse(res) {
   if (res.status >= 200 && res.status < 300) {
     return res
   } else if (res.status === 404) return null // HACK: for tracking not found
-    else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`)
+  else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`)
 }
 
 function handleRequestResponse(request, callback) {
@@ -107,16 +107,16 @@ function _toURL(baseUrl, endpoint, queryArr) {
   queryArr.forEach(param => {
     // query transformations for API
     switch (param.name) {
-      case 'trackingNo':
-        param.name = 'tno'
-        param.value = encodeURIComponent(param.value)
-        break
-      case 'u':
-        param.name = 'user'
-        break
-      case 'orderNo':
-        param.value = encodeURIComponent(param.value)
-        break
+    case 'trackingNo':
+      param.name = 'tno'
+      param.value = encodeURIComponent(param.value)
+      break
+    case 'u':
+      param.name = 'user'
+      break
+    case 'orderNo':
+      param.value = encodeURIComponent(param.value)
+      break
     }
 
     url += param.name + '=' + param.value + '&'
@@ -133,14 +133,17 @@ function _objToQueryArr(propsObj) {
     // query for checkpoints by trackingNo
     if (propsObj.trackingNo) result.push({ name: 'trackingNo', value: propsObj.trackingNo })
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier })
+    if (propsObj.zip) result.push({ name: 'zip', value: propsObj.zip })
   } else if (propsObj.orderNo) {
     // query for checkpoints by orderNo
     if (propsObj.orderNo) result.push({ name: 'orderNo', value: propsObj.orderNo })
     if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId })
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier }) // why not?
+    if (propsObj.zip) result.push({ name: 'zip', value: propsObj.zip })
   } else if (propsObj.xid) {
     if (propsObj.xid) result.push({ name: 'xid', value: propsObj.xid })
     if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId })
+    if (propsObj.zip) result.push({ name: 'zip', value: propsObj.zip })
   } else if (propsObj.location) {
     // query for a shop prediction
     if (propsObj.location) result.push({ name: 'location', value: propsObj.location })

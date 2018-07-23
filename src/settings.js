@@ -14,6 +14,7 @@ module.exports = {
   defualt_opts: {
     styles: true,
     show_searchForm: false,
+    show_zipCodeInput: false,
     userId: null,
     show_note: null,
     rerouteButton: null,

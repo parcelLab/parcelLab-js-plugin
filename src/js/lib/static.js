@@ -229,6 +229,7 @@ const translations = {
       delivery: 'Unfortunately, this delivery is not available.',
     },
     searchOrder: 'Search order',
+    zip: 'Zip code',
     search: 'Search',
     containsOf: 'consists of',
     deliveries: 'deliveries',
@@ -259,6 +260,7 @@ const translations = {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
     },
     searchOrder: 'Bestellung suchen',
+    zip: 'PLZ',
     search: 'Suchen',
     containsOf: 'besteht aus',
     deliveries: 'Lieferungen',
@@ -666,21 +668,23 @@ const langIds = {
   },
 }
 
-const listenBlocks = [{
-  name: '#footnote',
-  type: 'parcellab',
-}, {
-  name: '#parcelLab-sender',
-  type: 'shop',
-  target: '.parcelLab-main-sender a',
-}, {
-  name: '#parcelLab-sender',
-  type: 'social',
-  target: '.parcelLab-social a',
-}, {
-  name: '#parcelLab-faq',
-  type: 'faq',
-}, ]
+const listenBlocks = [
+  {
+    name: '#footnote',
+    type: 'parcellab',
+  }, {
+    name: '#parcelLab-sender',
+    type: 'shop',
+    target: '.parcelLab-main-sender a',
+  }, {
+    name: '#parcelLab-sender',
+    type: 'social',
+    target: '.parcelLab-social a',
+  }, {
+    name: '#parcelLab-faq',
+    type: 'faq',
+  },
+]
 
 module.exports = {
   listenBlocks,
