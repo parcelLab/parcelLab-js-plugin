@@ -1,5 +1,5 @@
-const html = require('bel')
-const raw = require('bel/raw')
+const html = require('nanohtml')
+const raw = require('nanohtml/raw')
 const translate = require('../../../lib/translator').translate
 const Icon = require('../../Icon')
 

@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const { icon_url } = require('../../settings')
 const base = icon_url
 

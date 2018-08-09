@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const Header = require('./Header')
 const RerouteLinkShort = require('./RerouteLinkShort')
 const ActionBox = require('./actionbox')

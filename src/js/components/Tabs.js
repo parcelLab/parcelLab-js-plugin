@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const Tab = require('./Tab')
 const statics = require('../../js/lib/static')
 

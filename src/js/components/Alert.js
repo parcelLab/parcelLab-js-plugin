@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const { translations } = require('../lib/static')
 
 const Alert = ({ query }) => {

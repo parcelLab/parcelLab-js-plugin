@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 // border-radius: .pl-box .pl-form-input .pl-alert .pl-button
 
 module.exports = function StyleSet() {

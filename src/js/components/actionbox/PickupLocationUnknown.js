@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const { translate } = require('../../../js/lib/translator.js')
 
 const PickupLocationUnknown = ({ actionBox, courier, last_delivery_status }, lang) => {

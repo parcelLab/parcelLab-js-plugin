@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const GOOGLE_API_KEY = require('../../../../settings').google_api_key
 const OpeningHours = require('./OpeningHours')
 

@@ -1,5 +1,5 @@
-const html = require('bel')
-const raw = require('bel/raw')
+const html = require('nanohtml')
+const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
 const transitStates = require('../../lib/static').transitStates
 

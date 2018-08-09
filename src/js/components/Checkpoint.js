@@ -1,5 +1,5 @@
-const html = require('bel')
-const raw = require('bel/raw')
+const html = require('nanohtml')
+const raw = require('nanohtml/raw')
 
 const Checkpoint = cp => html`
   <div class="pl-checkpoint ${ cp.alert ? `pl-${cp.alert}` : '' }">

@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 
 const Loading = () => html`
   <div class="pl-sk-three-bounce">

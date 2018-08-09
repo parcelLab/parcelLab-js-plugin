@@ -1,4 +1,4 @@
-const html = require('bel')
+const html = require('nanohtml')
 const T = require('../lib/translator.js')
 const statics = require('../lib/static')
 const Checkpoint = require('./Checkpoint')
