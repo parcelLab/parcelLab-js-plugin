@@ -10,17 +10,28 @@ const Note = require('./Note')
 const Loading = require('./Loading')
 const StyleSet = require('./StyleSet')
 
+
+const createLayout = styleSet => content => html`
+  <div id="pl-plugin-wrapper">
+    ${styleSet}
+    ${content}
+  </div>`
+
+
 const App = (state, emit) => {
+  const Layout = createLayout(StyleSet())
+
   // query not sufficient
   if (state.query_err || state.fetchCheckpoints_failed) {
     if (state.options.show_searchForm)
-      return Search(state, emit)
+      return Layout(Search(state, emit))
     else
-      return Alert(state)
+      return Layout(Alert(state))
 
   } else if (state.checkpoints && state.checkpoints.header.length === 0) { // tracking w/ no cps
-    return Alert(state)
-  } else if (!state.checkpoints) return Loading() // still loading
+    return Layout(Alert(state))
+  } else if (!state.checkpoints) return Layout(Loading()) // still loading
+
 
   const header = Header(state, emit)
   const rerouteLinkShort = RerouteLinkShort(state)
@@ -33,13 +44,9 @@ const App = (state, emit) => {
   if (!actionBox) layout = ['0', '12']
   if (actionBox && banner) layout = ['4', '4', '4']
 
-  const styleSet = StyleSet()
 
-
-  return html`
-    <div id="pl-plugin-wrapper">
-      ${ styleSet }
-
+  const app = html`
+    <div>
       ${ note }
 
       ${ header }
@@ -61,10 +68,13 @@ const App = (state, emit) => {
 
           ${ banner }
         </div>
-
+      
       </div>
+
     </div>
   `
+
+  return Layout(app)
 }
 
 module.exports = App

@@ -14,14 +14,14 @@
 
     
     <script>
-      var pl = new ParcelLab('#app-root', { 
+      var pl = new ParcelLab('#app-root', {
         styles: true, 
         rerouteButton: 'right',
         // banner_image: 'https://via.placeholder.com/300x400',
-        // customStyles: { borderRadius: '0px', buttonBackground: '#000000', buttonColor: '#fff' },
-        // show_note: 'Alle Sendungen die vor dem blabla bestellt wurden werden vor dem 24. versendet.',
+        customStyles: { borderRadius: '5px', buttonBackground: '#000000', buttonColor: '#fff' },
         show_searchForm: true,
         // show_zipCodeInput: true,
+        // show_note: 'Alle Sendungen die vor dem blabla bestellt wurden werden vor dem 24. versendet.',
         userId: 22,
         onRendered: function (state) {
           console.log('rerendered!', state)

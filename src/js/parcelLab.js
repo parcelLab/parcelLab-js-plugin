@@ -76,10 +76,18 @@ class ParcelLab {
     if (this.getUrlQuery('disableVoting'))
       this.options.disableVoting = true
 
+    this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
+
 
     // set up store
     const queryOK = checkQuery(this.getProps())
-    const initialState = { query: this.getProps(), options: this.options, activeTracking: 0 }
+    const initialState = {
+      query: this.getProps(),
+      options: this.options,
+      activeTracking: 0,
+      comingFromSearch: this.comingFromSearch,
+    }
+
     if (!queryOK) initialState['query_err'] = true
     const store = new Store(initialState)
     this.setupStore(store)
@@ -361,6 +369,7 @@ class ParcelLab {
         ['orderNo', encodeURIComponent(input)],
         ['u', userId],
         ['lang', langVal],
+        ['comingFromSearch', 'true'],
       ]
       if (zip) props.push(['zip', encodeURIComponent(zip)])
       let searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')

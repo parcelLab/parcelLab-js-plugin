@@ -227,6 +227,7 @@ const translations = {
     opensIn: 'Opens in about',
     error: {
       delivery: 'Unfortunately, this delivery is not available.',
+      search: 'Unfortunately, no information was found for this delivery.',
     },
     searchOrder: 'Search order',
     zip: 'Zip code',
@@ -258,6 +259,7 @@ const translations = {
     opensIn: 'Öffnet in ungefähr',
     error: {
       delivery: 'Diese Sendung liegt leider nicht im System vor.',
+      search: 'Leider liegen uns aktuell keine Sendungsdetails zu dieser Bestellung vor.',
     },
     searchOrder: 'Bestellung suchen',
     zip: 'PLZ',
@@ -289,6 +291,7 @@ const translations = {
     opensIn: 'abre en',
     error: {
       delivery: 'Desafortunadamente tu paquete no esta disponible.',
+      search: 'Desafortunadamente tu paquete no esta disponible.',
     },
     searchOrder: 'Búsqueda del envío',
     search: 'Buscar',
@@ -319,6 +322,7 @@ const translations = {
     opensIn: 'ouvre dans',
     error: {
       delivery: "Malheureusement, ce numéro de colis ou de commande n'est pas valide.",
+      search: "Malheureusement, ce numéro de colis ou de commande n'est pas valide.",
     },
     searchOrder: 'Rechercher la commande',
     search: 'Chercher',
@@ -349,6 +353,7 @@ const translations = {
     opensIn: 'Apre alle',
     error: {
       delivery: 'Purtroppo non abbiamo dati per questa consegna',
+      search: 'Purtroppo non abbiamo dati per questa consegna',
     },
     searchOrder: "cerca l'ordine",
     search: 'Ricerca',
@@ -379,6 +384,7 @@ const translations = {
     opensIn: 'Opent om',
     error: {
       delivery: 'Helaas is de levering niet bekend.',
+      search: 'Helaas is de levering niet bekend.',
     },
     searchOrder: 'Zoek order',
     search: 'Zoeken',
@@ -409,6 +415,7 @@ const translations = {
     opensIn: 'Åbner om',
     error: {
       delivery: 'Beklageligvis er leveringen ikke tilgængelig.',
+      search: 'Beklageligvis er leveringen ikke tilgængelig.',
     },
     searchOrder: 'Søg ordre',
     search: 'Søg',
@@ -439,6 +446,7 @@ const translations = {
     opensIn: 'öppnas om',
     error: {
       delivery: 'Tyvärr är inte denna leverans tillgänglig.',
+      search: 'Tyvärr är inte denna leverans tillgänglig.',
     },
     searchOrder: 'Sök order',
     search: 'Sök',
@@ -469,6 +477,7 @@ const translations = {
     opensIn: 'avautuu',
     error: {
       delivery: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.',
+      search: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.',
     },
     searchOrder: 'Hae tilausta',
     search: 'Hae',
@@ -499,6 +508,7 @@ const translations = {
     opensIn: 'åpner om',
     error: {
       delivery: 'Dessverre er denne leveransen ikke tilgjengelig.',
+      search: 'Dessverre er denne leveransen ikke tilgjengelig.',
     },
     searchOrder: 'Søk etter bestilling',
     search: 'Søk',
@@ -529,6 +539,7 @@ const translations = {
     opensIn: 'abre em',
     error: {
       delivery: 'Infelizmente, esta entrega não está disponível.',
+      search: 'Infelizmente, esta entrega não está disponível.',
     },
     searchOrder: 'ordem de pesquisa',
     search: 'Pesquisa',
@@ -559,6 +570,7 @@ const translations = {
     opensIn: 'otwiera za',
     error: {
       delivery: 'Niestety, ta paczka nie znajduje się w systemie.',
+      search: 'Niestety, ta paczka nie znajduje się w systemie.',
     },
     searchOrder: 'szukaj zamówienia',
     search: 'Szukaj',
@@ -589,6 +601,7 @@ const translations = {
     opensIn: 'Se va deschide',
     error: {
       delivery: 'Din păcate, această livrare nu este disponibil.',
+      search: 'Din păcate, această livrare nu este disponibil.',
     },
     searchOrder: 'ordinea de căutare',
     search: 'Căutare',
@@ -619,6 +632,7 @@ const translations = {
     opensIn: 'Otevírá za',
     error: {
       delivery: 'Tato zásilka se bohužel nenachází v systému.',
+      search: 'Tato zásilka se bohužel nenachází v systému.',
     },
     searchOrder: 'Hledat objednávku',
     search: 'Hledat',
