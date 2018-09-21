@@ -92,6 +92,19 @@ For example  `www.versand-status.de/?trackingNo=...&borderRadius=2px&buttonColor
 
 #### ⚠️  If you need more customizing, use a custom stylesheet.
 
+### Hook onRendered
+
+There is another option called `onRendered` which expects a `function (state)` with `state` being an object describing the pulled information:
+
+```
+var plRenderedHook = function (state) {
+  // Do something with the DOM or the information
+};
+
+var parcelLab = new ParcelLab('#parcelLab-trace-container', { onRendered: plRenderedHook });
+parcelLab.initialize();
+```
+
 ## Custom styling example
 In this example we will set the box and button border-radius to 0px and make the buttons black.
 ```html
