@@ -55,6 +55,7 @@ These are the available options:
 - orderNo : String (other way to pass orderNo - instead of in url)
 - zip : String (other way to pass zip - instead of in url)
 - courier : String (other way to pass courier - instead of in url)
+- client : String (other way to pass courier - instead of in url)
 - selectedTrackingNo : String (other way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
 - onRendered : Function (the plugin will run this function whenever it (re)renders)

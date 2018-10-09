@@ -140,6 +140,7 @@ function _objToQueryArr(propsObj) {
     if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId })
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier }) // why not?
     if (propsObj.zip) result.push({ name: 'zip', value: propsObj.zip })
+    if (propsObj.client) result.push({ name: 'client', value: propsObj.client })
   } else if (propsObj.xid) {
     if (propsObj.xid) result.push({ name: 'xid', value: propsObj.xid })
     if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId })

@@ -50,6 +50,7 @@ class ParcelLab {
     this.courier = this.getUrlQuery('courier') || this.options.courier
     this.userId = this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
     this.secureHash = this.getUrlQuery('s') || this.getUrlQuery('secureHash') || this.options.secureHash
+    this.client = this.getUrlQuery('client') || this.getUrlQuery('shop') || this.options.secureHash
     this.zip = this.getUrlQuery('zip') || this.options.zip
 
     this.initLanguage()
@@ -167,6 +168,7 @@ class ParcelLab {
       xid: this.xid,
       courier: this.courier,
       userId: this.userId,
+      client: this.client,
       lang: this.lang,
       s: this.secureHash,
       zip: this.zip,
