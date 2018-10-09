@@ -117,6 +117,9 @@ function _toURL(baseUrl, endpoint, queryArr) {
     case 'orderNo':
       param.value = encodeURIComponent(param.value)
       break
+    case 'client':
+      param.value = encodeURIComponent(param.value)
+      break
     }
 
     url += param.name + '=' + param.value + '&'
