@@ -271,3 +271,17 @@ textarea.pl-form-input {
       padding-right: 5px;
   }
 }
+
+.pl-box-address {
+  .pl-box-address-caption {
+    font-weight: bold;
+    margin-top: 0px;
+  }
+
+  address {
+    font-style: normal;
+    p {
+      margin: 0;
+    }
+  }
+}

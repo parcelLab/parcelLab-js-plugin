@@ -34,5 +34,5 @@ module.exports = function Fallback(tHeader) {
         ${ raw(status_details) }
       </div>
     </div>
-  ` 
+  `
 }
