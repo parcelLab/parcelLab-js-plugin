@@ -285,3 +285,19 @@ textarea.pl-form-input {
     }
   }
 }
+
+.pl-box-articles {
+  .pl-box-articles-caption {
+    font-weight: bold;
+    margin-top: 0px;
+  }
+  ul.pl-article-list {
+    list-style: none;
+    padding: 0px;
+    li {
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      border-bottom: 1px dashed #eee;
+    }
+  }
+}

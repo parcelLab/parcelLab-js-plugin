@@ -7,6 +7,7 @@ const NextAction = require('./NextAction')
 const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 const DeliveryAddress = require('./DeliveryAddress')
+const ArticleList = require('./ArticleList')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
@@ -23,7 +24,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
         return Prediction(tHeader)
-      else return [Fallback(tHeader), DeliveryAddress(tHeader)]
+      else return [Fallback(tHeader), DeliveryAddress(tHeader), ArticleList(tHeader)]
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':
