@@ -24,7 +24,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
         return Prediction(tHeader)
-      else return [Fallback(tHeader), DeliveryAddress(tHeader), ArticleList(tHeader)]
+      else return [Fallback(tHeader), DeliveryAddress(tHeader, query.lang), ArticleList(tHeader, query.lang)]
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':

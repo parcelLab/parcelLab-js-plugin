@@ -235,6 +235,8 @@ const translations = {
     containsOf: 'consists of',
     deliveries: 'deliveries',
     showPickuplocation: 'Show pickup location',
+    articleList: 'Item list',
+    deliveryAddress: 'Delivery address',
   },
   de: {
     delivery: 'Lieferung',
@@ -267,6 +269,8 @@ const translations = {
     containsOf: 'besteht aus',
     deliveries: 'Lieferungen',
     showPickuplocation: 'Abholort anzeigen',
+    articleList: 'Artikelliste',
+    deliveryAddress: 'Zustelladresse',
   },
   es: {
     delivery: 'Entrega',
@@ -298,6 +302,8 @@ const translations = {
     containsOf: 'consiste en',
     deliveries: 'entregas',
     showPickuplocation: 'Lugar de recogida',
+    articleList: 'Lista de articulos',
+    deliveryAddress: 'Dirección de entrega',
   },
   fr: {
     delivery: 'Livraison',
@@ -329,6 +335,8 @@ const translations = {
     containsOf: 'consiste en',
     deliveries: 'livraisons',
     showPickuplocation: 'Lieu de retrait',
+    articleList: 'Liste des articles',
+    deliveryAddress: 'Adresse de livraison',
   },
   it: {
     delivery: 'Consegna',
@@ -360,6 +368,8 @@ const translations = {
     containsOf: 'consiste in',
     deliveries: 'consegne',
     showPickuplocation: 'Mostra punto di ritiro',
+    articleList: 'Elenco degli articoli',
+    deliveryAddress: 'Indirizzo di consegna',
   },
   nl: {
     delivery: 'Levering',
@@ -391,6 +401,8 @@ const translations = {
     containsOf: 'bestaat uit',
     deliveries: 'leveringen',
     showPickuplocation: 'Afhaalpunt',
+    articleList: 'Artikellijst',
+    deliveryAddress: 'Bezorgadres',
   },
   da: {
     delivery: 'Levering',
@@ -422,6 +434,8 @@ const translations = {
     containsOf: 'består af',
     deliveries: 'leveringer',
     showPickuplocation: 'Vis leveringssted',
+    articleList: 'Artikelliste',
+    deliveryAddress: 'Leveringsadresse',
   },
   sv: {
     delivery: 'Leverans',
@@ -453,6 +467,8 @@ const translations = {
     containsOf: 'består av',
     deliveries: 'leveranser',
     showPickuplocation: 'Visa leveranstid',
+    articleList: 'Artikellista',
+    deliveryAddress: 'Leveransadress',
   },
   fi: {
     delivery: 'Toimitus',
@@ -484,6 +500,8 @@ const translations = {
     containsOf: 'koostuu',
     deliveries: 'toimituksesta',
     showPickuplocation: 'Näytä noutopiste',
+    articleList: 'Artikkeliluettelo',
+    deliveryAddress: 'Toimitusosoite',
   },
   no: {
     delivery: 'Levering',
@@ -515,6 +533,8 @@ const translations = {
     containsOf: 'inneholder',
     deliveries: 'leveranser',
     showPickuplocation: 'vis hentested',
+    articleList: 'Artikkelliste',
+    deliveryAddress: 'Leveringsadresse',
   },
   pt: {
     delivery: 'Entrega',
@@ -546,6 +566,8 @@ const translations = {
     containsOf: 'consiste em',
     deliveries: 'entregas',
     showPickuplocation: 'Opsamlingssted',
+    articleList: 'Lista de artigos',
+    deliveryAddress: 'Endereço de entrega',
   },
   pl: {
     delivery: 'Dostawa',
@@ -577,6 +599,8 @@ const translations = {
     containsOf: 'składa się z',
     deliveries: 'dostawy',
     showPickuplocation: 'Pokaż punkt odbioru',
+    articleList: 'Lista artykułów',
+    deliveryAddress: 'Adres dostawy',
   },
   ro: {
     delivery: 'Livrare',
@@ -608,6 +632,8 @@ const translations = {
     containsOf: 'este format din',
     deliveries: 'livrări',
     showPickuplocation: 'Noutopaikka',
+    articleList: 'Lista de articole',
+    deliveryAddress: 'Adresă de livrare',
   },
   cs: {
     delivery: 'Doručení',
@@ -639,6 +665,8 @@ const translations = {
     containsOf: 'Skládá se z',
     deliveries: 'Doručení',
     showPickuplocation: 'Zobrazit výdejní místo',
+    articleList: 'Seznam článků',
+    deliveryAddress: 'Doručovací adresa',
   },
 }
 

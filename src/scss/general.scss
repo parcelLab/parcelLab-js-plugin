@@ -298,6 +298,16 @@ textarea.pl-form-input {
       padding-bottom: 5px;
       margin-bottom: 5px;
       border-bottom: 1px dashed #eee;
+      span.pl-article-list-no {
+        margin-right: 5px;
+        // font-weight: lighter;
+        opacity: .6;
+        font-size: .75rem;
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }

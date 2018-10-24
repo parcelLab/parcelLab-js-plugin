@@ -1,4 +1,5 @@
 const html = require('nanohtml')
+const { translate } = require('../../lib/translator.js')
 
 const Address = (delivery_info) => {
   return html`
@@ -12,7 +13,7 @@ const Address = (delivery_info) => {
   `
 }
 
-module.exports = function DeliveryAddress(tHeader) {
+module.exports = function DeliveryAddress(tHeader, lang) {
   const { delivery_info } = tHeader
 
   if (delivery_info && delivery_info.street && delivery_info.zip_code && delivery_info.city) {
@@ -21,8 +22,8 @@ module.exports = function DeliveryAddress(tHeader) {
     return html`
     <div class="pl-box pl-action-box pl-box-address pl-space-top">
       <div class="pl-box-body">
-        <p class="pl-box-address-caption">${ 'Delivery address'}</p>
-        ${ address}
+        <p class="pl-box-address-caption">${ translate('deliveryAddress', lang.name) }</p>
+        ${ address }
       </div>
     </div>
   `
