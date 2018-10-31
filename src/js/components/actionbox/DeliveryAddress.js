@@ -1,4 +1,5 @@
 const html = require('nanohtml')
+const Icon = require('../Icon')
 const { translate } = require('../../lib/translator.js')
 
 const Address = (delivery_info) => {
@@ -19,10 +20,17 @@ module.exports = function DeliveryAddress(tHeader, lang) {
   if (delivery_info && delivery_info.street && delivery_info.zip_code && delivery_info.city) {
     const address = Address(delivery_info)
 
+    const icon = Icon('map', 0, '18')
+    icon.style.display = 'inline-block'
+    icon.style.opacity = '.7'
+    icon.style.verticalAlign = 'middle'
+
     return html`
     <div class="pl-box pl-action-box pl-box-address pl-space-top">
       <div class="pl-box-body">
-        <p class="pl-box-address-caption">${ translate('deliveryAddress', lang.name) }</p>
+        <p class="pl-box-address-caption">
+          ${ icon } ${ translate('deliveryAddress', lang.name)}
+        </p>
         ${ address }
       </div>
     </div>

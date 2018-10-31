@@ -302,11 +302,17 @@ textarea.pl-form-input {
         margin-right: 5px;
         // font-weight: lighter;
         opacity: .6;
-        font-size: .75rem;
+        font-size: .8rem;
         display: block;
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      span.pl-article-quantity {
+        opacity: .6;
+        font-size: .8rem;
+        margin-right: 5px;
       }
     }
   }
