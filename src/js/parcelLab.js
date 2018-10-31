@@ -53,6 +53,9 @@ class ParcelLab {
     this.client = this.getUrlQuery('client') || this.getUrlQuery('shop') || this.options.secureHash
     this.zip = this.getUrlQuery('zip') || this.options.zip
 
+    // get note fron url
+    this.options.show_note = this.getUrlQuery('show_note') ? window.decodeURIComponent(this.getUrlQuery('show_note')) : (this.options.show_note || null)
+
     this.initLanguage()
 
     if (this.options.styles) {
