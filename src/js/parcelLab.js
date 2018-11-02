@@ -79,6 +79,8 @@ class ParcelLab {
       this.options.disableBranding = true
     if (this.getUrlQuery('disableVoting'))
       this.options.disableVoting = true
+    if (this.getUrlQuery('show_articleList'))
+      this.options.show_articleList = true
 
     this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
 

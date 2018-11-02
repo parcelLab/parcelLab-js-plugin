@@ -12,12 +12,14 @@ const Article = ({ articleNo, articleName, quantity }) => {
   else return null
 }
 
-module.exports = function ArticleList(tHeader, lang) {
+module.exports = function ArticleList(tHeader, lang, options) {
   const { delivery_info } = tHeader
 
-  if (delivery_info && delivery_info.articles && delivery_info.articles.length > 0) {
+  if (delivery_info && delivery_info.articles && delivery_info.articles.length > 0 && options.show_articleList) {
     let articles = delivery_info.articles.map(art => Article(art))
     articles = articles.filter(art => art)
+
+    if (articles.length === 0) return null // Hack for false entries
 
     const icon = Icon('info_box', 0, '20')
     icon.style.display = 'inline-block'

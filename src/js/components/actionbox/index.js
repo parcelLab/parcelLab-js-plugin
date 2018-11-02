@@ -19,25 +19,42 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       if (tHeader.actionBox.data)
         return PickupLocation(tHeader, query.lang, emit)
       else
-        return [Fallback(tHeader), ArticleList(tHeader, query.lang)]
+        return [
+          Fallback(tHeader),
+          ArticleList(tHeader, query.lang, options),
+        ]
     case 'vote-courier':
-      return [Fallback(tHeader), VoteCourier(tHeader, options, emit)]
+      return [
+        Fallback(tHeader),
+        VoteCourier(tHeader, options, emit),
+      ]
     case  'prediction':
       if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
-        return [Prediction(tHeader), ArticleList(tHeader, query.lang)]
+        return [
+          Prediction(tHeader),
+          ArticleList(tHeader, query.lang, options),
+        ]
       else
-        return [Fallback(tHeader), DeliveryAddress(tHeader, query.lang), ArticleList(tHeader, query.lang)]
+        return [
+          Fallback(tHeader),
+          DeliveryAddress(tHeader, query.lang),
+          ArticleList(tHeader, query.lang, options),
+        ]
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':
-      return [OrderProcessed(tHeader), ArticleList(tHeader, query.lang)]
+      return [OrderProcessed(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'next-action':
-      return [NextAction(tHeader), ArticleList(tHeader, query.lang)]
+      return [NextAction(tHeader), ArticleList(tHeader, query.lang), options]
     case 'returned':
       return Returned(tHeader)
     default:
-      return [Fallback(tHeader), DeliveryAddress(tHeader, query.lang), ArticleList(tHeader, query.lang)]
+      return [
+        Fallback(tHeader),
+        DeliveryAddress(tHeader, query.lang),
+        ArticleList(tHeader, query.lang, options),
+      ]
 
     }
 
