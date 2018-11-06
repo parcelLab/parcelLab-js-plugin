@@ -46,7 +46,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     case 'order-processed':
       return [OrderProcessed(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'next-action':
-      return [NextAction(tHeader), ArticleList(tHeader, query.lang), options]
+      return [NextAction(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'returned':
       return Returned(tHeader)
     default:
