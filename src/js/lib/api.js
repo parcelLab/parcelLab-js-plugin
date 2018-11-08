@@ -137,6 +137,7 @@ function _objToQueryArr(propsObj) {
     if (propsObj.trackingNo) result.push({ name: 'trackingNo', value: propsObj.trackingNo })
     if (propsObj.courier) result.push({ name: 'courier', value: propsObj.courier })
     if (propsObj.zip) result.push({ name: 'zip', value: propsObj.zip })
+    if (propsObj.userId) result.push({ name: 'user', value: propsObj.userId })
   } else if (propsObj.orderNo) {
     // query for checkpoints by orderNo
     if (propsObj.orderNo) result.push({ name: 'orderNo', value: propsObj.orderNo })
