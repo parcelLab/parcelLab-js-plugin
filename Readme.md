@@ -22,8 +22,10 @@ Just place the following `<script>` snippet at the bottom of the `<body>` of you
 ```
 
 This snippet will load the needed assets and render the parcelLab plugin into the div with the id "#pl-trace". If you want the plugin to be rendered to an other DOM node you just have to change the id in the snippet. Further you can customize the plugin by extending the options object (see below).
-
-P.S.: A recent version of these scripts is always available at the parcelLab CDN:
+  
+#### WARNING
+If your webpage does not allow post hoc insertion of assets (scripts and stylesheets), you have to add the assets manually in the `<header>` part of your webpage.  
+A recent version of these scripts is always available at the parcelLab CDN:
 - `<link href="https://cdn.parcellab.com/css/v3/parcelLab.min.css" rel="stylesheet">`
 - `<script src="https://cdn.parcellab.com/js/v3/parcelLab.min.js" charset="utf-8"></script>`
 
