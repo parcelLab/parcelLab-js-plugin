@@ -34,7 +34,7 @@ You can define options by passing an Object as second argument, when creating a 
     ...
     var options = { rerouteButton: 'left', show_searchForm: 'true' };
     var parcelLab = new ParcelLab('#pl-trace', options);
-    parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"  
+    parcelLab.initialize();
     ...
   </script>
 ```
