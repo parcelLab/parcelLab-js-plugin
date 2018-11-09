@@ -92,12 +92,13 @@ For example  `www.versand-status.de/?trackingNo=...&borderRadius=2px&buttonColor
 
 There is another option called `onRendered` which expects a `function (state)` with `state` being an object describing the pulled information:
 
-```
+```javascript
 var plRenderedHook = function (state) {
   // Do something with the DOM or the information
+  console.log(state);
 };
 
-var parcelLab = new ParcelLab('#parcelLab-trace-container', { onRendered: plRenderedHook });
+var parcelLab = new ParcelLab('#pl-trace', { onRendered: plRenderedHook });
 parcelLab.initialize();
 ```
 
