@@ -1,27 +1,27 @@
 ![parcelLab JS Plugin](./mockup.jpg)
 
 # parcelLab Javascript Plugin
-JavaScript to integrate a shop frontend (or any webpage) with parcelLab. This plugin can be used to retrieve and display the checkpoints of a tracking (delivery status page), or display an estimated delivery date for a given destination and courier (delivery time prediction) — on any given webpage.
+Integrate parcelLab to your shop frontend (or any webpage). This plugin will fetch and display all important information of a given tracking and turn any webpage to a delivery status page.
 
 ## Integrate delivery status page
 
 ### Adding to your webpage
-Just place the following snippet somewhere in the BODY! of your webpage:
+Just place the following `<script>` snippet at the bottom of the `<body>` of your webpage.
 
 ```html
-  <script>
+  <script  type="text/javascript">
     (function (prcl) {/* Load parcelLab assets ... */
       if (window.ParcelLab) {return prcl();}function a() {var styles = document.createElement('link'); styles.rel = 'stylesheet'; styles.href = 'https://cdn.parcellab.com/css/v3/parcelLab.min.css'; document.getElementsByTagName('head')[0].appendChild(styles); }function b(cb) { var script = document.createElement('script'); script.async = true; script.src = 'https://cdn.parcellab.com/js/v3/parcelLab.min.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script); script.onload = cb; } a(); b(prcl);
     })(function () {/* ... plugin is ready to use: */
       var options = {};
-      var pl = new ParcelLab('#app-root', options);
+      var pl = new ParcelLab('#pl-trace', options);
       pl.initialize();
       window._prcl = pl;
     });
   </script>
 ```
 
-This snippet will load the needed assets and render the parcelLab plugin into the div with the id "#app-root".
+This snippet will load the needed assets and render the parcelLab plugin into the div with the id "#pl-trace". If you want the plugin to be rendered to an other DOM node you just have to change the id from '#pl-trace' to the id of the required DOM node. Further you can customize the plugin by extending the options object in the snippet.
 
 P.S.: A recent version of these scripts is always available at the parcelLab CDN:
 - `<link href="https://cdn.parcellab.com/css/v3/parcelLab.min.css" rel="stylesheet">`
