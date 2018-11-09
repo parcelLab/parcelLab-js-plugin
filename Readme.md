@@ -1,47 +1,42 @@
-![parcelLab JS Plugin](./logo-code.png)
+![parcelLab JS Plugin](./mockup.jpg)
 
 # parcelLab Javascript Plugin
 JavaScript to integrate a shop frontend (or any webpage) with parcelLab. This plugin can be used to retrieve and display the checkpoints of a tracking (delivery status page), or display an estimated delivery date for a given destination and courier (delivery time prediction) — on any given webpage.
 
 ## Integrate delivery status page
-### Adding to your webpage
-Just add the `parcelLab.min.css` and `parcelLab.min.js` files to your webpage.  
 
-A recent version of these scripts is always available at the parcelLab CDN:
+### Adding to your webpage
+Just place the following snippet somewhere in the BODY! of your webpage:
+
+```html
+  <script>
+    (function (prcl) {/* Load parcelLab assets ... */
+      if (window.ParcelLab) {return prcl();}function a() {var styles = document.createElement('link'); styles.rel = 'stylesheet'; styles.href = 'https://cdn.parcellab.com/css/v3/parcelLab.min.css'; document.getElementsByTagName('head')[0].appendChild(styles); }function b(cb) { var script = document.createElement('script'); script.async = true; script.src = 'https://cdn.parcellab.com/js/v3/parcelLab.min.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script); script.onload = cb; } a(); b(prcl);
+    })(function () {/* ... plugin is ready to use: */
+      var options = {};
+      var pl = new ParcelLab('#app-root', options);
+      pl.initialize();
+      window._prcl = pl;
+    });
+  </script>
+```
+
+This snippet will load the needed assets and render the parcelLab plugin into the div with the id "#app-root".
+
+P.S.: A recent version of these scripts is always available at the parcelLab CDN:
 - `<link href="https://cdn.parcellab.com/css/v3/parcelLab.min.css" rel="stylesheet">`
 - `<script src="https://cdn.parcellab.com/js/v3/parcelLab.min.js" charset="utf-8"></script>`
-
-### Initializing the magic
-After adding the script you will have a new `ParcelLab` class in your global scope. Just create a new instance, with the rootDomId as a parameter and initialize it and you are good to go!
-
-### Example
-```html
-<head>
-  ...
-  <link href="https://cdn.parcellab.com/css/v3/parcelLab.min.css" rel="stylesheet">
-</head>
-<body>
-  ...
-  <div id="pl-trace"><!-- the plugin will be rendered here --></div>
-  ...
-  <script src="https://cdn.parcellab.com/js/v3/parcelLab.min.js" charset="utf-8"></script>
-  <script type="text/javascript">
-    var parcelLab = new ParcelLab('#pl-trace');
-    parcelLab.initialize();
-  </script>
-</body>  
-```
 
 ### Options
 You can define options by passing an Object as second argument, when creating a new ParcelLab Object.
 ```html
-  ...
   <script type="text/javascript">
+    ...
     var options = { rerouteButton: 'left', show_searchForm: 'true' };
     var parcelLab = new ParcelLab('#pl-trace', options);
     parcelLab.initialize(); // <~ delivery status will be display to dom-elem. with id="pl-trace"  
+    ...
   </script>
-  ...
 ```
 
 These are the available options:
