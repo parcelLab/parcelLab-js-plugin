@@ -5,5 +5,8 @@
         "commonjs": true,
         "es6": true,
         "node": false
+    },
+    "rules": {
+        "no-trailing-spaces": 0
     }
 }

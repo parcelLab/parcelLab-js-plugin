@@ -17,7 +17,7 @@ module.exports = {
     show_zipCodeInput: false,
     userId: null,
     show_note: null,
-    rerouteButton: null,
+    rerouteButton: 'right',
   },
   default_styles: {
     borderColor: '#eeeeee',

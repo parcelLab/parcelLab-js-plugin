@@ -21,7 +21,6 @@ const RerouteLinkShort = ({ checkpoints, activeTracking, options }) => {
   if (courier &&
     courier.rerouteurl &&
     courier.rerouteurl_label_short &&
-    options.rerouteButton &&
     options.rerouteButton === 'left') {
 
     const icon = Icon('event', window.parcelLab_styles.buttonColor, 28)

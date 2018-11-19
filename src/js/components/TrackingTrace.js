@@ -14,7 +14,7 @@ const showTimeOnCheckpoint = (d, i) => {
   else return true
 }
 
-const prepareCheckpoints = (checkpoints, query) => checkpoints.map( (cp, i) => {
+const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   const ts = cp.timestamp ? new Date(cp.timestamp) : null
   if (ts) cp.dateText = T.date(ts, showTimeOnCheckpoint(ts, i), query.lang.name)
 
@@ -38,7 +38,7 @@ const TrackingTrace = (state, emit) => {
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
   const iconState = IconState({ checkpoints, activeTracking })
-  const rerouteLink = (options.rerouteButton &&options.rerouteButton === 'right') ? RerouteLink(tHeader) : null
+  const rerouteLink = RerouteLink(tHeader, options)
   const furtherInfos = FurtherInfos(tHeader, query.lang.name)
   
   let tCheckpoints = prepareCheckpoints(tBody, query)
