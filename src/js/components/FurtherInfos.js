@@ -10,7 +10,7 @@ const FurtherInfos = ({ courier, tracking_number }, langName) => {
       ${ sub }
     </a>`
   else
-    return html`<div style="opacity:.6;" class="pl-button pl-is-fullwidth">
+    return html`<div id="pl-courier-fwd-link" style="opacity:.6;" class="pl-button pl-is-fullwidth">
         ${ courier.trackingurl_label }
         ${ sub }
     </div>`
