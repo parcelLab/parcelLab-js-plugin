@@ -88,7 +88,59 @@ The customStyles attr can also be passed in via URL search query (without 'custo
 Just drop the '#' from hex colors and/or encode as URI component if needed.  
 For example  `www.versand-status.de/?trackingNo=...&borderRadius=2px&buttonColor=e6e6e6`
 
-#### ⚠️  If you need more customizing, use a custom stylesheet.
+### Custom Icons
+Now you also can use your own icon set for the parcelLab plugin.  
+To use custom icons, you first have to create a transitStatus to icon map.
+This maps the urls of your icons to the possible transit states of a parcelLab tracking.  
+Below you can see how the default icon set looks like. Please feel free to inspect the parcelLab icons to find a good match from your own icon set.
+
+Cautions:
+- The iconMap must be COMPLETE! Do not remove keys / set keys to null or undefined. (If you don't have a good icon for a transit state - just use the parcelLab one.)
+- All icons must be reachable from the domain the plugin runs on / your website is hosted on.
+- If you use a custom iconMap the customStyles.iconColor option won't work!
+- Make sure the icons are small in size since it will slow down load times.
+- We suggest to use icons with a transparent background (png/svg).
+
+
+```javascript
+var iconMap = {
+  OrderProcessed: 'http://icon.parcellab.com/order_processed',
+  Pending: 'http://icon.parcellab.com/order_processed',
+  PickUpScheduled: 'http://icon.parcellab.com/order_processed',
+  Upgrade: 'http://icon.parcellab.com/info_truck',
+  InboundScan: 'http://icon.parcellab.com/in_transit',
+  InTransit: 'http://icon.parcellab.com/in_transit',
+  ExportHub: 'http://icon.parcellab.com/in_transit',
+  ImportHub: 'http://icon.parcellab.com/in_transit',
+  DestinationDeliveryCenter: 'http://icon.parcellab.com/in_transit',
+  DestinationDeliveryDepot: 'http://icon.parcellab.com/in_transit',
+  OutForDelivery: 'http://icon.parcellab.com/in_transit',
+  Rerouted: 'http://icon.parcellab.com/warning_truck',
+  FailedAttemptFirst: 'http://icon.parcellab.com/warning_truck',
+  FailedAttemptSecond: 'http://icon.parcellab.com/warning_truck',
+  FailedAttemptFinal: 'http://icon.parcellab.com/warning_truck',
+  PickupReadyToday: 'http://icon.parcellab.com/map',
+  PickupReadyNextDay: 'http://icon.parcellab.com/map',
+  Delivered: 'http://icon.parcellab.com/success_standard',
+  Exception: 'http://icon.parcellab.com/warning_truck',
+  Stored: 'http://icon.parcellab.com/info_truck',
+  Return: 'http://icon.parcellab.com/return',
+  default: 'http://icon.parcellab.com/info_truck',
+};
+```
+
+After you have created an iconMap, you just have to tell the parcelLab plugin to use it:  
+(`useIconMap` has to be called before `initialize`!)
+
+```javascript
+var iconMap = {...};
+var options = {...};
+var parcelLab = new ParcelLab('#pl-trace', options);
+parcelLab.useIconMap(iconMap);
+parcelLab.initialize();
+```
+
+#### ⚠️  If you need even more customizing, please use a custom stylesheet.
 
 ### Hook onRendered
 
