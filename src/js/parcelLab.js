@@ -411,6 +411,19 @@ class ParcelLab {
     }
     else return false
   }
+
+  useIconMap(iconMap) {
+    const testIconMap = (im) => {
+      return ['default', 'Delivered', 'PickupReadyToday', 'PickupReadyNextDay', 'Exception', 'OrderProcessed', 'PickUpScheduled', 'OutForDelivery']
+        .map(status => im[status]).filter(url => !url).length
+    }
+    if (typeof iconMap !== 'object' || testIconMap(iconMap))
+      return console.warn('Your iconMap is not complete. Please take a look at the parcelLab docs.')
+    else {
+      window.parcelLab_iconMap = iconMap
+      this.options._customIconMap = true
+    }
+  }
 }
 
 module.exports = ParcelLab

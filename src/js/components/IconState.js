@@ -33,23 +33,24 @@ const IconState = ({ checkpoints, activeTracking }) => {
   let thirdIcon = null
 
   switch (currentCp.status) {
-    case 'OrderProcessed':
-    case 'PickUpScheduled':
-      firstIcon = makeActive(Icon(transitStatus.icon))
-      secondIcon = makeInactive(Icon('in_transit'))
-      thirdIcon = makeInactive(Icon('success_standard'))
-      break
+
+  case 'OrderProcessed':
+  case 'PickUpScheduled':
+    firstIcon = makeActive(Icon(transitStatus.icon))
+    secondIcon = makeInactive(Icon('in_transit'))
+    thirdIcon = makeInactive(Icon('success_standard'))
+    break
       
-    case 'Delivered':
-      firstIcon = makeInactive(Icon('order_processed'))
-      secondIcon = makeInactive(Icon('in_transit'))
-      thirdIcon = makeActive(Icon(transitStatus.icon))
-      break
+  case 'Delivered':
+    firstIcon = makeInactive(Icon('order_processed'))
+    secondIcon = makeInactive(Icon('in_transit'))
+    thirdIcon = makeActive(Icon(transitStatus.icon))
+    break
       
-    default:
-      firstIcon = makeInactive(Icon('order_processed'))
-      secondIcon = makeActive(Icon(transitStatus.icon))
-      thirdIcon = makeInactive(Icon('success_standard'))
+  default:
+    firstIcon = makeInactive(Icon('order_processed'))
+    secondIcon = makeActive(Icon(transitStatus.icon))
+    thirdIcon = makeInactive(Icon('success_standard'))
       
   }
 

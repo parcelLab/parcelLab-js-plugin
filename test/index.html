@@ -14,6 +14,30 @@
 
     
     <script>
+      var iconMap = {
+          OrderProcessed: 'http://icon.parcellab.com/order_processed',
+          Pending: 'http://icon.parcellab.com/order_processed',
+          PickUpScheduled: 'http://icon.parcellab.com/order_processed',
+          Upgrade: 'http://icon.parcellab.com/info_truck',
+          InboundScan: 'http://icon.parcellab.com/in_transit',
+          InTransit: 'https://icongr.am/jam/beer.svg',
+          ExportHub: 'http://icon.parcellab.com/in_transit',
+          ImportHub: 'http://icon.parcellab.com/in_transit',
+          DestinationDeliveryCenter: 'http://icon.parcellab.com/in_transit',
+          DestinationDeliveryDepot: 'http://icon.parcellab.com/in_transit',
+          OutForDelivery: 'http://icon.parcellab.com/in_transit',
+          Rerouted: 'http://icon.parcellab.com/warning_truck',
+          FailedAttemptFirst: 'http://icon.parcellab.com/warning_truck',
+          FailedAttemptSecond: 'http://icon.parcellab.com/warning_truck',
+          FailedAttemptFinal: 'http://icon.parcellab.com/warning_truck',
+          PickupReadyToday: 'http://icon.parcellab.com/map',
+          PickupReadyNextDay: 'http://icon.parcellab.com/map',
+          Delivered: 'http://icon.parcellab.com/success_standard',
+          Exception: 'http://icon.parcellab.com/warning_truck',
+          Stored: 'http://icon.parcellab.com/info_truck',
+          Return: 'http://icon.parcellab.com/return',
+          default: 'http://icon.parcellab.com/info_truck',
+        };
       var pl = new ParcelLab('#app-root', {
         styles: true, 
         rerouteButton: 'right',
@@ -26,8 +50,9 @@
         onRendered: function (state) {
           console.log('rerendered!', state)
         }
-      })
-      pl.initialize()
+      });
+      pl.useIconMap(iconMap);
+      pl.initialize();
     </script>
   </body>
 </html>
