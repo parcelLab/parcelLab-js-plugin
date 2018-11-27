@@ -1,12 +1,15 @@
 const transitStates = {
   OrderProcessed: {
     icon: 'order_processed',
+    xmas_icon: 'christmas_gift',
   },
   Pending: {
     icon: 'order_processed',
+    xmas_icon: 'christmas_gift',
   },
   PickUpScheduled: {
     icon: 'order_processed',
+    xmas_icon: 'christmas_gift',
   },
   Upgrade: {
     icon: 'info_truck',
@@ -14,24 +17,31 @@ const transitStates = {
   },
   InboundScan: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   InTransit: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   ExportHub: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   ImportHub: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   DestinationDeliveryCenter: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   DestinationDeliveryDepot: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   OutForDelivery: {
     icon: 'in_transit',
+    xmas_icon: 'christmas_sleigh',
   },
   Rerouted: {
     icon: 'warning_truck',
@@ -63,6 +73,7 @@ const transitStates = {
   },
   Delivered: {
     icon: 'success_standard',
+    xmas_icon: 'christmas_tree',
     color: '#58B957',
     alert: 'success',
   },
@@ -82,7 +93,15 @@ const transitStates = {
   },
   default: {
     icon: 'info_truck',
+    xmas_icon: 'christmas_sleigh',
   },
+}
+
+const getIconName = (tStatus, xmas=false) => {
+  const type = xmas ? 'xmas_icon' : 'icon'
+  if (transitStates[tStatus]) {
+    return transitStates[tStatus][type] || transitStates[tStatus]['icon']
+  } else return xmas ? transitStates.default.xmas_icon : transitStates.default.icon
 }
 
 const courierNames = {
@@ -736,4 +755,5 @@ module.exports = {
   courierNames,
   transitStates,
   langIds,
+  getIconName,
 }

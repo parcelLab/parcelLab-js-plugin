@@ -1,7 +1,10 @@
 const html = require('nanohtml')
 const Icon = require('../Icon')
+const { getIconName } = require('../../lib/static')
 
-const OrderProcessed = ({ actionBox }) => {
+const OrderProcessed = ({ actionBox }, options) => {
+  const xmas = options.xmas_theme || false
+  let iconName = getIconName('OrderProcessed', xmas)
 
   return html`
     <div class="pl-box pl-action-box pl-box-icon-status">
@@ -11,7 +14,7 @@ const OrderProcessed = ({ actionBox }) => {
 
     
       <div class="pl-box-body">
-        ${ Icon('order_processed', null, '80') }
+        ${ Icon(iconName, null, '80') }
       </div>
     </div>
   `  

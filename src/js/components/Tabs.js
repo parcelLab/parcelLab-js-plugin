@@ -1,28 +1,26 @@
 const html = require('nanohtml')
 const Tab = require('./Tab')
-const statics = require('../../js/lib/static')
+const { getIconName } = require('../lib/static')
 
-const Tabs =  ({ checkpoints, activeTracking, query }, emit)=> {
+const Tabs =  ({ checkpoints, activeTracking, query, options }, emit)=> {
   if (!checkpoints || checkpoints.header.length <= 1) return null
 
   const { lang } = query
   const colSize = checkpoints.header.length === 2 ? 6 : 4
+  const xmas = options.xmas_theme || false
   const tabs = checkpoints.header.map((cph, ind) => {
-    const tabData = { 
+    const tabData = {
       colSize,
       trackingNo: cph.tracking_number,
       courier: cph.courier,
       lang,
       active: activeTracking === ind,
       transitCode: cph.last_delivery_status ? cph.last_delivery_status.code.toLowerCase() : '',
-      transitStatus: statics.transitStates[cph.last_delivery_status.code],
+      iconName: getIconName(cph.last_delivery_status.code, xmas),
       statusText: cph.last_delivery_status ? cph.last_delivery_status.status : null,
       id: cph.id,
       actionBox: cph.actionBox,
     }
-    
-    if (typeof tabData.transitStatus === 'undefined')
-      tabData.transitStatus = statics.transitStates.default
 
     return Tab(tabData, emit)
   })

@@ -37,7 +37,7 @@ const TrackingTrace = (state, emit) => {
   // const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
-  const iconState = IconState({ checkpoints, activeTracking })
+  const iconState = IconState({ checkpoints, activeTracking, options })
   const rerouteLink = RerouteLink(tHeader, options)
   const furtherInfos = FurtherInfos(tHeader, query.lang.name)
   

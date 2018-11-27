@@ -1,7 +1,7 @@
 const html = require('nanohtml')
 const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
-const transitStates = require('../../lib/static').transitStates
+const { getIconName } = require('../../lib/static')
 
 // hackish because of clarity icons ...
 const makeBig = el => {
@@ -13,11 +13,12 @@ const makeBig = el => {
   return el
 }
 
-module.exports = function Fallback(tHeader) {
+module.exports = function Fallback(tHeader, options) {
   if (!tHeader || !tHeader.last_delivery_status) return null
   const { code, status, status_details } = tHeader.last_delivery_status
-  const transitState = transitStates[code] || transitStates.default
-  const icon = transitState ? Icon(transitState.icon, null, '80') : null
+  const xmas = options.xmas_theme || false
+  const iconName = getIconName(code, xmas)
+  const icon = Icon(iconName, null, '80')
   makeBig(icon)
 
   return html`

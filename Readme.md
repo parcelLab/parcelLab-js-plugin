@@ -56,6 +56,7 @@ These are the available options:
 - selectedTrackingNo : String (alternative way to pass selectedTrackingNo - instead of in url)
 - show_note : String (renders a note box on top - useful for showing important information)
 - onRendered : Function (the plugin will run this function whenever it (re)renders)
+- xmas_theme: Boolean (activates the christmas themed icons 🎄)
 
 All options can also be set via URL search query.  
 Just drop the '#' from hex colors and/or encode as URI component if needed.  

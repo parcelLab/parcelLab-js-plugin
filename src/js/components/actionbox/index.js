@@ -20,12 +20,12 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
         return PickupLocation(tHeader, query.lang, emit)
       else
         return [
-          Fallback(tHeader),
+          Fallback(tHeader, options),
           ArticleList(tHeader, query.lang, options),
         ]
     case 'vote-courier':
       return [
-        Fallback(tHeader),
+        Fallback(tHeader, options),
         VoteCourier(tHeader, options, emit),
       ]
     case  'prediction':
@@ -37,21 +37,21 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
         ]
       else
         return [
-          Fallback(tHeader),
+          Fallback(tHeader, options),
           DeliveryAddress(tHeader, query.lang),
           ArticleList(tHeader, query.lang, options),
         ]
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':
-      return [OrderProcessed(tHeader), ArticleList(tHeader, query.lang, options)]
+      return [OrderProcessed(tHeader, options), ArticleList(tHeader, query.lang, options)]
     case 'next-action':
       return [NextAction(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'returned':
       return Returned(tHeader)
     default:
       return [
-        Fallback(tHeader),
+        Fallback(tHeader, options),
         DeliveryAddress(tHeader, query.lang),
         ArticleList(tHeader, query.lang, options),
       ]

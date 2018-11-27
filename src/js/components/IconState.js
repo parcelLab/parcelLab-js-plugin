@@ -1,6 +1,6 @@
 const html = require('nanohtml')
 const Icon = require('./Icon')
-const statics = require('../lib/static')
+const { getIconName } = require('../lib/static')
 
 const makeInactive = elem => {
   if (elem && elem.classList) {
@@ -19,37 +19,40 @@ const makeActive = elem => {
 }
 
 
-const IconState = ({ checkpoints, activeTracking }) => {
+const IconState = ({ checkpoints, activeTracking, options }) => {
   const tHeader = checkpoints.header[activeTracking]
   const visibleCps = checkpoints.body[tHeader.id].filter(cp => cp.shown === true).reverse()
   const currentCp = visibleCps[0]
   if (!currentCp) return null // show nothing if no currentCp
-  
-  let transitStatus = statics.transitStates[currentCp.status]
-  if (!transitStatus) transitStatus = statics.transitStates.default
+
+  const xmas = options.xmas_theme || false
+  let cpStateIconName = getIconName(currentCp.status, xmas)
+  let orderProcessedIconName = getIconName('OrderProcessed', xmas)
+  let inTransitIconName = getIconName('InTransit', xmas)
+  let successIconName = getIconName('Delivered', xmas)
 
   let firstIcon = null
   let secondIcon = null
   let thirdIcon = null
 
   switch (currentCp.status) {
-    case 'OrderProcessed':
-    case 'PickUpScheduled':
-      firstIcon = makeActive(Icon(transitStatus.icon))
-      secondIcon = makeInactive(Icon('in_transit'))
-      thirdIcon = makeInactive(Icon('success_standard'))
-      break
+  case 'OrderProcessed':
+  case 'PickUpScheduled':
+    firstIcon = makeActive(Icon(cpStateIconName))
+    secondIcon = makeInactive(Icon(inTransitIconName))
+    thirdIcon = makeInactive(Icon(successIconName))
+    break
       
-    case 'Delivered':
-      firstIcon = makeInactive(Icon('order_processed'))
-      secondIcon = makeInactive(Icon('in_transit'))
-      thirdIcon = makeActive(Icon(transitStatus.icon))
-      break
+  case 'Delivered':
+    firstIcon = makeInactive(Icon(orderProcessedIconName))
+    secondIcon = makeInactive(Icon(inTransitIconName))
+    thirdIcon = makeActive(Icon(cpStateIconName))
+    break
       
-    default:
-      firstIcon = makeInactive(Icon('order_processed'))
-      secondIcon = makeActive(Icon(transitStatus.icon))
-      thirdIcon = makeInactive(Icon('success_standard'))
+  default:
+    firstIcon = makeInactive(Icon(orderProcessedIconName))
+    secondIcon = makeActive(Icon(cpStateIconName))
+    thirdIcon = makeInactive(Icon(successIconName))
       
   }
 

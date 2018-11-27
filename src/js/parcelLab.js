@@ -81,6 +81,8 @@ class ParcelLab {
       this.options.disableVoting = true
     if (this.getUrlQuery('show_articleList'))
       this.options.show_articleList = true
+    if (this.getUrlQuery('xmas_theme'))
+      this.options.xmas_theme = true
 
     this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
 
