@@ -2,16 +2,7 @@ const html = require('nanohtml')
 const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
 const { getIconName } = require('../../lib/static')
-
-// hackish because of clarity icons ...
-const makeBig = el => {
-  if (el && el.style) {
-    el.style.width = '80px'
-    el.style.height = '80px'
-  }
-
-  return el
-}
+const { makeBig } = require('../../lib/helpers')
 
 module.exports = function Fallback(tHeader, options) {
   if (!tHeader || !tHeader.last_delivery_status) return null

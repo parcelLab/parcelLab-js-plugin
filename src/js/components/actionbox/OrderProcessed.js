@@ -1,6 +1,7 @@
 const html = require('nanohtml')
 const Icon = require('../Icon')
 const { getIconName } = require('../../lib/static')
+const { makeBig } = require('../../lib/helpers')
 
 const OrderProcessed = ({ actionBox }, options) => {
   const xmas = options.xmas_theme || false
@@ -14,7 +15,7 @@ const OrderProcessed = ({ actionBox }, options) => {
 
     
       <div class="pl-box-body">
-        ${ Icon(iconName, null, '80') }
+        ${ makeBig(Icon(iconName, null, '80')) }
       </div>
     </div>
   `  

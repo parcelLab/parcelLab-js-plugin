@@ -19,3 +19,12 @@ exports.checkQuery = function (query) {
   else if (query.xid && query.userId) return true
   else return false
 }
+
+exports.makeBig = el => {
+  if (el && el.style) {
+    el.style.width = '80px'
+    el.style.height = '80px'
+  }
+
+  return el
+}
