@@ -191,13 +191,13 @@ exports.getShopPrediction = function (propsObj, callback) {
 exports.voteCourier = function (vote, propsObj, callback) {
   if (['up', 'down'].indexOf(vote) < 0) callback(new Error('Wrong argument for vote!'))
   const url = _toURL(BASE_URL, `${VOTE_ENDPOINT}${vote}`, _objToQueryArr(propsObj))
-  _post(url, {}, callback)
+  _post(url, { id: propsObj.id }, callback)
 }
 
 exports.voteCommunication = function (vote, propsObj, callback) {
   if (['up', 'down'].indexOf(vote) < 0) callback(new Error('Wrong argument for vote!'))
   const url = _toURL(BASE_URL, `${VOTE_COMMUNICATION_ENDPOINT}${vote}`, _objToQueryArr(propsObj))
-  _post(url, {}, callback)
+  _post(url, { id: propsObj.id }, callback)
 }
 
 exports.saveUAct = function (link, propsObj, callback) {
