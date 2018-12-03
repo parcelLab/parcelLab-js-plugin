@@ -1,6 +1,5 @@
 // deps
 require('./lib/polyfills.js')
-const Raven = require('raven-js')
 const updateHTML = require('nanomorph')
 const Store = require('nanostore')
 const App = require('./components/App')
@@ -40,10 +39,6 @@ class ParcelLab {
   //////////////////////
 
   initialize() {
-    Raven.config('https://2b7ac8796fe140b8b8908749849ff1ce@app.getsentry.com/94336', {
-      whitelistUrls: [/cdn\.parcellab\.com/],
-    }).install()
-
     this.orderNo = this.getUrlQuery('orderNo') || this.options.orderNo
     this.xid = this.getUrlQuery('xid') || this.options.xid
     this.trackingNo = this.getUrlQuery('trackingNo') || this.options.trackingNo

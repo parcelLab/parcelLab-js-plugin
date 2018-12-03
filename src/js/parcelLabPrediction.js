@@ -1,5 +1,4 @@
 // deps
-const Raven = require('raven-js')
 let _$ = require('cash-dom')
 if (typeof window.jQuery === 'function')
   _$ = window.jQuery
@@ -38,9 +37,6 @@ class ParcelLab {
   //////////////////////
 
   initialize() {
-    Raven.config('https://2b7ac8796fe140b8b8908749849ff1ce@app.getsentry.com/94336', {
-      whitelistUrls: [/cdn\.parcellab\.com/],
-    }).install()
     this.initLanguage()
 
     if (this.propsCheck() === false) return this.showError() // check yourself before you ...
@@ -118,7 +114,6 @@ class ParcelLab {
     if (typeof err === 'string')
       console.error(`🙀  ${err}`)
     else if (typeof err === 'object') {
-      Raven.captureException(err)
       console.error(`🙀  ${err.message}`)
     }
   }
