@@ -9,6 +9,8 @@ Integrate parcelLab to your shop frontend (or any webpage). This plugin will fet
 Just place the following `<script>` snippet at the bottom of the `<body>` of your webpage.
 
 ```html
+<div id="pl-trace"></div>
+
 <script  type="text/javascript">
   (function (prcl) {/* Load parcelLab assets ... */
     if (window.ParcelLab) {return prcl();}function a() {var styles = document.createElement('link'); styles.rel = 'stylesheet'; styles.href = 'https://cdn.parcellab.com/css/v3/parcelLab.min.css'; document.getElementsByTagName('head')[0].appendChild(styles); }function b(cb) { var script = document.createElement('script'); script.async = true; script.src = 'https://cdn.parcellab.com/js/v3/parcelLab.min.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script); script.onload = cb; } a(); b(prcl);
@@ -19,8 +21,6 @@ Just place the following `<script>` snippet at the bottom of the `<body>` of you
     window._prcl = pl;
   });
 </script>
-
-<div id="pl-trace"></div>
 ```
 
 This snippet will load the needed assets and render the parcelLab plugin into the div with the id "#pl-trace". If you want the plugin to be rendered to an other DOM node you just have to change the id in the snippet. Further you can customize the plugin by extending the options object (see below).
