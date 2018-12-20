@@ -9,6 +9,7 @@ module.exports = {
   shop_prediction_endpoint: 'prediction',
   user_activity_endpoint: 'user-activity/click',
   default_root_node: '#parcelLab-trace-wrapper',
+  instagram_api_url: 'https://a96osof5j9.execute-api.eu-central-1.amazonaws.com/production/',
   google_api_key: require('./GOOGLE_API_KEY').key,
   mapShortenAddressForCouriers: ['ups-express', 'ups'],
   defualt_opts: {
