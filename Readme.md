@@ -71,6 +71,8 @@ The script can render an image banner link on the right, with these option param
 - `banner_image` : *String* (url of image or `'instagram'` for your latest instagram posting)
 - `banner_link` : *String* (url of link destination)
 
+⚠ *instagram banners are not enabled by default. ask our support if you want this feature.*
+
 `banner_link` is optional if `banner_image` is `'instagram'` where it defaults to your instagram page. 
 
 For a custom `banner_image` we recommend PNG or JPG with a ratio of `0.7 : 1`, but any other format can be chosen as well. A recommended solution is `700 x 1000 px` for optimal rendering on retina screens, with texts being at least 16px high.
