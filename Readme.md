@@ -66,12 +66,14 @@ Just drop the '#' from hex colors and/or encode as URI component if needed.
 
 ### Banner
 
-The script can render an image banner with a link, if both of the following two additional option parameters are given:
+The script can render an image banner link on the right, with these option parameters:
 
-- banner_image : String (Banner to render on the right)
-- banner_link : String (Link for banner image)
+- `banner_image` : *String* (url of image or `'instagram'` for your latest instagram posting)
+- `banner_link` : *String* (url of link destination)
 
-For the `banner_image` we recommend PNG or JPG with a ratio of `0.7 : 1`, but any other format can be chosen as well. A recommended solution is `700 x 1000 px` for optimal rendering on retina screens, with texts being at least 16px high.
+`banner_link` is optional if `banner_image` is `'instagram'` where it defaults to your instagram page. 
+
+For a custom `banner_image` we recommend PNG or JPG with a ratio of `0.7 : 1`, but any other format can be chosen as well. A recommended solution is `700 x 1000 px` for optimal rendering on retina screens, with texts being at least 16px high.
 
 ### Custom styling
 You can customize the buttons and the boxes of the plugin by simply passing the Object 'customStyles' in the options.  
