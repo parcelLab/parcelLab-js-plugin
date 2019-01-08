@@ -105,7 +105,7 @@ class ParcelLab {
     }
 
     // instagram post integration
-    if(this.options.banner_image === 'instagram') {
+    if (this.options.banner_image === 'instagram') {
       store.emit('fetchInstagram')
     }
 
@@ -396,13 +396,14 @@ class ParcelLab {
         // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
 
-        if(res && res.Item && res.Item.imgsrc && res.Item.imgsrc.thumb) {
+        if (res && res.Item && res.Item.imgsrc && res.Item.imgsrc.thumb) {
           state.options.banner_image = res.Item.imgsrc.thumb
-          if(!state.options.banner_link) state.options.banner_link = res.Item.igurl
+          if (!state.options.banner_link) state.options.banner_link = res.Item.igurl
         } else { // log error and fail silently
           console.log('⚠️ failed to retrieve latest instagram post', err)
-          state.options.banner_image = undefined
+          state.options.banner_image = null
         }
+
         this.store.set(state)
       })
     })
