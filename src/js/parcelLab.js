@@ -102,11 +102,11 @@ class ParcelLab {
     if (queryOK) {
       this.__cphash = ''
       store.emit('fetchCheckpoints')
-    }
 
-    // instagram post integration
-    if (this.options.banner_image && this.options.banner_image === 'instagram') {
-      store.emit('fetchInstagram')
+      // instagram post integration
+      if (this.options.banner_image && this.options.banner_image === 'instagram') {
+        store.emit('fetchInstagram')
+      }
     }
 
     this.setupMaraudersMap()
