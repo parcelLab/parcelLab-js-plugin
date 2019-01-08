@@ -105,7 +105,7 @@ class ParcelLab {
     }
 
     // instagram post integration
-    if (this.options.banner_image === 'instagram') {
+    if (this.options.banner_image && this.options.banner_image === 'instagram') {
       store.emit('fetchInstagram')
     }
 
