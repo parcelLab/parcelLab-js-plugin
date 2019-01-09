@@ -395,10 +395,9 @@ class ParcelLab {
       Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err,res) => {
         // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
-
+        console.log(res)
         if (res && res.Item && res.Item.imgsrc && res.Item.imgsrc.thumb) {
-          state.options.banner_image = res.Item.imgsrc.thumb
-          if (!state.options.banner_link) state.options.banner_link = res.Item.igurl
+          state.options.instagram = res.Item
         } else { // log error and fail silently
           console.log('⚠️ failed to retrieve latest instagram post', err)
           state.options.banner_image = null
