@@ -319,13 +319,23 @@ textarea.pl-form-input {
 }
 
 .pl-instagram-box {
+  font: 'San Francisco', Helvetica, Arial, san-serif;
+  font-size: 14px;
   .pl-box-heading {
     font-size: 1em;
     padding: 15px;
     text-align: left;
     // font-weight: bold;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
   }
   .pl-box-footer {
     padding: 15px;
+    a {
+      text-decoration: none;
+      color: #003569;
+    }
   }
 }
