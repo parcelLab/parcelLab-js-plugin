@@ -220,6 +220,12 @@ const languages = {
     code: 'CES',
     icon: 'https://cdn.parcellab.com/img/flags/cz.png',
   },
+  hu: {
+    name: 'hu',
+    label: 'Magyar',
+    code: 'HUN',
+    icon: 'https://cdn.parcellab.com/img/flags/hu.png',
+  },
 }
 
 const translations = {
@@ -686,6 +692,39 @@ const translations = {
     showPickuplocation: 'Zobrazit výdejní místo',
     articleList: 'Seznam článků',
     deliveryAddress: 'Doručovací adresa',
+  },
+  hu: {
+    delivery: 'Szállítás',
+    more: 'Részletek...',
+    orderNo: 'Rendelés',
+    predictions: {
+      OutForDelivery: 'Csomag érkezik <b>a mai napon</b>.',
+      DestinationDeliveryCenter: 'Csomag érkezik <b>a következő munkanapon</b>.',
+    },
+    openingHours: 'Otevírací doba',
+    weekDays: [
+      'Vasárnap',
+      'Hétfő',
+      'Kedd',
+      'Szerda',
+      'Csütörtök',
+      'Péntek',
+      'Szombat',
+    ],
+    alwaysOpened: 'Éjjel-nappal nyitva',
+    closesIn: 'Zárás',
+    opensIn: 'Nyitva',
+    error: {
+      delivery: 'Sajnos a szállítmányról nincs információ',
+      search: 'Sajnos erről a küldeményről nincs információ',
+    },
+    searchOrder: 'Küldemény keresése',
+    search: 'Keresés',
+    containsOf: 'Tartalom',
+    deliveries: 'Szállítmányok',
+    showPickuplocation: 'Felvétel címe',
+    articleList: 'Tételek listázása',
+    deliveryAddress: 'Szállítási cím',
   },
 }
 
