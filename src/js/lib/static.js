@@ -622,7 +622,7 @@ const translations = {
     searchOrder: 'szukaj zamówienia',
     search: 'Szukaj',
     containsOf: 'składa się z',
-    deliveries: 'dostawy',
+    deliveries: 'przesyłek',
     showPickuplocation: 'Pokaż punkt odbioru',
     articleList: 'Lista artykułów',
     deliveryAddress: 'Adres dostawy',
