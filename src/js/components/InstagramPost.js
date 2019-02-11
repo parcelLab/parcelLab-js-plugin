@@ -11,6 +11,8 @@ const hashtagify = str => {
 module.exports = function InstagramPost({ options }) {
   const { instagram } = options
   const username = instagram.igurl.replace(/\/$/g, '').split('/').pop()
+
+  const post = instagram.posts[0]
   
   const icon = Icon('instagram', '#d3d3d3', 25)
   icon.style.display = 'inline-block'
@@ -34,10 +36,10 @@ module.exports = function InstagramPost({ options }) {
       </div>
       <a href="${ instagram.igurl }" target="_blank">
         <img class="pl-img-responsive"
-        src="${ instagram.imgsrc.thumb }" style="border:none;">
+        src="${ post.imgsrc.thumb }" style="border:none;">
       </a>
       <div class="pl-box-footer">
-        ${ hashtagify(instagram.caption) }
+        ${ hashtagify(post.caption) }
       </div>
     </div>
   </div>
