@@ -198,13 +198,21 @@ class ParcelLab {
       const { body } = checkpoints
 
       if (header && header.length > 1) {
-        header = header.sort((x, y) => {
+        let delivered = header.filter(h => h.last_delivery_status.code === 'Delivered')
+        let notDelivered = header.filter(h => h.last_delivery_status.code !== 'Delivered')
+
+        const sortFunc = (x, y) => {
           const xTime = x && x.id ? body[x.id][body.length - 1] : null
           const yTime = y && y.id ? body[y.id][body.length - 1] : null
           const xMS = xTime ? new Date(xTime) : null
           const yMS = yTime ? new Date(yTime) : null
           return xMS > yMS ? -1 : 1
-        })
+        }
+
+      
+        delivered = delivered.sort(sortFunc)
+        notDelivered = notDelivered.sort(sortFunc)
+        header = [...notDelivered, ...delivered]
       }
 
       return { header, body }
