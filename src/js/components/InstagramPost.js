@@ -8,6 +8,14 @@ const hashtagify = str => {
   return raw(str.split(/\s/).map((wrd) => (wrd[0] === '#') ? Hashtag(wrd) : wrd).join(' '))
 }
 
+const timestampToDate = ts => {
+  const loc = navigator.language || 'en-US'
+  if (ts && typeof ts === 'number') {
+    return new Date(ts * 1000).toLocaleDateString(loc, { month: 'long', day: 'numeric', year: 'numeric' })
+  }
+  else return null
+}
+
 module.exports = function InstagramPost({ options }) {
   const { instagram } = options
   const username = instagram.igurl.replace(/\/$/g, '').split('/').pop()
@@ -47,6 +55,10 @@ module.exports = function InstagramPost({ options }) {
         src="${ post.imgsrc.thumb }" style="border:none;">
       </a>
       <div class="pl-box-footer">
+        <div style="margin-bottom: 10px;color: #aaa;font-size: 10px;">
+          ${ timestampToDate(post.timestamp) }
+        </div>
+
         <div>
           ${ hashtagify(post.caption) }
         </div>
@@ -56,12 +68,11 @@ module.exports = function InstagramPost({ options }) {
             <span style="margin-right:15px;">
               ${ heart } ${ post.likeCount || '0' }
             </span>
-            <span>
+            <span style="margin-right:15px;">
               ${ chat } ${ post.commentCount || '0' }
             </span>
           </div>
         ` : null }
-
       </div>
     </div>
   </div>
