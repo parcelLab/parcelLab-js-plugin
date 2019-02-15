@@ -19,8 +19,10 @@ const timestampToDate = ts => {
 module.exports = function InstagramPost({ options }) {
   const { instagram } = options
   const username = instagram.igurl.replace(/\/$/g, '').split('/').pop()
-
   const post = instagram.posts[0]
+  if (!post) return null
+
+  const localeDate = timestampToDate(post.timestamp)
   
   const icon = Icon('instagram', '#d3d3d3', 25)
   icon.style.display = 'inline-block'
@@ -55,9 +57,11 @@ module.exports = function InstagramPost({ options }) {
         src="${ post.imgsrc.thumb }" style="border:none;">
       </a>
       <div class="pl-box-footer">
-        <div style="margin-bottom: 10px;color: #aaa;font-size: 10px;">
-          ${ timestampToDate(post.timestamp) }
-        </div>
+        ${ localeDate ? html`
+          <div style="margin-bottom: 10px;color: #aaa;font-size: 10px;">
+            ${ localeDate }
+          </div>
+        ` : null}
 
         <div>
           ${ hashtagify(post.caption) }
