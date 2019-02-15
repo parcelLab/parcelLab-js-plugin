@@ -24,6 +24,14 @@ module.exports = function InstagramPost({ options }) {
   checkmark.style.verticalAlign = 'text-top'
   checkmark.style.marginLeft = '1px'
 
+  const heart = Icon('thumbs_up', '#aaaaaa', 20)
+  heart.style.display = 'inline-block'
+  heart.style.verticalAlign = 'sub'
+
+  const chat = Icon('chat', '#aaaaaa', 20)
+  chat.style.display = 'inline-block'
+  chat.style.verticalAlign = 'sub'
+
   return html`
   <div class="pl-box-aside-right pl-col pl-col-4">
     <div class="pl-box pl-instagram-box">
@@ -39,7 +47,21 @@ module.exports = function InstagramPost({ options }) {
         src="${ post.imgsrc.thumb }" style="border:none;">
       </a>
       <div class="pl-box-footer">
-        ${ hashtagify(post.caption) }
+        <div>
+          ${ hashtagify(post.caption) }
+        </div>
+
+        ${ (post.likeCount || post.commentCount) ? html`
+          <div style="margin-top: 10px;color:#aaa;">
+            <span style="margin-right:15px;">
+              ${ heart } ${ post.likeCount || '0' }
+            </span>
+            <span>
+              ${ chat } ${ post.commentCount || '0' }
+            </span>
+          </div>
+        ` : null }
+
       </div>
     </div>
   </div>
