@@ -145,21 +145,26 @@ class ParcelLab {
   }
 
   setGlobalStyles(customStyles) {
-    if (!customStyles) {
-      customStyles = {}
-      if (this.getUrlQuery('borderColor'))
-        customStyles.borderColor = `#${this.getUrlQuery('borderColor')}`
-      if (this.getUrlQuery('borderRadius'))
-        customStyles.borderRadius = this.getUrlQuery('borderRadius')
-      if (this.getUrlQuery('buttonColor'))
-        customStyles.buttonColor = `#${this.getUrlQuery('buttonColor')}`
-      if (this.getUrlQuery('buttonBackground'))
-        customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
-      if (this.getUrlQuery('buttonBackground'))
-        customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
-      if (this.getUrlQuery('margin'))
-        customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
-    }
+    if (!customStyles) customStyles = {}
+
+    if (this.getUrlQuery('borderColor'))
+      customStyles.borderColor = `#${this.getUrlQuery('borderColor')}`
+    if (this.getUrlQuery('borderRadius'))
+      customStyles.borderRadius = this.getUrlQuery('borderRadius')
+    if (this.getUrlQuery('buttonColor'))
+      customStyles.buttonColor = `#${this.getUrlQuery('buttonColor')}`
+    if (this.getUrlQuery('buttonBackground'))
+      customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+    if (this.getUrlQuery('buttonBackground'))
+      customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
+    if (this.getUrlQuery('margin'))
+      customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
+    if (this.getUrlQuery('iconColor'))
+      customStyles.iconColor = decodeURIComponent(`#${this.getUrlQuery('iconColor')}`)
+    if (this.getUrlQuery('tabIconColor'))
+      customStyles.tabIconColor = decodeURIComponent(`#${this.getUrlQuery('tabIconColor')}`)
+    if (this.getUrlQuery('activeTabIconColor'))
+      customStyles.activeTabIconColor = decodeURIComponent(`#${this.getUrlQuery('activeTabIconColor')}`)
 
     Object.keys(DEFAULT_STYLES).forEach(key => {
       if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
