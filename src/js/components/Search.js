@@ -47,7 +47,8 @@ const Search = ({ query, query_err, options, comingFromSearch }, emit) => {
     const handleSubmit = (evt) => {
       evt.preventDefault()
       const inpOrder = document.getElementById('pl-ts-trackingno')
-      if (inpOrder.value) emit('searchOrder', inpOrder.value)
+      const val = inpOrder.value.trim()
+      if (val) emit('searchOrder', val)
     }
     searchBody = html`
       <form onsubmit=${handleSubmit}>

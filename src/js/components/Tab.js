@@ -19,6 +19,10 @@ const Tab = (tab, emit) => {
     tab.statusText = `${label} ${dateOfMonth} ${month}`
   }
 
+  let iconColor = window.parcelLab_styles.tabIconColor || window.parcelLab_styles.buttonColor
+  if (tab.active && window.parcelLab_styles.activeTabIconColor)
+    iconColor = window.parcelLab_styles.activeTabIconColor
+
   return html`
     <div class="pl-col pl-col-${tab.colSize}" onclick="${handleClick}">
       <div class="pl-tab pl-tab-${tab.transitCode} pl-button pl-space-bottom pl-is-fullwidth pl-${tab.active ? 'active' : 'not-active' }">
@@ -36,7 +40,7 @@ const Tab = (tab, emit) => {
           
           <div class="pl-status">
             <div class="pl-icon">
-              ${Icon(tab.iconName, window.parcelLab_styles.buttonColor, '35')}
+              ${Icon(tab.iconName, iconColor, '35')}
             </div>
           </div>
         </div>
