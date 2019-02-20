@@ -90,8 +90,8 @@ options.customStyles = {
   buttonColor: '#333', // sets text color for buttons (default: #333)
   buttonBackground: '#e6e6e6', // sets background color for buttons (default: #e6e6e6)
   iconColor: '#000', // sets color for the status icons (default: #000)
-  tabIconColor: '#000', // sets color for the order tab icons (default: -> #333)
-  activeTabIconColor: '#000', // sets color only for the active order tab icon (default: #333)
+  tabIconColor: '#000', // sets color for the order tab icons (default: buttonColor #333)
+  activeTabIconColor: '#000', // sets color only for the active order tab icon (default: buttonColor #333)
   margin: '0px 0px', // sets mnargin for #pl-main-box (default: 0px)
 };
 ```
