@@ -25,11 +25,11 @@ const IconState = ({ checkpoints, activeTracking, options }) => {
   const currentCp = visibleCps[0]
   if (!currentCp) return null // show nothing if no currentCp
 
-  const xmas = options.xmas_theme || false
-  let cpStateIconName = getIconName(currentCp.status, xmas)
-  let orderProcessedIconName = getIconName('OrderProcessed', xmas)
-  let inTransitIconName = getIconName('InTransit', xmas)
-  let successIconName = getIconName('Delivered', xmas)
+  const theme = options.theme
+  let cpStateIconName = getIconName(currentCp.status, theme)
+  let orderProcessedIconName = getIconName('OrderProcessed', theme)
+  let inTransitIconName = getIconName('InTransit', theme)
+  let successIconName = getIconName('Delivered', theme)
 
   let firstIcon = null
   let secondIcon = null

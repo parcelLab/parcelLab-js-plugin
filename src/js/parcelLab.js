@@ -77,7 +77,11 @@ class ParcelLab {
     if (this.getUrlQuery('show_articleList'))
       this.options.show_articleList = true
     if (this.getUrlQuery('xmas_theme'))
-      this.options.xmas_theme = true
+      this.options.theme = 'xmas'
+    if (this.getUrlQuery('easter_theme'))
+      this.options.theme = 'easter'
+    if (this.getUrlQuery('icon_theme'))
+      this.options.theme = this.getUrlQuery('icon_theme')
 
     this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
 

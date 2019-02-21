@@ -2,106 +2,128 @@ const transitStates = {
   OrderProcessed: {
     icon: 'order_processed',
     xmas_icon: 'christmas_gift',
+    easter_icon: 'easter_order_processed',
   },
   Pending: {
     icon: 'order_processed',
     xmas_icon: 'christmas_gift',
+    easter_icon: 'easter_order_processed',
   },
   PickUpScheduled: {
     icon: 'order_processed',
     xmas_icon: 'christmas_gift',
+    easter_icon: 'easter_order_processed',
   },
   Upgrade: {
     icon: 'info_truck',
     color: '#3378B9',
+    easter_icon: 'easter_info_truck',
   },
   InboundScan: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   InTransit: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   ExportHub: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   ImportHub: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   DestinationDeliveryCenter: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   DestinationDeliveryDepot: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   OutForDelivery: {
     icon: 'in_transit',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_in_transit',
   },
   Rerouted: {
     icon: 'warning_truck',
+    easter_icon: 'easter_warning_truck',
   },
   FailedAttemptFirst: {
     icon: 'warning_truck',
     color: '#E59400',
     alert: 'warning',
+    easter_icon: 'easter_warning_truck',
   },
   FailedAttemptSecond: {
     icon: 'warning_truck',
     color: '#E59400',
     alert: 'warning',
+    easter_icon: 'easter_warning_truck',
   },
   FailedAttemptFinal: {
     icon: 'warning_truck',
     color: '#DB524B',
     alert: 'danger',
+    easter_icon: 'easter_warning_truck',
   },
   PickupReadyToday: {
     icon: 'map',
     color: '#58B957',
     alert: 'success_standard',
+    easter_icon: 'easter_map',
   },
   PickupReadyNextDay: {
     icon: 'map',
     color: '#58B957',
     alert: 'success_standard',
+    easter_icon: 'easter_map',
   },
   Delivered: {
     icon: 'success_standard',
     xmas_icon: 'christmas_tree',
     color: '#58B957',
     alert: 'success',
+    easter_icon: 'easter_delivered',
   },
   Exception: {
     icon: 'warning_truck',
     color: '#DB524B',
     alert: 'danger',
+    easter_icon: 'easter_warning_truck',
   },
   Stored: {
     icon: 'info_truck',
     percentage: '50',
+    easter_icon: 'easter_info_truck',
   },
   Return: {
     icon: 'return',
     color: '#DB524B',
     alert: 'danger',
+    easter_icon: 'easter_return',
   },
   default: {
     icon: 'info_truck',
     xmas_icon: 'christmas_sleigh',
+    easter_icon: 'easter_info_truck',
   },
 }
 
-const getIconName = (tStatus, xmas=false) => {
-  const type = xmas ? 'xmas_icon' : 'icon'
+const getIconName = (tStatus, theme) => {
+  const type = theme ? `${theme}_icon` : 'icon'
   if (transitStates[tStatus]) {
     return transitStates[tStatus][type] || transitStates[tStatus]['icon']
-  } else return xmas ? transitStates.default.xmas_icon : transitStates.default.icon
+  } else return transitStates.default[type] || transitStates.default['icon']
 }
 
 const courierNames = {

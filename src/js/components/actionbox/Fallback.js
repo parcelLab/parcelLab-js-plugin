@@ -7,8 +7,8 @@ const { makeBig } = require('../../lib/helpers')
 module.exports = function Fallback(tHeader, options) {
   if (!tHeader || !tHeader.last_delivery_status) return null
   const { code, status, status_details } = tHeader.last_delivery_status
-  const xmas = options.xmas_theme || false
-  const iconName = getIconName(code, xmas)
+  const theme = options.theme
+  const iconName = getIconName(code, theme)
   const icon = Icon(iconName, null, '80')
   makeBig(icon)
 

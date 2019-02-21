@@ -4,8 +4,8 @@ const { getIconName } = require('../../lib/static')
 const { makeBig } = require('../../lib/helpers')
 
 const OrderProcessed = ({ actionBox }, options) => {
-  const xmas = options.xmas_theme || false
-  let iconName = getIconName('OrderProcessed', xmas)
+  const theme = options.theme
+  let iconName = getIconName('OrderProcessed', theme)
 
   return html`
     <div class="pl-box pl-action-box pl-box-icon-status">

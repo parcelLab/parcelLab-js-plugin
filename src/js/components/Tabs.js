@@ -7,7 +7,7 @@ const Tabs =  ({ checkpoints, activeTracking, query, options }, emit)=> {
 
   const { lang } = query
   const colSize = checkpoints.header.length === 2 ? 6 : 4
-  const xmas = options.xmas_theme || false
+  const theme = options.theme
   const tabs = checkpoints.header.map((cph, ind) => {
     const tabData = {
       colSize,
@@ -16,7 +16,7 @@ const Tabs =  ({ checkpoints, activeTracking, query, options }, emit)=> {
       lang,
       active: activeTracking === ind,
       transitCode: cph.last_delivery_status ? cph.last_delivery_status.code.toLowerCase() : '',
-      iconName: getIconName(cph.last_delivery_status.code, xmas),
+      iconName: getIconName(cph.last_delivery_status.code, theme),
       statusText: cph.last_delivery_status ? cph.last_delivery_status.status : null,
       id: cph.id,
       actionBox: cph.actionBox,
