@@ -30,7 +30,7 @@ const App = (state, emit) => {
 
     if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404
     && state.query.courier && state.query.trackingNo
-    && state.courier_tracking_url)
+    && state.fallback_deeplink)
       errApp.push(FallbackFurtherInfos(state))
     
     return Layout(errApp)

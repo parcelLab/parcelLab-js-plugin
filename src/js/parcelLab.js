@@ -429,8 +429,8 @@ class ParcelLab {
     this.store.on('fetchCourierTrackingUrl', () => {
       Api.getCourierTrackingURL({ ...store.get().query }, (err, res) => {
         if (err) return null
-        if (res && res.courier_tracking_url) {
-          store.set({ courier_tracking_url: res.courier_tracking_url })
+        if (res && res.fallback_deeplink) {
+          store.set({ fallback_deeplink: res.fallback_deeplink })
         }
       })
     })
