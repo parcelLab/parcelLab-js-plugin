@@ -9,11 +9,7 @@ const FurtherInfos = ({ courier, tracking_number }, langName) => {
       ${ courier.trackingurl_label }
       ${ sub }
     </a>`
-  else
-    return html`<div id="pl-courier-fwd-link" style="opacity:.6;" class="pl-button pl-is-fullwidth">
-        ${ courier.trackingurl_label }
-        ${ sub }
-    </div>`
+  else return null
 }
 
 module.exports = FurtherInfos

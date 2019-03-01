@@ -8,6 +8,7 @@ module.exports = {
   prediction_endpoint: 'prediction/tracking',
   shop_prediction_endpoint: 'prediction',
   user_activity_endpoint: 'user-activity/click',
+  courier_tracking_url_endpoint: 'courier-tracking-url',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
   google_api_key: require('./GOOGLE_API_KEY').key,

@@ -8,6 +8,7 @@ const InstagramPost = require('./InstagramPost')
 const Search = require('./Search')
 const Alert = require('./Alert')
 const Note = require('./Note')
+const FallbackFurtherInfos = require('./FallbackFurtherInfos')
 const Loading = require('./Loading')
 const StyleSet = require('./StyleSet')
 
@@ -22,16 +23,26 @@ const createLayout = styleSet => content => html`
 const App = (state, emit) => {
   const Layout = createLayout(StyleSet())
 
-  // query not sufficient
+  // fetch failed
   if (state.query_err || state.fetchCheckpoints_failed) {
-    if (state.options.show_searchForm)
-      return Layout(Search(state, emit))
-    else
-      return Layout(Alert(state))
+    let errApp = []
+    state.options.show_searchForm ? errApp.push(Search(state, emit)) : errApp.push(Alert(state))
 
-  } else if (state.checkpoints && state.checkpoints.header.length === 0) { // tracking w/ no cps
+    if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404
+    && state.query.courier && state.query.trackingNo
+    && state.courier_tracking_url)
+      errApp.push(FallbackFurtherInfos(state))
+    
+    return Layout(errApp)
+  }
+  
+  // tracking w/ no cps
+  if (state.checkpoints && state.checkpoints.header.length === 0) {
     return Layout(Alert(state))
-  } else if (!state.checkpoints) return Layout(Loading()) // still loading
+  } 
+  
+  // still loading
+  if (!state.checkpoints) return Layout(Loading()) 
 
 
   const header = Header(state, emit)

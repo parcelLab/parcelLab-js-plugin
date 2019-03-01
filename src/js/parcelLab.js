@@ -264,8 +264,10 @@ class ParcelLab {
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
       Api.getCheckpoints(this.store.get().query, (err, res) => {
-        if (err) this.store.set({ fetchCheckpoints_failed: err })
-        else {
+        if (err) {
+          this.store.set({ fetchCheckpoints_failed: err })
+          if (err === 404) store.emit('fetchCourierTrackingUrl')
+        } else {
           if (res && res._rt) { // refetch checkpoints after 3 sek
             window.setTimeout(() => {
               this.store.emit('fetchCheckpoints')
@@ -423,6 +425,15 @@ class ParcelLab {
         this.store.set(state)
       })
     })
+
+    this.store.on('fetchCourierTrackingUrl', () => {
+      Api.getCourierTrackingURL({ ...store.get().query }, (err, res) => {
+        if (err) return null
+        if (res && res.courier_tracking_url) {
+          store.set({ courier_tracking_url: res.courier_tracking_url })
+        }
+      })
+    })
   }
 
   setupMaraudersMap() {
@@ -441,7 +452,7 @@ class ParcelLab {
   }
 
   _generateCPhash(obj={}) {
-    if (typeof obj === 'object' && obj.header && obj.body) {
+    if (obj && typeof obj === 'object' && obj.header && obj.body) {
       const { header, body } = obj
       return JSON.stringify({ header, body }).length
     }

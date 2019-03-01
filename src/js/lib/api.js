@@ -7,6 +7,7 @@ const PICKUP_LOCATION_ENDPOINT = _settings.pickup_location_endpoint
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint
 const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint
 const USER_ACTIVITY_ENDPOINT = _settings.user_activity_endpoint
+const COURIER_TRACKING_URL_ENDPOINT = _settings.courier_tracking_url_endpoint
 
 // API calls for all the modules
 const status = {
@@ -43,6 +44,8 @@ function handleRequestResponse(request, callback) {
   if (!request) return callback(new Error('Cant parse empty requestResponse'))
   if (request && request.status >= 200 && request.status < 300) {
     return callback(null, handleJSON(request.responseText.trim()))
+  } else if (request.status === 404) {
+    return callback(404)
   } else {
     return callback(`Request Error at xhr request: ${request.status} ~> ${request.responseText}`)
   }
@@ -56,9 +59,16 @@ function _get(url, callback) {
   if (window && window.fetch) {
     window.fetch(url)
       .then(res => handleFetchResponse(res))
-      .then(res => res.text())
-      .then(res =>  handleJSON(res))
-      .then(res => callback(null, res))
+      .then(res => {
+        if (res) {
+          res
+            .text()
+            .then(res => handleJSON(res))
+            .then(res => callback(null, res))
+        } else {
+          callback(404)
+        }
+      })
       .catch(err => callback(err))
   } else {
     // Fallback if no fetch available
@@ -204,4 +214,8 @@ exports.saveUAct = function (link, propsObj, callback) {
   const url = _toURL(BASE_URL, USER_ACTIVITY_ENDPOINT, _objToQueryArr(propsObj))
   const data = { link: link }
   _post(url, data, callback)
+}
+
+exports.getCourierTrackingURL = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, COURIER_TRACKING_URL_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
