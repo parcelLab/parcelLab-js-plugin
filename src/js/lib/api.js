@@ -7,7 +7,7 @@ const PICKUP_LOCATION_ENDPOINT = _settings.pickup_location_endpoint
 const PREDICTION_ENDPOINT = _settings.prediction_endpoint
 const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint
 const USER_ACTIVITY_ENDPOINT = _settings.user_activity_endpoint
-const COURIER_TRACKING_URL_ENDPOINT = _settings.courier_tracking_url_endpoint
+const COURIER_DEEPLINK_ENDPOINT = _settings.courier_deeplink_endpoint
 
 // API calls for all the modules
 const status = {
@@ -217,5 +217,5 @@ exports.saveUAct = function (link, propsObj, callback) {
 }
 
 exports.getCourierTrackingURL = function (propsObj, callback) {
-  _get(_toURL(BASE_URL, COURIER_TRACKING_URL_ENDPOINT, _objToQueryArr(propsObj)), callback)
+  _get(_toURL(BASE_URL, COURIER_DEEPLINK_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
