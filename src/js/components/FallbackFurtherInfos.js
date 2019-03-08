@@ -1,8 +1,8 @@
 const html = require('nanohtml')
 const { translate } = require('../../js/lib/translator.js')
 
-const FallbackFurtherInfos = ({ options, fallback_deeplink }) => {
-  const { courier, trackingNo, lang } = options
+const FallbackFurtherInfos = ({ query, fallback_deeplink }) => {
+  const { courier, trackingNo, lang } = query
   if (courier && trackingNo && fallback_deeplink) {
     const sub = (trackingNo && trackingNo !== 'unknown') ? html`<div style="font-size:.9em;opacity:.6;">${ translate('delivery', lang.name) } ${ trackingNo }</div>` : null
 
