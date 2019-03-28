@@ -412,10 +412,11 @@ class ParcelLab {
     // fetch latest ig post served by our api
     this.store.on('fetchInstagram', () => {
       Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err,res) => {
+        console.log('RES', { res })
         // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
         
-        if (res && res.Item && res.Item.imgsrc && res.Item.imgsrc.thumb) {
+        if (res && res.Item && res.Item.posts && res.Item.posts.length > 0) {
           state.options.instagram = res.Item
         } else { // log error and fail silently
           console.log('⚠️ failed to retrieve latest instagram post', err)
