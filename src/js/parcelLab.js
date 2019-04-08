@@ -142,6 +142,8 @@ class ParcelLab {
       console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!')
 
     this.options = opts
+
+    if (opts.customTranslations) window.parcelLab_customTranslations = opts.customTranslations
   }
 
   initStyles() {

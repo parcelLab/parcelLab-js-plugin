@@ -59,6 +59,7 @@ These are the available options:
 - show_note : String (renders a note box on top - useful for showing important information)
 - onRendered : Function (the plugin will run this function whenever it (re)renders)
 - icon_theme : 'xmas' | 'easter' (activates the themed icons 🎄/🐰)
+- customTranslations: Object (see below)
 
 All options can also be set via URL search query.  
 Just drop the '#' from hex colors and/or encode as URI component if needed.  
@@ -133,6 +134,29 @@ If you want to use the plugin in a non-customer facing website (e.g. internal pa
 
 ```html
 <style> div#pl-action-box-container { display: none; } </style>
+```
+
+## Custom translations
+You can change the static plugin text parts with your own translations. Therefor just add the attribute `customTranslations` to options and fill with your custom texts. You can find the full list of texts, used by the plugin [here](https://github.com/parcelLab/parcelLab-js-plugin/blob/master/src/js/lib/static.js#L253). If you don't define a language in your customTranslations, the plugin will fallback to the original text, when rendered in this language.
+
+### Custom translations example
+Lets change the texts for the search form:
+```javascript
+  ...
+  options.customTranslations = {
+    de: {
+      searchOrder: 'Bestellnummer eingeben', // translation for search input placeholder
+      zip: 'PLZ eingeben', // translation for zip input placeholder
+      search: 'Suche starten', // translation for search button text
+    },
+    en: {
+      searchOrder: 'Type order number',
+      zip: 'Type zip code',
+      search: 'Start search',
+    },
+  }
+  var parcelLab = new ParcelLab('#pl-trace', options);
+  parcelLab.initialize();
 ```
 
 ## Integrate delivery time prediction

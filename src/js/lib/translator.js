@@ -1,9 +1,18 @@
 const statics = require('./static')
 
 const translate = function (word, lang='en') {
-  if (statics.translations[lang] && statics.translations[lang][word]) {
+  const customTranslations = window.parcelLab_customTranslations
+
+  // try customTranslations
+  if (customTranslations && customTranslations[lang] && customTranslations[lang][word]) {
+    return customTranslations[lang][word]
+  }
+  
+  else if (statics.translations[lang] && statics.translations[lang][word]) {
     return statics.translations[lang][word]
-  } else {
+  }
+  
+  else {
     console.warn('Can not translate "' + word + '" into ' + lang)
 
     // try to translate to en
