@@ -60,22 +60,28 @@ class ParcelLab {
 
     if (this.getUrlQuery('selectedTrackingNo'))
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
+
     if (this.getUrlQuery('show_searchForm'))
       this.options.show_searchForm = this.getUrlQuery('show_searchForm')
     if (this.getUrlQuery('show_zipCodeInput'))
       this.options.show_zipCodeInput = this.getUrlQuery('show_zipCodeInput')
     if (this.getUrlQuery('rerouteButton'))
       this.options.rerouteButton = this.getUrlQuery('rerouteButton')
+
     if (this.getUrlQuery('banner_image'))
       this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
     if (this.getUrlQuery('banner_link'))
       this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link'))
+
     if (this.getUrlQuery('pwrdBy_parcelLab'))
       this.options.disableBranding = true
     if (this.getUrlQuery('disableVoting'))
       this.options.disableVoting = true
     if (this.getUrlQuery('show_articleList'))
       this.options.show_articleList = true
+
+    if (this.options.icon_theme) // transfer attr for more clarity
+      this.options.theme = this.options.icon_theme
     if (this.getUrlQuery('xmas_theme'))
       this.options.theme = 'xmas'
     if (this.getUrlQuery('easter_theme'))
