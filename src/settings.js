@@ -5,7 +5,7 @@ module.exports = {
   vote_endpoint: 'v2/vote-courier/',
   vote_communication_endpoint: 'v2/vote-communication/',
   pickup_location_endpoint: 'pickup-location',
-  prediction_endpoint: 'prediction/tracking',
+  prediction_endpoint: 'prediction/parcel',
   shop_prediction_endpoint: 'prediction',
   user_activity_endpoint: 'user-activity/click',
   courier_deeplink_endpoint: 'deeplink-fallback',
