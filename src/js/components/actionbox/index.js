@@ -8,6 +8,7 @@ const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 const DeliveryAddress = require('./DeliveryAddress')
 const ArticleList = require('./ArticleList')
+const LiveTracking = require('./LiveTracking')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
@@ -16,7 +17,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
 
     switch (tHeader.actionBox.type) {
     case 'pickup-location':
-      if (tHeader.actionBox.data)
+     if (tHeader.actionBox.data)
         return PickupLocation(tHeader, query.lang, emit)
       else
         return [
@@ -49,6 +50,16 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       return [NextAction(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'returned':
       return Returned(tHeader)
+    case 'live-tracking':
+    if (tHeader.actionBox.info.cty) {
+    return LiveTracking(tHeader, query.lang, emit)
+    }
+    else
+        return [
+          Fallback(tHeader, options),
+          DeliveryAddress(tHeader, query.lang),
+          ArticleList(tHeader, query.lang, options),
+        ]
     default:
       return [
         Fallback(tHeader, options),

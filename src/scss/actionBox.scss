@@ -274,7 +274,13 @@ h3 {
 
 #pl-pickup-location-map {
   height: 250px;
-  width:100%;
+  width: 100%;
+}
+
+#pl-live-location-map {
+  height: 250px;
+  width: 100%;
+  text-align: center !important;
 }
 
 .pl-box-pseudo-map {
