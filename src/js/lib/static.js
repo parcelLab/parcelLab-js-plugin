@@ -371,7 +371,7 @@ const translations = {
       'Samedi',
     ],
     alwaysOpened: 'Ouvert toute la journée',
-    closesIn: 'ferme en',
+    closesIn: 'ferme dans',
     opensIn: 'ouvre dans',
     error: {
       delivery: "Malheureusement, ce numéro de colis ou de commande n'est pas valide.",
@@ -437,8 +437,8 @@ const translations = {
       'Zaterdag',
     ],
     alwaysOpened: 'De hele dag geopend',
-    closesIn: 'Sluit om',
-    opensIn: 'Opent om',
+    closesIn: 'Sluit over',
+    opensIn: 'Opent over',
     error: {
       delivery: 'Helaas is de levering niet bekend.',
       search: 'Helaas is de levering niet bekend.',
