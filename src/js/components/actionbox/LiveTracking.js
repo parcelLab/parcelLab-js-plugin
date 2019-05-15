@@ -1,16 +1,13 @@
 const html = require('nanohtml');
-const STATIC_GOOGLE_API_KEY = require('../../../settings').static_google_api_key;
+const GOOGLE_API_KEY = require('../../../settings').google_api_key;
 const { translate } = require('../../../js/lib/translator.js');
+
+const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`;
 
 const Map = (id, actionBox) => {
   const elem = html`
-    <div id="pl-live-location-map" data-tid="${id}">
-      <img
-        src="https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(
-          `${actionBox.info.cty},${actionBox.info.ctry.n}`
-        )}&autoscale=1&size=300x250&zoom=12&maptype=terrain&format=png&visual_refresh=true&key=${STATIC_GOOGLE_API_KEY}"
-        alt=""
-      />
+    <div id="pl-pickup-location-map" data-tid="${id}">
+      <iframe src="${generateMapSrc(`${actionBox.info.cty},${actionBox.info.ctry.n}`)}" frameborder="0" style="width:100%;height:100%;border:0px;"></iframe>
     </div>
   `;
 
