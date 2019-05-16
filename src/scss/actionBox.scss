@@ -273,14 +273,39 @@ h3 {
 }
 
 #pl-pickup-location-map {
-  height: 250px;
+  height: 100%; 
   width: 100%;
 }
 
 #pl-live-location-map {
   height: 250px;
   width: 100%;
-  text-align: center !important;
+  position: relative;
+}
+
+#pl-map-iframe {
+  filter: blur(1px);
+}
+
+#pl-map-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .1);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, .4);
+    transition: all .2s linear;
+  }
+}
+
+#pl-truck-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .pl-box-pseudo-map {

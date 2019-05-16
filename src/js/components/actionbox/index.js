@@ -51,15 +51,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     case 'returned':
       return Returned(tHeader)
     case 'live-tracking':
-      if (tHeader.actionBox.info.cty) {
-        return LiveTracking(tHeader, query.lang, emit)
-      }
-      else
-        return [
-          Fallback(tHeader, options),
-          DeliveryAddress(tHeader, query.lang),
-          ArticleList(tHeader, query.lang, options),
-          ]
+      return LiveTracking(tHeader, query.lang, emit)
     default:
       return [
         Fallback(tHeader, options),
