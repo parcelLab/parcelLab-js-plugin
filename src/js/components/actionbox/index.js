@@ -50,8 +50,8 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       return [NextAction(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'returned':
       return Returned(tHeader)
-    case 'live-tracking':
-      return LiveTracking(tHeader, query.lang, emit)
+    case 'live-tracking':    
+      return LiveTracking(tHeader, query)
     default:
       return [
         Fallback(tHeader, options),
