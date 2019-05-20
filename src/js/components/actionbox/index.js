@@ -12,6 +12,8 @@ const LiveTracking = require('./LiveTracking')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
+  console.log(checkpoints)
+  console.log(activeTracking)
 
   if (tHeader && tHeader.actionBox) {
 
@@ -51,7 +53,8 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     case 'returned':
       return Returned(tHeader)
     case 'live-tracking':    
-      return LiveTracking(tHeader, query)
+      return LiveTracking(tHeader, query, checkpoints.body[tHeader.id])
+
     default:
       return [
         Fallback(tHeader, options),

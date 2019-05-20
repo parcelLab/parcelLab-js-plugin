@@ -4,6 +4,7 @@
   }
 }
 
+
 .pl-box-aside-left {
   display:block !important;
   padding: 0 20px 0 0;
@@ -195,6 +196,13 @@ h3 {
   .pl-location-link {
 
   }
+}
+
+.pl-box-schedule-message {
+  text-align: center;
+  // ultra filthy hack: 
+  // makes the scheduled delivery window line break nicely in most cases...hopefully
+  padding: 0 50px 10px;
 }
 
 .pl-opening-hours-box {

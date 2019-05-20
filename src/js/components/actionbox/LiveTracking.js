@@ -1,15 +1,14 @@
 const html = require('nanohtml');
-const GOOGLE_API_KEY = require('../../../settings').google_api_key;
-const { translate } = require('../../../js/lib/translator.js');
+const GOOGLE_API_KEY = require('../../../settings').google_api_key
+const { translate } = require('../../../js/lib/translator.js')
 
-const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`;
+const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`
 
 const Map = (id, actionBox, courier, query) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
-        <iframe id="pl-map-iframe" src="${generateMapSrc(
-          `${actionBox.info.cty},${actionBox.info.ctry.n}`
-        )}" frameborder="0" style="width:100%;height:100%;border:0px;z-index:2"">
+        <iframe id="pl-map-iframe" src="${generateMapSrc(`${actionBox.info.cty},${actionBox.info.ctry.n}`)}" 
+          frameborder="0" style="width:100%;height:100%;border:0px;z-index:2"">
         </iframe>
         <a href="${courier.trackingurl}">
         <div id="pl-map-overlay">
@@ -17,18 +16,27 @@ const Map = (id, actionBox, courier, query) => {
         </div>
       </a>
     </div>
-  `;
+  `
 
-  elem.isSameNode = function(target) {
+  elem.isSameNode = function (target) {
     // dont rerender map if it is still the same tid
-    return id === target.dataset['tid'];
-  };
+    return id === target.dataset['tid']
+  }
 
-  return elem;
-};
+  return elem
+}
 
-const LiveTracking = ({ id, actionBox, last_delivery_status, courier }, query) => {
-  if (!actionBox.info.cty) return null;
+const getDeliveryWindow = (checkpoints) => {
+  let i = checkpoints.length
+  while (i--) {
+    if (['Scheduled'].indexOf(checkpoints[i].status) >= 0) {
+      return checkpoints[i].full_courier_status
+    }
+  } return null
+}
+
+const LiveTracking = ({ id, actionBox, last_delivery_status, courier }, query, checkpoints) => {
+  if (!actionBox.info.cty) return null
 
   const heading = last_delivery_status
     ? html`
@@ -36,13 +44,17 @@ const LiveTracking = ({ id, actionBox, last_delivery_status, courier }, query) =
           ${last_delivery_status.status}
         </div>
       `
-    : null;
+    : null
+
+  const timeWindow = getDeliveryWindow(checkpoints)
+  console.log(timeWindow)
 
   return html`
     <div class="pl-box pl-action-box pl-box-location">
       ${heading}
-
       <div class="pl-box-body pl-box-location-body">
+        <div class="pl-box-schedule-message">${timeWindow}</div>
+
         ${Map(id, actionBox, courier, query)}
 
         <div class="pl-location-link-container">
@@ -56,8 +68,9 @@ const LiveTracking = ({ id, actionBox, last_delivery_status, courier }, query) =
           </a>
         </div>
       </div>
+      
     </div>
-  `;
-};
+  `
+}
 
-module.exports = LiveTracking;
+module.exports = LiveTracking
