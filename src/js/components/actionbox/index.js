@@ -12,14 +12,11 @@ const LiveTracking = require('./LiveTracking')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
-  console.log(checkpoints)
-  console.log(activeTracking)
-
   if (tHeader && tHeader.actionBox) {
 
     switch (tHeader.actionBox.type) {
     case 'pickup-location':
-     if (tHeader.actionBox.data)
+      if (tHeader.actionBox.data)
         return PickupLocation(tHeader, query.lang, emit)
       else
         return [

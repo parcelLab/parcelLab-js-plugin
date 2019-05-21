@@ -314,7 +314,6 @@ class ParcelLab {
 
     // fetch pickup location
     this.store.on('fetchPickupLocation', id => {
-      console.log('fetching pickup location for ', id)
       Api.getPickupLocation({ ...store.get().query, id }, (err, res) => {
         if (err) this.store.set({ fetchPickupLocation_failed: err })
         else if (res) {
