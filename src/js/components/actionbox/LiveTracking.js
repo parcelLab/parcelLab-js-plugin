@@ -18,7 +18,7 @@ const getDeliveryWindow = (checkpoints) => {
 const Map = (id, actionBox, courier, query) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
-        <iframe src="${generateMapSrc(`${actionBox.info.cty},${actionBox.info.ctry.n}`)}" 
+        <iframe src="${generateMapSrc(`${actionBox.info.city},${actionBox.info.destination_country_iso3}`)}" 
           frameborder="0" style="width:100%;height:100%;border:0px;z-index:2"">
         </iframe>
         <a href="${courier.trackingurl}" target="_blank">
@@ -39,7 +39,7 @@ const Map = (id, actionBox, courier, query) => {
 }
 
 const LiveTracking = ({ id, actionBox, last_delivery_status, courier }, query, checkpoints) => {
-  if (!actionBox.info || !actionBox.info.cty) return null
+  if (!actionBox.info || !actionBox.info.city) return null
 
   const heading = last_delivery_status
     ? html`
