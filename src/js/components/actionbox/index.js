@@ -50,7 +50,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     case 'returned':
       return Returned(tHeader)
     case 'live-tracking':    
-      return LiveTracking(tHeader, query, checkpoints.body[tHeader.id])
+      return LiveTracking(tHeader, query)
 
     default:
       return [

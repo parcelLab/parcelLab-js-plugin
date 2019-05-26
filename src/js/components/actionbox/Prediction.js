@@ -55,10 +55,12 @@ const Prediction = ({ actionBox }) => {
   return html`
     <div class="pl-spaced-list">
       <div class="pl-box pl-action-box pl-box-calendar">
-        ${ heading} ${ calendar}
+        ${ heading}
+        ${ calendar}
       </div>
     
-      ${ timeBox} ${ caption}
+      ${ timeBox}
+      ${ caption}
     </div>
   `
 }

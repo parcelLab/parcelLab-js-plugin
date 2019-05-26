@@ -1,18 +1,24 @@
 const html = require('nanohtml')
 const GOOGLE_API_KEY = require('../../../settings').google_api_key
-const { translate } = require('../../../js/lib/translator.js')
+const Icon = require('../Icon')
 
 const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
 
-const getDeliveryWindow = (checkpoints) => {
-  let i = checkpoints.length
-  while (i--) {
-    if (['Scheduled'].indexOf(checkpoints[i].status) >= 0) {
-      return checkpoints[i].full_courier_status
-    }
-  } return null
+const checkTimeFormat = function (i) {
+  if (i < 10) {
+    i = '0' + i
+  }
+  return i
+}
+
+const generatePrettyTime = timeString => {
+  if (!timeString) return null
+  const date = new Date(timeString)
+  const hours = checkTimeFormat(date.getHours())
+  const mins = checkTimeFormat(date.getMinutes())
+  return `${hours}:${mins}`
 }
 
 const Map = (id, actionBox, courier, query) => {
@@ -24,7 +30,7 @@ const Map = (id, actionBox, courier, query) => {
         <a href="${courier.trackingurl}" target="_blank">
         <div id="pl-map-overlay">
           <img id="pl-truck-icon" src="${generateTruckIconSrc(query.userId || 1612164)}" alt="" />
-          <div id="pl-live-delivery-text">${translate('liveDelivery', query.lang.name)}</div>
+          <div id="pl-live-delivery-text">${actionBox.label}</div>
         </div>
       </a>
     </div>
@@ -38,33 +44,50 @@ const Map = (id, actionBox, courier, query) => {
   return elem
 }
 
-const LiveTracking = ({ id, actionBox, last_delivery_status, courier }, query, checkpoints) => {
-  if (!actionBox.info || !actionBox.info.city) return null
-
-  const heading = last_delivery_status
-    ? html`
-        <div class="pl-box-heading pl-box-location-heading">
-          ${last_delivery_status.status}
-        </div>
-      `
-    : null
-
-  const timeWindow = getDeliveryWindow(checkpoints)
-  const footer = timeWindow 
-    ? html`
-      <div class="pl-box-footer">
-        ${timeWindow}
-      </div>
-    `
-    : null
+const TimeBox = (startTime, endTime, timeCaption) => {
+  const icon = Icon('clock', '#000', '25')
+  icon.classList.add('pl-space-right')
+  icon.style.display = 'inline-block'
+  icon.style.verticalAlign = 'bottom'
+  icon.style.marginBottom = '3px'
 
   return html`
+    <div class="pl-box pl-box-time">
+      <div class="pl-box-body">
+        <div class="pl-time-data">
+          ${ icon} ${generatePrettyTime(startTime)} ${endTime ? ' - ' + generatePrettyTime(endTime) : ''}
+        </div>
+        ${ timeCaption ? html`
+        <small class="pl-time-caption">${timeCaption}</small>` : ''}
+      </div>
+    </div>
+    `
+}
+
+const LiveTracking = ({ id, actionBox, courier, last_delivery_status }, query) => {
+  if (!actionBox.info || !actionBox.info.city) return null
+  const mapBox = html`
     <div class="pl-box pl-action-box pl-box-location">
-      ${heading}
+      <div class="pl-box-heading pl-box-location-heading">
+          ${last_delivery_status.status}
+      </div>
       <div class="pl-box-body pl-box-location-body">
         ${Map(id, actionBox, courier, query)}
       </div>
-      ${footer}
+      <div class="pl-box-footer">
+        ${ last_delivery_status.status_details }
+      </div>
+    </div>
+  `
+  const scheduled = actionBox.scheduled
+  const timeBox = (scheduled && scheduled.startTime) 
+    ? TimeBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption) 
+    : null
+
+  return html`
+    <div class="pl-spaced-list">
+      ${ mapBox }    
+      ${ timeBox }
     </div>
   `
 }
