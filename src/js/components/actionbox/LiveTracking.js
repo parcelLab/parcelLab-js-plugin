@@ -6,6 +6,10 @@ const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?ke
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
 
+//////////////
+// time box //
+//////////////
+
 const checkTimeFormat = function (i) {
   if (i < 10) {
     i = '0' + i
@@ -14,12 +18,36 @@ const checkTimeFormat = function (i) {
 }
 
 const generatePrettyTime = timeString => {
-  if (!timeString) return null
+  if (!timeString) return null  
   const date = new Date(timeString)
   const hours = checkTimeFormat(date.getHours())
   const mins = checkTimeFormat(date.getMinutes())
   return `${hours}:${mins}`
 }
+
+const TimeBox = (startTime, endTime, timeCaption) => {
+  const icon = Icon('clock', '#000', '25')
+  icon.classList.add('pl-space-right')
+  icon.style.display = 'inline-block'
+  icon.style.verticalAlign = 'bottom'
+  icon.style.marginBottom = '3px'
+
+  return html`
+    <div class="pl-box pl-box-time">
+      <div class="pl-box-body">
+        <div class="pl-time-data">
+          ${ icon} ${generatePrettyTime(startTime)} ${endTime ? ' - ' + generatePrettyTime(endTime) : ''}
+        </div>
+        ${ timeCaption ? html`
+        <small class="pl-time-caption">${timeCaption}</small>` : ''}
+      </div>
+    </div>
+    `
+}
+
+////////
+// map//
+////////
 
 const Map = (id, actionBox, courier, query) => {
   const elem = html`
@@ -47,38 +75,18 @@ const Map = (id, actionBox, courier, query) => {
   return elem
 }
 
-const TimeBox = (startTime, endTime, timeCaption) => {
-  const icon = Icon('clock', '#000', '25')
-  icon.classList.add('pl-space-right')
-  icon.style.display = 'inline-block'
-  icon.style.verticalAlign = 'bottom'
-  icon.style.marginBottom = '3px'
-
-  return html`
-    <div class="pl-box pl-box-time">
-      <div class="pl-box-body">
-        <div class="pl-time-data">
-          ${ icon} ${generatePrettyTime(startTime)} ${endTime ? ' - ' + generatePrettyTime(endTime) : ''}
-        </div>
-        ${ timeCaption ? html`
-        <small class="pl-time-caption">${timeCaption}</small>` : ''}
-      </div>
-    </div>
-    `
-}
-
 const LiveTracking = ({ id, actionBox, courier, last_delivery_status }, query) => {
   if (!actionBox.info || !actionBox.info.city) return null
   const mapBox = html`
     <div class="pl-box pl-action-box pl-box-location">
       <div class="pl-box-heading pl-box-location-heading">
-          ${last_delivery_status.status}
+          ${ actionBox.label || last_delivery_status.status}
       </div>
       <div class="pl-box-body pl-box-location-body">
         ${Map(id, actionBox, courier, query)}
       </div>
       <div class="pl-box-footer">
-        ${ last_delivery_status.status_details }
+        ${ actionBox.caption || last_delivery_status.status_details }
       </div>
     </div>
   `
