@@ -79,7 +79,7 @@ const LiveTracking = ({ id, actionBox, courier, last_delivery_status }, query) =
       </div>
     </div>
   `
-  const scheduled = actionBox.scheduled
+  const scheduled = actionBox.info.scheduled
   const timeBox = (scheduled && scheduled.startTime) 
     ? TimeBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption) 
     : null
