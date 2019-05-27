@@ -24,13 +24,16 @@ const generatePrettyTime = timeString => {
 const Map = (id, actionBox, courier, query) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
-        <iframe src="${generateMapSrc(`${actionBox.info.city},${actionBox.info.destination_country_iso3}`)}" 
-          frameborder="0" style="width:100%;height:100%;border:0px;z-index:2"">
-        </iframe>
-        <a href="${courier.trackingurl}" target="_blank">
+      <iframe src="${generateMapSrc(`${actionBox.info.city},${actionBox.info.destination_country_iso3}`)}" 
+        frameborder="0" style="width:100%;height:100%;border:0px;z-index:2"">
+      </iframe>
+
+      <a href="${courier.trackingurl}" target="_blank">
         <div id="pl-map-overlay">
           <img id="pl-truck-icon" src="${generateTruckIconSrc(query.userId || 1612164)}" alt="" />
-          <div id="pl-live-delivery-text">${actionBox.label}</div>
+          <div id="pl-live-delivery-btn-container">
+            <div class="pl-button pl-is-fullwidth">${actionBox.label}</div>
+          </div>
         </div>
       </a>
     </div>

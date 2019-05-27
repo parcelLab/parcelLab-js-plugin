@@ -198,14 +198,12 @@ h3 {
   // }
 }
 
-#pl-live-delivery-text {
-  position: absolute;
-  bottom: 60px;
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  text-shadow: 1px 1px 3px #000;
-  font-size: 15px;
+#pl-live-delivery-btn-container {
+  padding: 10px;
+  .pl-button {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 .pl-opening-hours-box {
   border: 0px;
@@ -295,8 +293,8 @@ h3 {
 }
 
 #pl-live-location-map > iframe {
-  -webkit-filter: blur(2px);
-  filter: blur(2px);
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
 }
 
 #pl-map-overlay {
@@ -313,11 +311,34 @@ h3 {
   }
 }
 
+@keyframes truck-roll {
+  0% {
+    opacity: 0;
+    left: 20%;
+    // transform: translateX(-50%) rotateZ(-20deg);  
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: .9;
+  }
+  100% {
+    left: 80%;
+    opacity: 0;
+    // transform: translateX(-50%) rotateZ(-20deg);  
+  }
+}
+
 #pl-truck-icon {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 45%;
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -moz-animation: truck-roll 20s infinite linear;
+  -webkit-animation: truck-roll 20s infinite linear;
+  animation: truck-roll 20s infinite linear;
 }
 
 .pl-box-pseudo-map {
