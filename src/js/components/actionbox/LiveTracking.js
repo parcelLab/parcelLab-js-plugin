@@ -1,6 +1,7 @@
 const html = require('nanohtml')
 const GOOGLE_API_KEY = require('../../../settings').google_api_key
 const Icon = require('../Icon')
+const { translate } = require('../../lib/translator')
 
 const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`
 
@@ -60,7 +61,7 @@ const Map = (id, actionBox, courier, query) => {
         <div id="pl-map-overlay">
           <img id="pl-truck-icon" src="${generateTruckIconSrc(query.userId || 1612164)}" alt="" />
           <div id="pl-live-delivery-btn-container">
-            <div class="pl-button pl-is-fullwidth">${actionBox.label}</div>
+            <div class="pl-button pl-is-fullwidth">${translate('liveDelivery', query.lang.name)}</div>
           </div>
         </div>
       </a>
