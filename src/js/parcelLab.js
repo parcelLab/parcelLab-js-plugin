@@ -118,8 +118,6 @@ class ParcelLab {
         store.emit('fetchInstagram')
       }
     }
-
-    this.setupMaraudersMap()
   }
 
   initLanguage() {
@@ -442,21 +440,6 @@ class ParcelLab {
         }
       })
     })
-  }
-
-  setupMaraudersMap() {
-    const listener = (evt) => {
-      if (evt && evt.target.tagName === 'A' && evt.target.href) {
-        const state = this.store.get()
-
-        //Api.saveUAct(evt.target.href, { ...state.query }, () => {
-        //  return true
-        //})
-
-        return true
-      } else return true
-    }
-    document.onclick = listener
   }
 
   _generateCPhash(obj={}) {
