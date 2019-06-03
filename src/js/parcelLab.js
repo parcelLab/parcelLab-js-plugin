@@ -449,9 +449,9 @@ class ParcelLab {
       if (evt && evt.target.tagName === 'A' && evt.target.href) {
         const state = this.store.get()
 
-        Api.saveUAct(evt.target.href, { ...state.query }, () => {
-          return true
-        })
+        //Api.saveUAct(evt.target.href, { ...state.query }, () => {
+        //  return true
+        //})
 
         return true
       } else return true
