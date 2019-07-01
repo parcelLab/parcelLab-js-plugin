@@ -68,6 +68,9 @@ class ParcelLab {
     if (this.getUrlQuery('rerouteButton'))
       this.options.rerouteButton = this.getUrlQuery('rerouteButton')
 
+    if (this.getUrlQuery('animateTruck'))
+      this.options.animateTruck = true
+
     if (this.getUrlQuery('banner_image'))
       this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
     if (this.getUrlQuery('banner_link'))

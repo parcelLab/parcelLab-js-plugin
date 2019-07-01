@@ -333,12 +333,16 @@ h3 {
 #pl-truck-icon {
   position: absolute;
   top: 45%;
-  -moz-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
+  left: 50%;
   transform: translateX(-50%);
-  -moz-animation: truck-roll 20s infinite linear;
-  -webkit-animation: truck-roll 20s infinite linear;
-  animation: truck-roll 20s infinite linear;
+  &.pl-truck-animated {
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -moz-animation: truck-roll 20s infinite linear;
+    -webkit-animation: truck-roll 20s infinite linear;
+    animation: truck-roll 20s infinite linear;  
+  }
 }
 
 .pl-box-pseudo-map {
