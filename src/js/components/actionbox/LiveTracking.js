@@ -1,9 +1,9 @@
 const html = require('nanohtml')
-// const GOOGLE_API_KEY = require('../../../settings').google_api_key
+const GOOGLE_API_KEY = require('../../../settings').google_api_key
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator')
 
-// const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`
+const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
 
@@ -50,13 +50,13 @@ const TimeBox = (startTime, endTime, timeCaption) => {
 // map//
 ////////
 
-/*<iframe src="${generateMapSrc(`${actionBox.info.city},${actionBox.info.destination_country_iso3}`)}" frameborder="0" style="width:100%;height:100%;border:0px;z-index:2""></iframe>*/
-
 const Map = (id, actionBox, courier, query, animated=false) => {
   const elem = html`
-    <div id="pl-live-location-map" data-tid="${id}">      
+    <div id="pl-live-location-map" data-tid="${id}">
+      <iframe src="${generateMapSrc(`${actionBox.info.city},${actionBox.info.destination_country_iso3}`)}" frameborder="0" style="width:100%;height:100%;border:0px;z-index:2""></iframe>
+ 
       <a href="${courier.trackingurl}" target="_blank">
-        <div id="pl-map-overlay" style="background-image: url(https://s3.eu-central-1.amazonaws.com/static-map-cache/749605187_40060018.png);background-position: center;background-size: cover;">
+        <div id="pl-map-overlay">
           <img id="pl-truck-icon" class="${ animated ? 'pl-truck-animated' : '' }" src="${generateTruckIconSrc(query.userId || 1612164)}" alt="" />
           <div id="pl-live-delivery-btn-container">
             <div class="pl-button pl-is-fullwidth">${translate('liveDelivery', query.lang.name)}</div>
