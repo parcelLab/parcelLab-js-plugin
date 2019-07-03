@@ -3,7 +3,15 @@ const GOOGLE_API_KEY = require('../../../settings').google_api_key
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator')
 
-const generateMapSrc = address => `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}&zoom=11`
+const generateMapSrc = ({ city,  destination_country_iso3 }) => {
+  if (city && destination_country_iso3) {
+    let addressString = `${city},${destination_country_iso3}`
+    return `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(addressString)}&zoom=11`
+  } else {
+    let addressString = `${destination_country_iso3}`
+    return `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(addressString)}&zoom=6`
+  }
+}
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
 
@@ -53,7 +61,7 @@ const TimeBox = (startTime, endTime, timeCaption) => {
 const Map = (id, actionBox, courier, query, animated=false) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
-      <iframe src="${generateMapSrc(`${actionBox.info.city},${actionBox.info.destination_country_iso3}`)}" frameborder="0" style="width:100%;height:100%;border:0px;z-index:2""></iframe>
+      <iframe src="${generateMapSrc(actionBox.info)}" frameborder="0" style="width:100%;height:100%;border:0px;z-index:2""></iframe>
  
       <a href="${courier.trackingurl}" target="_blank">
         <div id="pl-map-overlay">
@@ -75,7 +83,9 @@ const Map = (id, actionBox, courier, query, animated=false) => {
 }
 
 const LiveTracking = ({ id, actionBox, courier, last_delivery_status }, query, animated=false) => {
-  if (!actionBox.info || !actionBox.info.city) return null
+  if (!actionBox.info || !(actionBox.info.city || actionBox.info.destination_country_iso3))
+    return null
+
   const mapBox = html`
     <div class="pl-box pl-action-box pl-box-location">
       <div class="pl-box-heading pl-box-location-heading">
