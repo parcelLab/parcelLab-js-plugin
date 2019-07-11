@@ -7,6 +7,7 @@
         "node": false
     },
     "rules": {
-        "no-trailing-spaces": 0
+        "no-trailing-spaces": 0,
+        "no-fallthrough": 0
     }
 }

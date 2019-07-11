@@ -35,12 +35,6 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
           Prediction(tHeader),
           ArticleList(tHeader, query.lang, options),
         ]
-      else
-        return [
-          Fallback(tHeader, options),
-          DeliveryAddress(tHeader, query.lang),
-          ArticleList(tHeader, query.lang, options),
-        ]
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':
@@ -49,9 +43,9 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       return [NextAction(tHeader), ArticleList(tHeader, query.lang, options)]
     case 'returned':
       return Returned(tHeader)
-    case 'live-tracking':    
-      return LiveTracking(tHeader, query, options.animateTruck || false)
-
+    case 'live-tracking':
+      if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl)
+        return LiveTracking(tHeader, query, options.animateTruck || false)
     default:
       return [
         Fallback(tHeader, options),

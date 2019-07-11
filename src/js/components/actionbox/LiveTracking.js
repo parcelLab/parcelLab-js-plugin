@@ -1,15 +1,14 @@
 const html = require('nanohtml')
-const GOOGLE_API_KEY = require('../../../settings').google_api_key
+const { base_url, static_map_endpoint } = require('../../../settings')
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator')
 
-const generateMapSrc = ({ city,  destination_country_iso3 }) => {
+const generateStaticMapSrc = ({ city,  destination_country_iso3 }) => {
+  let endpoint = `${base_url}${static_map_endpoint}`
   if (city && destination_country_iso3) {
-    let addressString = `${city},${destination_country_iso3}`
-    return `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(addressString)}&zoom=11`
+    return `${endpoint}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(destination_country_iso3)}`
   } else {
-    let addressString = `${destination_country_iso3}`
-    return `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(addressString)}&zoom=6`
+    return `${endpoint}?country=${encodeURIComponent(destination_country_iso3)}`
   }
 }
 
@@ -61,7 +60,8 @@ const TimeBox = (startTime, endTime, timeCaption) => {
 const Map = (id, actionBox, courier, query, animated=false) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
-      <iframe src="${generateMapSrc(actionBox.info)}" frameborder="0" style="width:100%;height:100%;border:0px;z-index:2""></iframe>
+      <div style="width:100%;height:100%;background-position: center;background-repeat: no-repeat;background-size: cover;background-image:url(${generateStaticMapSrc(actionBox.info)});"></div>
+      
  
       <a href="${courier.trackingurl}" target="_blank">
         <div id="pl-map-overlay">

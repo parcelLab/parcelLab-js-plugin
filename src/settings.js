@@ -9,6 +9,7 @@ module.exports = {
   shop_prediction_endpoint: 'prediction',
   user_activity_endpoint: 'user-activity/click',
   courier_deeplink_endpoint: 'deeplink-fallback',
+  static_map_endpoint: 'staticmap/livetracking',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
   google_api_key: require('./GOOGLE_API_KEY').key,
