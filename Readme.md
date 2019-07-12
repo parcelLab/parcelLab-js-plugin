@@ -93,6 +93,7 @@ options.customStyles = {
   iconColor: '#000', // sets color for the status icons (default: #000)
   tabIconColor: '#000', // sets color for the order tab icons (default: buttonColor #333)
   activeTabIconColor: '#000', // sets color only for the active order tab icon (default: buttonColor #333)
+  actionIconColor: '#000', // sets color only for the icons of the actionbox buttons
   margin: '0px 0px', // sets mnargin for #pl-main-box (default: 0px)
 };
 ```

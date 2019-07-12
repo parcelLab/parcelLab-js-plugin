@@ -178,6 +178,8 @@ class ParcelLab {
       customStyles.tabIconColor = decodeURIComponent(`#${this.getUrlQuery('tabIconColor')}`)
     if (this.getUrlQuery('activeTabIconColor'))
       customStyles.activeTabIconColor = decodeURIComponent(`#${this.getUrlQuery('activeTabIconColor')}`)
+    if (this.getUrlQuery('actionIconColor'))
+      customStyles.actionIconColor = decodeURIComponent(`#${this.getUrlQuery('actionIconColor')}`)
 
     Object.keys(DEFAULT_STYLES).forEach(key => {
       if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
