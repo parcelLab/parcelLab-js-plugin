@@ -287,16 +287,15 @@ textarea.pl-form-input {
 }
 
 .pl-box-articles {
-  .pl-box-articles-caption {
-    font-weight: bold;
-    margin-top: 0px;
+  .pl-box-body {
+    padding-top: 0;
   }
   ul.pl-article-list {
     list-style: none;
     padding: 0px;
     li {
-      padding-bottom: 5px;
-      margin-bottom: 5px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
       border-bottom: 1px dashed #eee;
       span.pl-article-list-no {
         margin-right: 5px;
@@ -314,9 +313,22 @@ textarea.pl-form-input {
         font-size: .8rem;
         margin-right: 5px;
       }
+
+      div.pl-article-description {
+        padding: 5px 0 0 5px;
+      }
     }
   }
+  #pl-show-more-articles-button {
+    color: #aaa;
+    background-color: transparent;
+    padding-bottom: 0;
+    &:focus {
+      outline: 0;
+    }  
+  }
 }
+
 
 .pl-instagram-box {
   font: 'San Francisco', Helvetica, Arial, san-serif;

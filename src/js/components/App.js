@@ -5,6 +5,7 @@ const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
 const Banner = require('./Banner')
 const InstagramPost = require('./InstagramPost')
+const ArticleBox = require('./ArticleBox')
 const Search = require('./Search')
 const Alert = require('./Alert')
 const Note = require('./Note')
@@ -50,11 +51,19 @@ const App = (state, emit) => {
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
-  const banner = (state.options.banner_image === 'instagram' && state.options.instagram) ? InstagramPost(state) : ((state.options.banner_image && state.options.banner_link) ? Banner(state) : null)
+
+  let rightBox = null
+  if (state.options.banner_image === 'instagram' && state.options.instagram)
+    rightBox = InstagramPost(state)
+  else if (state.options.banner_image && state.options.banner_link)
+    rightBox = Banner(state)
+  else
+    rightBox = ArticleBox(state)
+
 
   let layout = ['4', '8']
   if (!actionBox) layout = ['0', '12']
-  if (actionBox && banner) layout = ['4', '4', '4']
+  if (actionBox && rightBox) layout = ['4', '4', '4']
 
 
   const app = html`
@@ -78,7 +87,7 @@ const App = (state, emit) => {
             ${ trace }
           </div>
 
-          ${ banner }
+          ${ rightBox }
         </div>
       
       </div>
