@@ -13,7 +13,6 @@ const LiveTracking = require('./LiveTracking')
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
   if (tHeader && tHeader.actionBox) {
-
     switch (tHeader.actionBox.type) {
     case 'pickup-location':
       if (tHeader.actionBox.data)
@@ -28,13 +27,15 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
         Fallback(tHeader, options),
         VoteCourier(tHeader, options, emit),
       ]
-    case  'prediction':
+    case 'prediction':
       if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
         return [
           Prediction(tHeader),
           ArticleList(tHeader, query.lang, options),
         ]
+      else
+        break
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':
@@ -46,14 +47,16 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     case 'live-tracking':
       if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl)
         return LiveTracking(tHeader, query, options.animateTruck || false)
-    default:
-      return [
-        Fallback(tHeader, options),
-        DeliveryAddress(tHeader, query.lang),
-        ArticleList(tHeader, query.lang, options),
-      ]
-
+      else
+        break
     }
+
+    return [ // fallback
+      Fallback(tHeader, options),
+      DeliveryAddress(tHeader, query.lang),
+      ArticleList(tHeader, query.lang, options),
+    ]
+
 
   }
 }
