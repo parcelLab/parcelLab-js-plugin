@@ -11,7 +11,7 @@ function ArticleItem({ articleNo, articleName, quantity, imageUrl }) {
     <li>
       <div class="pl-col-row">
         <div class="pl-col" style="text-align: center;width:30%;">
-          ${ imageUrl ? html`<img class="pl-img-responsive" src="${imageUrl}" alt="${articleName}">` : noImageIcon }
+          ${ imageUrl ? html`<img class="pl-img-article-preview" src="${imageUrl}" alt="${articleName}">` : noImageIcon }
         </div>
         <div class="pl-col" style="width:70%;">
           <div class="pl-article-description">
@@ -25,6 +25,7 @@ function ArticleItem({ articleNo, articleName, quantity, imageUrl }) {
 
 module.exports = function ArticleList({ activeTracking, checkpoints, query }) {
   const { lang } = query
+
   // const { delivery_info } = checkpoints.header[activeTracking]
   // TEST
   const delivery_info = {}
@@ -42,7 +43,6 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query }) {
     const validArticles = delivery_info.articles.filter(a => a.articleName && a.quantity)
     const articleListPreview = validArticles.slice(0, 4).map(ArticleItem)
     const moreArticlesAvailable = validArticles.length > articleListPreview.length
-    console.log()
 
     return html`
     <div class="pl-box-aside-right pl-col pl-col-4">
@@ -54,7 +54,7 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query }) {
           <ul class="pl-article-list">
             ${ articleListPreview }
           </ul>
-          ${ moreArticlesAvailable ? html`<button id="pl-show-more-articles-button" class="pl-button pl-is-fullwidth">...</button>` : null}
+          ${ moreArticlesAvailable ? html`<button id="pl-show-more-articles-button" class="pl-button pl-is-fullwidth">Alle anzeigen...</button>` : null}
         </div>
       </div>
     </div>
