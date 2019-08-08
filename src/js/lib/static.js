@@ -273,7 +273,7 @@ const translations = {
     closesIn: 'Closes in about',
     opensIn: 'Opens in about',
     error: {
-      delivery: 'Unfortunately, this delivery is not available.',
+      delivery: 'We have not yet received tracking data for your order.',
       search: 'Unfortunately, no information was found for this delivery.',
     },
     searchOrder: 'Search order',
@@ -308,7 +308,7 @@ const translations = {
     closesIn: 'Schließt in ungefähr',
     opensIn: 'Öffnet in ungefähr',
     error: {
-      delivery: 'Diese Sendung liegt leider nicht im System vor.',
+      delivery: 'Zu dieser Bestellung liegen noch keine Sendungsdaten vor.',
       search: 'Leider liegen uns aktuell keine Sendungsdetails zu dieser Bestellung vor.',
     },
     searchOrder: 'Bestellung suchen',
@@ -343,7 +343,7 @@ const translations = {
     closesIn: 'se cierra en',
     opensIn: 'abre en',
     error: {
-      delivery: 'Desafortunadamente tu paquete no esta disponible.',
+      delivery: 'Actualmente no hay de datos de envío disponibles para este pedido.',
       search: 'Desafortunadamente tu paquete no esta disponible.',
     },
     searchOrder: 'Búsqueda del envío',
@@ -376,7 +376,7 @@ const translations = {
     closesIn: 'ferme dans',
     opensIn: 'ouvre dans',
     error: {
-      delivery: "Malheureusement, ce numéro de colis ou de commande n'est pas valide.",
+      delivery: "Aucune information concernant l'expédition disponible pour cette commande.",
       search: "Malheureusement, ce numéro de colis ou de commande n'est pas valide.",
     },
     searchOrder: 'Rechercher la commande',
@@ -409,8 +409,8 @@ const translations = {
     closesIn: 'chiude alle',
     opensIn: 'Apre alle',
     error: {
-      delivery: 'Purtroppo non abbiamo dati per questa consegna',
-      search: 'Purtroppo non abbiamo dati per questa consegna',
+      delivery: 'Non ci sono ancora informazioni sulla spedizione di questo ordine.',
+      search: 'Purtroppo non abbiamo dati per questa consegna.',
     },
     searchOrder: "cerca l'ordine",
     search: 'Ricerca',
@@ -442,7 +442,7 @@ const translations = {
     closesIn: 'Sluit over',
     opensIn: 'Opent over',
     error: {
-      delivery: 'Helaas is de levering niet bekend.',
+      delivery: 'Voor deze bestelling zijn nog geen track & trace gegevens bekend',
       search: 'Helaas is de levering niet bekend.',
     },
     searchOrder: 'Zoek order',
@@ -475,7 +475,7 @@ const translations = {
     closesIn: 'Lukker om',
     opensIn: 'Åbner om',
     error: {
-      delivery: 'Beklageligvis er leveringen ikke tilgængelig.',
+      delivery: 'Der findes endnu ingen leveringsinformationer til denne bestilling.',
       search: 'Beklageligvis er leveringen ikke tilgængelig.',
     },
     searchOrder: 'Søg ordre',
@@ -508,7 +508,7 @@ const translations = {
     closesIn: 'stänger om',
     opensIn: 'öppnas om',
     error: {
-      delivery: 'Tyvärr är inte denna leverans tillgänglig.',
+      delivery: 'Beställningen har ännu inte tilldelats något kollinummer.',
       search: 'Tyvärr är inte denna leverans tillgänglig.',
     },
     searchOrder: 'Sök order',
@@ -541,7 +541,7 @@ const translations = {
     closesIn: 'sulkeutuu',
     opensIn: 'avautuu',
     error: {
-      delivery: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.',
+      delivery: 'Tästä tilauksesta ei ole vielä lähetystietoja.',
       search: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.',
     },
     searchOrder: 'Hae tilausta',
@@ -574,7 +574,7 @@ const translations = {
     closesIn: 'stenger om',
     opensIn: 'åpner om',
     error: {
-      delivery: 'Dessverre er denne leveransen ikke tilgjengelig.',
+      delivery: 'Vi har ennå ikke mottatt sendingsopplysninger tilknyttet denne bestillingen.',
       search: 'Dessverre er denne leveransen ikke tilgjengelig.',
     },
     searchOrder: 'Søk etter bestilling',
@@ -640,7 +640,7 @@ const translations = {
     closesIn: 'zamyka za',
     opensIn: 'otwiera za',
     error: {
-      delivery: 'Niestety, ta paczka nie znajduje się w systemie.',
+      delivery: 'Nie wprowadzono jeszcze do systemu informacji o tej przesyłce.',
       search: 'Niestety, ta paczka nie znajduje się w systemie.',
     },
     searchOrder: 'szukaj zamówienia',
@@ -706,7 +706,7 @@ const translations = {
     closesIn: 'Zavírá za',
     opensIn: 'Otevírá za',
     error: {
-      delivery: 'Tato zásilka se bohužel nenachází v systému.',
+      delivery: 'Pro tuto objednávku zatím nejsou k dispozici žádné údaje o zásilce.',
       search: 'Tato zásilka se bohužel nenachází v systému.',
     },
     searchOrder: 'Hledat objednávku',
