@@ -14,7 +14,7 @@ const Returned = ({ actionBox }) => {
         ${ Icon('return', null, '80') }
       </div>
 
-      <div class="pl-box-footer">
+      <div class="pl-box-footer pl-space-top">
         ${ actionBox.caption }
       </div>
     </div>

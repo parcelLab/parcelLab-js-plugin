@@ -19,7 +19,7 @@ const NextAction = ({ actionBox, last_delivery_status }) => {
         ${ Icon('error', null, '80') }
       </div>
 
-      <div class="pl-box-footer">
+      <div class="pl-box-footer pl-space-top">
         <div>${ details }</div>
       </div>
     </div>
