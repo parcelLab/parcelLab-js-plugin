@@ -36,7 +36,7 @@ You can define options by passing an Object as second argument, when creating a 
 ```html
   <script type="text/javascript">
     ...
-    var options = { rerouteButton: 'left', show_searchForm: 'true' };
+    var options = { show_searchForm: 'true' };
     var parcelLab = new ParcelLab('#pl-trace', options);
     parcelLab.initialize();
     ...
@@ -46,7 +46,7 @@ You can define options by passing an Object as second argument, when creating a 
 These are the available options:
 - styles : Boolean (`false` will disable the default css for custom styling)
 - customStyles : Object (see below)
-- rerouteButton : 'left' | 'right' - default is 'right' (defines where to render the reroute button if possible)
+- (reprecated!) rerouteButton : 'left' | 'right' - default is 'right' (defines where to render the reroute button if possible)
 - show_searchForm :  Boolean (activates a search form, which will be rendered if tracking was not found or no trackingNo/orderNo was given, needs userId)
 - show_zipCodeInput : Boolean (activates the zip code field for the search form)
 - userId : String (alternative way to pass userId - instead of in url)

@@ -1,23 +1,19 @@
 const html = require('nanohtml')
 const Icon = require('./Icon')
 
-const RerouteLink = ({ checkpoints, activeTracking, options }) => {
-  if (!checkpoints) return null
-
-  let courier = null
-  const header = checkpoints.header[activeTracking]
-  if (header) courier = header.courier
+const RerouteLink = (tHeader) => {
+  if (!tHeader) return null
+  let courier = tHeader.courier
 
   if (courier &&
     courier.rerouteurl &&
-    courier.rerouteurl_label_short &&
-    options.rerouteButton === 'left') {
+    courier.rerouteurl_label_short) {
     const color = window.parcelLab_styles.actionIconColor || window.parcelLab_styles.buttonColor
     const icon = Icon('event', color, 28)
     icon.style.margin = '0 auto 10px'
 
     return html`
-      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth pl-space-bottom">
+      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth" style="margin-top:25px;">
         <div>
           ${ icon }
         </div>

@@ -1,6 +1,5 @@
 const html = require('nanohtml')
 const Header = require('./Header')
-const RerouteLink = require('./RerouteLink')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
 const Banner = require('./Banner')
@@ -47,7 +46,6 @@ const App = (state, emit) => {
 
 
   const header = Header(state, emit)
-  const rerouteLink = RerouteLink(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
@@ -79,8 +77,6 @@ const App = (state, emit) => {
             <div id="pl-action-box-container" class="pl-space-bottom">
               ${ actionBox }
             </div>
-
-            ${ rerouteLink }
           </div>
 
           <div class="pl-main pl-col pl-col-${layout[1]}">

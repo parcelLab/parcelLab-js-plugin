@@ -172,10 +172,6 @@ textarea.pl-form-input {
      -moz-appearance: none;
           appearance: none; }
 
-.pl-reroute-link {
-  margin-bottom: 15px;
-}
-
 .pl-reduced-margin {
   margin-bottom: 15px;
 }
@@ -382,9 +378,11 @@ textarea.pl-form-input {
 
 .pl-col-row-same-height {
   .pl-action-box {
-    height: 650px;
+    min-height: 650px;
+    overflow: hidden;
+    overflow-y: scroll;
     @media screen and (max-width: 749px) {
-      height: auto;
+      min-height: unset;
     }
   }
 

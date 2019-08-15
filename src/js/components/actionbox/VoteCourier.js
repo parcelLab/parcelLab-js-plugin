@@ -37,11 +37,9 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   `
 
   return html`
-      <div class="pl-box pl-space-top pl-vote">
-        <div class="pl-box-body">
+      <div class="pl-vote">
           ${ label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${ label }</b></div>` : ''}
           ${ body }
-        </div>
       </div>
     `
 }
@@ -73,11 +71,9 @@ const VoteParcelLab = ({ actionBox, id }, emit) => {
   `
 
   return html`
-      <div class="pl-box pl-space-top pl-vote">
-        <div class="pl-box-body">
+      <div class="pl-vote" style="margin-top:50px;">
           ${ label_communication ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${ label_communication }</b></div>` : ''}
           ${ body }
-        </div>
       </div>
     `
 }

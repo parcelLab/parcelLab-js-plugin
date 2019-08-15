@@ -19,10 +19,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
         return PickupLocation(tHeader, query.lang, emit)
 
     case 'vote-courier':
-      return [
-        Fallback(tHeader, options),
-        VoteCourier(tHeader, options, emit),
-      ]
+      return Fallback(tHeader, options, VoteCourier(tHeader, options, emit))
     case  'prediction':
       if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
@@ -40,10 +37,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl)
         return LiveTracking(tHeader, query, options.animateTruck || false)
     default:
-      return [
-        Fallback(tHeader, options),
-        DeliveryAddress(tHeader, query.lang),
-      ]
+      return Fallback(tHeader, options, DeliveryAddress(tHeader, query.lang))
 
     }
 

@@ -26,7 +26,7 @@ module.exports = function DeliveryAddress(tHeader, lang) {
     icon.style.verticalAlign = 'middle'
 
     return html`
-    <div class="pl-box pl-action-box pl-box-address pl-space-top">
+    <div class="pl-box pl-box-address pl-space-top">
       <div class="pl-box-body">
         <p class="pl-box-address-caption">
           ${ icon } ${ translate('deliveryAddress', lang.name)}

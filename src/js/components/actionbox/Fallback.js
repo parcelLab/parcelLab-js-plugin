@@ -4,7 +4,7 @@ const Icon = require('../Icon')
 const { getIconName } = require('../../lib/static')
 const { makeBig } = require('../../lib/helpers')
 
-module.exports = function Fallback(tHeader, options) {
+module.exports = function Fallback(tHeader, options, secondElement) {
   if (!tHeader || !tHeader.last_delivery_status) return null
   const { code, status, status_details } = tHeader.last_delivery_status
   const theme = options.theme
@@ -20,11 +20,19 @@ module.exports = function Fallback(tHeader, options) {
 
       <div class="pl-box-body">
         ${ icon }
+        <div style="margin: 50px 0 0;">
+          ${ raw(status_details) }
+        </div>
       </div>
 
+      ${ secondElement ?
+    html`
       <div class="pl-box-footer">
-        ${ raw(status_details) }
+        <div style="border-top: 1px dashed #eee; width:100%;margin-bottom:25px;"></div>
+        ${ secondElement }
       </div>
+    ` 
+    : null}
     </div>
   `
 }
