@@ -3,8 +3,6 @@ const T = require('../lib/translator.js')
 const statics = require('../lib/static')
 const Checkpoint = require('./Checkpoint')
 const MoreButton = require('./MoreButton')
-const RerouteLink = require('./RerouteLink')
-const FurtherInfos = require('./FurtherInfos')
 const IconState = require('./IconState')
 
 const showTimeOnCheckpoint = (d, i) => {
@@ -38,34 +36,25 @@ const TrackingTrace = (state, emit) => {
   const tHeader = checkpoints.header[activeTracking]
   const tBody = checkpoints.body[tHeader.id]
   const iconState = IconState({ checkpoints, activeTracking, options })
-  const rerouteLink = RerouteLink(tHeader, options)
-  const furtherInfos = FurtherInfos(tHeader, query.lang.name)
+  // const furtherInfos = FurtherInfos(tHeader, query.lang.name)
   
   let tCheckpoints = prepareCheckpoints(tBody, query)
-  let moreButton = null
+  let moreButton = MoreButton(T.translate('more', query.lang.name), emit)
 
-  if (tCheckpoints.length > 3 && !showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
-    moreButton = MoreButton(T.translate('more', query.lang.name), emit)
-    tCheckpoints = tCheckpoints.slice(0, 3)
-  }
-    
+  const boxBody = html`
+  <div class="pl-box-body">
+    ${ iconState }
+    ${ tCheckpoints.map(tCp => Checkpoint(tCp)) }
+  </div>
+  `
 
   return html`
-  <div>
-    <div id="pl-t-${tHeader.id}" class="pl-box pl-box-trace">
-      <div class="pl-box-body">
-        ${ iconState }
-        ${ tCheckpoints.map(tCp => Checkpoint(tCp)) }
-        ${ moreButton }
-      </div>
-    </div>
+    <div id="pl-t-${tHeader.id}" class="pl-box pl-box-trace ${ showAllCheckpoints ? 'pl-scrollable' : ''}">
 
-    <div class="pl-spaced-list pl-space-top">
-      ${ rerouteLink }
+      ${ boxBody }
       
-      ${ furtherInfos }
+      ${ moreButton }
     </div>
-  </div>
   `
 }
 

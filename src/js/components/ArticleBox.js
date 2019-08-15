@@ -1,11 +1,13 @@
 const html = require('nanohtml')
 const Icon = require('./Icon')
+const T = require('../lib/translator.js')
+const MoreButton = require('./MoreButton')
 const { translate } = require('../lib/translator.js')
 
 function ArticleItem({ articleNo, articleName, quantity, imageUrl }) {
-  const noImageIcon = Icon('no_camera', '000', '50')
+  const noImageIcon = Icon('no_camera', '000', '40')
   noImageIcon.style.margin = 'auto'
-  noImageIcon.style.opacity = '.6'
+  noImageIcon.style.opacity = '.2'
 
   return html`
     <li>
@@ -15,15 +17,15 @@ function ArticleItem({ articleNo, articleName, quantity, imageUrl }) {
         </div>
         <div class="pl-col" style="width:70%;">
           <div class="pl-article-description">
-            ${ articleNo ? html`<span class="pl-article-list-no">${articleNo}</span>` : '' } 
-            ${ quantity ? html`<span class="pl-article-quantity">${quantity }x</span>` : '' }${ articleName }
+            ${ articleNo ? html`<span class="pl-article-list-no">${ articleNo}</span>` : '' } 
+            ${ quantity ? html`<span class="pl-article-quantity">${ quantity }x</span>` : '' }${ articleName }
           </div>
       </div>
     </li>
   `
 }
 
-module.exports = function ArticleList({ activeTracking, checkpoints, query }) {
+module.exports = function ArticleList({ activeTracking, checkpoints, query, showAllArticles }, emit) {
   const { lang } = query
 
   // const { delivery_info } = checkpoints.header[activeTracking]
@@ -41,21 +43,22 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query }) {
   // TEST
   if (delivery_info && delivery_info.articles) {
     const validArticles = delivery_info.articles.filter(a => a.articleName && a.quantity)
-    const articleListPreview = validArticles.slice(0, 4).map(ArticleItem)
-    const moreArticlesAvailable = validArticles.length > articleListPreview.length
+    let articleList = validArticles.map(ArticleItem)
+    let moreButton = MoreButton(T.translate('more', query.lang.name), emit, 'showAllArticles')
 
     return html`
     <div class="pl-box-aside-right pl-col pl-col-4">
-      <div class="pl-box pl-box-articles">
-        <div class="pl-box-heading">
-          ${ translate('articleList', lang.name) } (${validArticles.length})
-        </div>
+      <div class="pl-box pl-box-articles ${ showAllArticles ? 'pl-scrollable' : ''}">
         <div class="pl-box-body">
+          <div class="pl-box-title">
+            ${ translate('articleList', lang.name) } (${validArticles.length})
+          </div>
           <ul class="pl-article-list">
-            ${ articleListPreview }
+            ${ articleList }
           </ul>
-          ${ moreArticlesAvailable ? html`<button id="pl-show-more-articles-button" class="pl-button pl-is-fullwidth">Alle anzeigen...</button>` : null}
         </div>
+
+        ${ moreButton }
       </div>
     </div>
     `

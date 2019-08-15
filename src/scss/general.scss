@@ -287,8 +287,10 @@ textarea.pl-form-input {
 }
 
 .pl-box-articles {
-  .pl-box-body {
-    padding-top: 0;
+  .pl-box-title {
+    font-size: 1.5em;
+    padding: 0 25px 25px;
+    text-align: center;
   }
   ul.pl-article-list {
     list-style: none;
@@ -321,17 +323,9 @@ textarea.pl-form-input {
   }
   .pl-img-article-preview {
     margin: auto;
-    max-width: 100%;
-    max-height: 70px;
+    max-height: 80px;
     width: auto;
-  }
-  #pl-show-more-articles-button {
-    color: #aaa;
-    background-color: transparent;
-    padding-bottom: 0;
-    &:focus {
-      outline: 0;
-    }  
+    max-width: 100%;
   }
 }
 
@@ -358,25 +352,62 @@ textarea.pl-form-input {
   }
 }
 
-#pl-modal-backdrop {
-  position: fixed;
-  top: 0px;
-  left: 0px;
+.pl-show-more-button-container  {
+  padding: 25px 0;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .6);
-  z-index: 999;
+  position: absolute;
+  left:0px;
+  bottom:0px;
+  background-color: rgba(255,255,255, .95);
+}
+.pl-show-more-button {
+  background: transparent;
+  border: 0;
+  font-size: 1em;
+  line-height: 1;
+  text-align: center;
+  transition: opacity .2s ease;
+  text-decoration: none;
+  transform: scale(1);
+  display: inline-block;
+  box-sizing: border-box;
+  color:#aaa;
+  padding: 0;
+  &:focus {
+    outline: 0;
+  }
 }
 
-#pl-modal {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  width: 450px;
-  height: 100%;
-  background-color: #fff;
-  z-index: 1000;
-  @media screen and (max-width: 549px) {
-    width: 100%;
+.pl-col-row-same-height {
+  .pl-action-box {
+    height: 650px;
+    @media screen and (max-width: 749px) {
+      height: auto;
+    }
+  }
+
+  .pl-box-trace, .pl-box-articles {
+    position: relative;
+    & > .pl-box-body {
+      height: 600px;
+      overflow: hidden;
+    }
+    @media screen and (max-width: 749px) {
+      &.pl-scrollable > .pl-box-body {
+        height: auto;
+      }
+    }
+    @media screen and (min-width: 750px) {
+      &.pl-scrollable > .pl-box-body {
+        overflow-y: scroll;
+      }
+    }
+    &.pl-scrollable  {
+      .pl-show-more-button-container {
+        display: none;
+      }
+    }
   }
 }

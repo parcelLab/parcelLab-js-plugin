@@ -1,6 +1,6 @@
 const html = require('nanohtml')
 const Header = require('./Header')
-const RerouteLinkShort = require('./RerouteLinkShort')
+const RerouteLink = require('./RerouteLink')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
 const Banner = require('./Banner')
@@ -47,7 +47,7 @@ const App = (state, emit) => {
 
 
   const header = Header(state, emit)
-  const rerouteLinkShort = RerouteLinkShort(state)
+  const rerouteLink = RerouteLink(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
@@ -58,7 +58,7 @@ const App = (state, emit) => {
   else if (state.options.banner_image && state.options.banner_link)
     rightBox = Banner(state)
   else
-    rightBox = ArticleBox(state)
+    rightBox = ArticleBox(state, emit)
 
 
   let layout = ['4', '8']
@@ -74,13 +74,13 @@ const App = (state, emit) => {
 
       <div id="pl-main-box">
 
-        <div class="pl-col-row">
+        <div class="pl-col-row pl-col-row-same-height">
           <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
             <div id="pl-action-box-container" class="pl-space-bottom">
               ${ actionBox }
             </div>
 
-            ${ rerouteLinkShort }
+            ${ rerouteLink }
           </div>
 
           <div class="pl-main pl-col pl-col-${layout[1]}">

@@ -352,11 +352,16 @@ class ParcelLab {
         if (cph.id === id) state.activeTracking = ind
       })
       state.showAllCheckpoints = false
+      state.showAllArticles = false
       store.set(state)
     })
 
     this.store.on('showAllCheckpoints', () => {
       this.store.set({ showAllCheckpoints: true })
+    })
+
+    this.store.on('showAllArticles', () => {
+      this.store.set({ showAllArticles: true })
     })
 
     this.store.on('voteCourier', (v, tid) => {
