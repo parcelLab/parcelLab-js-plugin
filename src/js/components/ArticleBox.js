@@ -4,14 +4,14 @@ const T = require('../lib/translator.js')
 const MoreButton = require('./MoreButton')
 const { translate } = require('../lib/translator.js')
 
-function ArticleItem({ sku, name, quantity, imageUrl, productUrl }) {
+function ArticleItem({ articleName, articleNo, quantity, imageUrl, productUrl }) {
   let articleImage = null
 
   if (imageUrl) {
     if (productUrl)
-      articleImage = html`<a href="${productUrl}" target="_blank"><img class="pl-img-article-preview" src="${imageUrl}" alt="${name}"></a>`
+      articleImage = html`<a href="${productUrl}" target="_blank"><img class="pl-img-article-preview" src="${imageUrl}" alt="${articleName}"></a>`
     else
-      articleImage = html`<img class="pl-img-article-preview" src="${imageUrl}" alt="${name}">`
+      articleImage = html`<img class="pl-img-article-preview" src="${imageUrl}" alt="${articleName}">`
   } else {
     articleImage = Icon('no_camera', '000', '40')
     articleImage.style.margin = 'auto'
@@ -26,8 +26,8 @@ function ArticleItem({ sku, name, quantity, imageUrl, productUrl }) {
         </div>
         <div class="pl-col" style="width:70%;">
           <div class="pl-article-description">
-            ${ sku ? html`<span class="pl-article-list-no">${ sku }</span>` : '' } 
-            ${ quantity ? html`<span class="pl-article-quantity">${ quantity }x</span>` : '' }${ name }
+            ${ articleNo ? html`<span class="pl-article-list-no">${ articleNo }</span>` : '' } 
+            ${ quantity ? html`<span class="pl-article-quantity">${ quantity }x</span>` : '' }${ articleName }
           </div>
       </div>
     </li>
@@ -43,7 +43,7 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query, show
 
 
   if (activeTrackingArticles && activeTrackingArticles.length > 0) {
-    const validArticles = activeTrackingArticles.filter(a => a.name)
+    const validArticles = activeTrackingArticles.filter(a => a.articleName)
     let articleList = validArticles.map(ArticleItem)
     let moreButton = null
 
