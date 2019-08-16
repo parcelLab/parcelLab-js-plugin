@@ -10,6 +10,7 @@ module.exports = {
   user_activity_endpoint: 'user-activity/click',
   courier_deeplink_endpoint: 'deeplink-fallback',
   static_map_endpoint: 'staticmap/livetracking',
+  article_list_endpoint: 'return-portal/articles',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
   google_api_key: require('./GOOGLE_API_KEY').key,

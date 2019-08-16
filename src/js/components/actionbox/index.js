@@ -7,7 +7,6 @@ const NextAction = require('./NextAction')
 const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 const DeliveryAddress = require('./DeliveryAddress')
-const ArticleList = require('./ArticleList')
 const LiveTracking = require('./LiveTracking')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
@@ -18,10 +17,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       if (tHeader.actionBox.data)
         return PickupLocation(tHeader, query.lang, emit)
       else
-        return [
-          Fallback(tHeader, options),
-          ArticleList(tHeader, query.lang, options),
-        ]
+        return Fallback(tHeader, options)
     case 'vote-courier':
       return [
         Fallback(tHeader, options),
@@ -30,18 +26,15 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     case 'prediction':
       if (tHeader.actionBox.data &&
           (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation))
-        return [
-          Prediction(tHeader),
-          ArticleList(tHeader, query.lang, options),
-        ]
+        return Prediction(tHeader)
       else
         break
     case 'pickup-location-unknown':
       return PickupLocationUnknown(tHeader, query.lang)
     case 'order-processed':
-      return [OrderProcessed(tHeader, options), ArticleList(tHeader, query.lang, options)]
+      return OrderProcessed(tHeader, options)
     case 'next-action':
-      return [NextAction(tHeader), ArticleList(tHeader, query.lang, options)]
+      return NextAction(tHeader)
     case 'returned':
       return Returned(tHeader)
     case 'live-tracking':
@@ -54,7 +47,6 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     return [ // fallback
       Fallback(tHeader, options),
       DeliveryAddress(tHeader, query.lang),
-      ArticleList(tHeader, query.lang, options),
     ]
 
 

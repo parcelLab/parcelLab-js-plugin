@@ -119,6 +119,8 @@ class ParcelLab {
       // instagram post integration
       if (this.options.banner_image && this.options.banner_image === 'instagram') {
         store.emit('fetchInstagram')
+      } else if (this.options.show_articleList) {
+        store.emit('fetchArticleList')
       }
     }
   }
@@ -346,17 +348,34 @@ class ParcelLab {
       })
     })
 
+    // fetch prediction
+    this.store.on('fetchArticleList', () => {
+      Api.getArticleList(this.store.get().query, (err, res) => {
+        if (err) this.store.set({ fetchArticleList_failed: err })
+        else if (res) {
+          const state = this.store.get()
+          state.articleList = res
+          this.store.set(state)
+        }
+      })
+    })
+
     this.store.on('setActiveTracking', id => {
       const state = this.store.get()
       state.checkpoints.header.forEach((cph, ind) => {
         if (cph.id === id) state.activeTracking = ind
       })
       state.showAllCheckpoints = false
+      state.showAllArticles = false
       store.set(state)
     })
 
     this.store.on('showAllCheckpoints', () => {
       this.store.set({ showAllCheckpoints: true })
+    })
+    
+    this.store.on('showAllArticles', () => {
+      this.store.set({ showAllArticles: true })
     })
 
     this.store.on('voteCourier', (v, tid) => {
