@@ -44,6 +44,8 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query, show
 
   if (activeTrackingArticles && activeTrackingArticles.length > 0) {
     const validArticles = activeTrackingArticles.filter(a => a.articleName)
+    if (validArticles.length < 1) return null
+
     let articleList = validArticles.map(ArticleItem)
     let moreButton = null
 
