@@ -283,7 +283,7 @@ const translations = {
     deliveries: 'deliveries',
     showPickuplocation: 'Show pickup location',
     liveDelivery: 'Live tracking',
-    articleList: 'Item list',
+    articleList: 'Articles in this package',
     deliveryAddress: 'Delivery address',
   },
   de: {
@@ -318,7 +318,7 @@ const translations = {
     deliveries: 'Lieferungen',
     showPickuplocation: 'Abholort anzeigen',
     liveDelivery: 'Live verfolgen',
-    articleList: 'Artikelliste',
+    articleList: 'Artikel in diesem Paket',
     deliveryAddress: 'Zustelladresse',
   },
   es: {
@@ -351,7 +351,7 @@ const translations = {
     containsOf: 'consiste en',
     deliveries: 'entregas',
     showPickuplocation: 'Lugar de recogida',
-    articleList: 'Lista de articulos',
+    articleList: 'Artículos en este paquete',
     deliveryAddress: 'Dirección de entrega',
   },
   fr: {
@@ -384,7 +384,7 @@ const translations = {
     containsOf: 'consiste en',
     deliveries: 'livraisons',
     showPickuplocation: 'Lieu de retrait',
-    articleList: 'Liste des articles',
+    articleList: 'Articles dans ce paquet',
     deliveryAddress: 'Adresse de livraison',
   },
   it: {
@@ -417,7 +417,7 @@ const translations = {
     containsOf: 'consiste in',
     deliveries: 'consegne',
     showPickuplocation: 'Mostra punto di ritiro',
-    articleList: 'Elenco degli articoli',
+    articleList: 'Articoli in questo pacchetto',
     deliveryAddress: 'Indirizzo di consegna',
   },
   nl: {
@@ -450,7 +450,7 @@ const translations = {
     containsOf: 'bestaat uit',
     deliveries: 'leveringen',
     showPickuplocation: 'Afhaalpunt',
-    articleList: 'Artikellijst',
+    articleList: 'Items in dit pakket',
     deliveryAddress: 'Bezorgadres',
   },
   da: {
@@ -483,7 +483,7 @@ const translations = {
     containsOf: 'består af',
     deliveries: 'leveringer',
     showPickuplocation: 'Vis leveringssted',
-    articleList: 'Artikelliste',
+    articleList: 'Varer i denne pakke',
     deliveryAddress: 'Leveringsadresse',
   },
   sv: {
@@ -516,7 +516,7 @@ const translations = {
     containsOf: 'består av',
     deliveries: 'leveranser',
     showPickuplocation: 'Visa leveranstid',
-    articleList: 'Artikellista',
+    articleList: 'Objekt i detta paket',
     deliveryAddress: 'Leveransadress',
   },
   fi: {
@@ -549,7 +549,7 @@ const translations = {
     containsOf: 'koostuu',
     deliveries: 'toimituksesta',
     showPickuplocation: 'Näytä noutopiste',
-    articleList: 'Artikkeliluettelo',
+    articleList: 'Tuotteet tässä paketissa',
     deliveryAddress: 'Toimitusosoite',
   },
   no: {
@@ -582,7 +582,7 @@ const translations = {
     containsOf: 'inneholder',
     deliveries: 'leveranser',
     showPickuplocation: 'vis hentested',
-    articleList: 'Artikkelliste',
+    articleList: 'Varer i denne pakken',
     deliveryAddress: 'Leveringsadresse',
   },
   pt: {
@@ -615,7 +615,7 @@ const translations = {
     containsOf: 'consiste em',
     deliveries: 'entregas',
     showPickuplocation: 'Opsamlingssted',
-    articleList: 'Lista de artigos',
+    articleList: 'Artigos neste pacote',
     deliveryAddress: 'Endereço de entrega',
   },
   pl: {
@@ -648,7 +648,7 @@ const translations = {
     containsOf: 'składa się z',
     deliveries: 'przesyłek',
     showPickuplocation: 'Pokaż punkt odbioru',
-    articleList: 'Lista artykułów',
+    articleList: 'Artykuły w tym pakiecie',
     deliveryAddress: 'Adres dostawy',
   },
   ro: {
@@ -681,7 +681,7 @@ const translations = {
     containsOf: 'este format din',
     deliveries: 'livrări',
     showPickuplocation: 'Noutopaikka',
-    articleList: 'Lista de articole',
+    articleList: 'Articole din acest pachet',
     deliveryAddress: 'Adresă de livrare',
   },
   cs: {
@@ -714,7 +714,7 @@ const translations = {
     containsOf: 'Skládá se z',
     deliveries: 'Doručení',
     showPickuplocation: 'Zobrazit výdejní místo',
-    articleList: 'Seznam článků',
+    articleList: 'Články v tomto balíčku',
     deliveryAddress: 'Doručovací adresa',
   },
   hu: {
@@ -747,7 +747,7 @@ const translations = {
     containsOf: 'Tartalom',
     deliveries: 'Szállítmányok',
     showPickuplocation: 'Felvétel címe',
-    articleList: 'Tételek listázása',
+    articleList: 'Cikkek ebben a csomagban',
     deliveryAddress: 'Szállítási cím',
   },
 }
