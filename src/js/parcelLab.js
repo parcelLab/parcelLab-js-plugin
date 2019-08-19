@@ -239,7 +239,7 @@ class ParcelLab {
 
       return { header, body }
     } catch (error) {
-      console.log('💩  Could not sort checkpoints... ', error)
+      console.log('Could not sort checkpoints... ', error)
       return checkpoints
     }
   }
