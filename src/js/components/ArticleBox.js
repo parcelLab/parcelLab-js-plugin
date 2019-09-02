@@ -4,6 +4,14 @@ const T = require('../lib/translator.js')
 const MoreButton = require('./MoreButton')
 const { translate } = require('../lib/translator.js')
 
+function calcArticleTotalSum(validArticles) {
+  let sum = 0
+  validArticles.forEach(({ quantity = 1 }) => {
+    sum = sum + parseInt(quantity)
+  })
+  return sum
+}
+
 function ArticleItem({ articleName, articleNo, quantity, imageUrl, productUrl }) {
   let articleImage = null
 
@@ -58,7 +66,7 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query, show
     <div class="pl-box-aside-right pl-col pl-col-4">
       <div class="pl-box pl-box-articles ${ showAllArticles ? 'pl-scrollable' : ''}">
         <div class="pl-box-heading">
-          ${ translate('articleList', lang.name) } (${validArticles.length})
+          ${ translate('articleList', lang.name) } (${calcArticleTotalSum(validArticles)})
         </div>
         <div class="pl-box-body" style="padding-top:0;">
           <ul class="pl-article-list">
