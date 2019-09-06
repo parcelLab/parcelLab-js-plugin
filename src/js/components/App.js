@@ -13,80 +13,80 @@ const FallbackFurtherInfos = require('./FallbackFurtherInfos')
 const Loading = require('./Loading')
 const StyleSet = require('./StyleSet')
 
-
 const createLayout = styleSet => content => html`
   <div id="pl-plugin-wrapper">
     ${styleSet}
     ${content}
   </div>`
 
-
 const App = (state, emit) => {
   const Layout = createLayout(StyleSet())
 
   // fetch failed
   if (state.query_err || state.fetchCheckpoints_failed) {
-    let errApp = []
+    const errApp = []
     state.options.show_searchForm ? errApp.push(Search(state, emit)) : errApp.push(Alert(state))
 
-    if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404
-    && state.query.courier && state.query.trackingNo
-    && state.fallback_deeplink)
+    if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404 &&
+      state.query.courier && state.query.trackingNo &&
+      state.fallback_deeplink) {
       errApp.push(FallbackFurtherInfos(state))
-    
+    }
+
     return Layout(errApp)
   }
-  
+
   // tracking w/ no cps
   if (state.checkpoints && state.checkpoints.header.length === 0) {
     return Layout(Alert(state))
-  } 
-  
-  // still loading
-  if (!state.checkpoints) return Layout(Loading()) 
+  }
 
+  // still loading
+  if (!state.checkpoints) return Layout(Loading())
 
   const header = Header(state, emit)
   const rerouteLinkShort = RerouteLinkShort(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
-  let banner = null 
-  if (state.options.banner_image === 'instagram' && state.options.instagram)
+  let banner = null
+  if (state.options.banner_image === 'instagram' && state.options.instagram) {
     banner = InstagramPost(state)
-  else if (state.options.banner_image && state.options.banner_link)
+  } else if (state.options.banner_image && state.options.banner_link) {
     banner = Banner(state)
-  else if (state.options.show_articleList)
+  } else if (state.options.show_articleList) {
     banner = ArticleBox(state, emit)
-
-  let layout = ['4', '8']
-  if (!actionBox) layout = ['0', '12']
-  if (actionBox && banner) layout = ['4', '4', '4']
-
+  }
 
   const app = html`
     <div>
-      ${ note }
+      ${note}
 
-      ${ header }
+      ${header}
 
       <div id="pl-main-box">
 
-        <div class="pl-col-row">
-          <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
-            <div id="pl-action-box-container" class="pl-space-bottom">
-              ${ actionBox }
-            </div>
+      <div class="pl-col-row pl-col-row-same-height">
 
-            ${ rerouteLinkShort }
-          </div>
+${ actionBox ? html`
+<div  style="display: none;" class="pl-box-aside-left pl-col pl-col-4">
+  <div id="pl-action-box-container" class="pl-space-bottom">
+    ${ actionBox}
+  </div>
+</div>
+`: null}
 
-          <div class="pl-main pl-col pl-col-${layout[1]}">
-            ${ trace }
-          </div>
+<div class="pl-main pl-col pl-col-4">
+  ${ trace}
+</div>
 
-          ${ banner }
-        </div>
+${ rightBox ? html`
+  <div class="pl-box-aside-right pl-col pl-col-4">
+    ${ rightBox}
+  </div>
+  ` : null}
+
+</div>
       
       </div>
 
