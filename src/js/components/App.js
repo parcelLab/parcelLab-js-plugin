@@ -1,6 +1,5 @@
 const html = require('nanohtml')
 const Header = require('./Header')
-const RerouteLinkShort = require('./RerouteLinkShort')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
 const Banner = require('./Banner')
@@ -28,8 +27,8 @@ const App = (state, emit) => {
     state.options.show_searchForm ? errApp.push(Search(state, emit)) : errApp.push(Alert(state))
 
     if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404 &&
-      state.query.courier && state.query.trackingNo &&
-      state.fallback_deeplink) {
+    state.query.courier && state.query.trackingNo &&
+    state.fallback_deeplink) {
       errApp.push(FallbackFurtherInfos(state))
     }
 
@@ -45,17 +44,17 @@ const App = (state, emit) => {
   if (!state.checkpoints) return Layout(Loading())
 
   const header = Header(state, emit)
-  const rerouteLinkShort = RerouteLinkShort(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
-  let banner = null
+
+  let rightBox = null
   if (state.options.banner_image === 'instagram' && state.options.instagram) {
-    banner = InstagramPost(state)
+    rightBox = InstagramPost(state)
   } else if (state.options.banner_image && state.options.banner_link) {
-    banner = Banner(state)
-  } else if (state.options.show_articleList) {
-    banner = ArticleBox(state, emit)
+    rightBox = Banner(state)
+  } else {
+    rightBox = ArticleBox(state, emit)
   }
 
   const app = html`
@@ -66,27 +65,27 @@ const App = (state, emit) => {
 
       <div id="pl-main-box">
 
-      <div class="pl-col-row pl-col-row-same-height">
+        <div class="pl-col-row pl-col-row-same-height">
 
-${ actionBox ? html`
-<div  style="display: none;" class="pl-box-aside-left pl-col pl-col-4">
-  <div id="pl-action-box-container" class="pl-space-bottom">
-    ${ actionBox}
-  </div>
-</div>
-`: null}
+          ${actionBox ? html`
+          <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-4">
+            <div id="pl-action-box-container" class="pl-space-bottom">
+              ${actionBox}
+            </div>
+          </div>
+          ` : null}
 
-<div class="pl-main pl-col pl-col-4">
-  ${ trace}
-</div>
+          <div class="pl-main pl-col pl-col-4">
+            ${trace}
+          </div>
 
-${ rightBox ? html`
-  <div class="pl-box-aside-right pl-col pl-col-4">
-    ${ rightBox}
-  </div>
-  ` : null}
+          ${rightBox ? html`
+            <div class="pl-box-aside-right pl-col pl-col-4">
+              ${rightBox}
+            </div>
+            ` : null}
 
-</div>
+        </div>
       
       </div>
 
