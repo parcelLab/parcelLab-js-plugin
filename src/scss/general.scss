@@ -172,6 +172,51 @@ textarea.pl-form-input {
      -moz-appearance: none;
           appearance: none; }
 
+
+.pl-layout-left {
+  padding: 0 10px 0 0;
+  @media(max-width: 749px) {
+    padding: 0;
+  }
+}
+.pl-layout-center {
+  padding: 0 5px 0 5px;
+  @media(max-width: 749px) {
+    padding: 0;
+    margin: 15px 0;
+  }  
+}
+
+.pl-layout-right {
+  display:block !important;
+  padding: 0 0 0 10px;
+  @media(max-width: 749px) {
+    padding: 0;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+@media(min-width: 750px) {
+  .pl-layout {
+    &-left > .pl-box {
+      height: 550px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    &-center > .pl-box {
+      height: 550px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    &-right > .pl-box {
+      height: 550px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}
 .pl-reroute-link {
   margin-bottom: 15px;
 }

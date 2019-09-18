@@ -65,8 +65,6 @@ class ParcelLab {
       this.options.show_searchForm = this.getUrlQuery('show_searchForm')
     if (this.getUrlQuery('show_zipCodeInput'))
       this.options.show_zipCodeInput = this.getUrlQuery('show_zipCodeInput')
-    if (this.getUrlQuery('rerouteButton'))
-      this.options.rerouteButton = this.getUrlQuery('rerouteButton')
 
     if (this.getUrlQuery('animateTruck'))
       this.options.animateTruck = true

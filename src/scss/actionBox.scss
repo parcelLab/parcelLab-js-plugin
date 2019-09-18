@@ -4,28 +4,6 @@
   }
 }
 
-
-.pl-box-aside-left {
-  display:block !important;
-  padding: 0 20px 0 0;
-  @media(max-width: 749px) {
-    padding: 0;
-  }
-}
-
-.pl-box-aside-right {
-  display:block !important;
-  padding: 0 0 0 20px;
-  @media(max-width: 749px) {
-    margin-top: 15px;
-    padding: 0;
-  }
-
-  img {
-    width: 100%;
-  }
-}
-
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
@@ -165,18 +143,15 @@ h3 {
   }
 }
 
-.pl-box-time {
+
   .pl-time-data {
     font-size: 20px;
+    text-align: center;
   }
   .pl-time-caption {
     color: #aaa;
     font-size: 13px;
   }
-  hr {
-    margin: 5px 0;
-  }
-}
 
 
 .pl-box-location {

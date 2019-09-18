@@ -36,7 +36,7 @@ You can define options by passing an Object as second argument, when creating a 
 ```html
   <script type="text/javascript">
     ...
-    var options = { rerouteButton: 'left', show_searchForm: 'true' };
+    var options = { show_searchForm: 'true' };
     var parcelLab = new ParcelLab('#pl-trace', options);
     parcelLab.initialize();
     ...
@@ -46,7 +46,6 @@ You can define options by passing an Object as second argument, when creating a 
 These are the available options:
 - styles : Boolean (`false` will disable the default css for custom styling)
 - customStyles : Object (see below)
-- rerouteButton : 'left' | 'right' - default is 'right' (defines where to render the reroute button if possible)
 - show_searchForm :  Boolean (activates a search form, which will be rendered if tracking was not found or no trackingNo/orderNo was given, needs userId)
 - show_zipCodeInput : Boolean (activates the zip code field for the search form)
 - userId : String (alternative way to pass userId - instead of in url)
@@ -127,14 +126,6 @@ In this example we will set the box and button border-radius to 0px and make the
   var parcelLab = new ParcelLab('#pl-trace', { styles: true, customStyles: custom });
   parcelLab.initialize();
 </script>
-```
-
-### Without action box
-
-If you want to use the plugin in a non-customer facing website (e.g. internal page for customer support), it is recommended to hide the action box like so:
-
-```html
-<style> div#pl-action-box-container { display: none; } </style>
 ```
 
 ## Custom translations
