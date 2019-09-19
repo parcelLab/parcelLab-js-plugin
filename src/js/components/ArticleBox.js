@@ -1,7 +1,5 @@
 const html = require('nanohtml')
 const Icon = require('./Icon')
-const T = require('../lib/translator.js')
-const MoreButton = require('./MoreButton')
 const { translate } = require('../lib/translator.js')
 
 function calcArticleTotalSum (validArticles) {
@@ -59,13 +57,7 @@ module.exports = function ArticleList ({ activeTracking, checkpoints, query, sho
     const validArticles = activeTrackingArticles.filter(a => (a.articleNo || a.articleName))
     if (validArticles.length < 1) return null
 
-    let articleList = validArticles.map(ArticleItem)
-    let moreButton = null
-
-    if (!showAllArticles && validArticles.length > 4) {
-      articleList = articleList.slice(0, 4)
-      moreButton = MoreButton(T.translate('more', query.lang.name), emit, 'showAllArticles')
-    }
+    const articleList = validArticles.map(ArticleItem)
 
     return html`
       <div class="pl-box pl-box-articles ${showAllArticles ? 'pl-scrollable' : ''}">
@@ -76,8 +68,7 @@ module.exports = function ArticleList ({ activeTracking, checkpoints, query, sho
           <ul class="pl-article-list">
             ${articleList}
           </ul>
-        
-          ${moreButton}
+
         </div>
 
       </div>

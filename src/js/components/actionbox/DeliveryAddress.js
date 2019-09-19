@@ -25,16 +25,17 @@ module.exports = function DeliveryAddress(tHeader, lang) {
     icon.style.opacity = '.7'
     icon.style.verticalAlign = 'middle'
 
-    return html`
-    <div class="pl-box pl-action-box pl-box-address pl-space-top">
-      <div class="pl-box-body">
+    return [
+      html`<hr>`,
+      html`
+    <div class="pl-box-address">
         <p class="pl-box-address-caption">
-          ${ icon } ${ translate('deliveryAddress', lang.name)}
+          ${icon} ${translate('deliveryAddress', lang.name)}
         </p>
-        ${ address }
-      </div>
+        ${address}
     </div>
-  `
+    `
+    ]
   } else {
     return ''
   }

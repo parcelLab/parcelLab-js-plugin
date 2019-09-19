@@ -2,7 +2,6 @@ const PickupLocation = require('./PickupLocation')
 const Prediction = require('./Prediction')
 const VoteCourier = require('./VoteCourier')
 const PickupLocationUnknown = require('./PickupLocationUnknown')
-const OrderProcessed = require('./OrderProcessed')
 const NextAction = require('./NextAction')
 const Returned = require('./Returned')
 const Fallback = require('./Fallback')
@@ -11,44 +10,39 @@ const LiveTracking = require('./LiveTracking')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
-  if (tHeader && tHeader.actionBox) {
-    switch (tHeader.actionBox.type) {
-      case 'pickup-location':
-        if (tHeader.actionBox.data) return PickupLocation(tHeader, query.lang, emit)
-        else return Fallback(tHeader, options)
-      case 'vote-courier':
-        return [
-          Fallback(tHeader, options),
-          VoteCourier(tHeader, options, emit)
-        ]
-      case 'prediction':
-        if (tHeader.actionBox.data &&
-          (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation)) {
-          return Prediction(tHeader)
-        } else {
-          break
-        }
-      case 'pickup-location-unknown':
-        return PickupLocationUnknown(tHeader, query.lang)
-      case 'order-processed':
-        return OrderProcessed(tHeader, options)
-      case 'next-action':
-        return NextAction(tHeader)
-      case 'returned':
-        return Returned(tHeader)
-      case 'live-tracking':
-        if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl) {
-          return LiveTracking(tHeader, query, options.animateTruck || false)
-        } else {
-          break
-        }
-    }
+  if (!tHeader) return null
 
-    return [ // fallback
-      Fallback(tHeader, options),
-      DeliveryAddress(tHeader, query.lang)
-    ]
+  let result = null
+  if (tHeader && tHeader.actionBox) {
+    const type = tHeader.actionBox.type
+
+    if (type === 'pickup-location' && tHeader.actionBox.data) {
+      result = PickupLocation(tHeader, query.lang, emit)
+    } else if (type === 'vote-courier') {
+      result = Fallback(tHeader, options, VoteCourier(tHeader, options, emit))
+    } else if (type === 'prediction' &&
+    tHeader.actionBox.data &&
+    (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation)
+    ) {
+      result = Prediction(tHeader)
+    } else if (type === 'pickup-location-unknown') {
+      result = PickupLocationUnknown(tHeader, query.lang)
+    } else if (type === 'next-action') {
+      result = NextAction(tHeader)
+    } else if (type === 'returned') {
+      result = Returned(tHeader)
+    } else if (type === 'live-tracking' &&
+    tHeader.actionBox.info &&
+    tHeader.courier &&
+    tHeader.courier.trackingurl
+    ) {
+      result = LiveTracking(tHeader, query, options.animateTruck || false)
+    }
   }
+
+  if (!result) result = Fallback(tHeader, options, DeliveryAddress(tHeader, query.lang))
+
+  return result
 }
 
 module.exports = ActionBox

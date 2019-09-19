@@ -126,7 +126,6 @@ h3 {
     text-align: center;
     font-size: 20px;
     position: relative;
-    padding-top: 0;
     .pl-cal-week-day {
       font-weight: 200;
       font-size: 20px;
@@ -372,13 +371,8 @@ h3 {
 .pl-box-icon-status {
   .pl-box-body {
     text-align: center;
-    padding: 0;
-    padding-bottom: 25px;
     img {
       margin: 0 auto;
     }
-  }
-  .pl-box-footer {
-    padding-top: 0px;
   }
 }

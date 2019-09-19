@@ -7,15 +7,15 @@ const Returned = ({ actionBox }) => {
   return html`
     <div class="pl-box pl-action-box pl-box-icon-status">
       <div class="pl-box-heading">
-        ${ actionBox.label }
+        ${actionBox.label}
       </div>
 
       <div class="pl-box-body">
-        ${ Icon('return', null, '80') }
+        ${Icon('return', null, '80')}
       </div>
 
       <div class="pl-box-footer">
-        ${ actionBox.caption }
+        ${actionBox.caption}
       </div>
     </div>
   `
