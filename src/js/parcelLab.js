@@ -41,8 +41,8 @@ class ParcelLab {
   initialize() {
     this.orderNo = this.getUrlQuery('orderNo') || this.options.orderNo
     this.xid = this.getUrlQuery('xid') || this.options.xid
-    this.trackingNo = this.getUrlQuery('trackingNo') || this.options.trackingNo
-    this.courier = this.getUrlQuery('courier') || this.options.courier
+    this.trackingNo = this.getUrlQuery('trackingNo') || this.getUrlQuery('tno') || this.options.trackingNo
+    this.courier = this.getUrlQuery('courier') || this.getUrlQuery('c') || this.options.courier
     this.userId = this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
     this.secureHash = this.getUrlQuery('s') || this.getUrlQuery('secureHash') || this.options.secureHash
     this.client = this.getUrlQuery('client') || this.getUrlQuery('shop') || this.options.secureHash
