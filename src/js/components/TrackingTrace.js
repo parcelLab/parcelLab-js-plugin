@@ -2,7 +2,6 @@ const html = require('nanohtml')
 const T = require('../lib/translator.js')
 const statics = require('../lib/static')
 const Checkpoint = require('./Checkpoint')
-const MoreButton = require('./MoreButton')
 const FurtherInfos = require('./FurtherInfos')
 const IconState = require('./IconState')
 
@@ -31,7 +30,7 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
 }).filter(cp => true && cp.shown).reverse()
 
 const TrackingTrace = (state, emit) => {
-  const { checkpoints, activeTracking, query, showAllCheckpoints, options } = state
+  const { checkpoints, activeTracking, query, /* showAllCheckpoints, */ options } = state
   if (!checkpoints) return null
 
   // const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'

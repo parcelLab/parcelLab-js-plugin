@@ -18,20 +18,32 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
 
     if (type === 'pickup-location' && tHeader.actionBox.data) {
       result = PickupLocation(tHeader, query.lang, emit)
-    } else if (type === 'vote-courier') {
+    }
+
+    if (type === 'vote-courier') {
       result = Fallback(tHeader, options, VoteCourier(tHeader, options, emit))
-    } else if (type === 'prediction' &&
+    }
+
+    if (type === 'prediction' &&
     tHeader.actionBox.data &&
     (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation)
     ) {
       result = Prediction(tHeader)
-    } else if (type === 'pickup-location-unknown') {
+    }
+
+    if (type === 'pickup-location-unknown') {
       result = PickupLocationUnknown(tHeader, query.lang)
-    } else if (type === 'next-action') {
+    }
+
+    if (type === 'next-action') {
       result = NextAction(tHeader)
-    } else if (type === 'returned') {
+    }
+
+    if (type === 'returned') {
       result = Returned(tHeader)
-    } else if (type === 'live-tracking' &&
+    }
+
+    if (type === 'live-tracking' &&
     tHeader.actionBox.info &&
     tHeader.courier &&
     tHeader.courier.trackingurl
@@ -40,7 +52,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     }
   }
 
-  if (!result) result = Fallback(tHeader, options, DeliveryAddress(tHeader, query.lang))
+  result = result || Fallback(tHeader, options, DeliveryAddress(tHeader, query.lang))
 
   return result
 }

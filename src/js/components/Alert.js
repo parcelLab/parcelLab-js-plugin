@@ -6,7 +6,7 @@ const Alert = ({ query }) => {
   const messageText = translations[langCode].error.delivery
   return html`
     <div class="pl-alert pl-alert-danger">
-      ${ messageText }
+      ${messageText}
     </div>
   `
 }

@@ -2,23 +2,23 @@ const html = require('nanohtml')
 const { translate } = require('../lib/translator')
 const { translations } = require('../lib/static')
 
-const Search = ({ query, query_err, options, comingFromSearch }, emit) => {
-  const { show_zipCodeInput } = options
+const Search = ({ query, query_err: queryErr, options, comingFromSearch }, emit) => {
+  const { show_zipCodeInput: showZipCodeInput } = options
   const langName = query.lang.name
   const inputPlaceholder = translate('searchOrder', langName)
   const zipPlaceholder = translate('zip', langName)
   const buttonText = translate('search', langName)
   const messageText = comingFromSearch ? translations[langName].error.search : translations[langName].error.delivery
-  const message = !query_err ? html`
+  const message = !queryErr ? html`
     <div class="pl-box-heading">
         <div class="pl-alert pl-alert-danger">
-          ${ messageText }
+          ${messageText}
         </div>
     </div>` : null
 
   let searchBody = null
 
-  if (show_zipCodeInput) {
+  if (showZipCodeInput) {
     const handleSubmit = (evt) => {
       evt.preventDefault()
       const inpOrder = document.getElementById('pl-ts-trackingno')
@@ -70,9 +70,9 @@ const Search = ({ query, query_err, options, comingFromSearch }, emit) => {
   return html`
     <div class="pl-container">
       <div class="pl-box pl-search-box">
-        ${ message }
+        ${message}
         <div class="pl-box-body" style="padding: 25px;">
-          ${ searchBody }
+          ${searchBody}
         </div>
       </div>
     </div>

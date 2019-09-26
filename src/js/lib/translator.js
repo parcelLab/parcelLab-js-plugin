@@ -1,18 +1,14 @@
 const statics = require('./static')
 
-const translate = function (word, lang='en') {
+const translate = function (word, lang = 'en') {
   const customTranslations = window.parcelLab_customTranslations
 
   // try customTranslations
   if (customTranslations && customTranslations[lang] && customTranslations[lang][word]) {
     return customTranslations[lang][word]
-  }
-  
-  else if (statics.translations[lang] && statics.translations[lang][word]) {
+  } else if (statics.translations[lang] && statics.translations[lang][word]) {
     return statics.translations[lang][word]
-  }
-  
-  else {
+  } else {
     console.warn('Can not translate "' + word + '" into ' + lang)
 
     // try to translate to en
@@ -40,42 +36,41 @@ const date = function (ts, time, code) {
  * @param  {Number} size, the number of zeros.
  * @return {String} the formatted string.
  */
-function padWithZero(s, size) {
+function padWithZero (s, size) {
   s = s + ''
   while (s.length < size) s = '0' + s
   return s
 }
 
-
-function dateToStringDe(ts, showTime) {
+function dateToStringDe (ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
   if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2) + ' Uhr'
   return result
 }
 
-function dateToStringSlash(ts, showTime) {
+function dateToStringSlash (ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '/' + padWithZero((ts.getMonth() + 1), 2) + '/' + ts.getFullYear()
   if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
   return result
 }
 
-function dateToStringDot(ts, showTime) {
+function dateToStringDot (ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
   if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
   return result
 }
 
-function dateToStringDash(ts, showTime) {
+function dateToStringDash (ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '-' + padWithZero((ts.getMonth() + 1), 2) + '-' + ts.getFullYear()
   if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
   return result
 }
 
-function dateToStringEn(ts, showTime) {
+function dateToStringEn (ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
   if (showTime) {
@@ -86,14 +81,14 @@ function dateToStringEn(ts, showTime) {
   return result
 }
 
-function dateToStringFr(ts, showTime) {
+function dateToStringFr (ts, showTime) {
   let result = ''
   result += padWithZero(ts.getDate(), 2) + '.' + padWithZero(ts.getMonth() + 1, 2) + '.' + ts.getFullYear()
   if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + 'h' + padWithZero(ts.getMinutes(), 2)
   return result
 }
 
-function dateToStringIso(ts, showTime) {
+function dateToStringIso (ts, showTime) {
   let result = ''
   result += ts.getFullYear() + '-' + padWithZero(ts.getMonth() + 1, 2) + '-' + padWithZero(ts.getDate(), 2)
   if (showTime) result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)

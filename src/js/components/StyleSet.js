@@ -1,7 +1,7 @@
 const html = require('nanohtml')
 // border-radius: .pl-box .pl-form-input .pl-alert .pl-button
 
-module.exports = function StyleSet() {
+module.exports = function StyleSet () {
   return html`
     <style>
       .parcelLab-style #pl-plugin-wrapper, .parcellab-style #pl-plugin-wrapper, .parcelLab-styles #pl-plugin-wrapper, .parcellab-styles #pl-plugin-wrapper

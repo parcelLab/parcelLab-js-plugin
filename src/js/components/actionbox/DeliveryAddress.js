@@ -2,23 +2,23 @@ const html = require('nanohtml')
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator.js')
 
-const Address = (delivery_info) => {
+const Address = (info) => {
   return html`
     <address>
-      ${delivery_info.recipient ? html`<p>${delivery_info.recipient}</p>` : ''}
-      <p>${delivery_info.street}</p>
+      ${info.recipient ? html`<p>${info.recipient}</p>` : ''}
+      <p>${info.street}</p>
       <p>
-        ${delivery_info.destination_country_iso3 || ''} ${delivery_info.zip_code} ${delivery_info.city}
+        ${info.destination_country_iso3 || ''} ${info.zip_code} ${info.city}
       </p>
     </address>
   `
 }
 
-module.exports = function DeliveryAddress(tHeader, lang) {
-  const { delivery_info } = tHeader
+module.exports = function DeliveryAddress (tHeader, lang) {
+  const { delivery_info: info } = tHeader
 
-  if (delivery_info && delivery_info.street && delivery_info.zip_code && delivery_info.city) {
-    const address = Address(delivery_info)
+  if (info && info.street && info.zip_code && info.city) {
+    const address = Address(info)
 
     const icon = Icon('map', 0, '18')
     icon.style.display = 'inline-block'

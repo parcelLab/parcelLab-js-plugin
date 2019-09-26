@@ -1,5 +1,5 @@
 const html = require('nanohtml')
-const Icon = require('../Icon')
+// const Icon = require('../Icon')
 const RerouteLink = require('../RerouteLink')
 
 const Label = text => html`

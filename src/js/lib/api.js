@@ -1,3 +1,4 @@
+/* global XMLHttpRequest */
 const _settings = require('../../settings')
 const BASE_URL = _settings.base_url
 const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint
@@ -13,14 +14,14 @@ const ARTICLE_LIST_ENDPOINT = _settings.article_list_endpoint
 // API calls for all the modules
 const status = {
   DONE: 4,
-  OK: 200,
+  OK: 200
 }
 
-//////////////
-// Handlers //
-//////////////
+//
+// Handlers
+//
 
-function handleJSON(text) {
+function handleJSON (text) {
   let json = null
   try {
     json = JSON.parse(text)
@@ -32,7 +33,7 @@ function handleJSON(text) {
   else return text
 }
 
-function handleFetchResponse(res) {
+function handleFetchResponse (res) {
   if (!res) throw new Error('Cant parse empty handleFetchResponse')
   if (!res.headers) return res
   if (res.status >= 200 && res.status < 300) {
@@ -41,22 +42,23 @@ function handleFetchResponse(res) {
   else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`)
 }
 
-function handleRequestResponse(request, callback) {
+function handleRequestResponse (request, callback) {
   if (!request) return callback(new Error('Cant parse empty requestResponse'))
   if (request && request.status >= 200 && request.status < 300) {
     return callback(null, handleJSON(request.responseText.trim()))
   } else if (request.status === 404) {
-    return callback(404)
+    return callback(request.status)
   } else {
-    return callback(`Request Error at xhr request: ${request.status} ~> ${request.responseText}`)
+    const errText = `Request Error at xhr request: ${request.status} ~> ${request.responseText}`
+    return callback(errText)
   }
 }
 
-/////////////
+/// //////////
 // METHODS //
-/////////////
+/// //////////
 
-function _get(url, callback) {
+function _get (url, callback) {
   if (window && window.fetch) {
     window.fetch(url)
       .then(res => handleFetchResponse(res))
@@ -67,7 +69,8 @@ function _get(url, callback) {
             .then(res => handleJSON(res))
             .then(res => callback(null, res))
         } else {
-          callback(404)
+          const errMsg = 404
+          callback(errMsg)
         }
       })
       .catch(err => callback(err))
@@ -85,7 +88,7 @@ function _get(url, callback) {
   }
 }
 
-function _post(url, data, callback) {
+function _post (url, data, callback) {
   if (!data) data = {}
   if (window && window.fetch) { // use fetch api
     const headers = {}
@@ -105,32 +108,30 @@ function _post(url, data, callback) {
       }
     }
 
-    if (typeof data === 'object')
-      request.send(JSON.stringify(data))
-    else
-      request.send(data)
+    if (typeof data === 'object') request.send(JSON.stringify(data))
+    else request.send(data)
   }
 }
 
-function _toURL(baseUrl, endpoint, queryArr) {
+function _toURL (baseUrl, endpoint, queryArr) {
   let url = baseUrl + endpoint + '/?'
 
   queryArr.forEach(param => {
     // query transformations for API
     switch (param.name) {
-    case 'trackingNo':
-      param.name = 'tno'
-      param.value = encodeURIComponent(param.value)
-      break
-    case 'u':
-      param.name = 'user'
-      break
-    case 'orderNo':
-      param.value = encodeURIComponent(param.value)
-      break
-    case 'client':
-      param.value = encodeURIComponent(param.value)
-      break
+      case 'trackingNo':
+        param.name = 'tno'
+        param.value = encodeURIComponent(param.value)
+        break
+      case 'u':
+        param.name = 'user'
+        break
+      case 'orderNo':
+        param.value = encodeURIComponent(param.value)
+        break
+      case 'client':
+        param.value = encodeURIComponent(param.value)
+        break
     }
 
     url += param.name + '=' + param.value + '&'
@@ -139,7 +140,7 @@ function _toURL(baseUrl, endpoint, queryArr) {
   return url
 }
 
-function _objToQueryArr(propsObj) {
+function _objToQueryArr (propsObj) {
   const result = []
   if (propsObj.id) {
     result.push({ name: 'id', value: propsObj.id })
@@ -173,9 +174,9 @@ function _objToQueryArr(propsObj) {
   return result
 }
 
-/////////////
+/// //////////
 // Exports //
-/////////////
+/// //////////
 
 exports.get = _get
 

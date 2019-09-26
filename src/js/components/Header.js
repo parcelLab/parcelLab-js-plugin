@@ -6,15 +6,13 @@ const OrderStats = header => {
   if (header) {
     const orderStats = {}
 
-    header.filter(h => h.last_delivery_status).forEach(({ last_delivery_status }) => {
-      if (orderStats[last_delivery_status.status])
-        orderStats[last_delivery_status.status]++
-      else
-        orderStats[last_delivery_status.status] = 1
+    header.filter(h => h.last_delivery_status).forEach(({ last_delivery_status: current }) => {
+      if (orderStats[current.status]) orderStats[current.status]++
+      else orderStats[current.status] = 1
     })
 
     if (Object.keys(orderStats).length > 0) {
-      return Object.keys(orderStats).map(stat => `${ orderStats[stat] } ${ stat }`).join(', ')
+      return Object.keys(orderStats).map(stat => `${orderStats[stat]} ${stat}`).join(', ')
     }
   } else return null
 }
@@ -31,18 +29,18 @@ const Header = (state, emit) => {
     <div class="pl-header">
       <div class="pl-col-row">
         <div class="pl-order-no">
-          ${ translate('orderNo', query.lang.name) } ${ query.orderNo }
+          ${translate('orderNo', query.lang.name)} ${query.orderNo}
         </div>
 
           <div class="pl-order-sub">
             ${translate('containsOf', query.lang.name)} ${header.length} ${translate('deliveries', query.lang.name)}
 
-            ${ orderStatsText ? `(${ orderStatsText })` : null }
+            ${orderStatsText ? `(${orderStatsText})` : null}
           </div>
 
 
       </div>
-      <div class="pl-col-row">${ tabs }</div>
+      <div class="pl-col-row">${tabs}</div>
     </div>
     `
   } else if (!tabs && query.orderNo) {

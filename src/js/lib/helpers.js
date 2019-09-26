@@ -5,10 +5,10 @@ exports.trimURL = function (url) {
     parser.href = url
     result = parser.host
     if (parser.pathname && parser.pathname.length > 1) result += parser.pathname
+    return result
   } catch (e) {
     console.log(e)
-  } finally {
-    if (!result) result = url
+    result = url
     return result
   }
 }
