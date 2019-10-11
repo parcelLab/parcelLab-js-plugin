@@ -11,10 +11,13 @@ const FurtherInfos = ({ courier, tracking_number: trackingNo }, langName) => {
 
   if (courier && courier.trackingurl) {
     return html`
-      <a id="pl-courier-fwd-link" href="${courier.trackingurl}" target="_blank" class="pl-button pl-is-fullwidth">
-        ${courier.trackingurl_label}
-        ${sub}
-    </a>`
+    <a id="pl-courier-fwd-link" href="${courier.trackingurl}" target="_blank">
+      <div class="checkpoint">
+        <div><b>${courier.trackingurl_label}</b></div>
+        <div>${sub}</div>
+      </div>
+    </a>
+    `
   } else return null
 }
 

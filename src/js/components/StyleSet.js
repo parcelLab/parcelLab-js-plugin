@@ -4,9 +4,17 @@ const html = require('nanohtml')
 module.exports = function StyleSet () {
   return html`
     <style>
-      .parcelLab-style #pl-plugin-wrapper, .parcellab-style #pl-plugin-wrapper, .parcelLab-styles #pl-plugin-wrapper, .parcellab-styles #pl-plugin-wrapper
-      {
-        margin: ${window.parcelLab_styles.margin};
+      @media(max-width: 749px) {
+        .parcelLab-style #pl-plugin-wrapper, .parcellab-style #pl-plugin-wrapper, .parcelLab-styles #pl-plugin-wrapper, .parcellab-styles #pl-plugin-wrapper
+        {
+          margin: ${window.parcelLab_styles.margin_mobile};
+        }
+      }
+      @media(min-width:750px) {
+        .parcelLab-style #pl-plugin-wrapper, .parcellab-style #pl-plugin-wrapper, .parcelLab-styles #pl-plugin-wrapper, .parcellab-styles #pl-plugin-wrapper
+        {
+          margin: ${window.parcelLab_styles.margin};
+        }
       }
       .parcelLab-style .pl-box, .parcellab-style .pl-box, .parcelLab-styles .pl-box, .parcellab-styles .pl-box
       {

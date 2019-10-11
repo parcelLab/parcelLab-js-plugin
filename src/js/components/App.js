@@ -68,17 +68,17 @@ const App = (state, emit) => {
         <div class="pl-col-row">
 
           ${actionBox ? html`
-          <div class="pl-layout-left pl-col pl-col-4">
+          <div class="pl-layout-left pl-col">
               ${actionBox}
           </div>
           ` : null}
 
-          <div class="pl-layout-center pl-col pl-col-4">
+          <div class="pl-layout-center pl-col">
             ${trace}
           </div>
 
           ${rightBox ? html`
-            <div class="pl-layout-right pl-col pl-col-4">
+            <div class="pl-layout-right pl-col">
               ${rightBox}
             </div>
             ` : null}

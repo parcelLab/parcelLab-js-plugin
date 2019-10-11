@@ -182,6 +182,9 @@ class ParcelLab {
     if (this.getUrlQuery('margin')) {
       customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
     }
+    if (this.getUrlQuery('margin_mobile')) {
+      customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin_mobile')}`)
+    }
     if (this.getUrlQuery('iconColor')) {
       customStyles.iconColor = decodeURIComponent(`#${this.getUrlQuery('iconColor')}`)
     }
@@ -270,8 +273,7 @@ class ParcelLab {
 
     // update app on ~all~ state changes
     this.store.subscribe(state => {
-      const newApp = App(state, store.emit)
-      updateHTML(this.el, newApp)
+      this.render(state)
 
       // run optional onRendered hook
       if (this.options.onRendered && typeof this.options.onRendered === 'function') {
@@ -482,6 +484,11 @@ class ParcelLab {
       const { header, body } = obj
       return JSON.stringify({ header, body }).length
     } else return false
+  }
+
+  render (state) {
+    const newApp = App(state, this.store.emit)
+    updateHTML(this.el, newApp)
   }
 }
 

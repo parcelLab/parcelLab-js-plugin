@@ -93,7 +93,8 @@ options.customStyles = {
   tabIconColor: '#000', // sets color for the order tab icons (default: buttonColor #333)
   activeTabIconColor: '#000', // sets color only for the active order tab icon (default: buttonColor #333)
   actionIconColor: '#000', // sets color only for the icons of the actionbox buttons
-  margin: '0px 0px', // sets mnargin for #pl-main-box (default: 0px)
+  margin: '0px 0px', // sets mnargin on desktop devices for plugin container (default: 0px)
+  margin_mobile: '0px 0px', // sets margin on mobile devices for plugin container (default: 0px)
 };
 ```
 
@@ -214,3 +215,8 @@ Minified `index.js` and `index.css` will be in the `dist` dir.
 $ npm run deploy
 ```
 The `index.js`and `index.css`files will be deployed as parcelLab.min.js and parcelLab.min.css on the CDN.
+
+
+### TODO
+- more material styles
+- deacticate material styles?

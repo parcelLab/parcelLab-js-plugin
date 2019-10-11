@@ -3,6 +3,7 @@ const T = require('../lib/translator.js')
 const statics = require('../lib/static')
 const Checkpoint = require('./Checkpoint')
 const FurtherInfos = require('./FurtherInfos')
+const MoreButton = require('./MoreButton')
 const IconState = require('./IconState')
 
 const showTimeOnCheckpoint = (d, i) => {
@@ -30,7 +31,7 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
 }).filter(cp => true && cp.shown).reverse()
 
 const TrackingTrace = (state, emit) => {
-  const { checkpoints, activeTracking, query, /* showAllCheckpoints, */ options } = state
+  const { checkpoints, activeTracking, query, showAllCheckpoints, options } = state
   if (!checkpoints) return null
 
   // const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
@@ -40,19 +41,21 @@ const TrackingTrace = (state, emit) => {
   const furtherInfos = FurtherInfos(tHeader, query.lang.name)
 
   const tCheckpoints = prepareCheckpoints(tBody, query)
-  // let moreButton = null
+  let moreButton = null
 
-  // if (tCheckpoints.length > 3 && !showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
-  //   moreButton = MoreButton(T.translate('more', query.lang.name), emit)
-  //   tCheckpoints = tCheckpoints.slice(0, 3)
-  // }
+  if (!showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
+    moreButton = MoreButton(T.translate('more', query.lang.name), emit)
+  }
 
   return html`
     <div id="pl-t-${tHeader.id}" class="pl-box pl-box-trace">
       <div class="pl-box-body">
         ${iconState}
-        ${tCheckpoints.map(tCp => Checkpoint(tCp))}
+        <div class="pl-checkpoints  ${showAllCheckpoints ? 'pl-checkpoints-show-all' : ''}">
+          ${tCheckpoints.map(tCp => Checkpoint(tCp))}
+        </div>
         ${furtherInfos}
+        ${moreButton}
       </div>
     </div>
   `

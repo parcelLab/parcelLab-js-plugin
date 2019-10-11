@@ -29,6 +29,7 @@ module.exports = {
     iconColor: '#000',
     buttonColor: '#333',
     buttonBackground: '#e6e6e6',
-    margin: '0px'
+    margin: '0px',
+    margin_mobile: '0px'
   }
 }
