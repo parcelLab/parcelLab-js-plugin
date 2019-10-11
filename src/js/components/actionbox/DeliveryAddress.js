@@ -1,4 +1,5 @@
 const html = require('nanohtml')
+const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator.js')
 
@@ -6,9 +7,9 @@ const Address = (delivery_info) => {
   return html`
     <address>
       ${delivery_info.recipient ? html`<p>${delivery_info.recipient}</p>` : ''}
-      <p>${delivery_info.street}</p>
+      <p>${raw(delivery_info.street)}</p>
       <p>
-        ${delivery_info.destination_country_iso3 || ''} ${delivery_info.zip_code} ${delivery_info.city}
+        ${delivery_info.destination_country_iso3 || ''} ${delivery_info.zip_code} ${raw(delivery_info.city)}
       </p>
     </address>
   `
