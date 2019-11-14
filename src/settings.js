@@ -1,6 +1,7 @@
 module.exports = {
   base_url: 'https://api.parcellab.com/',
   icon_url: 'https://icon.parcellab.com/',
+  test_url: 'http://localhost:port/',
   checkpoints_endpoint: 'v2/checkpoints',
   vote_endpoint: 'v2/vote-courier/',
   vote_communication_endpoint: 'v2/vote-communication/',
@@ -11,6 +12,7 @@ module.exports = {
   courier_deeplink_endpoint: 'deeplink-fallback',
   static_map_endpoint: 'staticmap/livetracking',
   article_list_endpoint: 'article-list',
+  live_tracking_map_endpoint: 'live-tracking-map/geoData',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
   google_api_key: require('./GOOGLE_API_KEY').key,
