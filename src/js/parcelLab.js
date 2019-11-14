@@ -313,8 +313,8 @@ class ParcelLab {
           if (actionBox.type === 'prediction') {
             store.emit('fetchPrediction', cph.id)
           }
-          if (actionBox.type === 'fetchLiveTrackingMap') {
-            store.emit('fetch', cph.id)
+          if (actionBox.type === 'live-tracking-map') {
+            store.emit('fetchLiveTrackingMap', cph.id)
           }
         })
       }
@@ -472,7 +472,7 @@ class ParcelLab {
       Api.getLiveTrackingMap((err, res) => {
         if (err) this.store.set({ liveTrackingMap: err })
         else if (res) {
-
+          store.set({ liveTrackingMap: res })
         }
       })
     })

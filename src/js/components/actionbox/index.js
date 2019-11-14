@@ -7,6 +7,7 @@ const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 const DeliveryAddress = require('./DeliveryAddress')
 const LiveTracking = require('./LiveTracking')
+const LiveTrackingMap = require('./LiveTrackingMap')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
@@ -52,6 +53,10 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl) {
         result = LiveTracking(tHeader, query, options.animateTruck || false)
       }
+    }
+
+    if (type === 'live-tracking-map') {
+      result = LiveTrackingMap(tHeader, query.lang, emit)
     }
 
     result = result || [ // fallback
