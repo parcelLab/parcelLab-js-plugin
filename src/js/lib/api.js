@@ -9,6 +9,7 @@ const SHOP_PREDICTION_ENDPOINT = _settings.shop_prediction_endpoint
 const USER_ACTIVITY_ENDPOINT = _settings.user_activity_endpoint
 const COURIER_DEEPLINK_ENDPOINT = _settings.courier_deeplink_endpoint
 const ARTICLE_LIST_ENDPOINT = _settings.article_list_endpoint
+const LIVE_TRACKING_MAP_ENDPOINT = _settings.live_tracking_map_endpoint
 
 // API calls for all the modules
 const status = {
@@ -201,6 +202,10 @@ exports.getShopPrediction = function (propsObj, callback) {
 
 exports.getArticleList = function (propsObj, callback) {
   _get(_toURL(BASE_URL, ARTICLE_LIST_ENDPOINT, _objToQueryArr(propsObj)), callback)
+}
+
+exports.getLiveTrackingMap = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, LIVE_TRACKING_MAP_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
 
 exports.voteCourier = function (vote, propsObj, callback) {
