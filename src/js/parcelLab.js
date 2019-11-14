@@ -214,7 +214,7 @@ class ParcelLab {
     return decodeURIComponent(results[2].replace(/\+/g, ' '))
   }
 
-  sortCheckpoints(checkpoints={}) {
+  sortCheckpoints(checkpoints = {}) {
     try {
       let { header } = checkpoints
       const { body } = checkpoints
@@ -231,7 +231,7 @@ class ParcelLab {
           return xMS > yMS ? -1 : 1
         }
 
-      
+
         delivered = delivered.sort(sortFunc)
         notDelivered = notDelivered.sort(sortFunc)
         header = [...notDelivered, ...delivered]
@@ -313,6 +313,9 @@ class ParcelLab {
           if (actionBox.type === 'prediction') {
             store.emit('fetchPrediction', cph.id)
           }
+          if (actionBox.type === 'fetchLiveTrackingMap') {
+            store.emit('fetch', cph.id)
+          }
         })
       }
     })
@@ -373,7 +376,7 @@ class ParcelLab {
     this.store.on('showAllCheckpoints', () => {
       this.store.set({ showAllCheckpoints: true })
     })
-    
+
     this.store.on('showAllArticles', () => {
       this.store.set({ showAllArticles: true })
     })
@@ -440,11 +443,11 @@ class ParcelLab {
 
     // fetch latest ig post served by our api
     this.store.on('fetchInstagram', () => {
-      Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err,res) => {
+      Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err, res) => {
         console.log('RES', { res })
         // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
-        
+
         if (res && res.Item && res.Item.posts && res.Item.posts.length > 0) {
           state.options.instagram = res.Item
         } else { // log error and fail silently
@@ -464,9 +467,18 @@ class ParcelLab {
         }
       })
     })
+
+    this.store.on('fetchLiveTrackingMap', () => {
+      Api.getLiveTrackingMap((err, res) => {
+        if (err) this.store.set({ liveTrackingMap: err })
+        else if (res) {
+
+        }
+      })
+    })
   }
 
-  _generateCPhash(obj={}) {
+  _generateCPhash(obj = {}) {
     if (obj && typeof obj === 'object' && obj.header && obj.body) {
       const { header, body } = obj
       return JSON.stringify({ header, body }).length

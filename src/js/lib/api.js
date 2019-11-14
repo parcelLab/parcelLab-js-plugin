@@ -1,5 +1,6 @@
 const _settings = require('../../settings')
 const BASE_URL = _settings.base_url
+const TEST_URL = _settings.test_url
 const CHECKPOINTS_ENDPOINT = _settings.checkpoints_endpoint
 const VOTE_ENDPOINT = _settings.vote_endpoint
 const VOTE_COMMUNICATION_ENDPOINT = _settings.vote_communication_endpoint
@@ -205,7 +206,7 @@ exports.getArticleList = function (propsObj, callback) {
 }
 
 exports.getLiveTrackingMap = function (propsObj, callback) {
-  _get(_toURL(BASE_URL, LIVE_TRACKING_MAP_ENDPOINT, _objToQueryArr(propsObj)), callback)
+  _get(_toURL(TEST_URL, LIVE_TRACKING_MAP_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
 
 exports.voteCourier = function (vote, propsObj, callback) {
