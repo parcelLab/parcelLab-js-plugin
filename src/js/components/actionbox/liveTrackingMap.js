@@ -30,22 +30,29 @@ const generatePrettyTime = timeString => {
   return `${hours}:${mins}`
 }
 
-const DeliveryBox = (startTime, endTime, timeCaption, openStops) => {
+const DeliveryBox = (startTime, endTime, timeCaption, openStops, actionBox) => {
 
-  // TODO Caption for "Ankunftszeit ca... xx - xx"
+
+  /* 
+  * TODO Caption for "Ankunftszeit ca... xx - xx"
+  * TODO Ikea style scss (pl-box-body-userName)
+  * Blue: HEX COLOR: #0051BA;
+  * Yellow: HEX COLOR: #FFDA1A;
+  */
+
+
+
+  const caption = actionBox.caption.replace('{{openStops}}', openStops)
+
   return html`
-    <div class="pl-box pl-box-time">
-      <div class="pl-box-body">
         <div>
-        <--Hier rein kommt "Noch 2 Stopps...."--/>
+          ${caption}
         </div>
         <div class="pl-time-data">
           ${generatePrettyTime(startTime)} ${endTime ? ' - ' + generatePrettyTime(endTime) : ''}
         </div>
         ${ timeCaption ? html`
         <small class="pl-time-caption">${timeCaption}</small>` : ''}
-      </div>
-    </div>
     `
 }
 
@@ -56,7 +63,9 @@ const DeliveryBox = (startTime, endTime, timeCaption, openStops) => {
 const LiveMap = (id, actionBox, courier, query, coordinates) => {
 
   // TODO get map and render truck on coordinates
-  const elem = html``
+  const elem = html`
+
+  `
 
   return elem
 }
@@ -65,22 +74,29 @@ const LiveTrackingMap = ({ id, actionBox, courier, last_delivery_status }, query
   if (!actionBox.info || !(actionBox.info.city || actionBox.info.destination_country_iso3))
     return null
 
-  const mapBox = html`
-    <div class="pl-box pl-action-box pl-box-location">
-      <div class="pl-box-body pl-box-location-body">
-        <--DO MAP--/>
-      </div>
-    </div>
-  `
+  // const mapBox = Map()
+  // html`
+  //   <div class="pl-box pl-action-box pl-box-location">
+  //     <div class="pl-box-body pl-box-location-body">
+  //       <--DO MAP--/>
+  //     </div>
+  //   </div>
+  // `
   const scheduled = actionBox.info.scheduled
   const deliveryBox = (scheduled && scheduled.startTime)
-    ? DeliveryBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption)
+    ? DeliveryBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption, openStops, actionBox)
     : null
 
   return html`
     <div class="pl-spaced-list">
-      ${ mapBox}    
-      ${ deliveryBox}
+    <div class="pl-box pl-action-box pl-box-location">
+      <div class="pl-box-body pl-box-location-body">
+        ${Map(id, actionBox, courier, query, animated)}
+      </div>
+      <div class="pl-box-footer">
+        ${ deliveryBox}
+      </div>
+    </div>
     </div>
   `
 }
