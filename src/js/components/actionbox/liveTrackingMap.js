@@ -1,8 +1,11 @@
 const html = require('nanohtml')
-const { base_url, static_map_endpoint } = require('../../../settings')
-const Icon = require('../Icon')
-const { translate } = require('../../lib/translator')
+const GOOGLE_API_KEY = require('../../../../settings').google_api_key
 
+const generateLinkSrc = coordinates =>
+  `https://www.google.com/maps/@${coordinates.long},${coordinates.lat},5z`
+
+const generateMapSrc = (coordinates, zoom) =>
+  `https://www.google.com/maps/embed/v1/view?key=${GOOGLE_API_KEY}&center=${coordinates.long},${coordinates.lat}&zoom=${zoom}&maptype=roadmap`
 
 //DO RIGHT MAP!
 const liveMap = ({ city, destination_country_iso3 }) => {
@@ -40,8 +43,6 @@ const DeliveryBox = (startTime, endTime, timeCaption, openStops, actionBox) => {
   * Yellow: HEX COLOR: #FFDA1A;
   */
 
-
-
   const caption = actionBox.caption.replace('{{openStops}}', openStops)
 
   return html`
@@ -60,12 +61,10 @@ const DeliveryBox = (startTime, endTime, timeCaption, openStops, actionBox) => {
 // map//
 ////////
 
-const LiveMap = (id, actionBox, courier, query, coordinates) => {
+const Map = (id, actionBox, courier, query, coordinates) => {
 
   // TODO get map and render truck on coordinates
-  const elem = html`
-
-  `
+  const elem = html``
 
   return elem
 }
