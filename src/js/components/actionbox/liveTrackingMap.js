@@ -1,18 +1,40 @@
 const html = require('nanohtml')
 const GOOGLE_API_KEY = require('../../../../settings').google_api_key
+// const googleMaps = require('@google/maps').createClient({
+//   key: GOOGLE_API_KEY,
+// })
 
 const generateLinkSrc = coordinates =>
   `https://www.google.com/maps/@${coordinates.long},${coordinates.lat},5z`
 
 const generateMapSrc = (coordinates, zoom) =>
-  `https://www.google.com/maps/embed/v1/view?key=${GOOGLE_API_KEY}&center=${coordinates.long},${coordinates.lat}&zoom=${zoom}&maptype=roadmap`
-
-//DO RIGHT MAP!
-const liveMap = ({ city, destination_country_iso3 }) => {
-
-}
+  `https://www.google.com/maps/embed/v1/view?key=${GOOGLE_API_KEY}&center=${coordinates.long},${coordinates.lat}&zoom=5&maptype=roadmap`
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
+
+// How to zoom in? Truck and Delivery Place need to be on map!
+const getZoom = (coordinates, deliveryAdress) => {
+  return 12.5
+}
+
+////////
+// map//
+////////
+
+//DO RIGHT MAP --> Display truck!!
+const Map = (id, actionBox) => {
+  const elem = html`
+    <div id="pl-pickup-location-map" data-tid="${id}">
+      <iframe src="${generateMapSrc(actionBox.data.coordinates, 12.5)}" frameborder="0" style="width:100%;height:100%;border:0px;"></iframe>
+    </div>
+  `
+
+  elem.isSameNode = function (target) { // dont rerender map if it is still the same tid
+    return id === target.dataset['tid']
+  }
+
+  return elem
+}
 
 //////////////
 // time box //
@@ -33,7 +55,7 @@ const generatePrettyTime = timeString => {
   return `${hours}:${mins}`
 }
 
-const DeliveryBox = (startTime, endTime, timeCaption, openStops, actionBox) => {
+const DeliveryBox = (startTime, endTime, timeCaption, actionBox) => {
 
 
   /* 
@@ -43,7 +65,7 @@ const DeliveryBox = (startTime, endTime, timeCaption, openStops, actionBox) => {
   * Yellow: HEX COLOR: #FFDA1A;
   */
 
-  const caption = actionBox.caption.replace('{{openStops}}', openStops)
+  const caption = actionBox.caption.replace('{{openStops}}', actionBox.data.details.openStops)
 
   return html`
         <div>
@@ -57,21 +79,9 @@ const DeliveryBox = (startTime, endTime, timeCaption, openStops, actionBox) => {
     `
 }
 
-////////
-// map//
-////////
 
-const Map = (id, actionBox, courier, query, coordinates) => {
-
-  // TODO get map and render truck on coordinates
-  const elem = html``
-
-  return elem
-}
-
-const LiveTrackingMap = ({ id, actionBox, courier, last_delivery_status }, query, animated = false) => {
-  if (!actionBox.info || !(actionBox.info.city || actionBox.info.destination_country_iso3))
-    return null
+const LiveTrackingMap = ({ id, actionBox }, query) => {
+  if (!actionBox.coordinates) return null
 
   // const mapBox = Map()
   // html`
@@ -82,17 +92,17 @@ const LiveTrackingMap = ({ id, actionBox, courier, last_delivery_status }, query
   //   </div>
   // `
   const scheduled = actionBox.info.scheduled
-  const deliveryBox = (scheduled && scheduled.startTime)
-    ? DeliveryBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption, openStops, actionBox)
+  const deliveryBox = (scheduled && scheduled.startTime, actionBox)
+    ? DeliveryBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption, actionBox)
     : null
 
   return html`
     <div class="pl-spaced-list">
     <div class="pl-box pl-action-box pl-box-location">
       <div class="pl-box-body pl-box-location-body">
-        ${Map(id, actionBox, courier, query, animated)}
+        ${Map(id, actionBox)}
       </div>
-      <div class="pl-box-footer">
+      <div class="pl-box-${query.userId}">
         ${ deliveryBox}
       </div>
     </div>

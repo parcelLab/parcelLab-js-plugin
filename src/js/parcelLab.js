@@ -468,11 +468,16 @@ class ParcelLab {
       })
     })
 
-    this.store.on('fetchLiveTrackingMap', () => {
+    this.store.on('fetchLiveTrackingMap', id => {
       Api.getLiveTrackingMap((err, res) => {
         if (err) this.store.set({ liveTrackingMap: err })
         else if (res) {
-          store.set({ liveTrackingMap: res })
+          const state = this.store.get()
+          state.checkpoints.header = state.checkpoints.header.map(cph => {
+            if (cph.id === id) cph.actionBox.data = res
+            return cph
+          })
+          this.store.set(state)
         }
       })
     })
