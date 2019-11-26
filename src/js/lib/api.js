@@ -205,7 +205,7 @@ exports.getArticleList = function (propsObj, callback) {
   _get(_toURL(BASE_URL, ARTICLE_LIST_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
 
-exports.getLiveTrackingMap = function (propsObj, callback) {
+exports.getLiveTrackingCoordinates = function (propsObj, callback) {
   _get(_toURL(TEST_URL, LIVE_TRACKING_MAP_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
 

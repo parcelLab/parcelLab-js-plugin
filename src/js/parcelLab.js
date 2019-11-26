@@ -314,7 +314,7 @@ class ParcelLab {
             store.emit('fetchPrediction', cph.id)
           }
           if (actionBox.type === 'live-tracking-map') {
-            store.emit('fetchLiveTrackingMap', cph.id)
+            store.emit('fetchLiveTrackingCoordinates', cph.id)
           }
         })
       }
@@ -468,8 +468,8 @@ class ParcelLab {
       })
     })
 
-    this.store.on('fetchLiveTrackingMap', id => {
-      Api.getLiveTrackingMap((err, res) => {
+    this.store.on('fetchLiveTrackingCoordinates', id => {
+      Api.getLiveTrackingCoordinates((err, res) => {
         if (err) this.store.set({ liveTrackingMap: err })
         else if (res) {
           const state = this.store.get()
@@ -483,7 +483,7 @@ class ParcelLab {
     })
   }
 
-  _generateCPhash(obj = {}) {
+  _generateCPhash (obj = {}) {
     if (obj && typeof obj === 'object' && obj.header && obj.body) {
       const { header, body } = obj
       return JSON.stringify({ header, body }).length

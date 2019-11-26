@@ -6,7 +6,7 @@ const NextAction = require('./NextAction')
 const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 const DeliveryAddress = require('./DeliveryAddress')
-const LiveTracking = require('./LiveTracking')
+const LiveTrackingLink = require('./LiveTrackingLink')
 const LiveTrackingMap = require('./LiveTrackingMap')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
@@ -51,7 +51,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
 
     if (type === 'live-tracking') {
       if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl) {
-        result = LiveTracking(tHeader, query, options.animateTruck || false)
+        result = LiveTrackingLink(tHeader, query, options.animateTruck || false)
       }
     }
 
