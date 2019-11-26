@@ -12,11 +12,6 @@ const generateMapSrc = (coordinates, zoom) =>
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
 
-// How to zoom in? Truck and Delivery Place need to be on map!
-const getZoom = (coordinates, deliveryAdress) => {
-  return 12.5
-}
-
 ////////
 // map//
 ////////
