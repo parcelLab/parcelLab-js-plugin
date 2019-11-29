@@ -743,39 +743,6 @@ const translations = {
   },
   sl: {
     delivery: 'Dostava',
-    more: 'Prikaži več…',
-    orderNo: 'Naročilo',
-    predictions: {
-      OutForDelivery: 'Paket bo dostavljen <b>danes</b>.',
-      DestinationDeliveryCenter: 'Paket bo dostavljen <b>jutri</b>.'
-    },
-    openingHours: 'Delovni čas',
-    weekDays: [
-      'Nedelja',
-      'Ponedeljek',
-      'Torek',
-      'Sreda',
-      'Četrtek',
-      'Petek',
-      'Sobota'
-    ],
-    alwaysOpened: 'Odprto 24h.',
-    closesIn: 'Zaprto čez',
-    opensIn: 'Odprto čez',
-    error: {
-      delivery: 'Na žalost ta dostava ni na voljo.',
-      search: 'Na žalost ni bilo najdenih informacij za to dostavo.'
-    },
-    searchOrder: 'Iskanje po naročilu',
-    search: 'Iskanje',
-    containsOf: 'sestoji iz',
-    deliveries: 'dostave',
-    showPickuplocation: 'Pokaži prevzemno mesto',
-    articleList: 'Članki v tem paketu',
-    deliveryAddress: 'Dostavni naslov'
-  },
-  sl: {
-    delivery: 'Dostava',
     more: 'Podrobnosti...',
     orderNo: 'Naročilo',
     predictions: {
