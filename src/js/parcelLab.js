@@ -307,6 +307,7 @@ class ParcelLab {
       if (checkpoints && checkpoints.header && checkpoints.header.length > 0) {
         checkpoints.header.forEach(cph => {
           const { actionBox } = cph
+
           if (actionBox.type === 'pickup-location') {
             store.emit('fetchPickupLocation', cph.id)
           }
@@ -468,13 +469,13 @@ class ParcelLab {
       })
     })
 
-    this.store.on('fetchLiveTrackingCoordinates', id => {
-      Api.getLiveTrackingCoordinates((err, res) => {
+    this.store.on('fetchLiveTrackingCoordinates', tid => {
+      Api.getLiveTrackingCoordinates({ id: tid }, (err, res) => {
         if (err) this.store.set({ liveTrackingMap: err })
         else if (res) {
           const state = this.store.get()
           state.checkpoints.header = state.checkpoints.header.map(cph => {
-            if (cph.id === id) cph.actionBox.data = res
+            if (cph.id === tid) cph.actionBox.data = res
             return cph
           })
           this.store.set(state)

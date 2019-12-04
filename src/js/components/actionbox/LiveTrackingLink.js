@@ -57,8 +57,8 @@ const Map = (id, actionBox, courier, query, animated = false) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
       <div style="width:100%;height:100%;background-position: center;background-repeat: no-repeat;background-size: cover;background-image:url(${generateStaticMapSrc(actionBox.info)});"></div>
-      
- 
+
+
       <a href="${courier.trackingurl}" target="_blank">
         <div id="pl-map-overlay">
           <img id="pl-truck-icon" class="${animated ? 'pl-truck-animated' : ''}" src="${generateTruckIconSrc(query.userId || 1612164)}" alt="" />
@@ -97,6 +97,7 @@ const LiveTrackingLink = ({ id, actionBox, courier, last_delivery_status }, quer
       </div>
     </div>
   `
+
   const scheduled = actionBox.info.scheduled
   const timeBox = (scheduled && scheduled.startTime)
     ? TimeBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption)
@@ -104,7 +105,7 @@ const LiveTrackingLink = ({ id, actionBox, courier, last_delivery_status }, quer
 
   return html`
     <div class="pl-spaced-list">
-      ${mapBox}    
+      ${mapBox}
       ${timeBox}
     </div>
   `
