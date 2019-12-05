@@ -45,7 +45,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       result = NextAction(tHeader)
     }
 
-    if (type === 'returned') {
+    if (type && type.indexOf('returned') === 0) {
       result = Returned(tHeader)
     }
 
