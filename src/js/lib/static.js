@@ -308,7 +308,11 @@ const translations = {
     showPickuplocation: 'Show pickup location',
     liveDelivery: 'Live tracking',
     articleList: 'Articles in this package',
-    deliveryAddress: 'Delivery address'
+    deliveryAddress: 'Delivery address',
+    liveTrackingLastUpdate: 'Last update',
+    liveTrackingHeader: 'The driver is on his way.',
+    liveTrackingStations: '### stopover(s)',
+    liveTrackingCaption: 'until your shipment arrives.'
   },
   de: {
     delivery: 'Lieferung',
@@ -343,7 +347,11 @@ const translations = {
     showPickuplocation: 'Abholort anzeigen',
     liveDelivery: 'Live verfolgen',
     articleList: 'Artikel in diesem Paket',
-    deliveryAddress: 'Zustelladresse'
+    deliveryAddress: 'Zustelladresse',
+    liveTrackingLastUpdate: 'Letztes Update',
+    liveTrackingHeader: 'Der Fahrer ist auf dem Weg.',
+    liveTrackingStations: 'Noch ### Zwischenstopp(s)',
+    liveTrackingCaption: 'bis deine Sendung bei dir ist.'
   },
   es: {
     delivery: 'Entrega',

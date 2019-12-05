@@ -9,7 +9,7 @@ exports.trimURL = function (url) {
     console.log(e)
   } finally {
     if (!result) result = url
-    return result
+    return result // eslint-disable-line
   }
 }
 
