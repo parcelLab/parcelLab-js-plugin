@@ -297,6 +297,10 @@ const translations = {
     liveDelivery: 'Live tracking',
     articleList: 'Articles in this package',
     deliveryAddress: 'Delivery address',
+    liveTrackingLastUpdate: 'Last update',
+    liveTrackingHeader: 'The driver is on his way.',
+    liveTrackingStations: '### stopover(s)',
+    liveTrackingCaption: 'until your shipment arrives.'
   },
   de: {
     delivery: 'Lieferung',
@@ -332,6 +336,10 @@ const translations = {
     liveDelivery: 'Live verfolgen',
     articleList: 'Artikel in diesem Paket',
     deliveryAddress: 'Zustelladresse',
+    liveTrackingLastUpdate: 'Letztes Update',
+    liveTrackingHeader: 'Der Fahrer ist auf dem Weg.',
+    liveTrackingStations: 'Noch ### Zwischenstopp(s)',
+    liveTrackingCaption: 'bis deine Sendung bei dir ist.'
   },
   es: {
     delivery: 'Entrega',

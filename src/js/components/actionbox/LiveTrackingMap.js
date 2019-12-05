@@ -1,4 +1,6 @@
 const html = require('nanohtml')
+const { translate } = require('../../lib/translator')
+const Icon = require('../Icon')
 
 const LiveMap = (liveMapUrl, courier) => html`
   <div>
@@ -9,26 +11,39 @@ const LiveMap = (liveMapUrl, courier) => html`
   </div>
 `
 
-const Footer = (openStops, lastStatusFrom) => html`
+const generateTime = timeStamp => {
+  const date = new Date(timeStamp)
+  return date.toLocaleTimeString(window.navigator.language, {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+const timeIcon = Icon('clock', '#000', '17')
+timeIcon.classList.add('pl-space-right')
+timeIcon.style.display = 'inline-block'
+timeIcon.style.verticalAlign = 'top'
+
+const Footer = (openStops, lastStatusFrom, query) => html`
   <div class="pl-box-footer pl-live-map-footer">
-    ${lastStatusFrom ? html`<div class="pl-live-map-footer-last-status">Letzter Stand: ${lastStatusFrom}</div>` : ''}
-    <div class="pl-live-map-footer-header">Der Fahrer ist auf dem Weg.</div>
-    <div class="pl-live-map-footer-stations">Noch ${openStops} Zwischenstopp(s)</div>
-    <div class="pl-live-map-footer-caption">bis deine Sendung bei dir ist.</div>
+    ${lastStatusFrom ? html`<div class="pl-live-map-footer-last-status">${translate('liveTrackingLastUpdate', query.lang.name)}: ${generateTime(lastStatusFrom)} ${timeIcon}</div>` : ''}
+    <div class="pl-live-map-footer-header">${translate('liveTrackingHeader', query.lang.name)}</div>
+    <div class="pl-live-map-footer-stations">${translate('liveTrackingStations', query.lang.name).replace('###', openStops)}</div>
+    <div class="pl-live-map-footer-caption">${translate('liveTrackingCaption', query.lang.name)}</div>
   </div>
 `
 
 const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
-  if (!actionBox.data || !actionBox.data.liveMapUrl) return null
+  if (!actionBox.data || !actionBox.data.liveTrackingMap) return null
 
-  const { liveMapUrl, details } = actionBox.data
+  const { liveTrackingMap, details } = actionBox.data
   return html`
     <div class="pl-box pl-action-box pl-box-location pl-box-live-location">
       <div class="pl-box-body pl-box-location-body">
-        ${LiveMap(liveMapUrl, courier)}
+        ${LiveMap(liveTrackingMap, courier)}
       </div>
 
-      ${Footer(details.openStops, details.lastStatusUpdate)}
+      ${Footer(details.openStops, details.lastStatusUpdateAt, query)}
     </div>
   `
 }
