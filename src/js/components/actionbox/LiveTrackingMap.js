@@ -7,7 +7,7 @@ const LiveMap = (liveMapUrl, courier) => html`
     <div class="pl-live-map-label">
       <div class="pl-live-map-label-text">Live</div>
     </div>
-    <img src="${liveMapUrl}" alt="Live Tracking Map" class="pl-img-responsive">
+    <img src="${liveMapUrl}" alt="Live Tracking Map" class="pl-img-responsive" style="width:100%;">
   </div>
 `
 

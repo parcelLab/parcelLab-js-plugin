@@ -56,7 +56,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
     }
 
     if (type === 'live-tracking-map' && tHeader.actionBox.data) {
-      result = LiveTrackingMap(tHeader, query)
+      result = [LiveTrackingMap(tHeader, query), DeliveryAddress(tHeader, query.lang)]
     }
 
     result = result || [ // fallback
