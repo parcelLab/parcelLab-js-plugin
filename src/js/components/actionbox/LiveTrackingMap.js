@@ -22,7 +22,7 @@ const generateTime = timeStamp => {
 }
 
 const Footer = (openStops, lastStatusFrom, query) => {
-  const iconColor = window.parcelLab_styles ? window.parcelLab_styles.buttonColor : '#000'
+  const iconColor = window.parcelLab_styles ? window.parcelLab_styles.liveMapColor : '#000'
   const timeIcon = Icon('clock', iconColor, '17')
   timeIcon.classList.add('pl-space-right')
   timeIcon.style.display = 'inline-block'

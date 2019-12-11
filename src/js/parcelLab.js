@@ -182,6 +182,10 @@ class ParcelLab {
       customStyles.activeTabIconColor = decodeURIComponent(`#${this.getUrlQuery('activeTabIconColor')}`)
     if (this.getUrlQuery('actionIconColor'))
       customStyles.actionIconColor = decodeURIComponent(`#${this.getUrlQuery('actionIconColor')}`)
+    if (this.getUrlQuery('liveMapColor'))
+      customStyles.liveMapColor = `#${this.getUrlQuery('liveMapColor')}`
+    if (this.getUrlQuery('liveMapBackground'))
+      customStyles.liveMapBackground = `#${this.getUrlQuery('liveMapBackground')}`
 
     Object.keys(DEFAULT_STYLES).forEach(key => {
       if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]

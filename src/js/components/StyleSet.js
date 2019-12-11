@@ -1,7 +1,7 @@
 const html = require('nanohtml')
 // border-radius: .pl-box .pl-form-input .pl-alert .pl-button
 
-module.exports = function StyleSet() {
+module.exports = function StyleSet () {
   return html`
     <style>
       .parcelLab-style #pl-plugin-wrapper, .parcellab-style #pl-plugin-wrapper, .parcelLab-styles #pl-plugin-wrapper, .parcellab-styles #pl-plugin-wrapper
@@ -20,7 +20,7 @@ module.exports = function StyleSet() {
       {
         border-radius: ${window.parcelLab_styles.borderRadius};
       }
-      .parcelLab-style .pl-button, .parcellab-style .pl-button, .parcelLab-styles .pl-button, .parcellab-styles .pl-button, .pl-box-live-location .pl-live-map-footer
+      .parcelLab-style .pl-button, .parcellab-style .pl-button, .parcelLab-styles .pl-button, .parcellab-styles .pl-button
       {
         background-color: ${window.parcelLab_styles.buttonBackground};
         color: ${window.parcelLab_styles.buttonColor};
@@ -32,6 +32,11 @@ module.exports = function StyleSet() {
       .parcelLab-style .pl-color-highlighted, .parcellab-style .pl-color-highlighted, .parcelLab-styles .pl-color-highlighted, .parcellab-styles .pl-color-highlighted
       {
         color: ${window.parcelLab_styles.highlightColor};
+      }
+      .pl-box-live-location .pl-live-map-footer
+      {
+        background-color: ${window.parcelLab_styles.liveMapBackground};
+        color: ${window.parcelLab_styles.liveMapColor};
       }
     </style>
   `

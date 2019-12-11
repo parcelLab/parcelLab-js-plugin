@@ -31,5 +31,7 @@ module.exports = {
     buttonColor: '#333',
     buttonBackground: '#e6e6e6',
     margin: '0px',
+    liveMapColor: '#ffffff',
+    liveMapBackground: '#0051BA'
   },
 }
