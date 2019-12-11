@@ -20,7 +20,7 @@ module.exports = function StyleSet() {
       {
         border-radius: ${window.parcelLab_styles.borderRadius};
       }
-      .parcelLab-style .pl-button, .parcellab-style .pl-button, .parcelLab-styles .pl-button, .parcellab-styles .pl-button
+      .parcelLab-style .pl-button, .parcellab-style .pl-button, .parcelLab-styles .pl-button, .parcellab-styles .pl-button, .pl-box-live-location .pl-live-map-footer
       {
         background-color: ${window.parcelLab_styles.buttonBackground};
         color: ${window.parcelLab_styles.buttonColor};
@@ -29,7 +29,7 @@ module.exports = function StyleSet() {
       {
         background-color: ${window.parcelLab_styles.highlightColor};
       }
-      .parcelLab-style .pl-color-highlighted, .parcellab-style .pl-color-highlighted, .parcelLab-styles .pl-color-highlighted, .parcellab-styles .pl-color-highlighted 
+      .parcelLab-style .pl-color-highlighted, .parcellab-style .pl-color-highlighted, .parcelLab-styles .pl-color-highlighted, .parcellab-styles .pl-color-highlighted
       {
         color: ${window.parcelLab_styles.highlightColor};
       }

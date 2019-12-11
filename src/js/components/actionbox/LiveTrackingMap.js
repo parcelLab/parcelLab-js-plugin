@@ -12,6 +12,8 @@ const LiveMap = (liveMapUrl, courier) => html`
 `
 
 const generateTime = timeStamp => {
+  // this is bug fix for safari since it cant parse yyyy-MM-dd dates
+  timeStamp = timeStamp ? timeStamp.replace(/-/g, '/') : ''
   const date = new Date(timeStamp)
   return date.toLocaleTimeString(window.navigator.language, {
     hour: '2-digit',
@@ -19,19 +21,32 @@ const generateTime = timeStamp => {
   })
 }
 
-const timeIcon = Icon('clock', '#000', '17')
-timeIcon.classList.add('pl-space-right')
-timeIcon.style.display = 'inline-block'
-timeIcon.style.verticalAlign = 'top'
+const Footer = (openStops, lastStatusFrom, query) => {
+  const iconColor = window.parcelLab_styles ? window.parcelLab_styles.buttonColor : '#000'
+  const timeIcon = Icon('clock', iconColor, '17')
+  timeIcon.classList.add('pl-space-right')
+  timeIcon.style.display = 'inline-block'
+  timeIcon.style.verticalAlign = 'top'
 
-const Footer = (openStops, lastStatusFrom, query) => html`
+  openStops = parseInt(openStops)
+  const time = lastStatusFrom ? html`<div class="pl-live-map-footer-last-status">${translate('liveTrackingLastUpdate', query.lang.name)}: ${generateTime(lastStatusFrom)} ${timeIcon}</div>` : ''
+  let stations = translate('liveTrackingStations', query.lang.name).replace('###', openStops)
+  let caption = translate('liveTrackingCaption', query.lang.name)
+  if (openStops === 0) {
+    stations = translate('liveTrackingStationsNext', query.lang.name).replace('###', openStops)
+    caption = translate('liveTrackingCaptionNext', query.lang.name)
+  } else if (openStops === 1) {
+    stations = translate('liveTrackingStation', query.lang.name).replace('###', openStops)
+    caption = translate('liveTrackingCaption', query.lang.name)
+  }
+  return html`
   <div class="pl-box-footer pl-live-map-footer">
-    ${lastStatusFrom ? html`<div class="pl-live-map-footer-last-status">${translate('liveTrackingLastUpdate', query.lang.name)}: ${generateTime(lastStatusFrom)} ${timeIcon}</div>` : ''}
-    <div class="pl-live-map-footer-header">${translate('liveTrackingHeader', query.lang.name)}</div>
-    <div class="pl-live-map-footer-stations">${translate('liveTrackingStations', query.lang.name).replace('###', openStops)}</div>
-    <div class="pl-live-map-footer-caption">${translate('liveTrackingCaption', query.lang.name)}</div>
+    ${time}
+    <div class="pl-live-map-footer-stations">${stations}</div>
+    <div class="pl-live-map-footer-caption">${caption}</div>
   </div>
 `
+}
 
 const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
   if (!actionBox.data || !actionBox.data.details || !actionBox.data.details.liveTrackingMap) return null
