@@ -34,13 +34,13 @@ const Footer = (openStops, lastStatusFrom, query) => html`
 `
 
 const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
-  if (!actionBox.data || !actionBox.data.liveTrackingMap) return null
+  if (!actionBox.data || !actionBox.data.details || !actionBox.data.details.liveTrackingMap) return null
 
-  const { liveTrackingMap, details } = actionBox.data
+  const { details } = actionBox.data
   return html`
     <div class="pl-box pl-action-box pl-box-location pl-box-live-location">
       <div class="pl-box-body pl-box-location-body">
-        ${LiveMap(liveTrackingMap, courier)}
+        ${LiveMap(details.liveTrackingMap, courier)}
       </div>
 
       ${Footer(details.openStops, details.lastStatusUpdateAt, query)}
