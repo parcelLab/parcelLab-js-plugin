@@ -474,8 +474,8 @@ class ParcelLab {
     })
 
     this.store.on('fetchLiveTrackingCoordinates', tid => {
-      const { zip, s } = (store.get() || {}).query || {}
-      Api.getLiveTrackingCoordinates({ id: tid, zip, s }, (err, res) => {
+      const { zip, s, lang } = store.get().query
+      Api.getLiveTrackingCoordinates({ id: tid, zip, s, lang }, (err, res) => {
         if (err) this.store.set({ liveTrackingMap: err })
         else if (res) {
           const state = this.store.get()
