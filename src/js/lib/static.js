@@ -314,7 +314,8 @@ const translations = {
     liveTrackingStation: '### stopover',
     liveTrackingStations: '### stopovers',
     liveTrackingCaption: 'until your shipment arrives.',
-    liveTrackingCaptionNext: 'You are the next stopover.'
+    liveTrackingCaptionNext: 'You are the next stopover.',
+    liveTrackingPrediction: 'Arrival time approx.'
   },
   de: {
     delivery: 'Lieferung',
@@ -350,12 +351,13 @@ const translations = {
     liveDelivery: 'Live verfolgen',
     articleList: 'Artikel in diesem Paket',
     deliveryAddress: 'Zustelladresse',
-    liveTrackingLastUpdate: 'Letztes Update',
+    liveTrackingLastUpdate: 'Letzte Aktualisierung',
     liveTrackingStationsNext: 'Der Fahrer ist auf dem Weg zu dir.',
     liveTrackingStation: 'Noch ### Stopp vor dir',
     liveTrackingStations: 'Noch ### Stopps vor dir',
-    liveTrackingCaption: 'bis deine Sendung bei dir ist.',
-    liveTrackingCaptionNext: 'Du bist der nächste Stopp.'
+    liveTrackingCaption: 'bis deine Lieferung bei dir ist.',
+    liveTrackingCaptionNext: 'Du bist der nächste Stopp.',
+    liveTrackingPrediction: 'Ankunftszeit ca.'
   },
   es: {
     delivery: 'Entrega',

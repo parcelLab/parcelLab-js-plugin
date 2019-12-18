@@ -457,8 +457,17 @@ h3 {
   border-radius: 0 0 5px 5px;
   text-align: left;
   font-size: 15px;
+  .pl-live-map-footer-last-status {
+    opacity: .5;
+  }
   .pl-live-map-footer-stations {
     font-size: 25px;
+  }
+  .pl-live-map-footer-prediction {
+    margin-top: 15px;
+    .pl-live-map-footer-prediction-time {
+      font-size: 25px;
+    }
   }
 }
 
