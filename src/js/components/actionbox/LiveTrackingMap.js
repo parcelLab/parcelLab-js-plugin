@@ -12,11 +12,11 @@ const generateTime = timeStamp => {
   })
 }
 
-const LiveMap = (liveMapUrl, courier) => html`
+const LiveMap = (liveMapUrl, courier, coordinatesAvailable) => html`
   <div>
-    <div class="pl-live-map-label">
+    ${coordinatesAvailable ? html`<div class="pl-live-map-label">
       <div class="pl-live-map-label-text">Live</div>
-    </div>
+    </div>` : ''}
     <img src="${liveMapUrl}" alt="Live Tracking Map" class="pl-img-responsive" style="width:100%;">
   </div>
 `
@@ -40,7 +40,7 @@ const PredictionLabel = (prediction, query) => {
   } else return null
 }
 
-const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query) => {
+const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query, coordinatesAvailable) => {
   const iconColor = window.parcelLab_styles ? window.parcelLab_styles.liveMapColor : '#000'
   const timeIcon = Icon('clock', iconColor, '17')
   timeIcon.classList.add('pl-space-right')
@@ -65,7 +65,7 @@ const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query) => {
   <div class="pl-box-footer pl-live-map-footer">
     ${lastUpdateTime}
     <div class="pl-live-map-footer-stations">${stations}</div>
-    <div class="pl-live-map-footer-caption">${caption}</div>
+    ${coordinatesAvailable ? html`<div class="pl-live-map-footer-caption">${caption}</div>` : ''}
     ${predictionLabel}
   </div>
 `
@@ -74,14 +74,16 @@ const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query) => {
 const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
   if (!actionBox.data || !actionBox.data.details || !actionBox.data.details.liveTrackingMap) return null
 
-  const { details } = actionBox.data
+  const { details, coordinates } = actionBox.data
+  // hide liveLabel if no coordinates
+  const coordinatesAvailable = (coordinates && coordinates.length > 0)
   return html`
     <div class="pl-box pl-action-box pl-box-location pl-box-live-location">
       <div class="pl-box-body pl-box-location-body">
-        ${LiveMap(details.liveTrackingMap, courier)}
+        ${LiveMap(details.liveTrackingMap, courier, coordinatesAvailable)}
       </div>
 
-      ${Footer(details, query)}
+      ${Footer(details, query, coordinatesAvailable)}
     </div>
   `
 }
