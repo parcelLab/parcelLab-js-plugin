@@ -75,6 +75,9 @@ const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
   if (!actionBox.data || !actionBox.data.details || !actionBox.data.details.liveTrackingMap) return null
 
   const { details, coordinates } = actionBox.data
+  // dont render liveTrackingMap if we don't have open stops count...
+  if ((typeof details.openStops === 'undefined') || details.openStops === null) return null
+
   // hide liveLabel if no coordinates
   const coordinatesAvailable = (coordinates && coordinates.length > 0)
   return html`
