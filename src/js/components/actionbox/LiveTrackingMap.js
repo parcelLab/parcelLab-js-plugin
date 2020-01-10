@@ -65,7 +65,7 @@ const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query, coordinate
   <div class="pl-box-footer pl-live-map-footer">
     ${lastUpdateTime}
     <div class="pl-live-map-footer-stations">${stations}</div>
-    ${coordinatesAvailable ? html`<div class="pl-live-map-footer-caption">${caption}</div>` : ''}
+    <div class="pl-live-map-footer-caption">${caption}</div>
     ${predictionLabel}
   </div>
 `
