@@ -2,14 +2,25 @@ const html = require('nanohtml')
 const { translate } = require('../../lib/translator')
 const Icon = require('../Icon')
 
+function isIE () {
+  var ua = window.navigator.userAgent
+  // MSIE used to detect old browsers and Trident used to newer ones
+  return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1
+}
+
 const generateTime = timeStamp => {
-  // this is bug fix for safari since it cant parse yyyy-MM-dd dates
-  timeStamp = timeStamp ? timeStamp.replace(/-/g, '/') : ''
-  const date = new Date(timeStamp)
-  return date.toLocaleTimeString(window.navigator.language, {
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+  if (isIE()) {
+    const date = timeStamp ? new Date(timeStamp) : new Date()
+    return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
+  } else {
+    // this is bug fix for safari since it cant parse yyyy-MM-dd dates
+    timeStamp = timeStamp ? timeStamp.replace(/-/g, '/') : ''
+    const date = new Date(timeStamp)
+    return date.toLocaleTimeString(window.navigator.language, {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
 }
 
 const LiveMap = (liveMapUrl, courier, coordinatesAvailable) => html`
