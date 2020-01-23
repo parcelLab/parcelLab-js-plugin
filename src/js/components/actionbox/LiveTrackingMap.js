@@ -7,14 +7,14 @@ function parseIsoDatetime (dtstr) {
   return new Date(dt[0], dt[1] - 1, dt[2], dt[3] || 0, dt[4] || 0, dt[5] || 0, 0)
 }
 
-function isIE () {
+function isIEorEdge () {
   var ua = window.navigator.userAgent
   // MSIE used to detect old browsers and Trident used to newer ones
-  return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1
+  return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1 || ua.indexOf('Edge/') > -1
 }
 
 const generateTime = timeStamp => {
-  if (isIE()) {
+  if (isIEorEdge()) {
     // also for IE?
     timeStamp = timeStamp ? parseIsoDatetime(timeStamp) : ''
     const date = timeStamp ? new Date(timeStamp) : new Date()
