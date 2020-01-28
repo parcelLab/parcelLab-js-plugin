@@ -11,6 +11,7 @@ module.exports = {
   courier_deeplink_endpoint: 'deeplink-fallback',
   static_map_endpoint: 'staticmap/livetracking',
   article_list_endpoint: 'article-list',
+  live_tracking_map_endpoint: 'courier/tour/coordinates',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
   google_api_key: require('./GOOGLE_API_KEY').key,
@@ -30,6 +31,8 @@ module.exports = {
     buttonColor: '#333',
     buttonBackground: '#e6e6e6',
     margin: '0px',
-    margin_mobile: '0px'
+    margin_mobile: '0px',
+    liveMapColor: '#ffffff',
+    liveMapBackground: '#0051BA'
   }
 }

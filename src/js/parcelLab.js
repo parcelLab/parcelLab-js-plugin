@@ -10,7 +10,7 @@ const statics = require('./lib/static')
 const { checkQuery } = require('./lib/helpers')
 const _settings = require('../settings')
 
-// settings^
+// settings
 const DEFAULT_ROOT_NODE = _settings.default_root_node
 const DEFAULT_OPTS = _settings.defualt_opts
 const DEFAULT_STYLES = _settings.default_styles
@@ -34,18 +34,16 @@ class ParcelLab {
     }
   }
 
-  /// ////////////////////
-  // Instance methods //
-  /// ///////////////////
+  /* ---------------------------- Instance methods ---------------------------- */
 
   initialize () {
     this.orderNo = this.getUrlQuery('orderNo') || this.options.orderNo
     this.xid = this.getUrlQuery('xid') || this.options.xid
-    this.trackingNo = this.getUrlQuery('trackingNo') || this.options.trackingNo
-    this.courier = this.getUrlQuery('courier') || this.options.courier
+    this.trackingNo = this.getUrlQuery('trackingNo') || this.getUrlQuery('tno') || this.options.trackingNo
+    this.courier = this.getUrlQuery('courier') || this.getUrlQuery('c') || this.options.courier
     this.userId = this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
     this.secureHash = this.getUrlQuery('s') || this.getUrlQuery('secureHash') || this.options.secureHash
-    this.client = this.getUrlQuery('client') || this.getUrlQuery('shop') || this.options.secureHash
+    this.client = this.getUrlQuery('client') || this.getUrlQuery('shop') || this.options.client
     this.zip = this.getUrlQuery('zip') || this.options.zip
 
     // get note fron url
@@ -176,9 +174,6 @@ class ParcelLab {
     if (this.getUrlQuery('buttonBackground')) {
       customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
     }
-    if (this.getUrlQuery('buttonBackground')) {
-      customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
-    }
     if (this.getUrlQuery('margin')) {
       customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
     }
@@ -196,6 +191,12 @@ class ParcelLab {
     }
     if (this.getUrlQuery('actionIconColor')) {
       customStyles.actionIconColor = decodeURIComponent(`#${this.getUrlQuery('actionIconColor')}`)
+    }
+    if (this.getUrlQuery('liveMapColor')) {
+      customStyles.liveMapColor = `#${this.getUrlQuery('liveMapColor')}`
+    }
+    if (this.getUrlQuery('liveMapBackground')) {
+      customStyles.liveMapBackground = `#${this.getUrlQuery('liveMapBackground')}`
     }
 
     Object.keys(DEFAULT_STYLES).forEach(key => {
@@ -268,6 +269,15 @@ class ParcelLab {
     } else return 0
   }
 
+  _generateCPhash (obj = {}) {
+    if (obj && typeof obj === 'object' && obj.header && obj.body) {
+      const { header, body } = obj
+      return JSON.stringify({ header, body }).length
+    } else return false
+  }
+
+  /* ------------------ App state management & data fetching ------------------ */
+
   setupStore (store) {
     this.store = store
 
@@ -325,6 +335,9 @@ class ParcelLab {
           }
           if (actionBox.type === 'prediction') {
             store.emit('fetchPrediction', cph.id)
+          }
+          if (actionBox.type === 'live-tracking-map') {
+            store.emit('fetchLiveTrackingCoordinates', cph.id)
           }
         })
       }
@@ -454,8 +467,6 @@ class ParcelLab {
     // fetch latest ig post served by our api
     this.store.on('fetchInstagram', () => {
       Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err, res) => {
-        console.log('RES', { res })
-        // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
 
         if (res && res.Item && res.Item.posts && res.Item.posts.length > 0) {
@@ -477,13 +488,21 @@ class ParcelLab {
         }
       })
     })
-  }
 
-  _generateCPhash (obj = {}) {
-    if (obj && typeof obj === 'object' && obj.header && obj.body) {
-      const { header, body } = obj
-      return JSON.stringify({ header, body }).length
-    } else return false
+    this.store.on('fetchLiveTrackingCoordinates', tid => {
+      const { zip, s, lang } = store.get().query
+      Api.getLiveTrackingCoordinates({ id: tid, zip, s, lang }, (err, res) => {
+        if (err) this.store.set({ liveTrackingMap: err })
+        else if (res) {
+          const state = this.store.get()
+          state.checkpoints.header = state.checkpoints.header.map(cph => {
+            if (cph.id === tid) cph.actionBox.data = res
+            return cph
+          })
+          this.store.set(state)
+        }
+      })
+    })
   }
 
   render (state) {
