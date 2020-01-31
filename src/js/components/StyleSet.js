@@ -37,9 +37,14 @@ module.exports = function StyleSet () {
       {
         background-color: ${window.parcelLab_styles.highlightColor};
       }
-      .parcelLab-style .pl-color-highlighted, .parcellab-style .pl-color-highlighted, .parcelLab-styles .pl-color-highlighted, .parcellab-styles .pl-color-highlighted 
+      .parcelLab-style .pl-color-highlighted, .parcellab-style .pl-color-highlighted, .parcelLab-styles .pl-color-highlighted, .parcellab-styles .pl-color-highlighted
       {
         color: ${window.parcelLab_styles.highlightColor};
+      }
+      .pl-box-live-location .pl-live-map-footer
+      {
+        background-color: ${window.parcelLab_styles.liveMapBackground};
+        color: ${window.parcelLab_styles.liveMapColor};
       }
     </style>
   `

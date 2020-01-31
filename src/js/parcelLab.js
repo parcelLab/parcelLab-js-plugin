@@ -330,6 +330,7 @@ class ParcelLab {
       if (checkpoints && checkpoints.header && checkpoints.header.length > 0) {
         checkpoints.header.forEach(cph => {
           const { actionBox } = cph
+
           if (actionBox.type === 'pickup-location') {
             store.emit('fetchPickupLocation', cph.id)
           }

@@ -6,15 +6,15 @@ const NextAction = require('./NextAction')
 const Returned = require('./Returned')
 const Fallback = require('./Fallback')
 const DeliveryAddress = require('./DeliveryAddress')
-const LiveTracking = require('./LiveTracking')
+const LiveTrackingLink = require('./LiveTrackingLink')
+const LiveTrackingMap = require('./LiveTrackingMap')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
-  if (!tHeader) return null
 
-  let result = null
   if (tHeader && tHeader.actionBox) {
-    const type = tHeader.actionBox.type
+    const { type } = tHeader.actionBox
+    let result = null
 
     if (type === 'pickup-location' && tHeader.actionBox.data) {
       result = PickupLocation(tHeader, query.lang, emit)
@@ -24,11 +24,14 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       result = Fallback(tHeader, options, VoteCourier(tHeader, options, emit))
     }
 
-    if (type === 'prediction' &&
-    tHeader.actionBox.data &&
-    (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation)
-    ) {
-      result = Prediction(tHeader)
+    if (type === 'prediction') {
+      if (tHeader.actionBox.data &&
+        (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation)) {
+        result = [
+          Prediction(tHeader),
+          DeliveryAddress(tHeader, query.lang)
+        ]
+      }
     }
 
     if (type === 'pickup-location-unknown') {
@@ -39,22 +42,27 @@ const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
       result = NextAction(tHeader)
     }
 
-    if (type === 'returned') {
+    if (type && type.indexOf('returned') === 0) {
       result = Returned(tHeader)
     }
 
-    if (type === 'live-tracking' &&
-    tHeader.actionBox.info &&
-    tHeader.courier &&
-    tHeader.courier.trackingurl
-    ) {
-      result = LiveTracking(tHeader, query, options.animateTruck || false)
+    if (type === 'live-tracking') {
+      if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl) {
+        result = LiveTrackingLink(tHeader, query, options.animateTruck || false)
+      }
     }
+
+    if (type === 'live-tracking-map' && tHeader.actionBox.data) {
+      result = [
+        LiveTrackingMap(tHeader, query),
+        DeliveryAddress(tHeader, query.lang)
+      ]
+    }
+
+    result = result || Fallback(tHeader, options, DeliveryAddress(tHeader, query.lang))
+
+    return result
   }
-
-  result = result || Fallback(tHeader, options, DeliveryAddress(tHeader, query.lang))
-
-  return result
 }
 
 module.exports = ActionBox

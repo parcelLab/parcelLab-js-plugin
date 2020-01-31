@@ -4,6 +4,15 @@ const Icon = require('../Icon')
 const Returned = ({ actionBox }) => {
   if (!actionBox.label) return null
 
+  let iconName = 'return'
+
+  // custom icons for some return reasons
+  if (actionBox.type === 'returned-AddressIssue') {
+    iconName = 'questionmark'
+  } else if (actionBox.type === 'returned-NotColleccted') {
+    iconName = 'not_delivered'
+  }
+
   return html`
     <div class="pl-box pl-action-box pl-box-icon-status">
       <div class="pl-box-heading">
@@ -11,7 +20,7 @@ const Returned = ({ actionBox }) => {
       </div>
 
       <div class="pl-box-body">
-        ${Icon('return', null, '80')}
+        ${Icon(iconName, null, '80')}
       </div>
 
       <div class="pl-box-footer">

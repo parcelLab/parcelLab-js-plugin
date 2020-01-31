@@ -8,8 +8,9 @@ exports.trimURL = function (url) {
     return result
   } catch (e) {
     console.log(e)
-    result = url
-    return result
+  } finally {
+    if (!result) result = url
+    return result // eslint-disable-line
   }
 }
 

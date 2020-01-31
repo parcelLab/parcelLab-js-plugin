@@ -14,7 +14,7 @@ const generateStaticMapSrc = ({ city, destination_country_iso3: destinationCount
 
 const generateTruckIconSrc = userId => `http://cdn.parcellab.com/img/mail/_/truckonmap/${userId}.png`
 
-// time box
+/* -------------------------------- Time Box -------------------------------- */
 
 const checkTimeFormat = function (i) {
   if (i < 10) {
@@ -42,7 +42,7 @@ const TimeBox = (startTime, endTime, timeCaption) => {
     <div class="pl-box-time">
       <hr>
         <div class="pl-time-data">
-          ${generatePrettyTime(startTime)} ${endTime ? ' - ' + generatePrettyTime(endTime) : ''} ${icon} 
+          ${icon} ${generatePrettyTime(startTime)} ${endTime ? ' - ' + generatePrettyTime(endTime) : ''}
         </div>
         ${timeCaption ? html`
         <small class="pl-time-caption">${timeCaption}</small>` : ''}
@@ -51,16 +51,14 @@ const TimeBox = (startTime, endTime, timeCaption) => {
     `
 }
 
-/// /////
-// map//
-/// /////
+/* ----------------------------------- map ---------------------------------- */
 
 const Map = (id, actionBox, courier, query, animated = false) => {
   const elem = html`
     <div id="pl-live-location-map" data-tid="${id}">
       <div style="width:100%;height:100%;background-position: center;background-repeat: no-repeat;background-size: cover;background-image:url(${generateStaticMapSrc(actionBox.info)});"></div>
-      
- 
+
+
       <a href="${courier.trackingurl}" target="_blank">
         <div id="pl-map-overlay">
           <img id="pl-truck-icon" class="${animated ? 'pl-truck-animated' : ''}" src="${generateTruckIconSrc(query.userId || 1612164)}" alt="" />
@@ -80,13 +78,11 @@ const Map = (id, actionBox, courier, query, animated = false) => {
   return elem
 }
 
-const LiveTracking = ({ id, actionBox, courier, last_delivery_status: lastDeliveryStatus }, query, animated = false) => {
-  if (!actionBox.info || !(actionBox.info.city || actionBox.info.destination_country_iso3)) return null
-
-  const scheduled = actionBox.info.scheduled
-  const timeBox = (scheduled && scheduled.startTime)
-    ? TimeBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption)
-    : null
+const LiveTrackingLink = ({ id, actionBox, courier, last_delivery_status: lastDeliveryStatus }, query, animated = false) => {
+  if (!actionBox.info ||
+  !(actionBox.info.city || actionBox.info.destination_country_iso3)) {
+    return null
+  }
 
   const mapBox = html`
     <div class="pl-box pl-action-box pl-box-location">
@@ -98,12 +94,21 @@ const LiveTracking = ({ id, actionBox, courier, last_delivery_status: lastDelive
       </div>
       <div class="pl-box-footer">
         ${actionBox.caption || lastDeliveryStatus.status_details}
-        ${timeBox}
       </div>
     </div>
   `
 
-  return mapBox
+  const scheduled = actionBox.info.scheduled
+  const timeBox = (scheduled && scheduled.startTime)
+    ? TimeBox(scheduled.startTime, scheduled.endTime, scheduled.timeCaption)
+    : null
+
+  return html`
+    <div class="pl-spaced-list">
+      ${mapBox}
+      ${timeBox}
+    </div>
+  `
 }
 
-module.exports = LiveTracking
+module.exports = LiveTrackingLink

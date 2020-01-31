@@ -242,11 +242,23 @@ const languages = {
     code: 'CES',
     icon: 'https://cdn.parcellab.com/img/flags/cz.png'
   },
-  hu: {
-    name: 'hu',
-    label: 'Magyar',
-    code: 'HUN',
-    icon: 'https://cdn.parcellab.com/img/flags/hu.png'
+  sl: {
+    name: 'sl',
+    label: 'Slovenščina',
+    code: 'SLV',
+    icon: 'https://cdn.parcellab.com/img/flags/sl.png'
+  },
+  hr: {
+    name: 'hr',
+    label: 'Hrvatski Jezik',
+    code: 'HRV',
+    icon: 'https://cdn.parcellab.com/img/flags/hr.png'
+  },
+  bg: {
+    name: 'bg',
+    label: 'български език',
+    code: 'BUL',
+    icon: 'https://cdn.parcellab.com/img/flags/bg.png'
   },
   sk: {
     name: 'sk',
@@ -254,11 +266,11 @@ const languages = {
     code: 'SLK',
     icon: 'https://cdn.parcellab.com/img/flags/sk.png'
   },
-  sl: {
-    name: 'sl',
-    label: 'Slovenščina',
-    code: 'SLV',
-    icon: 'https://cdn.parcellab.com/img/flags/si.png'
+  hu: {
+    name: 'hu',
+    label: 'Magyar',
+    code: 'HUN',
+    icon: 'https://cdn.parcellab.com/img/flags/hu.png'
   }
 }
 
@@ -296,7 +308,14 @@ const translations = {
     showPickuplocation: 'Show pickup location',
     liveDelivery: 'Live tracking',
     articleList: 'Articles in this package',
-    deliveryAddress: 'Delivery address'
+    deliveryAddress: 'Delivery address',
+    liveTrackingLastUpdate: 'Last update',
+    liveTrackingStationsNext: 'The driver\'s on his way to you.',
+    liveTrackingStation: '### stopover',
+    liveTrackingStations: '### stopovers',
+    liveTrackingCaption: 'until your shipment arrives.',
+    liveTrackingCaptionNext: 'You are the next stopover.',
+    liveTrackingPrediction: 'Arrival time approx.'
   },
   de: {
     delivery: 'Lieferung',
@@ -331,7 +350,14 @@ const translations = {
     showPickuplocation: 'Abholort anzeigen',
     liveDelivery: 'Live verfolgen',
     articleList: 'Artikel in diesem Paket',
-    deliveryAddress: 'Zustelladresse'
+    deliveryAddress: 'Zustelladresse',
+    liveTrackingLastUpdate: 'Letzte Aktualisierung',
+    liveTrackingStationsNext: 'Der Fahrer ist auf dem Weg zu dir.',
+    liveTrackingStation: 'Noch ### Stopp vor dir',
+    liveTrackingStations: 'Noch ### Stopps vor dir',
+    liveTrackingCaption: 'bis deine Lieferung bei dir ist.',
+    liveTrackingCaptionNext: 'Du bist der nächste Stopp.',
+    liveTrackingPrediction: 'Ankunftszeit ca.'
   },
   es: {
     delivery: 'Entrega',
@@ -729,48 +755,15 @@ const translations = {
     articleList: 'Seznam zboží',
     deliveryAddress: 'Adresa doručení'
   },
-  sk: {
-    delivery: 'Zásilka',
-    more: 'Zobraziť viac...',
-    orderNo: 'Objednávka',
-    predictions: {
-      OutForDelivery: 'Zásielka bude doručená <b>dnes</b>.',
-      DestinationDeliveryCenter: 'Zásielka bude doručená <b>zajtra</b>.'
-    },
-    openingHours: 'Otevírací doba',
-    weekDays: [
-      'v nedeľu',
-      'v pondelok',
-      'v utorok',
-      'v stredu',
-      'vo štvrtok',
-      'v piatok',
-      'v sobotu'
-    ],
-    alwaysOpened: 'Otvorené 24 hod.',
-    closesIn: 'Zatvorené od',
-    opensIn: 'Otvorené od',
-    error: {
-      delivery: 'Je nám ľúto, ale táto zásielka nie je k dispozícii.',
-      search: 'Pre túto zásielku neboli nájdené žiadne informácie.'
-    },
-    searchOrder: 'Hľadať objednávku',
-    search: 'Hľadať',
-    containsOf: 'pozostáva z',
-    deliveries: 'zásielok',
-    showPickuplocation: 'Zobraziť miesto odberu',
-    articleList: 'Zoznam tovaru',
-    deliveryAddress: 'Adresa doručenia'
-  },
   sl: {
     delivery: 'Dostava',
-    more: 'Prikaži več…',
+    more: 'Podrobnosti...',
     orderNo: 'Naročilo',
     predictions: {
-      OutForDelivery: 'Paket bo dostavljen <b>danes</b>.',
+      OutForDelivery: 'Paket bo dostavljen še <b>danes</b>.',
       DestinationDeliveryCenter: 'Paket bo dostavljen <b>jutri</b>.'
     },
-    openingHours: 'Delovni čas',
+    openingHours: 'Odpiralni čas',
     weekDays: [
       'Nedelja',
       'Ponedeljek',
@@ -780,30 +773,137 @@ const translations = {
       'Petek',
       'Sobota'
     ],
-    alwaysOpened: 'Odprto 24h.',
-    closesIn: 'Zaprto čez',
-    opensIn: 'Odprto čez',
+    alwaysOpened: 'Odprto vse skozi',
+    closesIn: 'Zapre se približno čez',
+    opensIn: 'Odpre se približno čez',
     error: {
-      delivery: 'Na žalost ta dostava ni na voljo.',
-      search: 'Na žalost ni bilo najdenih informacij za to dostavo.'
+      delivery: 'Za to naročilo še ni na voljo številke za sledenje.',
+      search: 'Žal trenutni nimamo na voljo številke za sledenje za to naročilo.'
     },
-    searchOrder: 'Iskanje po naročilu',
-    search: 'Iskanje',
-    containsOf: 'sestoji iz',
-    deliveries: 'dostave',
-    showPickuplocation: 'Pokaži prevzemno mesto',
-    articleList: 'Članki v tem paketu',
-    deliveryAddress: 'Dostavni naslov'
+    searchOrder: 'Išči naročilo',
+    zip: 'PTT',
+    search: 'Išči',
+    containsOf: 'je sestavljeno iz',
+    deliveries: 'Dostava',
+    showPickuplocation: 'Prikaže kraj prevzema',
+    liveDelivery: 'Sledenje v živo',
+    articleList: 'Izdelek v tem paketu',
+    deliveryAddress: 'Naslov za dostavo'
+  },
+  hr: {
+    delivery: 'Dostava',
+    more: 'Prikaži više...',
+    orderNo: 'Narudžba',
+    predictions: {
+      OutForDelivery: 'Paket će biti dostavljen još <b>danas</b>.',
+      DestinationDeliveryCenter: 'Paket će biti dostavljen <b>sutra</b>.'
+    },
+    openingHours: 'Radno vrijeme',
+    weekDays: [
+      'Nedelja',
+      'Ponedeljak',
+      'Utorak',
+      'Srijeda',
+      'Četvrtak',
+      'Petak',
+      'Subota'
+    ],
+    alwaysOpened: 'Otvoreno cijeli dan',
+    closesIn: 'Zatvara se otprilike u:',
+    opensIn: 'Otvara se otprilike u:',
+    error: {
+      delivery: 'Ova narudžba još nema broja za online pračenje pošiljke.',
+      search: 'Nažalost, trenutno broj za online pračenje pošiljke nije dostupan.'
+    },
+    searchOrder: 'Traži narudžbu',
+    zip: 'Poštanski broj',
+    search: 'Traži',
+    containsOf: 'sastoji se od',
+    deliveries: 'Dostava',
+    showPickuplocation: 'Prikaz lokacije preuzimanja',
+    liveDelivery: 'Online pračenje',
+    articleList: 'Proizvodi u ovom paketu',
+    deliveryAddress: 'Adresa za dostavu'
+  },
+  bg: {
+    delivery: 'Доставка',
+    more: 'Научи повече...',
+    orderNo: 'Поръчка',
+    predictions: {
+      OutForDelivery: 'Стоките ще бъдат доставени още <b>днес</b>.',
+      DestinationDeliveryCenter: 'Стоките ще бъдат доставени <b>утре</b>.'
+    },
+    openingHours: 'Работно време',
+    weekDays: [
+      'неделя',
+      'понеделник',
+      'вторник',
+      'сряда',
+      'четвъртък',
+      'петък',
+      'събота'
+    ],
+    alwaysOpened: 'Без почивен ден',
+    closesIn: 'Затваря след около',
+    opensIn: 'Отваря след около',
+    error: {
+      delivery: 'Все още няма данни за пратката към тази поръчка.',
+      search: 'За съжаление, в момента още нямаме данни за пратката към тази поръчка.'
+    },
+    searchOrder: 'Намери поръчка',
+    zip: 'Пощ. код',
+    search: 'Търсене',
+    containsOf: 'състои се от',
+    deliveries: 'Доставки',
+    showPickuplocation: 'Показване на места за взимане',
+    liveDelivery: 'Проследи на живо',
+    articleList: 'Продукти в този пакет',
+    deliveryAddress: 'Адрес за доставка'
+  },
+  sk: {
+    delivery: 'Doprava',
+    more: 'Podrobnosti',
+    orderNo: 'Objednávka',
+    predictions: {
+      OutForDelivery: 'Balík bude doručený <b>dnes</b>.',
+      DestinationDeliveryCenter: 'Balík bude doručený <b>zajtra</b>.'
+    },
+    openingHours: 'Otváracie hodiny',
+    weekDays: [
+      'Nedeľa',
+      'Pondelok',
+      'Utorok',
+      'Streda',
+      'Štvrtok',
+      'Piatok',
+      'Sobota'
+    ],
+    alwaysOpened: 'Otvorené 24h',
+    closesIn: 'Zatvára sa o',
+    opensIn: 'Otvára sa o',
+    error: {
+      delivery: 'Žiaľ doposiaľ sme neobdržali dáta na sledovanie Vašej objednávky.',
+      search: 'Bohužiaľ, k zadanej objednávke neboli nájdené žiadne informacie.'
+    },
+    searchOrder: 'Vyhľadať objednávku',
+    zip: 'PSČ',
+    search: 'Hľadať',
+    containsOf: 'Pozostáva z',
+    deliveries: 'Expedovaný tovar',
+    showPickuplocation: 'Ukáž miesto prevzatia',
+    liveDelivery: 'Live sledovanie',
+    articleList: 'Produkty v tomto balíku',
+    deliveryAddress: 'Adresa doručenia'
   },
   hu: {
     delivery: 'Szállítás',
-    more: 'Részletek...',
+    more: 'További információk...',
     orderNo: 'Rendelés',
     predictions: {
-      OutForDelivery: 'Csomag érkezik <b>a mai napon</b>.',
-      DestinationDeliveryCenter: 'Csomag érkezik <b>a következő munkanapon</b>.'
+      OutForDelivery: 'A rendelés még a <b>mai napon</b> kiszállításra kerül.',
+      DestinationDeliveryCenter: 'A rendelés a <b>holnapi napon</b> kerül kiszállításra.'
     },
-    openingHours: 'Otevírací doba',
+    openingHours: 'Nyitvatartási idő',
     weekDays: [
       'Vasárnap',
       'Hétfő',
@@ -813,19 +913,21 @@ const translations = {
       'Péntek',
       'Szombat'
     ],
-    alwaysOpened: 'Éjjel-nappal nyitva',
-    closesIn: 'Zárás',
-    opensIn: 'Nyitva',
+    alwaysOpened: 'Folyamatosan nyitva',
+    closesIn: 'Zárás körübelül',
+    opensIn: 'Nyitás körübelül',
     error: {
-      delivery: 'Sajnos a szállítmányról nincs információ',
-      search: 'Sajnos erről a küldeményről nincs információ'
+      delivery: 'Ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.',
+      search: 'Sajnos ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.'
     },
-    searchOrder: 'Küldemény keresése',
+    searchOrder: 'Rendelés keresése',
+    zip: 'Irányítószám',
     search: 'Keresés',
-    containsOf: 'Tartalom',
-    deliveries: 'Szállítmányok',
-    showPickuplocation: 'Felvétel címe',
-    articleList: 'Cikkek ebben a csomagban',
+    containsOf: 'tartalmaz',
+    deliveries: 'küldemény',
+    showPickuplocation: 'Felvételi hely mutatása',
+    liveDelivery: 'Élő követés',
+    articleList: 'Ebben a csomagban található termékek',
     deliveryAddress: 'Szállítási cím'
   }
 }
