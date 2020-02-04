@@ -509,7 +509,23 @@ class ParcelLab {
   render (state) {
     const newApp = App(state, this.store.emit)
     updateHTML(this.el, newApp)
+    this.afterRender()
   }
+
+  afterRender () {
+    setTimeout(() => {
+      const left = document.querySelector('.pl-layout-left > .pl-box')
+      const center = document.querySelector('.pl-layout-center > .pl-box')
+      const right = document.querySelector('.pl-layout-right > .pl-box')
+      let layoutHeight = 500
+      console.log(left)
+      if (left.offsetHeight > layoutHeight) layoutHeight = left.offsetHeight
+      ;[left, center, right].forEach(layoutElem => {
+        if (layoutElem) layoutElem.style.height = layoutHeight
+      })
+    }, 1000)
+  }
+
 }
 
 module.exports = ParcelLab

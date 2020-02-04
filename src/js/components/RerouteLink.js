@@ -10,7 +10,7 @@ const RerouteLink = (courier) => {
     icon.style.margin = '0 auto 10px'
 
     return html`
-      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth pl-space-bottom">
+      <a id="pl-reroute-link" href="${courier.rerouteurl}" target="_blank" class="pl-button pl-is-fullwidth">
         <div>
           ${icon}
         </div>
