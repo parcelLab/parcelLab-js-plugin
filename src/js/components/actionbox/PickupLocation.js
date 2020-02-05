@@ -1,13 +1,12 @@
 const html = require('nanohtml')
-const GOOGLE_API_KEY = require('../../../../settings').google_api_key
-const OpeningHours = require('./OpeningHours')
+const GOOGLE_API_KEY = require('../../../settings').google_api_key
+const OpeningHours = require('./partials/OpeningHours')
 
 const generateLinkSrc = address =>
   `https://www.google.com/maps/place/${encodeURIComponent(address)}/`
 
 const generateMapSrc = address =>
   `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${encodeURIComponent(address)}`
-
 
 const Map = (id, actionBox) => {
   const elem = html`
@@ -17,38 +16,38 @@ const Map = (id, actionBox) => {
   `
 
   elem.isSameNode = function (target) { // dont rerender map if it is still the same tid
-    return id === target.dataset['tid']
+    return id === target.dataset.tid
   }
 
   return elem
 }
 
-const PickupLocation = ({ id, actionBox, last_delivery_status }, lang, emit) => {
+const PickupLocation = ({ id, actionBox, last_delivery_status: lastDeliveryStatus }, { lang, emit }) => {
   if (!actionBox.address) return null
 
   const openingHours = (actionBox.data && actionBox.data.openingHours) ? OpeningHours({ id, actionBox }, lang.name, emit) : null
-  
-  const heading = last_delivery_status ? html`
+
+  const heading = lastDeliveryStatus ? html`
     <div class="pl-box-heading pl-box-location-heading">
-      ${ last_delivery_status.status }
+      ${lastDeliveryStatus.status}
     </div>
   ` : null
 
   return html`
     <div class="pl-box pl-action-box pl-box-location">
-      ${ heading }
+      ${heading}
       <div class="pl-box-body pl-box-location-body">
-        ${ Map(id, actionBox) }
+        ${Map(id, actionBox)}
 
         <div class="pl-location-link-container">
-          <a href="${ generateLinkSrc(actionBox.address) }" title="${actionBox.address}" target="_blank" class="pl-button pl-is-fullwidth pl-location-link">
-            ${ actionBox.address }
+          <a href="${generateLinkSrc(actionBox.address)}" title="${actionBox.address}" target="_blank" class="pl-button pl-is-fullwidth pl-location-link">
+            ${actionBox.address}
           </a>
         </div>
       </div>
 
       <div class="pl-box-body">
-        ${ openingHours }
+        ${openingHours}
       </div>
     </div>
   `

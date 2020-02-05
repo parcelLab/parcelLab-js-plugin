@@ -39,8 +39,8 @@ const LiveMap = (liveMapUrl, courier, coordinatesAvailable) => html`
   </div>
 `
 
-const PredictionLabel = (prediction, query) => {
-  const label = translate('liveTrackingPrediction', query.lang.name)
+const PredictionLabel = (prediction, lang) => {
+  const label = translate('liveTrackingPrediction', lang.name)
   if (prediction.startTime && prediction.endTime) {
     return html`
     <div class="pl-live-map-footer-prediction">
@@ -58,7 +58,7 @@ const PredictionLabel = (prediction, query) => {
   } else return null
 }
 
-const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query, coordinatesAvailable) => {
+const Footer = ({ openStops, lastStatusUpdateAt, prediction }, lang, coordinatesAvailable) => {
   const iconColor = window.parcelLab_styles ? window.parcelLab_styles.liveMapColor : '#000'
   const timeIcon = Icon('clock', iconColor, '17')
   timeIcon.classList.add('pl-space-right')
@@ -66,18 +66,18 @@ const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query, coordinate
   timeIcon.style.verticalAlign = 'top'
 
   openStops = parseInt(openStops)
-  const lastUpdateTime = lastStatusUpdateAt ? html`<div class="pl-live-map-footer-last-status">${translate('liveTrackingLastUpdate', query.lang.name)}: ${generateTime(lastStatusUpdateAt)} ${timeIcon}</div>` : ''
-  let stations = translate('liveTrackingStations', query.lang.name).replace('###', openStops)
-  let caption = translate('liveTrackingCaption', query.lang.name)
+  const lastUpdateTime = lastStatusUpdateAt ? html`<div class="pl-live-map-footer-last-status">${translate('liveTrackingLastUpdate', lang.name)}: ${generateTime(lastStatusUpdateAt)} ${timeIcon}</div>` : ''
+  let stations = translate('liveTrackingStations', lang.name).replace('###', openStops)
+  let caption = translate('liveTrackingCaption', lang.name)
   if (openStops === 0) {
-    stations = translate('liveTrackingStationsNext', query.lang.name).replace('###', openStops)
-    caption = translate('liveTrackingCaptionNext', query.lang.name)
+    stations = translate('liveTrackingStationsNext', lang.name).replace('###', openStops)
+    caption = translate('liveTrackingCaptionNext', lang.name)
   } else if (openStops === 1) {
-    stations = translate('liveTrackingStation', query.lang.name).replace('###', openStops)
-    caption = translate('liveTrackingCaption', query.lang.name)
+    stations = translate('liveTrackingStation', lang.name).replace('###', openStops)
+    caption = translate('liveTrackingCaption', lang.name)
   }
 
-  const predictionLabel = PredictionLabel(prediction || {}, query)
+  const predictionLabel = PredictionLabel(prediction || {}, lang)
 
   return html`
   <div class="pl-box-footer pl-live-map-footer">
@@ -89,7 +89,7 @@ const Footer = ({ openStops, lastStatusUpdateAt, prediction }, query, coordinate
 `
 }
 
-const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
+const LiveTrackingMap = ({ id, actionBox, courier }, { lang, slot }) => {
   if (!actionBox.data || !actionBox.data.details || !actionBox.data.details.liveTrackingMap) return null
 
   const { details, coordinates } = actionBox.data
@@ -104,7 +104,8 @@ const LiveTrackingMap = ({ id, actionBox, courier }, query) => {
         ${LiveMap(details.liveTrackingMap, courier, coordinatesAvailable)}
       </div>
 
-      ${Footer(details, query, coordinatesAvailable)}
+      ${Footer(details, lang, coordinatesAvailable)}
+      ${slot || null}
     </div>
   `
 }

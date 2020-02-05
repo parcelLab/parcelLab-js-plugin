@@ -1,5 +1,5 @@
 const html = require('nanohtml')
-const Icon = require('../Icon')
+const Icon = require('../../Icon')
 
 const Branding = () => html`
   <div class="pl-space-top pl-space-bottom">
@@ -15,77 +15,79 @@ const VoteCourier = ({ actionBox, id }, emit) => {
   let body = html`
     <div class="pl-rating-body">
       <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCourier', 'up', id)}>
-        ${ Icon('thumbs_up', 'aaa', '30') }
+        ${Icon('thumbs_up', 'aaa', '30')}
       </div>
       <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCourier', 'down', id)}>
-        ${ Icon('thumbs_down', 'aaa', '30') }
+        ${Icon('thumbs_down', 'aaa', '30')}
       </div>
     </div>
   `
-  if (voteCourierSuccess) body = html`
+  if (voteCourierSuccess) {
+    body = html`
     <div class="pl-rating-body">
-      ${ Icon('success_standard', 'aaa', '30') }
-    </div>
-  `
+      ${Icon('success_standard', 'aaa', '30')}
+    </div>`
+  }
 
-  if (voteCourierErr) body = html`
+  if (voteCourierErr) {
+    body = html`
     <div class="pl-rating-body">
       <small style="text-align:center;">
         An Error occurred, we are very sorry 😥
       </small>
-    </div>
-  `
+    </div>`
+  }
 
   return html`
-      <div class="pl-box pl-space-top pl-vote">
-        <div class="pl-box-body">
-          ${ label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${ label }</b></div>` : ''}
-          ${ body }
-        </div>
+      <div class="pl-vote">
+          ${label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${label}</b></div>` : ''}
+          ${body}
       </div>
     `
 }
 
 const VoteParcelLab = ({ actionBox, id }, emit) => {
-  const { label_communication, voteCommunicationSuccess, voteCommunicationErr } = actionBox
+  const { label_communication: label, voteCommunicationSuccess, voteCommunicationErr } = actionBox
   let body = html`
     <div class="pl-rating-body">
       <div class="pl-courier-vote pl-vote-up" onclick=${() => emit('voteCommunication', 'up', id)}>
-        ${ Icon('thumbs_up', 'aaa', '30') }
+        ${Icon('thumbs_up', 'aaa', '30')}
       </div>
       <div class="pl-courier-vote pl-vote-down" onclick=${() => emit('voteCommunication', 'down', id)}>
-        ${ Icon('thumbs_down', 'aaa', '30') }
+        ${Icon('thumbs_down', 'aaa', '30')}
       </div>
     </div>
   `
-  if (voteCommunicationSuccess) body = html`
+  if (voteCommunicationSuccess) {
+    body = html`
     <div class="pl-rating-body">
-      ${ Icon('success_standard', 'aaa', '30') }
+      ${Icon('success_standard', 'aaa', '30')}
     </div>
-  `
+    `
+  }
 
-  if (voteCommunicationErr) body = html`
+  if (voteCommunicationErr) {
+    body = html`
     <div class="pl-rating-body">
       <small style="text-align:center;">
         An Error occurred, we are very sorry 😥
       </small>
-    </div>
-  `
+    </div>`
+  }
 
   return html`
-      <div class="pl-box pl-space-top pl-vote">
-        <div class="pl-box-body">
-          ${ label_communication ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${ label_communication }</b></div>` : ''}
-          ${ body }
-        </div>
+      <div class="pl-vote" style="margin-top:25px;">
+          ${label ? html`<div class="pl-space-bottom" style="text-align:center;"><b>${label}</b></div>` : ''}
+          ${body}
       </div>
     `
 }
 
-module.exports = function Vote(tHeader, options, emit) {
+module.exports = function Voting (tHeader, { options, emit }) {
   return options.disableVoting ? null : [
+    html`<hr>`,
     VoteCourier(tHeader, emit),
     VoteParcelLab(tHeader, emit),
-    options.disableBranding ? null : Branding(tHeader, emit),
+    options.disableBranding ? null : Branding(tHeader, emit)
   ]
 }

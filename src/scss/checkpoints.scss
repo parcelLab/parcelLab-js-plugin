@@ -1,7 +1,6 @@
 #pl-show-more-button {
   color:#aaa;
   background-color: transparent;
-  padding-bottom: 0;
   &:focus {
     outline: 0;
   }
@@ -12,17 +11,17 @@ div.pl-checkpoint {
   padding-bottom: 15px;
   margin-bottom: 10px;
   border-bottom: 1px dashed #eee;
-  &.pl-checkpoint-success {
-    // background-color: #dff0d8;
-    // border-color: #d6e9c6;
-  }
-  &.pl-checkpoint-danger {
-    // background-color: #f2dede;
-    // border-color: #ebccd1;
-  }
-  small {
+  .pl-checkpoint-date {
+    font-size: .8em;
     opacity: .6;
   }
+  
+  &:first-of-type > .pl-checkpoint-status {
+    font-size: 1.3em;
+  }  
+  &:first-of-type > .pl-checkpoint-details {
+    font-size: 1.3em;
+  }  
 }
 
 div.pl-alert {

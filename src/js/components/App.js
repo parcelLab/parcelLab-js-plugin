@@ -1,6 +1,5 @@
 const html = require('nanohtml')
 const Header = require('./Header')
-const RerouteLinkShort = require('./RerouteLinkShort')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
 const Banner = require('./Banner')
@@ -13,81 +12,71 @@ const FallbackFurtherInfos = require('./FallbackFurtherInfos')
 const Loading = require('./Loading')
 const StyleSet = require('./StyleSet')
 
-
 const createLayout = styleSet => content => html`
   <div id="pl-plugin-wrapper">
     ${styleSet}
     ${content}
   </div>`
 
-
 const App = (state, emit) => {
   const Layout = createLayout(StyleSet())
 
   // fetch failed
   if (state.query_err || state.fetchCheckpoints_failed) {
-    let errApp = []
+    const errApp = []
     state.options.show_searchForm ? errApp.push(Search(state, emit)) : errApp.push(Alert(state))
 
-    if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404
-    && state.query.courier && state.query.trackingNo
-    && state.fallback_deeplink)
+    if (state.fetchCheckpoints_failed && state.fetchCheckpoints_failed === 404 &&
+    state.query.courier && state.query.trackingNo &&
+    state.fallback_deeplink) {
       errApp.push(FallbackFurtherInfos(state))
-    
+    }
+
     return Layout(errApp)
   }
-  
+
   // tracking w/ no cps
   if (state.checkpoints && state.checkpoints.header.length === 0) {
     return Layout(Alert(state))
-  } 
-  
-  // still loading
-  if (!state.checkpoints) return Layout(Loading()) 
+  }
 
+  // still loading
+  if (!state.checkpoints) return Layout(Loading())
 
   const header = Header(state, emit)
-  const rerouteLinkShort = RerouteLinkShort(state)
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
-  let banner = null 
-  if (state.options.banner_image === 'instagram' && state.options.instagram)
-    banner = InstagramPost(state)
-  else if (state.options.banner_image && state.options.banner_link)
-    banner = Banner(state)
-  else if (state.options.show_articleList)
-    banner = ArticleBox(state, emit)
-
-  let layout = ['4', '8']
-  if (!actionBox) layout = ['0', '12']
-  if (actionBox && banner) layout = ['4', '4', '4']
-
+  let rightElement = null
+  if (state.options.banner_image === 'instagram' && state.options.instagram) {
+    rightElement = InstagramPost(state)
+  } else if (state.options.banner_image && state.options.banner_link) {
+    rightElement = Banner(state)
+  } else if (state.options.show_articleList) {
+    rightElement = ArticleBox(state, emit)
+  }
+  rightElement = TrackingTrace(state, emit) // TODO: delete dis
 
   const app = html`
-    <div>
-      ${ note }
+    <div class="pl-layout-wrapper">
+      ${note}
 
-      ${ header }
+      ${header}
 
-      <div id="pl-main-box">
-
-        <div class="pl-col-row">
-          <div  style="display: none;" class="pl-box-aside-left pl-col pl-col-${layout[0]}">
-            <div id="pl-action-box-container" class="pl-space-bottom">
-              ${ actionBox }
-            </div>
-
-            ${ rerouteLinkShort }
-          </div>
-
-          <div class="pl-main pl-col pl-col-${layout[1]}">
-            ${ trace }
-          </div>
-
-          ${ banner }
+      <div class="pl-layout">
+        <div  class="pl-layout-left">
+          ${actionBox}
         </div>
-      
+
+        <div class="pl-layout-center">
+          ${trace}
+        </div>
+
+        ${rightElement ? html`
+        <div class="pl-layout-right">
+          ${rightElement}
+        </div>
+        ` : ''}
       </div>
 
     </div>

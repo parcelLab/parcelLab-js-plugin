@@ -1,5 +1,6 @@
 const html = require('nanohtml')
-const Icon = require('../Icon')
+// const Icon = require('../Icon')
+const RerouteLink = require('../RerouteLink')
 
 const Label = text => html`
   <div class="pl-box-heading pl-box-cal-heading">
@@ -8,7 +9,7 @@ const Label = text => html`
 `
 
 const Calendar = (dayOfWeek, dateOfMonth, month) => html`
-  <div class="pl-box-body pl-box-cal-body pl-box-prediction">
+  <div class="pl-box-body pl-box-cal-body">
     <div class="pl-cal-week-day">${dayOfWeek}</div>
     <div class="pl-cal-day">${dateOfMonth}</div>
     <div class="pl-cal-month">${month}</div>
@@ -16,25 +17,14 @@ const Calendar = (dayOfWeek, dateOfMonth, month) => html`
 `
 
 const TimeBox = (startTime, endTime, timeCaption) => {
-  const icon = Icon('clock', '#000', '25')
-  icon.classList.add('pl-space-right')
-  icon.style.display = 'inline-block'
-  icon.style.verticalAlign = 'bottom'
-  icon.style.marginBottom = '3px'
-
   return html`
-    <div class="pl-box pl-box-time">
-      <div class="pl-box-body">
-        <div class="pl-time-data">
-          ${ icon} ${startTime} ${endTime ? ' - ' + endTime : ''}
-        </div>
-        ${ timeCaption ? html`
-        <small class="pl-time-caption">${timeCaption}</small>` : ''}
-      </div>
+    <div class="pl-time-data pl-space-bottom">
+      ${startTime} ${endTime ? ' - ' + endTime : ''}
+      ${timeCaption ? html`
+      <small class="pl-time-caption">${timeCaption}</small>` : ''}
     </div>
     `
 }
-
 
 const Caption = text => html`
   <div class="pl-prediction-caption">
@@ -42,7 +32,7 @@ const Caption = text => html`
     </small>
 `
 
-const Prediction = ({ actionBox }) => {
+const Prediction = ({ actionBox, courier }, { slot }) => {
   const { label, data } = actionBox
   if (!(data.dayOfWeek || data.startTime)) return null
 
@@ -50,18 +40,21 @@ const Prediction = ({ actionBox }) => {
   const calendar = data.dayOfWeek ? Calendar(data.dayOfWeek, data.dateOfMonth, data.month) : null
   const timeBox = data.startTime ? TimeBox(data.startTime, data.endTime, data.timeCaption) : null
   const caption = data.caption ? Caption(data.caption) : null
-
+  const rerouteLink = RerouteLink(courier)
 
   return html`
-    <div class="pl-spaced-list">
+
       <div class="pl-box pl-action-box pl-box-calendar">
-        ${ heading}
-        ${ calendar}
+        ${heading}
+        ${calendar}
+        ${timeBox}
+        <div class="pl-box-body pl-spaced-list">
+          ${caption}
+          ${rerouteLink}
+          ${slot || null}
+        </div>
       </div>
-    
-      ${ timeBox}
-      ${ caption}
-    </div>
+
   `
 }
 

@@ -94,7 +94,7 @@ options.customStyles = {
   tabIconColor: '#000', // sets color for the order tab icons (default: buttonColor #333)
   activeTabIconColor: '#000', // sets color only for the active order tab icon (default: buttonColor #333)
   actionIconColor: '#000', // sets color only for the icons of the actionbox buttons
-  margin: '0px 0px', // sets mnargin for #pl-main-box (default: 0px)
+  margin: '0px 0px', // sets outter margin space of plugin
 };
 ```
 
@@ -127,14 +127,6 @@ In this example we will set the box and button border-radius to 0px and make the
   var parcelLab = new ParcelLab('#pl-trace', { styles: true, customStyles: custom });
   parcelLab.initialize();
 </script>
-```
-
-### Without action box
-
-If you want to use the plugin in a non-customer facing website (e.g. internal page for customer support), it is recommended to hide the action box like so:
-
-```html
-<style> div#pl-action-box-container { display: none; } </style>
 ```
 
 ## Custom translations

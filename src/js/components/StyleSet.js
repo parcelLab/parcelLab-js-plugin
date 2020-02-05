@@ -25,14 +25,6 @@ module.exports = function StyleSet () {
         background-color: ${window.parcelLab_styles.buttonBackground};
         color: ${window.parcelLab_styles.buttonColor};
       }
-      .parcelLab-style .pl-highlighted, .parcellab-style .pl-highlighted, .parcelLab-styles .pl-highlighted, .parcellab-styles .pl-highlighted
-      {
-        background-color: ${window.parcelLab_styles.highlightColor};
-      }
-      .parcelLab-style .pl-color-highlighted, .parcellab-style .pl-color-highlighted, .parcelLab-styles .pl-color-highlighted, .parcellab-styles .pl-color-highlighted
-      {
-        color: ${window.parcelLab_styles.highlightColor};
-      }
       .pl-box-live-location .pl-live-map-footer
       {
         background-color: ${window.parcelLab_styles.liveMapBackground};

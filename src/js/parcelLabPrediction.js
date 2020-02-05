@@ -1,7 +1,8 @@
 // deps
 let _$ = require('cash-dom')
-if (typeof window.jQuery === 'function')
+if (typeof window.jQuery === 'function') {
   _$ = window.jQuery
+}
 
 // libs
 const Api = require('./lib/api')
@@ -18,7 +19,7 @@ const DEFAULT_OPTS = _settings.defualt_opts
  * ~> https://github.com/parcelLab/parcelLab-js-plugin
  */
 class ParcelLab {
-  constructor(rootNodeQuery, opts) {
+  constructor (rootNodeQuery, opts) {
     if (!rootNodeQuery) rootNodeQuery = DEFAULT_ROOT_NODE
     if (rootNodeQuery && typeof rootNodeQuery === 'string') {
       if (_$(rootNodeQuery).get(0)) {
@@ -32,25 +33,20 @@ class ParcelLab {
     }
   }
 
-  ///////////////////////
+  /// ////////////////////
   // Instance methods //
-  //////////////////////
+  /// ///////////////////
 
-  initialize() {
+  initialize () {
     this.initLanguage()
 
-    if (this.propsCheck() === false) return this.showError() // check yourself before you ...
-
-    // do a self update
-    this.selfUpdate()
+    if (this.propsCheck() === false) return this.showError()
 
     // get the prediction
     Api.getShopPrediction(this.props(), (err, res) => {
       if (err) return this.handleError(err)
       else if (res) {
-
         if (res.confidence && res.confidence > 40) {
-
           const offset = this.options.offset ? this.options.offset : 0
           const min = res.minDeliveryTime + offset
           const max = res.maxDeliveryTime + offset
@@ -61,15 +57,15 @@ class ParcelLab {
 
           this.innerHTML(prediction)
 
-          if (this.options.infoCaption && res.infoCaption && res.infoCaption.length > 0)
+          if (this.options.infoCaption && res.infoCaption && res.infoCaption.length > 0) {
             this.$findGlobal(this.options.infoCaption).text(res.infoCaption)
+          }
         }
-
       } else this.showError()
     })
   }
 
-  initLanguage() {
+  initLanguage () {
     this._langCode = this.options.language ? this.options.language : 'en'
     if (statics.languages[this._langCode]) {
       this.lang = statics.languages[this._langCode]
@@ -79,22 +75,22 @@ class ParcelLab {
     }
   }
 
-  props() {
+  props () {
     return {
       userId: this.options.userId,
       location: this.options.location,
       courier: this.options.courier,
       lang: {
-        code: this._langCode,
-      },
+        code: this._langCode
+      }
     }
   }
 
-  propsCheck() {
+  propsCheck () {
     return this.options.userId && this.options.location && this.options.courier
   }
 
-  $find(sel) {
+  $find (sel) {
     const buildSelector = sel => {
       let res = this.rootNodeQuery
       if (sel) res += ` ${sel}`
@@ -104,33 +100,32 @@ class ParcelLab {
     return _$(buildSelector(sel))
   }
 
-  $findGlobal(sel) {
+  $findGlobal (sel) {
     if (!sel) return null
     if (sel && typeof sel === 'string') if (_$(sel)) return _$(sel)
     return null
   }
 
-  handleError(err) {
-    if (typeof err === 'string')
+  handleError (err) {
+    if (typeof err === 'string') {
       console.error(`🙀  ${err}`)
-    else if (typeof err === 'object') {
+    } else if (typeof err === 'object') {
       console.error(`🙀  ${err.message}`)
     }
   }
 
-  ///////////////////////////
+  /// ////////////////////////
   // DOM affecting methods //
-  ///////////////////////////
+  /// ////////////////////////
 
   // TODO: specifiy where to write errors, currently all errors are silent
-  showError() {
+  showError () {
     // currently, do nothing
   }
 
-  innerHTML(html) {
+  innerHTML (html) {
     this.$find().html(html)
   }
-
 }
 
 module.exports = ParcelLab

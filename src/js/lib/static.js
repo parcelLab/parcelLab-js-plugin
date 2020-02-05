@@ -1,3 +1,5 @@
+/* ---------------------------------- Icons --------------------------------- */
+
 const transitStates = {
   OrderProcessed: {
     icon: 'order_processed',
@@ -126,36 +128,7 @@ const getIconName = (tStatus, theme) => {
   } else return transitStates.default[type] || transitStates.default.icon
 }
 
-const courierNames = {
-  'dhl-germany': 'DHL',
-  'hermes-de': 'Hermes',
-  'dpd-de': 'DPD',
-  ups: 'UPS'
-}
-
-const socialIcons = {
-  twitter: {
-    color: '#55acee'
-  },
-  instagram: {
-    color: '#3f729b'
-  },
-  facebook: {
-    color: '#3b5999'
-  },
-  'youtube-play': {
-    color: '#e52d27'
-  },
-  'google-plus': {
-    color: '#DC4E41'
-  },
-  xing: {
-    color: '#006567'
-  },
-  pinterest: {
-    color: '#bd081c'
-  }
-}
+/* -------------------------------- Languages ------------------------------- */
 
 const languages = {
   de: {
@@ -932,71 +905,9 @@ const translations = {
   }
 }
 
-const langIds = {
-  '#result-ticket': {
-    type: 'empty',
-    value: 'empty'
-  },
-  '#parcelLab-heading': {
-    type: 'data',
-    value: 'h1'
-  },
-  '#shipper': {
-    type: 'data',
-    value: 'shipper'
-  },
-  '#btn-ask': {
-    type: 'data',
-    value: 'ask'
-  },
-  '#txt-ask': {
-    type: 'data',
-    value: 'anyquestion',
-    attr: 'placeholder'
-  },
-  '#last_checkpoint': {
-    type: 'data',
-    value: 'predictions',
-    subtarget: 'this',
-    sub: 'value'
-  },
-  '#prediction_text': {
-    type: 'text',
-    value: 'txt-prediction'
-  },
-  '.versandstatushelpbutton a': {
-    type: 'data',
-    value: 'help',
-    subTarget: 'data',
-    sub: 'text_help_btn'
-  }
-}
-
-const listenBlocks = [
-  {
-    name: '#footnote',
-    type: 'parcellab'
-  }, {
-    name: '#parcelLab-sender',
-    type: 'shop',
-    target: '.parcelLab-main-sender a'
-  }, {
-    name: '#parcelLab-sender',
-    type: 'social',
-    target: '.parcelLab-social a'
-  }, {
-    name: '#parcelLab-faq',
-    type: 'faq'
-  }
-]
-
 module.exports = {
-  listenBlocks,
   translations,
   languages,
-  socialIcons,
-  courierNames,
   transitStates,
-  langIds,
   getIconName
 }

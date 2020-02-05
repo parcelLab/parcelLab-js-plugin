@@ -10,30 +10,6 @@
   }
 }
 
-
-.pl-box-aside-left {
-  display: block !important;
-  padding: 0 20px 0 0;
-
-  @media(max-width: 749px) {
-    padding: 0;
-  }
-}
-
-.pl-box-aside-right {
-  display: block !important;
-  padding: 0 0 0 20px;
-
-  @media(max-width: 749px) {
-    margin-top: 15px;
-    padding: 0;
-  }
-
-  img {
-    width: 100%;
-  }
-}
-
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
@@ -165,15 +141,12 @@ h3 {
   }
 }
 
-;
 
 .pl-box-calendar {
   .pl-box-body {
     text-align: center;
     font-size: 20px;
     position: relative;
-    padding-top: 0;
-
     .pl-cal-week-day {
       font-weight: 200;
       font-size: 20px;
@@ -193,19 +166,15 @@ h3 {
   }
 }
 
-.pl-box-time {
-  .pl-time-data {
-    font-size: 20px;
-  }
 
-  .pl-time-caption {
-    color: #aaa;
-    font-size: 13px;
-  }
+.pl-time-data {
+  font-size: 20px;
+  text-align: center;
+}
 
-  hr {
-    margin: 5px 0;
-  }
+.pl-time-caption {
+  color: #aaa;
+  font-size: 13px;
 }
 
 
@@ -240,26 +209,18 @@ h3 {
   }
 }
 
-.pl-opening-hours-box {
-  border: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-
-  .pl-closes-in {
-    font-size: 12px;
+.pl-opening-hours {
+  padding: 15px 0;
+  &-heading {
+    padding: 0 20px;
+    font-size: 16px;
+    .pl-closes-in {
+      font-size: 12px;
+    }
   }
 
-  .pl-box-heading {
-    background-color: transparent;
-    text-align: left;
-    font-size: 1em;
-    padding: 10px 20px;
-    border: 0px;
-  }
-
-  .pl-box-body {
-    padding: 10px 0;
-
+  &-entries {
+    margin-top: 15px;
     &:not(.pl-open) {
       @media(max-width: 749px) {
         display: none;
@@ -267,39 +228,36 @@ h3 {
     }
   }
 
-  .pl-opening-hours-entry {
-
-    &,
-    &>div {
-      font-size: 11px;
-
-      @media(max-width: 749px) {
-        font-size: 14px;
-      }
+  &-entry {
+    padding: 5px 20px;
+    margin: 0;
+    border-width: 0px;
+    position: relative;
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
     }
-
-    padding: 0 20px;
-
-    .pl-week-day-col {
+    &-weekday {
+      width:55%;
       float: left;
-      width: 50%;
+      opacity: .8;
     }
-
-    .pl-hours-col {
+    &-hours {
+      width: 45%;
       float: left;
-      width: 50%;
-      text-align: center;
+      text-align: right;
+      font-size: 16px;
     }
-
-    &.pl-highlighted-entry {
-      background-color: #eee;
-    }
+  }
+  &-entry.pl-highlighted-entry {
+    background-color: #eee;
   }
 }
 
 .pl-prediction-caption {
   color: #aaa;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 #pl-prediction-map {
@@ -440,16 +398,9 @@ h3 {
 .pl-box-icon-status {
   .pl-box-body {
     text-align: center;
-    padding: 0;
-    padding-bottom: 25px;
-
     img {
       margin: 0 auto;
     }
-  }
-
-  .pl-box-footer {
-    padding-top: 0px;
   }
 }
 
