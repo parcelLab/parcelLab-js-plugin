@@ -5,6 +5,7 @@ const Checkpoint = require('./Checkpoint')
 const FurtherInfos = require('./FurtherInfos')
 const MoreButton = require('./MoreButton')
 const IconState = require('./IconState')
+const { animateIn } = require('../lib/helpers')
 
 const showTimeOnCheckpoint = (d, i) => {
   if (!d || i === 0) return false
@@ -46,6 +47,7 @@ const TrackingTrace = (state, emit) => {
   if (!showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
     moreButton = MoreButton(T.translate('more', query.lang.name), emit)
   }
+  animateIn(iconState)
 
   return html`
     <div id="pl-t-${tHeader.id}" class="pl-box pl-box-trace">

@@ -28,3 +28,39 @@ exports.makeBig = el => {
 
   return el
 }
+
+exports.animateIn = (el, delay) => {
+  if (el && el.classList) {
+    el.classList.add('pl-animated')
+    el.classList.add('pl-fade-in')
+    if (delay && delay === 1) {
+      el.classList.add('pl-delay-1s')
+    } else if (delay && delay === 2) {
+      el.classList.add('pl-delay-2s')
+    }
+  }
+}
+
+exports.animateBounce = (el, delay) => {
+  if (el && el.classList) {
+    el.classList.add('pl-animated')
+    el.classList.add('pl-bounce')
+    if (delay && delay === 1) {
+      el.classList.add('pl-delay-1s')
+    } else if (delay && delay === 2) {
+      el.classList.add('pl-delay-2s')
+    }
+  }
+}
+
+exports.animatePulse = (el, delay) => {
+  if (el && el.classList) {
+    el.classList.add('pl-animated')
+    el.classList.add('pl-pulse')
+    if (delay && delay === 1) {
+      el.classList.add('pl-delay-1s')
+    } else if (delay && delay === 2) {
+      el.classList.add('pl-delay-2s')
+    }
+  }
+}

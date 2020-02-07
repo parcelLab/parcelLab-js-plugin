@@ -17,6 +17,14 @@
   }
 }
 
+.pl-clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 // LAYOUT
 .pl-layout-wrapper {
   padding-left:10px;
@@ -43,14 +51,6 @@
       width: 33.3333%;
     }
   }
-  &-right {
-    @media(min-width: 749px) {
-      width: 100%;
-    }
-    @media(min-width: 894px) {
-      width: 33.3333%;
-    }
-  }
   &:before {
     content: "";
     display: table;
@@ -69,20 +69,8 @@
         // height: 550px;
         overflow-x: hidden;
         overflow-y: auto;
-        box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.4);
+        // box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.4);
       }
-    }
-  }
-}
-
-// hide checkpoints on mobile
-@media(max-width: 748px) {
-  .pl-box-trace .pl-checkpoints:not(.pl-checkpoints-show-all) {
-    & > .pl-checkpoint:not(:first-of-type):not(:nth-of-type(2)) {
-      display: none;
-    }
-    & > #pl-courier-fwd-link {
-      display: none;
     }
   }
 }
@@ -138,11 +126,6 @@
     opacity: .8;
   }
 
-}
-
-// fix for btn span color
-.pl-button .pl-tab-text span {
-  color: inherit;
 }
 
 .pl-is-fullwidth {
@@ -321,28 +304,46 @@ textarea.pl-form-input {
     list-style: none;
     padding: 0px;
     li {
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-      border-bottom: 1px dashed #eee;
-      span.pl-article-list-no {
-        margin-right: 5px;
-        // font-weight: lighter;
-        opacity: .6;
-        font-size: .8rem;
-        display: block;
-        max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      &:not(:last-of-type) {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed #eee;  
       }
+      .pl-article-list-entry {
+        width: 100%;
+        :after {
+          clear: both;
+          content: ' ';
+        }
 
-      span.pl-article-quantity {
-        opacity: .6;
-        font-size: .8rem;
-        margin-right: 5px;
-      }
+        &-image {
+          float:left;
+          text-align: center;
+          width:30%;
+        }
+        &-description {
+          float: left;
+          width: 70%;
+          word-break: break-word;
+        }
 
-      div.pl-article-description {
-        padding: 5px 0 0 5px;
+        span.pl-article-list-no {
+          margin-right: 5px;
+          // font-weight: lighter;
+          opacity: .6;
+          font-size: .8rem;
+          display: block;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+  
+        span.pl-article-quantity {
+          opacity: .6;
+          font-size: .8rem;
+          margin-right: 5px;
+        }
+  
       }
     }
   }
@@ -376,6 +377,89 @@ textarea.pl-form-input {
   }
 }
 
-a#pl-courier-fwd-link {
-  color: rgb(71, 71, 71);
+a#pl-courier-fwd-link, a#pl-courier-fwd-link:visited, a#pl-courier-fwd-link:hover {
+  color: rgb(171, 171, 171);
+  text-decoration: none;
+  & > .pl-courier-fwd-link-content {
+    font-size: .8em;
+    margin-top: 30px;
+  }
+}
+
+// Animations
+
+.pl-animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+.pl-animated.pl-delay-1s {
+  animation-delay: 1s;
+}
+.pl-animated.pl-delay-2s {
+  animation-delay: 2s;
+}
+
+@keyframes plfadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.pl-fade-in {
+  animation-name: plfadeInDown;
+}
+
+@keyframes plbounce {
+  from,
+  20%,
+  53%,
+  80%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+.pl-bounce {
+  animation-name: plbounce;
+  transform-origin: center bottom;
+}
+
+
+@keyframes plpulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pl-pulse {
+  animation-name: plpulse;
 }

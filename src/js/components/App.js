@@ -55,7 +55,6 @@ const App = (state, emit) => {
   } else if (state.options.show_articleList) {
     rightElement = ArticleBox(state, emit)
   }
-  rightElement = TrackingTrace(state, emit) // TODO: delete dis
 
   const app = html`
     <div class="pl-layout-wrapper">

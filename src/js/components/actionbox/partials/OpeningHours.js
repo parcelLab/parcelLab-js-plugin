@@ -108,7 +108,7 @@ function renderOpeningHourEntry (ophObj, weekDays, fallBack, hideWeekDay) {
   if (ophObj.open.day === currentWorkingDay) highlightClass = 'pl-highlighted-entry'
 
   return html`
-    <div class="pl-opening-hours-entry ${highlightClass}">
+    <div class="pl-opening-hours-entry pl-clearfix ${highlightClass}">
       <div class="pl-opening-hours-entry-weekday">
         ${(!hideWeekDay) ? weekDay + ':' : raw('<span>&nbsp;</span>')}
       </div>

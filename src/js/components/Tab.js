@@ -13,41 +13,35 @@ const Tab = (tab, emit) => {
     tab.actionBox.data &&
     tab.actionBox.data.label &&
     tab.actionBox.data.dateOfMonth &&
-    tab.actionBox.data.month)  {
-
+    tab.actionBox.data.month) {
     const { label, dateOfMonth, month } = tab.actionBox.data
     tab.statusText = `${label} ${dateOfMonth} ${month}`
   }
 
   let iconColor = window.parcelLab_styles.tabIconColor || window.parcelLab_styles.buttonColor
-  if (tab.active && window.parcelLab_styles.activeTabIconColor)
+  if (tab.active && window.parcelLab_styles.activeTabIconColor) {
     iconColor = window.parcelLab_styles.activeTabIconColor
+  }
 
   return html`
-    <div class="pl-col pl-col-${tab.colSize}" onclick="${handleClick}">
-      <div class="pl-tab pl-tab-${tab.transitCode} pl-button pl-space-bottom pl-is-fullwidth pl-${tab.active ? 'active' : 'not-active' }">
-        <div class="pl-tab-content">
-          <div class="pl-tab-text">
-            <span class="pl-tab-text-tno">
-              ${tab.courier.prettyname}
-              ${tab.trackingNo}
-            </span>
-            <br />
-            <span class="pl-tab-text-status">
-              ${tab.statusText}
-            </span>
-          </div>
-          
-          <div class="pl-status">
-            <div class="pl-icon">
-              ${Icon(tab.iconName, iconColor, '35')}
-            </div>
-          </div>
+    <div class="pl-button pl-split-order-entry pl-split-order-entry-${tab.active ? 'active' : 'not-active'}" onclick="${handleClick}">
+      <div class="pl-split-order-entry-icon">
+        ${Icon(tab.iconName, iconColor, '35')}
+      </div>
+
+      <div class="pl-split-order-entry-text">
+        <div class="pl-split-order-entry-text-tno">
+          <span class="">
+            ${tab.courier.prettyname}
+          </span>
+          ${tab.trackingNo}
+        </div>
+        <div class="pl-split-order-entry-text-status">
+          ${tab.statusText}
         </div>
       </div>
     </div>
   `
-
 }
 
 module.exports = Tab

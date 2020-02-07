@@ -233,11 +233,6 @@ h3 {
     margin: 0;
     border-width: 0px;
     position: relative;
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
     &-weekday {
       width:55%;
       float: left;

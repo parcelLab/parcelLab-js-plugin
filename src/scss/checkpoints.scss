@@ -8,9 +8,11 @@
 
 
 div.pl-checkpoint {
-  padding-bottom: 15px;
-  margin-bottom: 10px;
-  border-bottom: 1px dashed #eee;
+  &:not(:last-of-type) {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #eee;  
+  }
   .pl-checkpoint-date {
     font-size: .8em;
     opacity: .6;
@@ -22,6 +24,18 @@ div.pl-checkpoint {
   &:first-of-type > .pl-checkpoint-details {
     font-size: 1.3em;
   }  
+}
+
+// hide checkpoints on mobile
+@media(max-width: 748px) {
+  .pl-box-trace .pl-checkpoints:not(.pl-checkpoints-show-all) {
+    & > .pl-checkpoint:not(:first-of-type) {
+      display: none;
+    }
+    & > #pl-courier-fwd-link {
+      display: none;
+    }
+  }
 }
 
 div.pl-alert {
@@ -55,86 +69,6 @@ a:hover, a:focus {
 
 .pl-alert {
   color: #000000;
-}
-
-
-div.pl-header {
-  div.pl-order-no {
-    font-size: 1.5em;
-    opacity: .6;
-  }
-  div.pl-order-sub {
-    font-size: 0.8em;
-    opacity: .6;
-    margin-bottom: 15px;
-  }
-  overflow-x: hidden;
-}
-
-div.pl-tab-container {
-  max-width: unset;
-  width: unset;
-  margin-top: 0;
-  margin-left: -15px;
-  margin-right: -15px;
-  
-  & > div {
-    padding: 0 15px;
-  }
-}
-
-div.pl-order-subheading {
-  opacity: .6;
-}
-
-div.pl-tab {
-  padding: 10px 25px;
-  opacity: 0.5;
-  text-align: left;
-  &:hover {
-    // cursor: pointer;
-    cursor: default;
-    opacity: 0.8;
-  }
-  &.pl-active {
-    opacity: 1;
-  }
-  div + div {
-    text-align: left;
-  }
-
-  div.pl-tab-content {
-    width: 100%;
-    position: relative;
-    div.pl-tab-text {
-      position: relative;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-right: 40px;
-      
-      span.pl-tab-text-tno {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      span.pl-tab-text-status {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 12px;
-      }
-    }
-    div.pl-status {
-      position: absolute;
-      top: 0;
-      right: 0;
-      div.pl-icon {
-        margin: 0;
-        float: unset;
-      }
-    }
-  }
-
 }
 
 div.pl-icon-hr-container {
