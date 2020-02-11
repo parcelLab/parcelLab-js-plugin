@@ -472,30 +472,48 @@ class ParcelLab {
   }
 
   observeLayoutHeight () {
+    const borderWidth = window.parcelLab_styles.boxBorderWidth || 1
+    const elemHeight = elem => {
+      return elem.scrollHeight + (borderWidth * 2)
+    }
+    const setHeight = (elem, height) => {
+      const prop = `${height}px`
+      if (elem.style.height !== prop) {
+        elem.style.height = prop
+      }
+    }
+    const unsetHeight = elem => {
+      if (elem.style.height) {
+        elem.style.height = null
+      }
+    }
     const computeLayoutHeight = () => {
       const defaultHeight = 550
       const left = document.querySelector('.pl-layout-left > .pl-box')
       const center = document.querySelector('.pl-layout-center > .pl-box')
       const right = document.querySelector('.pl-layout-right > .pl-box')
-      if (window.innerWidth >= 750) {
+      if (left && center) {
+        if (window.innerWidth >= 750) {
         // set boxes to same fixed height on desktop
-        if (left && center) {
-          const heighestBoxHeight = (right && right.classList.contains('pl-instagram-box') && right.offsetHeight > left.offsetHeight)
-            ? right.offsetHeight
-            : left.offsetHeight
+          const leftHeight = elemHeight(left)
+          const rightHeight = right ? elemHeight(right) : null
+
+          const heighestBoxHeight = (right && right.classList.contains('pl-instagram-box') && rightHeight > leftHeight)
+            ? rightHeight
+            : leftHeight
           const layoutHeight = heighestBoxHeight > defaultHeight
             ? heighestBoxHeight
             : defaultHeight
-
-          left.style.height = `${layoutHeight}px`
-          center.style.height = `${layoutHeight}px`
-          if (right) right.style.height = `${layoutHeight}px`
+          console.log('H:', layoutHeight)
+          setHeight(left, layoutHeight)
+          setHeight(center, layoutHeight)
+          if (right) setHeight(right, layoutHeight)
+        } else {
+          // unset fixed box height on mobile
+          unsetHeight(left)
+          unsetHeight(center)
+          if (right) unsetHeight(right)
         }
-      } else {
-        // unset fixed box height on mobile
-        left.style.height = null
-        center.style.height = null
-        if (right) right.style.height = null
       }
     }
     setInterval(computeLayoutHeight, 300)
