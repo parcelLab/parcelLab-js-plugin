@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "parcel test/index.html -p 4000",
+    "strt": "parcel test/parcelfashion.html",
     "build": "parcel build src/index.js --no-source-maps",
     "clean": "rm -rf .cache && rm -rf dist",
     "deploy": "npm run clean && npm run build && make deploy && make deploy-v3"
