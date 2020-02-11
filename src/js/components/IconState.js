@@ -54,7 +54,7 @@ const IconState = (activeTracking, options) => {
   }
 
   return html`
-      <div class="pl-icon-hr-container">
+      <div class="pl-icon-hr-container pl-hide-on-mobile">
         <div class="pl-icon-hr"></div>
 
         <div class="pl-hr-icon pl-hr-icon-left">

@@ -1,7 +1,7 @@
 .pl-mobile-tracking {
   margin-bottom: 15px;
   &-active {
-    .pl-mobile-tracking-heading-icon {
+    .pl-mobile-tracking-heading-toggleicon {
       img {
         transform: none;
       }
@@ -14,8 +14,13 @@
   }
   &-heading {
     padding: 15px;
-    &-icon {
+    &-statusicon {
       width:20%;
+      float: left;
+      transition: all .2s linear;
+    }
+    &-toggleicon {
+      width:10%;
       float: left;
       transition: all .2s linear;
       img {
@@ -25,7 +30,7 @@
     &-text {
       padding-top: 4;
       float: left;
-      width:80%;
+      width:70%;
       &-tno, &-status {
         white-space: nowrap;
         width: 100%;
@@ -51,6 +56,9 @@
       border-right: 0px;
       border-bottom: 0px;
       border-radius: 0px;
+    }
+    & > .pl-box:last-of-type {
+      margin-bottom: 5px;
     }
   }
 }
