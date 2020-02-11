@@ -4,7 +4,7 @@ const Icon = require('./Icon')
 const Tab = (tab, emit) => {
   const handleClick = e => {
     e.preventDefault()
-    emit('setActiveTracking', tab.id)
+    emit('toggleDesktopTracking', tab.id)
   }
 
   // change default tab status to prediction if possible

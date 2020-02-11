@@ -90,6 +90,7 @@ const Footer = ({ openStops, lastStatusUpdateAt, prediction }, lang, coordinates
 }
 
 const LiveTrackingMap = ({ id, actionBox, courier }, { lang, slot }) => {
+  return null // TODO: disabled for v4
   if (!actionBox.data || !actionBox.data.details || !actionBox.data.details.liveTrackingMap) return null
 
   const { details, coordinates } = actionBox.data

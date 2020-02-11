@@ -1,0 +1,56 @@
+.pl-mobile-tracking {
+  margin-bottom: 15px;
+  &-active {
+    .pl-mobile-tracking-heading-icon {
+      img {
+        transform: none;
+      }
+    }
+    .pl-mobile-tracking-body {
+      height: auto;
+      visibility: visible;
+      transition: all 1s linear;
+    }
+  }
+  &-heading {
+    padding: 15px;
+    &-icon {
+      width:20%;
+      float: left;
+      transition: all .2s linear;
+      img {
+        transform: rotate(45deg);
+      }
+    }
+    &-text {
+      padding-top: 4;
+      float: left;
+      width:80%;
+      &-tno, &-status {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        line-height: 1.1em;
+        text-overflow: ellipsis;
+      }
+      &-tno {
+        font-size: 1.2em;
+      }
+      &-status {
+        opacity: .8;
+      }
+    }
+  }
+  &-body {
+    height: 0px;
+    visibility: hidden;
+    transition: all 1s linear;
+    overflow: hidden;
+    & > .pl-box {
+      border-left: 0px;
+      border-right: 0px;
+      border-bottom: 0px;
+      border-radius: 0px;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 const html = require('nanohtml')
+const MobileApp = require('./mobile')
 const Header = require('./Header')
 const ActionBox = require('./actionbox')
 const TrackingTrace = require('./TrackingTrace')
@@ -11,6 +12,7 @@ const Note = require('./Note')
 const FallbackFurtherInfos = require('./FallbackFurtherInfos')
 const Loading = require('./Loading')
 const StyleSet = require('./StyleSet')
+const { getActiveTracking } = require('../lib/helpers')
 
 const createLayout = styleSet => content => html`
   <div id="pl-plugin-wrapper">
@@ -43,9 +45,11 @@ const App = (state, emit) => {
   // still loading
   if (!state.checkpoints) return Layout(Loading())
 
+  const activeTracking = getActiveTracking(state)
+
   const header = Header(state, emit)
-  const actionBox = ActionBox(state, emit)
-  const trace = TrackingTrace(state, emit)
+  const actionBox = ActionBox(activeTracking, state, emit)
+  const trace = TrackingTrace(activeTracking, state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
   let rightElement = null
   if (state.options.banner_image === 'instagram' && state.options.instagram) {
@@ -53,7 +57,7 @@ const App = (state, emit) => {
   } else if (state.options.banner_image && state.options.banner_link) {
     rightElement = Banner(state)
   } else if (state.options.show_articleList) {
-    rightElement = ArticleBox(state, emit)
+    rightElement = ArticleBox(activeTracking, state, emit)
   }
 
   const app = html`
@@ -62,7 +66,9 @@ const App = (state, emit) => {
 
       ${header}
 
-      <div class="pl-layout">
+      ${MobileApp(state, emit)}
+
+      <div class="pl-layout pl-layout-desktop">
         <div  class="pl-layout-left">
           ${actionBox}
         </div>

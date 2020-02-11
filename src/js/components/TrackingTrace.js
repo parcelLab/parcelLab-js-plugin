@@ -31,21 +31,22 @@ const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   return cp
 }).filter(cp => true && cp.shown).reverse()
 
-const TrackingTrace = (state, emit) => {
-  const { checkpoints, activeTracking, query, showAllCheckpoints, options } = state
-  if (!checkpoints) return null
+const TrackingTrace = (activeTracking, state, emit) => {
+  const { query, options } = state
+  if (!activeTracking || !activeTracking.header) return null
 
   // const aceptedStatus = 'OutForDelivery DestinationDeliveryCenter'
-  const tHeader = checkpoints.header[activeTracking]
-  const tBody = checkpoints.body[tHeader.id]
-  const iconState = IconState({ checkpoints, activeTracking, options })
+  const tHeader = activeTracking.header
+  const { showAllCheckpoints } = tHeader
+  const tBody = activeTracking.body
+  const iconState = IconState(activeTracking, options)
   const furtherInfos = FurtherInfos(tHeader, query.lang.name)
 
   const tCheckpoints = prepareCheckpoints(tBody, query)
   let moreButton = null
 
   if (!showAllCheckpoints) { // only show 3 checkpoints (if not more button clicked)
-    moreButton = MoreButton(T.translate('more', query.lang.name), emit)
+    moreButton = MoreButton(T.translate('more', query.lang.name), activeTracking.header.id, emit)
   }
   animateIn(iconState)
 

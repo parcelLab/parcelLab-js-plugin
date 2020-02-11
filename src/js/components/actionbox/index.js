@@ -9,8 +9,8 @@ const DeliveryAddress = require('./partials/DeliveryAddress')
 const LiveTrackingLink = require('./LiveTrackingLink')
 const LiveTrackingMap = require('./LiveTrackingMap')
 
-const ActionBox = ({ checkpoints, activeTracking, query, options }, emit) => {
-  const tHeader = checkpoints.header[activeTracking]
+const ActionBox = (activeTracking, { query, options }, emit) => {
+  const tHeader = activeTracking.header
 
   if (tHeader && tHeader.actionBox) {
     const { type } = tHeader.actionBox

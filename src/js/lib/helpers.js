@@ -64,3 +64,27 @@ exports.animatePulse = (el, delay) => {
     }
   }
 }
+
+exports.getActiveTracking = (state) => {
+  const { checkpoints, activeTrackingIndex } = state
+  return {
+    header: checkpoints.header[activeTrackingIndex],
+    body: checkpoints.body[checkpoints.header[activeTrackingIndex].id]
+  }
+}
+
+exports.getTrackingById = (state, id) => {
+  const { checkpoints } = state
+  if (checkpoints && checkpoints.header && checkpoints.body[id]) {
+    const tBody = checkpoints.body[id]
+    const tHeader = checkpoints.header.find(th => th.id === id)
+    if (tBody && tHeader) {
+      return {
+        header: tHeader,
+        body: tBody
+      }
+    }
+  }
+
+  return null
+}

@@ -1,6 +1,8 @@
 div.pl-header {
   & > .pl-box-body {
-    padding-bottom: 0;
+    @media(min-width: 750px) {
+      padding-bottom: 0;
+    }
   }
   &.pl-header-plain {
     margin-bottom: 30px;
@@ -16,6 +18,9 @@ div.pl-header {
   
   .pl-split-order {
     padding: 20px;
+    @media(max-width: 749px) {
+      display: none;
+    }
     &-entry-wrap {
       width: 50%;
       float: left;
@@ -23,8 +28,7 @@ div.pl-header {
       // MOBILE:
       @media(max-width: 749px) {
         width: 100%;
-        display: none;
-      }
+      }  
     }
     &-entry {
       cursor: pointer;

@@ -143,38 +143,39 @@ h3 {
 
 
 .pl-box-calendar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .pl-box-body {
     text-align: center;
-    font-size: 20px;
     position: relative;
     .pl-cal-week-day {
       font-weight: 200;
-      font-size: 20px;
+      font-size: 1.3em;
       color: #ff5959;
     }
-
     .pl-cal-day {
       font-weight: bold;
-      ;
       font-size: 70px;
     }
-
     .pl-cal-month {
       font-weight: 200;
-      font-size: 15px;
+      font-size: 1.3em;
     }
   }
 }
 
 
 .pl-time-data {
-  font-size: 20px;
+  font-size: 1.8em;
   text-align: center;
+  color: #888;
+  background-color: #eee;
 }
 
 .pl-time-caption {
   color: #aaa;
-  font-size: 13px;
+  font-size: .8em;
 }
 
 

@@ -47,11 +47,11 @@ function ArticleItem ({ articleName, articleNo, quantity, imageUrl, productUrl, 
   `
 }
 
-module.exports = function ArticleList ({ activeTracking, checkpoints, query, showAllArticles, articleList }, emit) {
+module.exports = function ArticleList (activeTracking, { query, articleList }, emit) {
   if (!articleList) return null
 
   const { lang } = query
-  const { id } = checkpoints.header[activeTracking]
+  const { id } = activeTracking.header
   const activeTrackingArticles = articleList[id]
 
   if (activeTrackingArticles && activeTrackingArticles.length > 0) {
@@ -61,7 +61,7 @@ module.exports = function ArticleList ({ activeTracking, checkpoints, query, sho
     const articleList = validArticles.map(ArticleItem)
 
     return html`
-      <div class="pl-box pl-box-articles ${showAllArticles ? 'pl-scrollable' : ''}">
+      <div class="pl-box pl-box-articles">
         <div class="pl-box-heading">
           ${translate('articleList', lang.name)} (${calcArticleTotalSum(validArticles)})
         </div>

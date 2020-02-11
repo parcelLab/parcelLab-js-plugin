@@ -1,10 +1,10 @@
 const { translate } = require('../../js/lib/translator.js')
 
-const TrackingHeading = ({ checkpoints, activeTracking, query }) => {
+const TrackingHeading = ({ checkpoints, activeTrackingIndex, query }) => {
   if (!checkpoints) return null
 
   try {
-    const tHeader = checkpoints.header[activeTracking]
+    const tHeader = checkpoints.header[activeTrackingIndex]
     const courier = tHeader ? tHeader.courier.prettyname : query.courier
     return `${translate('delivery', query.lang.name)} ${tHeader.tracking_number} (${courier})`
   } catch (e) {

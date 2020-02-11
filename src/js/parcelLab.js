@@ -88,7 +88,8 @@ class ParcelLab {
     const initialState = {
       query: this.getProps(),
       options: this.options,
-      activeTracking: 0,
+      activeTrackingIndex: 0,
+      mobileTrackingsOpen: [],
       comingFromSearch: this.comingFromSearch
     }
 
@@ -273,8 +274,9 @@ class ParcelLab {
             this.__cphash = this._generateCPhash(res)
             let checkpoints = res || {}
             checkpoints = this.sortCheckpoints(checkpoints)
-            const activeTracking = this.findSelectedTrackingIndex(checkpoints)
-            this.store.set({ checkpoints, activeTracking })
+            const dektopTrackingOpenIndex = this.findSelectedTrackingIndex(checkpoints)
+            const mobileTrackingsOpen = (checkpoints.header && checkpoints.header.length === 1) ? [checkpoints.header[0].id] : []
+            this.store.set({ checkpoints, dektopTrackingOpenIndex, mobileTrackingsOpen })
             this.store.emit('fetchActionBoxData')
           }
         }
@@ -343,22 +345,34 @@ class ParcelLab {
       })
     })
 
-    this.store.on('setActiveTracking', id => {
+    this.store.on('toggleDesktopTracking', id => {
       const state = this.store.get()
       state.checkpoints.header.forEach((cph, ind) => {
-        if (cph.id === id) state.activeTracking = ind
+        if (cph.id === id) state.activeTrackingIndex = ind
       })
-      state.showAllCheckpoints = false
-      state.showAllArticles = false
       store.set(state)
     })
 
-    this.store.on('showAllCheckpoints', () => {
-      this.store.set({ showAllCheckpoints: true })
+    this.store.on('toggleMobileTracking', id => {
+      const state = this.store.get()
+      if (state.mobileTrackingsOpen.indexOf(id) >= 0) {
+        state.mobileTrackingsOpen = state.mobileTrackingsOpen.filter(oid => oid !== id)
+      } else {
+        state.mobileTrackingsOpen = [...state.mobileTrackingsOpen, id]
+      }
+      this.store.set(state)
     })
 
-    this.store.on('showAllArticles', () => {
-      this.store.set({ showAllArticles: true })
+    this.store.on('showAllCheckpoints', id => {
+      this.store.set({ showAllCheckpoints: true })
+      const state = this.store.get()
+      state.checkpoints.header = state.checkpoints.header.map(cph => {
+        if (cph.id === id) {
+          cph.showAllCheckpoints = true
+        }
+        return cph
+      })
+      this.store.set(state)
     })
 
     this.store.on('voteCourier', (v, tid) => {
@@ -424,8 +438,6 @@ class ParcelLab {
     // fetch latest ig post served by our api
     this.store.on('fetchInstagram', () => {
       Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err, res) => {
-        console.log('RES', { res })
-        // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
 
         if (res && res.Item && res.Item.posts && res.Item.posts.length > 0) {
@@ -504,7 +516,7 @@ class ParcelLab {
           const layoutHeight = heighestBoxHeight > defaultHeight
             ? heighestBoxHeight
             : defaultHeight
-          console.log('H:', layoutHeight)
+
           setHeight(left, layoutHeight)
           setHeight(center, layoutHeight)
           if (right) setHeight(right, layoutHeight)
