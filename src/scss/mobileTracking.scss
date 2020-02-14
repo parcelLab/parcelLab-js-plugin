@@ -14,23 +14,26 @@
   }
   &-heading {
     padding: 15px;
+    position: relative;
     &-statusicon {
-      width:20%;
-      float: left;
       transition: all .2s linear;
+      position: absolute;
+      top: 17px;
+      left: 10px;
     }
     &-toggleicon {
-      width:10%;
-      float: left;
       transition: all .2s linear;
+      position: absolute;
+      top: 20px;
+      right: 10px;
       img {
+        transition: all .2s linear;
         transform: rotate(45deg);
       }
     }
     &-text {
-      padding-top: 4;
-      float: left;
-      width:70%;
+      padding-right: 25px;
+      padding-left: 30px;
       &-tno, &-status {
         white-space: nowrap;
         width: 100%;

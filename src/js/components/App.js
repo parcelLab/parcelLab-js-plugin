@@ -1,4 +1,5 @@
 const html = require('nanohtml')
+const raw = require('nanohtml/raw')
 const MobileApp = require('./mobile')
 const Header = require('./Header')
 const ActionBox = require('./actionbox')
@@ -14,15 +15,14 @@ const Loading = require('./Loading')
 const StyleSet = require('./StyleSet')
 const { getActiveTracking } = require('../lib/helpers')
 
-const createLayout = styleSet => content => html`
+const Layout = content => html`
   <div id="pl-plugin-wrapper">
-    ${styleSet}
+    ${StyleSet()}
     ${content}
-  </div>`
+  </div>
+`
 
 const App = (state, emit) => {
-  const Layout = createLayout(StyleSet())
-
   // fetch failed
   if (state.query_err || state.fetchCheckpoints_failed) {
     const errApp = []
@@ -60,6 +60,17 @@ const App = (state, emit) => {
     rightElement = ArticleBox(activeTracking, state, emit)
   }
 
+  const layoutHeightStyle = `
+    <style>
+      @media (min-width: 750px) {
+        .parcellab-styles .pl-layout-left > .pl-box,
+        .parcellab-styles .pl-layout-center > .pl-box,
+        .parcellab-styles .pl-layout-right > .pl-box.pl-instagram-box {
+          height: ${state._layoutHeight ? state._layoutHeight + 'px' : 'auto'};
+        }
+      }
+    </style>
+  `
   const app = html`
     <div class="pl-layout-wrapper">
       ${note}
@@ -67,7 +78,7 @@ const App = (state, emit) => {
       ${header}
 
       ${MobileApp(state, emit)}
-
+      ${raw(layoutHeightStyle)}
       <div class="pl-layout pl-layout-desktop">
         <div  class="pl-layout-left">
           ${actionBox}

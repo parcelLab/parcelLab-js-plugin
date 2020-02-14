@@ -24,7 +24,9 @@ module.exports = function Default (tHeader, { options, slot }) {
       </div>
 
       <div class="pl-box-footer">
-        ${raw(statusDetails)}
+        <div class="pl-status-details">
+          ${raw(statusDetails)}
+        </div>
         ${slot ? html`
         <div class="pl-space-top">
           ${slot}

@@ -25,16 +25,11 @@ const Tab = (tab, emit, state) => {
 
   // const iconColor = window.parcelLab_styles.tabIconColor || window.parcelLab_styles.buttonColor
   const iconColor = window.parcelLab_styles.tabIconColor || window.parcelLab_styles.buttonColor
-  const statusIcon = Icon(tab.iconName, iconColor, '35')
-  statusIcon.style.display = 'inline-block'
-  statusIcon.style.marginRight = '5px'
+  const statusIcon = Icon(tab.iconName, iconColor, '27')
   statusIcon.style.opacity = '.7'
 
   const toggleIcon = Icon('times', iconColor, '20')
-  toggleIcon.style.float = 'right'
-  toggleIcon.style.transition = 'all .2s linear'
   toggleIcon.style.opacity = '.6'
-  toggleIcon.style.marginTop = '7px'
 
   const body = [
     ActionBox(currentTracking, state, emit),

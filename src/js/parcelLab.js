@@ -474,6 +474,13 @@ class ParcelLab {
         }
       })
     })
+
+    this.store.on('setLayoutHeight', px => {
+      const { _layoutHeight } = store.get()
+      if (px && px !== _layoutHeight) {
+        this.store.set({ _layoutHeight: px })
+      }
+    })
   }
 
   _generateCPhash (obj = {}) {
@@ -488,47 +495,27 @@ class ParcelLab {
     const elemHeight = elem => {
       return elem.scrollHeight + (borderWidth * 2)
     }
-    const setHeight = (elem, height) => {
-      const prop = `${height}px`
-      if (elem.style.height !== prop) {
-        elem.style.height = prop
-      }
-    }
-    const unsetHeight = elem => {
-      if (elem.style.height) {
-        elem.style.height = null
-      }
-    }
+
     const computeLayoutHeight = () => {
       const defaultHeight = 550
       const left = document.querySelector('.pl-layout-left > .pl-box')
       const center = document.querySelector('.pl-layout-center > .pl-box')
       const right = document.querySelector('.pl-layout-right > .pl-box')
       if (left && center) {
-        if (window.innerWidth >= 750) {
-        // set boxes to same fixed height on desktop
-          const leftHeight = elemHeight(left)
-          const rightHeight = right ? elemHeight(right) : null
+        const leftHeight = elemHeight(left)
+        const rightHeight = right ? elemHeight(right) : null
 
-          const heighestBoxHeight = (right && right.classList.contains('pl-instagram-box') && rightHeight > leftHeight)
-            ? rightHeight
-            : leftHeight
-          const layoutHeight = heighestBoxHeight > defaultHeight
-            ? heighestBoxHeight
-            : defaultHeight
+        const heighestBoxHeight = (right && right.classList.contains('pl-instagram-box') && rightHeight > leftHeight)
+          ? rightHeight
+          : leftHeight
+        const layoutHeight = heighestBoxHeight > defaultHeight
+          ? heighestBoxHeight
+          : defaultHeight
 
-          setHeight(left, layoutHeight)
-          setHeight(center, layoutHeight)
-          if (right) setHeight(right, layoutHeight)
-        } else {
-          // unset fixed box height on mobile
-          unsetHeight(left)
-          unsetHeight(center)
-          if (right) unsetHeight(right)
-        }
+        this.store.emit('setLayoutHeight', layoutHeight)
       }
     }
-    setInterval(computeLayoutHeight, 300)
+    setInterval(computeLayoutHeight, 600)
   }
 }
 

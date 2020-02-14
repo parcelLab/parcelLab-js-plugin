@@ -96,11 +96,11 @@
   padding:0;
   box-sizing: border-box;
   .pl-box-heading {
-    font-size: 1.5em;
+    font-size: 1.4em;
     padding: 25px;
     text-align: center;
     @media(max-width: 1000px) {
-      font-size: 1.3em;
+      font-size: 1.2em;
     }    
   }
   .pl-box-body {
@@ -248,7 +248,7 @@ textarea.pl-form-input {
     position: absolute;
     top: 15px;
     right: 5px;
-    font-size: 20px;
+    font-size: 1.4em;
     color: #d3d3d3;
     transition: all .2s linear;
     &:hover {
@@ -258,7 +258,7 @@ textarea.pl-form-input {
   }
   .pl-note-close-text {
     position:absolute;
-    font-size: 10px;
+    font-size: 0.7em;
     bottom: 2px;
     left: 0px;
     color: #d3d3d3;
@@ -312,7 +312,7 @@ textarea.pl-form-input {
 
 .pl-box-articles {
   .pl-box-title {
-    font-size: 1.5em;
+    font-size: 1.4em;
     padding: 0 25px 25px;
     text-align: center;
   }
@@ -347,7 +347,7 @@ textarea.pl-form-input {
           margin-right: 5px;
           // font-weight: lighter;
           opacity: .6;
-          font-size: .8rem;
+          font-size: .7em;
           display: block;
           max-width: 100%;
           overflow: hidden;
@@ -356,7 +356,7 @@ textarea.pl-form-input {
   
         span.pl-article-quantity {
           opacity: .6;
-          font-size: .8rem;
+          font-size: .7em;
           margin-right: 5px;
         }
   
@@ -373,7 +373,7 @@ textarea.pl-form-input {
 
 .pl-instagram-box {
   font: 'San Francisco', Helvetica, Arial, san-serif;
-  font-size: 14px;
+  font-size: 1em;
   .pl-box-heading {
     font-size: 1em;
     padding: 15px;
@@ -397,7 +397,7 @@ a#pl-courier-fwd-link, a#pl-courier-fwd-link:visited, a#pl-courier-fwd-link:hove
   color: rgb(171, 171, 171);
   text-decoration: none;
   & > .pl-courier-fwd-link-content {
-    font-size: .8em;
+    font-size: .7em;
     margin-top: 30px;
   }
 }

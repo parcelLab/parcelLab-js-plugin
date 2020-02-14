@@ -14,15 +14,15 @@ div.pl-checkpoint {
     border-bottom: 1px dashed #eee;  
   }
   .pl-checkpoint-date {
-    font-size: .8em;
+    font-size: .7em;
     opacity: .6;
   }
   
   &:first-of-type > .pl-checkpoint-status {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }  
   &:first-of-type > .pl-checkpoint-details {
-    font-size: 1.3em;
+    font-size: 1.2em;
   }  
 }
 
