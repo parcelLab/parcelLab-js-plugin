@@ -297,16 +297,16 @@ textarea.pl-form-input {
 }
 
 .pl-box-address {
+  font-size: 1.2em;
+  text-align: left;
   .pl-box-address-caption {
-    font-weight: bold;
-    margin-top: 0px;
+    // font-weight: bold;
+    opacity: .6;
   }
 
   address {
-    font-style: normal;
-    p {
-      margin: 0;
-    }
+    // font-style: normal;
+    margin: 0;
   }
 }
 

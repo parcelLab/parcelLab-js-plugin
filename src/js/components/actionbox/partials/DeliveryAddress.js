@@ -19,19 +19,18 @@ module.exports = function DeliveryAddress (tHeader, { lang }) {
   if (info && info.street && info.zip_code && info.city) {
     const address = Address(info)
 
-    const icon = Icon('map', 0, '18')
-    icon.style.display = 'inline-block'
-    icon.style.opacity = '.7'
-    icon.style.verticalAlign = 'middle'
+    // const icon = Icon('map', 0, '18')
+    // icon.style.display = 'inline-block'
+    // icon.style.opacity = '.7'
+    // icon.style.verticalAlign = 'middle'
 
     return [
-      html`<hr>`,
       html`
         <div class="pl-box-address">
-            <p class="pl-box-address-caption">
-              ${icon} ${translate('deliveryAddress', lang.name)}
-            </p>
-            ${address}
+          <div class="pl-box-address-caption">
+            ${translate('deliveryAddress', lang.name)}
+          </div>
+          ${address}
         </div>
       `
     ]
