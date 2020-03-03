@@ -92,6 +92,9 @@ class ParcelLab {
     if (this.getUrlQuery('icon_theme'))
       this.options.theme = this.getUrlQuery('icon_theme')
 
+    if (this.getUrlQuery('forceZip'))
+      this.options.forceZip = this.getUrlQuery('forceZip')
+
     this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
 
 
@@ -281,6 +284,7 @@ class ParcelLab {
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
       Api.getCheckpoints(this.store.get().query, (err, res) => {
+        this.store.set({ apiLoading: false })
         if (err) {
           this.store.set({ fetchCheckpoints_failed: err })
           if (err === 404) store.emit('fetchCourierTrackingUrl')
@@ -311,15 +315,15 @@ class ParcelLab {
       if (checkpoints && checkpoints.header && checkpoints.header.length > 0) {
         checkpoints.header.forEach(cph => {
           const { actionBox } = cph
-
+          if (!actionBox) return null
           if (actionBox.type === 'pickup-location') {
-            store.emit('fetchPickupLocation', cph.id)
+            this.store.emit('fetchPickupLocation', cph.id)
           }
           if (actionBox.type === 'prediction') {
-            store.emit('fetchPrediction', cph.id)
+            this.store.emit('fetchPrediction', cph.id)
           }
           if (actionBox.type === 'live-tracking-map') {
-            store.emit('fetchLiveTrackingCoordinates', cph.id)
+            this.store.emit('fetchLiveTrackingCoordinates', cph.id)
           }
         })
       }
@@ -486,6 +490,32 @@ class ParcelLab {
           this.store.set(state)
         }
       })
+    })
+
+    this.store.on('setZipCode', zip => {
+      this.store.set({ apiLoading: true })
+      const { query } = store.get()
+      query.zip = zip
+      // this changes the browser url to contain zip
+      if (window.history.replaceState) {
+        let url = window.location.href
+        let splitter = null
+        ;['&zip=', '?zip='].forEach(sp => {
+          if (url.indexOf(sp) >= 0) splitter = sp
+        })
+        if (splitter) {
+          let [preZip, restUrl] = url.split(splitter)
+          restUrl = restUrl.indexOf('&') >= 0 ? restUrl.substring(restUrl.indexOf('&')) : ''
+          url = [preZip, `${splitter}${zip}`, restUrl].join('')
+        } else {
+          let toAppend = `zip=${zip}`
+          if (url[url.length - 1] !== '&') toAppend = '&' + toAppend
+          url = url + toAppend
+        }
+        window.history.replaceState(null, document.title, url)
+      }
+      this.store.set({ query })
+      this.store.emit('fetchCheckpoints')
     })
   }
 

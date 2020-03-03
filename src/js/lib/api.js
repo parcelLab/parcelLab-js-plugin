@@ -144,6 +144,7 @@ function _objToQueryArr(propsObj) {
   const result = []
   if (propsObj.id) {
     result.push({ name: 'id', value: propsObj.id })
+    if (propsObj.zip) result.push({ name: 'zip', value: propsObj.zip })
   } else if (propsObj.trackingNo) {
     // query for checkpoints by trackingNo
     if (propsObj.trackingNo) result.push({ name: 'trackingNo', value: propsObj.trackingNo })

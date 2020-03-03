@@ -522,3 +522,35 @@ h3 {
   75% {opacity:1;}
 	100% {opacity:1;box-shadow: 0 0 0px 1rem rgba(255, 0, 0, 0); }
 }
+
+.pl-box-zip-input {
+  background-color: #0051BA;color: #fff;
+  .pl-box-zip-input-info {
+    // font-size:18px;
+    // margin-bottom:20px;
+  }
+  #pl-force-zip-input {
+    // height:50px;
+    background-color:#f5f5f5;
+    padding-right: 44px;
+    // font-size:21px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    &:focus, &:active {
+      outline: none;
+    }
+  }
+  .pl-force-zip-input-submit {
+    position:absolute;
+    top:21px;
+    right:5px;
+    width: 30px;
+    cursor:pointer;
+  }
+  .pl-sk-three-bounce {
+    margin: 30px auto 15px;
+    .pl-sk-child {
+      background-color: #fff;
+      opacity: .5;
+    }
+  }
+}
