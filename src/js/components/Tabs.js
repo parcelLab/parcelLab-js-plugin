@@ -26,7 +26,7 @@ const Tabs = ({ checkpoints, activeTrackingIndex, query, options }, emit) => {
   })
 
   return html`
-    <div class="pl-split-order pl-clearfix">
+    <div class="pl-split-order pl-space-top pl-clearfix">
       ${tabs}
     </div>
   `

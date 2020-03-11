@@ -1,5 +1,7 @@
 #pl-show-more-button {
-  color:#aaa;
+  padding: 0;
+  text-align: left;
+  // color:#aaa;
   background-color: transparent;
   &:focus {
     outline: 0;
@@ -14,16 +16,17 @@ div.pl-checkpoint {
     border-bottom: 1px dashed #eee;  
   }
   .pl-checkpoint-date {
-    font-size: .7em;
-    opacity: .6;
+    font-size: .8em;
+    opacity: .7;
   }
-  
-  &:first-of-type > .pl-checkpoint-status {
-    font-size: 1.4em;
-  }  
-  &:first-of-type > .pl-checkpoint-details {
-    font-size: 1.2em;
-  }  
+  // @media (min-width: 749px) {
+  //   &:first-of-type > .pl-checkpoint-status {
+  //     font-size: 1.2em;
+  //   }  
+  //   &:first-of-type > .pl-checkpoint-details {
+  //     font-size: 1.2em;
+  //   }  
+  // }
 }
 
 // hide checkpoints on mobile
@@ -50,7 +53,7 @@ div.pl-alert {
     border-color: #ebccd1;
   }
   small {
-    opacity: .6;
+    opacity: .7;
   }
 }
 

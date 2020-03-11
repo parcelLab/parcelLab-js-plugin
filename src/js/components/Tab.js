@@ -25,7 +25,7 @@ const Tab = (tab, emit) => {
 
   return html`
     <div class="pl-split-order-entry-wrap ${tab.active ? 'pl-split-order-entry-wrap-active' : ''}">
-    <div class="pl-button pl-split-order-entry pl-split-order-entry-${tab.active ? 'active' : 'not-active'}" onclick="${handleClick}">
+    <div class="pl-box pl-split-order-entry pl-split-order-entry-${tab.active ? 'active' : 'not-active'}" onclick="${handleClick}">
       <div class="pl-split-order-entry-icon">
         ${Icon(tab.iconName, iconColor, '35')}
       </div>

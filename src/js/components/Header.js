@@ -26,24 +26,19 @@ const Header = (state, emit) => {
     const orderStatsText = OrderStats(header)
 
     return html`
-      <div class="pl-box pl-space-bottom">
+      <div class="pl-space-bottom">
         <div class="pl-header">
-          <div class="pl-box-body">
-
-            <div class="pl-order-no">
-              ${translate('orderNo', query.lang.name)} ${query.orderNo}
-            </div>
-
-            <div class="pl-order-sub">
-              ${translate('containsOf', query.lang.name)} ${header.length} ${translate('deliveries', query.lang.name)}
-
-              ${orderStatsText ? `(${orderStatsText})` : null}
-            </div>
-
-
+          <div class="pl-order-no">
+            ${translate('orderNo', query.lang.name)} ${query.orderNo}
           </div>
+
+          <div class="pl-order-sub">
+            ${translate('containsOf', query.lang.name)} ${header.length} ${translate('deliveries', query.lang.name)}
+
+            ${orderStatsText ? `(${orderStatsText})` : null}
+          </div>
+
           ${tabs}
-        </div>
       </div>
     `
   } else if (!tabs && query.orderNo) {

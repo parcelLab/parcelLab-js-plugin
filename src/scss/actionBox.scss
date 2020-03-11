@@ -11,7 +11,7 @@
 }
 
 .pl-status-details {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .rating {
@@ -134,7 +134,7 @@ h3 {
     visibility: none;
     opacity: 0;
     transition: all .25s linear;
-    text-align: center;
+    // text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,21 +148,20 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  .pl-box-body {
+  .pl-box-body.pl-box-cal-body {
     text-align: center;
     position: relative;
     .pl-cal-week-day {
       font-weight: 200;
-      font-size: 1.4em;
+      font-size: 1.2em;
       color: #ff5959;
     }
     .pl-cal-day {
-      font-weight: bold;
       font-size: 5em;
     }
     .pl-cal-month {
       font-weight: 200;
-      font-size: 1.4em;
+      font-size: 1.2em;
     }
   }
 }
@@ -177,7 +176,7 @@ h3 {
 
 .pl-time-caption {
   color: #aaa;
-  font-size: .7em;
+  font-size: .8em;
 }
 
 
@@ -218,7 +217,7 @@ h3 {
     padding: 0 20px;
     font-size: 1.2em;
     .pl-closes-in {
-      opacity: .6;
+      opacity: .7;
     }
   }
 
@@ -239,7 +238,7 @@ h3 {
     &-weekday {
       width:55%;
       float: left;
-      opacity: .8;
+      opacity: .7;
     }
     &-hours {
       width: 45%;
@@ -253,7 +252,7 @@ h3 {
 }
 
 .pl-prediction-caption {
-  color: #aaa;
+  text-align: center;
   font-size: 1em;
 }
 
@@ -386,7 +385,7 @@ h3 {
       padding: 5px 15px;
       background-color: #d8d8d8;
       border-radius: 5px;
-      font-size: 1.4em;
+      font-size: 1.2em;
       border: 2px solid #c5c7c4;
     }
   }

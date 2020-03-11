@@ -65,7 +65,7 @@ const App = (state, emit) => {
       @media (min-width: 750px) {
         .parcellab-styles .pl-layout-left > .pl-box,
         .parcellab-styles .pl-layout-center > .pl-box,
-        .parcellab-styles .pl-layout-right > .pl-box.pl-instagram-box {
+        .parcellab-styles .pl-layout-right > .pl-box {
           height: ${state._layoutHeight ? state._layoutHeight + 'px' : 'auto'};
         }
       }

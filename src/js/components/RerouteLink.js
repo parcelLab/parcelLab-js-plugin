@@ -17,7 +17,7 @@ const RerouteLink = (courier) => {
         <div>
           ${courier.rerouteurl_label_short}
         </div>
-        <div style="font-size:10px;">
+        <div style="font-size:.8em;">
           ${courier.rerouteurl_label_info}
         </div>
       </a>

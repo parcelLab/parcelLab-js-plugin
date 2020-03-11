@@ -21,10 +21,6 @@ module.exports = function StyleSet () {
         background-color: ${window.parcelLab_styles.buttonBackground};
         color: ${window.parcelLab_styles.buttonColor};
       }
-      .parcellab-styles .pl-mobile-tracking-heading {
-        background-color: ${window.parcelLab_styles.buttonBackground};
-        color: ${window.parcelLab_styles.buttonColor};
-      }
       .parcellab-styles .pl-box-live-location .pl-live-map-footer {
         background-color: ${window.parcelLab_styles.liveMapBackground};
         color: ${window.parcelLab_styles.liveMapColor};

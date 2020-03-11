@@ -2,7 +2,7 @@ const html = require('nanohtml')
 const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
 const { getIconName } = require('../../lib/static')
-const { makeBig, animatePulse } = require('../../lib/helpers')
+const { makeBig } = require('../../lib/helpers')
 
 module.exports = function Default (tHeader, { options, slot }) {
   if (!tHeader || !tHeader.last_delivery_status) return null
@@ -11,7 +11,6 @@ module.exports = function Default (tHeader, { options, slot }) {
   const iconName = getIconName(code, theme)
   const icon = Icon(iconName, null, '80')
   makeBig(icon)
-  animatePulse(icon, 1)
 
   return html`
     <div class="pl-box pl-action-box pl-box-icon-status">
