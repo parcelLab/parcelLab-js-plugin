@@ -95,8 +95,12 @@ class ParcelLab {
     if (this.getUrlQuery('forceZip'))
       this.options.forceZip = this.getUrlQuery('forceZip')
 
-    this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
+    if (this.getUrlQuery('customCss')) {
+      this.options.customCssURL = this.getUrlQuery('customCss')
+      this.addCustomCss(this.options.customCssURL)
+    }
 
+    this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
 
     // set up store
     const queryOK = checkQuery(this.getProps())
@@ -525,6 +529,23 @@ class ParcelLab {
       return JSON.stringify({ header, body }).length
     }
     else return false
+  }
+
+  addCustomCss (url) {
+    const CSSID = 'pl-customcss'
+    const testRGX = /^https:\/\/cdn\.parcellab\.com\/.*\.css$/i
+    if (!testRGX.test(url)) return console.log('Custom CSS must be located on the parcelLab CDN.')
+
+    if (!document.getElementById(CSSID)) {
+      const head = document.getElementsByTagName('head')[0]
+      const newLink = document.createElement('link')
+      newLink.id = CSSID
+      newLink.rel = 'stylesheet'
+      newLink.type = 'text/css'
+      newLink.href = url
+      newLink.media = 'all'
+      head.appendChild(newLink)
+    }
   }
 }
 
