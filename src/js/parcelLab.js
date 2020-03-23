@@ -95,12 +95,13 @@ class ParcelLab {
     if (this.getUrlQuery('forceZip'))
       this.options.forceZip = this.getUrlQuery('forceZip')
 
-    if (this.getUrlQuery('customCss')) {
+    if (this.getUrlQuery('customCss'))
       this.options.customCssURL = this.getUrlQuery('customCss')
-      this.addCustomCss(this.options.customCssURL)
-    }
 
     this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
+
+    // add custom css if possible
+    if (this.options.customCssURL) this.addCustomCss(this.options.customCssURL)
 
     // set up store
     const queryOK = checkQuery(this.getProps())
