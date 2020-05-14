@@ -258,12 +258,16 @@ class ParcelLab {
 
   findSelectedTrackingIndex({ header }) {
     const { selectedTrackingNo } = this.options
+    let selectedTrackingIndex = 0
+
     if (selectedTrackingNo && header) {
       for (let i = 0; i < header.length; i++) {
         const elem = header[i]
-        if (elem.tracking_number === selectedTrackingNo) return i
+        if (elem.tracking_number === selectedTrackingNo) selectedTrackingIndex = i
       }
-    } else return 0
+    }
+
+    return selectedTrackingIndex
   }
 
   setupStore(store) {
