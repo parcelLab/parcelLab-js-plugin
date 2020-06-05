@@ -21,7 +21,7 @@ const ActionBox = ({ checkpoints, activeTracking, query, options, apiLoading }, 
 
     if (type === 'pickup-location' && tHeader.actionBox.data) {
       result = [
-        PickupLocation(tHeader, query.lang, emit),
+        PickupLocation(tHeader, query.lang, options.openingHoursWarning, emit),
         zipInput
       ]
     }

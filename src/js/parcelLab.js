@@ -98,6 +98,9 @@ class ParcelLab {
     if (this.getUrlQuery('customCss'))
       this.options.customCssURL = this.getUrlQuery('customCss')
 
+    if (this.getUrlQuery('openinghrs_warn'))
+      this.options.openingHoursWarning = this.getUrlQuery('openinghrs_warn')
+
     this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
 
     // add custom css if possible

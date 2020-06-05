@@ -296,6 +296,7 @@ const translations = {
     alwaysOpened: '24h opened',
     closesIn: 'Closes in about',
     opensIn: 'Opens in about',
+    openingHoursWarning: 'Opening hours may vary due to ###',
     error: {
       delivery: 'We have not yet received tracking data for your order.',
       search: 'Unfortunately, no information was found for this delivery.'
@@ -340,6 +341,7 @@ const translations = {
     alwaysOpened: 'Durchgehend geöffnet',
     closesIn: 'Schließt in ungefähr',
     opensIn: 'Öffnet in ungefähr',
+    openingHoursWarning: 'Öffnungszeiten können aufgrund von ### abweichen',
     error: {
       delivery: 'Zu dieser Bestellung liegen noch keine Sendungsdaten vor.',
       search: 'Leider liegen uns aktuell keine Sendungsdetails zu dieser Bestellung vor.'
@@ -384,6 +386,7 @@ const translations = {
     alwaysOpened: 'Abierto todo el día',
     closesIn: 'se cierra en',
     opensIn: 'abre en',
+    openingHoursWarning: 'Las horas de apertura pueden variar debido a ###',
     error: {
       delivery: 'Actualmente no hay de datos de envío disponibles para este pedido.',
       search: 'Desafortunadamente tu paquete no esta disponible.'
@@ -419,6 +422,7 @@ const translations = {
     alwaysOpened: 'Ouvert toute la journée',
     closesIn: 'ferme dans',
     opensIn: 'ouvre dans',
+    openingHoursWarning: 'Les heures d\'ouverture peuvent varier en raison de ###',
     error: {
       delivery: "Aucune information concernant l'expédition disponible pour cette commande.",
       search: "Malheureusement, ce numéro de colis ou de commande n'est pas valide."
@@ -454,6 +458,7 @@ const translations = {
     alwaysOpened: 'Aperto tutto il giorno',
     closesIn: 'chiude alle',
     opensIn: 'Apre alle',
+    openingHoursWarning: 'Gli orari di apertura possono variare a causa di ###',
     error: {
       delivery: 'Non ci sono ancora informazioni sulla spedizione di questo ordine.',
       search: 'Purtroppo non abbiamo dati per questa consegna.'
@@ -489,6 +494,7 @@ const translations = {
     alwaysOpened: 'De hele dag geopend',
     closesIn: 'Sluit over',
     opensIn: 'Opent over',
+    openingHoursWarning: 'De openingstijden kunnen variëren als gevolg van ###',
     error: {
       delivery: 'Voor deze bestelling zijn nog geen track & trace gegevens bekend',
       search: 'Helaas is de levering niet bekend.'
@@ -524,6 +530,7 @@ const translations = {
     alwaysOpened: 'Døgnåbent',
     closesIn: 'Lukker om',
     opensIn: 'Åbner om',
+    openingHoursWarning: 'Åbningstider kan variere på grund af ###',
     error: {
       delivery: 'Der findes endnu ingen leveringsinformationer til denne bestilling.',
       search: 'Beklageligvis er leveringen ikke tilgængelig.'
@@ -559,6 +566,7 @@ const translations = {
     alwaysOpened: 'Öppet hela dagen',
     closesIn: 'stänger om',
     opensIn: 'öppnas om',
+    openingHoursWarning: 'Öppettiderna kan variera beroende på ###',
     error: {
       delivery: 'Beställningen har ännu inte tilldelats något kollinummer.',
       search: 'Tyvärr är inte denna leverans tillgänglig.'
@@ -594,6 +602,7 @@ const translations = {
     alwaysOpened: 'Avoinna koko päivän',
     closesIn: 'sulkeutuu',
     opensIn: 'avautuu',
+    openingHoursWarning: 'Käyttötunnit voivat vaihdella ### : n takia',
     error: {
       delivery: 'Tästä tilauksesta ei ole vielä lähetystietoja.',
       search: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.'
@@ -629,6 +638,7 @@ const translations = {
     alwaysOpened: 'Åpent hele dagen',
     closesIn: 'stenger om',
     opensIn: 'åpner om',
+    openingHoursWarning: 'Driftstider kan variere på grunn av ###',
     error: {
       delivery: 'Vi har ennå ikke mottatt sendingsopplysninger tilknyttet denne bestillingen.',
       search: 'Dessverre er denne leveransen ikke tilgjengelig.'
@@ -664,6 +674,7 @@ const translations = {
     alwaysOpened: 'Aberto o dia inteiro',
     closesIn: 'fecha em',
     opensIn: 'abre em',
+    openingHoursWarning: 'O horário de funcionamento pode variar devido ao ###',
     error: {
       delivery: 'Infelizmente, esta entrega não está disponível.',
       search: 'Infelizmente, esta entrega não está disponível.'
@@ -699,6 +710,7 @@ const translations = {
     alwaysOpened: 'Otwarte bez przerw',
     closesIn: 'zamyka za',
     opensIn: 'otwiera za',
+    openingHoursWarning: 'Godziny pracy mogą się różnić ze względu na ###',
     error: {
       delivery: 'Nie wprowadzono jeszcze do systemu informacji o tej przesyłce.',
       search: 'Niestety, ta paczka nie znajduje się w systemie.'
@@ -734,6 +746,7 @@ const translations = {
     alwaysOpened: 'Deschis toată ziua',
     closesIn: 'Se închide în',
     opensIn: 'Se va deschide',
+    openingHoursWarning: 'Orele de funcționare pot varia din cauza ###',
     error: {
       delivery: 'Din păcate, această livrare nu este disponibil.',
       search: 'Din păcate, această livrare nu este disponibil.'
@@ -769,6 +782,7 @@ const translations = {
     alwaysOpened: 'Otevřeno 24 hod.',
     closesIn: 'Zavřeno od',
     opensIn: 'Otevřeno od',
+    openingHoursWarning: 'Provozní hodiny se mohou lišit v důsledku ###',
     error: {
       delivery: 'Je nám líto, ale tato zásilka není k dispozici.',
       search: 'Pro tuto zásilku nebyly nalezeny žádné informace.'
@@ -804,6 +818,7 @@ const translations = {
     alwaysOpened: 'Odprto vse skozi',
     closesIn: 'Zapre se približno čez',
     opensIn: 'Odpre se približno čez',
+    openingHoursWarning: 'Ure delovanja se zaradi ### lahko razlikujejo',
     error: {
       delivery: 'Za to naročilo še ni na voljo številke za sledenje.',
       search: 'Žal trenutni nimamo na voljo številke za sledenje za to naročilo.'
@@ -841,6 +856,7 @@ const translations = {
     alwaysOpened: 'Otvoreno cijeli dan',
     closesIn: 'Zatvara se otprilike u:',
     opensIn: 'Otvara se otprilike u:',
+    openingHoursWarning: 'Sati rada mogu varirati zbog ###',
     error: {
       delivery: 'Ova narudžba još nema broja za online pračenje pošiljke.',
       search: 'Nažalost, trenutno broj za online pračenje pošiljke nije dostupan.'
@@ -878,6 +894,7 @@ const translations = {
     alwaysOpened: 'Без почивен ден',
     closesIn: 'Затваря след около',
     opensIn: 'Отваря след около',
+    openingHoursWarning: 'Часовете на работа може да варират поради ###',
     error: {
       delivery: 'Все още няма данни за пратката към тази поръчка.',
       search: 'За съжаление, в момента още нямаме данни за пратката към тази поръчка.'
@@ -915,6 +932,7 @@ const translations = {
     alwaysOpened: 'Otvorené 24h',
     closesIn: 'Zatvára sa o',
     opensIn: 'Otvára sa o',
+    openingHoursWarning: 'Prevádzkové hodiny sa môžu líšiť v dôsledku ###',
     error: {
       delivery: 'Žiaľ doposiaľ sme neobdržali dáta na sledovanie Vašej objednávky.',
       search: 'Bohužiaľ, k zadanej objednávke neboli nájdené žiadne informacie.'
@@ -952,6 +970,7 @@ const translations = {
     alwaysOpened: 'Folyamatosan nyitva',
     closesIn: 'Zárás körübelül',
     opensIn: 'Nyitás körübelül',
+    openingHoursWarning: 'A működési idő a ### miatt változhat',
     error: {
       delivery: 'Ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.',
       search: 'Sajnos ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.'
