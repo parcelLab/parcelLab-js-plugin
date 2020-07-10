@@ -6,7 +6,7 @@ Integrate parcelLab to your shop frontend (or any webpage). This plugin will fet
 ## Integrate delivery status page
 
 ### Adding to your webpage
-Just place the following `<script>` snippet at the bottom of the `<body>` of your webpage.
+Just place the following snippet into the container you want the plugin to be rendered.
 
 ```html
 <div id="pl-trace"></div>
