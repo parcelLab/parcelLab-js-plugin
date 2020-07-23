@@ -16,7 +16,7 @@ module.exports = function ZipInput (tHeader, query, apiLoading, emit) {
     const infoText = translate('forceZip', lang.name)
     const zipPlaceholder = translate('zip', lang.name)
     const wrongZip = translate('wrongZip', lang.name)
-    const icon = html`<input type="image" src="https://icon.parcellab.com/circle_arrow_right?color=0051BA" alt="submit">`
+    const icon = html`<input type="image" src="https://icons.parcellab.com/circle_arrow_right?color=0051BA" alt="submit">`
     icon.classList.add('pl-force-zip-input-submit')
 
     const warning = (zip && !apiLoading) ? html`

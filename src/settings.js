@@ -1,6 +1,6 @@
 module.exports = {
   base_url: 'https://api.parcellab.com/',
-  icon_url: 'https://icon.parcellab.com/',
+  icon_url: 'https://icons.parcellab.com/',
   checkpoints_endpoint: 'v2/checkpoints',
   vote_endpoint: 'v2/vote-courier/',
   vote_communication_endpoint: 'v2/vote-communication/',
