@@ -12,7 +12,7 @@ const LiveTrackingMap = require('./LiveTrackingMap')
 
 const ActionBox = ({ checkpoints, activeTracking, query, options, apiLoading }, emit) => {
   const tHeader = checkpoints.header[activeTracking]
-  const containsPersonalData = !!tHeader.delivery_info
+  const containsPersonalData = !!(tHeader.delivery_info && tHeader.delivery_info.zip_code)
   const zipInput = (options.forceZip && !containsPersonalData) ? ZipInput(tHeader, query, apiLoading, emit) : null
 
   if (tHeader && tHeader.actionBox) {

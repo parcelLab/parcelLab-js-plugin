@@ -12,7 +12,7 @@ module.exports = function ZipInput (tHeader, query, apiLoading, emit) {
     if (input.value && input.value.length >= 3) emit('setZipCode', input.value)
   }
 
-  if (!deliveryInfo) {
+  if (!deliveryInfo || !deliveryInfo.zip_code) {
     const infoText = translate('forceZip', lang.name)
     const zipPlaceholder = translate('zip', lang.name)
     const wrongZip = translate('wrongZip', lang.name)
