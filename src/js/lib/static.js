@@ -271,6 +271,30 @@ const languages = {
     label: 'Magyar',
     code: 'HUN',
     icon: 'https://cdn.parcellab.com/img/flags/hu.png'
+  },
+  zh: {
+    name: 'zh',
+    label: '中文',
+    code: 'CHN',
+    icon: 'https://cdn.parcellab.com/img/flags/cn.png'
+  },
+  ko: {
+    name: 'ko',
+    label: '한국어',
+    code: 'KOR',
+    icon: 'https://cdn.parcellab.com/img/flags/kr.png'
+  },
+  tw: {
+    name: 'tw',
+    label: '台湾',
+    code: 'TWN',
+    icon: 'https://cdn.parcellab.com/img/flags/tw.png'
+  },
+  ja: {
+    name: 'ja',
+    label: '日本人',
+    code: 'JPN',
+    icon: 'https://cdn.parcellab.com/img/flags/jp.png'
   }
 }
 
@@ -986,6 +1010,146 @@ const translations = {
     liveDelivery: 'Élő követés',
     articleList: 'Ebben a csomagban található termékek',
     deliveryAddress: 'Szállítási cím'
+  },
+  zh: {
+    delivery: '配送',
+    more: '显示更多...',
+    orderNo: '订单',
+    predictions: {
+      OutForDelivery: '包裹将在今天<b></ b>到达。',
+      DestinationDeliveryCenter: '包裹将在明天<b></ b>到达。'
+    },
+    openingHours: '营业时间',
+    weekDays: [
+      '星期日',
+      '星期一',
+      '星期二',
+      '星期三',
+      '星期四',
+      '星期五',
+      '星期六'
+    ],
+    alwaysOpened: '24小时营业',
+    closesIn: '关闭大约在',
+    opensIn: '开始营业大约在',
+    error: {
+      delivery: '我们尚未收到您订单的跟踪数据。',
+      search: '很遗憾，我们找不到此次配送的信息。'
+    },
+    searchOrder: '搜索订单',
+    zip: '邮政编码',
+    search: '搜索',
+    containsOf: '由**组成',
+    deliveries: '配送',
+    showPickuplocation: '显示取货地点',
+    liveDelivery: '实时追踪',
+    articleList: '此包装中的文章',
+    deliveryAddress: '邮寄地址'
+  },
+  ko: {
+    delivery: '배송',
+    more: '추가',
+    orderNo: '주문 번호',
+    predictions: {
+      OutForDelivery: '소포는 <b>금일</b>. 도착예정입니다.',
+      DestinationDeliveryCenter: '소포는 <b>내일</b>. 도착 예정입니다.'
+    },
+    openingHours: '영업 시간',
+    weekDays: [
+      '일요일',
+      '월요일',
+      '화요일',
+      '수요일',
+      '목요일',
+      '금요일',
+      '토요일'
+    ],
+    alwaysOpened: '24시간 영업',
+    closesIn: '영업 종료',
+    opensIn: '영업 개시',
+    error: {
+      delivery: '고객님 배송 정보를 아직 받지 못했습니다.',
+      search: '안타깝게도 이 배송건에 관련된 정보가 확인되지 않습니다.'
+    },
+    searchOrder: '주문 검색',
+    zip: '우편번호',
+    search: '검색',
+    containsOf: '~로 구성되다',
+    deliveries: '배송',
+    showPickuplocation: '배송 픽업 장소 확인',
+    liveDelivery: '실시간 배송 조회',
+    articleList: '소포 내 항복',
+    deliveryAddress: '배송 주소'
+  },
+  tw: {
+    delivery: '配送',
+    more: '顯示更多...',
+    orderNo: '訂單',
+    predictions: {
+      OutForDelivery: '包裹將在今天<b></ b>到達。',
+      DestinationDeliveryCenter: '包裹將在明天<b></ b>到達。'
+    },
+    openingHours: '營業時間',
+    weekDays: [
+      '星期日',
+      '星期一',
+      '星期二',
+      '星期三',
+      '星期四',
+      '星期五',
+      '星期六'
+    ],
+    alwaysOpened: '24小時營業',
+    closesIn: '關閉大約在',
+    opensIn: '開始營業大約在',
+    error: {
+      delivery: '我們尚未收到您訂單的跟踪數據。',
+      search: '很遺憾，我們找不到此次配送的信息。'
+    },
+    searchOrder: '搜索訂單',
+    zip: '郵政編碼',
+    search: '搜索',
+    containsOf: '由**組成',
+    deliveries: '配送',
+    showPickuplocation: '顯示取貨地點',
+    liveDelivery: '實時追踪',
+    articleList: '此包裝中的文章',
+    deliveryAddress: '郵寄地址'
+  },
+  ja: {
+    delivery: '配達',
+    more: 'さらに表示する...',
+    orderNo: '注文',
+    predictions: {
+      OutForDelivery: '小包は<b>今日</ b>到着します。',
+      DestinationDeliveryCenter: '小包は<b>明日</ b>到着します。'
+    },
+    openingHours: '営業時間',
+    weekDays: [
+      '日曜日',
+      '月曜日',
+      '火曜日',
+      '水曜日',
+      '木曜日',
+      '金曜日',
+      '土曜日'
+    ],
+    alwaysOpened: '24時間営業',
+    closesIn: 'もうすぐ閉まります',
+    opensIn: 'もうすぐ開きます',
+    error: {
+      delivery: 'ご注文の追跡情報をまだ受け取っていません。',
+      search: '残念ながら、この配送に関する情報は見つかりませんでした。'
+    },
+    searchOrder: 'ご注文検索',
+    zip: '郵便番号',
+    search: '検索',
+    containsOf: 'からなる',
+    deliveries: '配送',
+    showPickuplocation: '受け取り場所を表示',
+    liveDelivery: 'ライブ追跡',
+    articleList: '小包の中の品物',
+    deliveryAddress: 'お届け先住所'
   }
 }
 
