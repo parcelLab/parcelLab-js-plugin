@@ -679,39 +679,39 @@ const translations = {
   },
   pt: {
     delivery: 'Entrega',
-    more: 'Ver mais...',
-    orderNo: 'Ordem',
+    more: 'Mostrar mais...',
+    orderNo: 'Encomenda',
     predictions: {
-      OutForDelivery: 'O pacote chegará hoje.',
-      DestinationDeliveryCenter: 'O pacote chegará amanhã.'
+      OutForDelivery: 'A encomenda chega <b>hoje</b>.',
+      DestinationDeliveryCenter: 'A encomenda chega <b>amanhã</b>.'
     },
-    openingHours: 'horário de funcionamento',
+    openingHours: 'Horário de abertura',
     weekDays: [
       'Domingo',
-      'Segunda-feira',
-      'Terça',
-      'quarta-feira',
-      'quinta-feira',
-      'Sexta-feira',
+      'Segunda feira',
+      'Terça feira',
+      'Quarta feira',
+      'Quinta feira',
+      'Sexta feira',
       'Sábado'
     ],
-    alwaysOpened: 'Aberto o dia inteiro',
-    closesIn: 'fecha em',
-    opensIn: 'abre em',
+    alwaysOpened: 'Aberto 24h',
+    closesIn: 'fecha dentro de',
+    opensIn: 'Abre dentro de ',
     openingHoursWarning: 'O horário de funcionamento pode variar devido ao ###',
     error: {
-      delivery: 'Infelizmente, esta entrega não está disponível.',
-      search: 'Infelizmente, esta entrega não está disponível.'
+      delivery: 'Não foram ainda recebidos os dados de rastreamento do seu pedido.',
+      search: 'Infelizmente, nenhuma informação foi encontrada para esta entrega.'
     },
-    searchOrder: 'ordem de pesquisa',
-    search: 'Pesquisa',
+    searchOrder: 'Procura de encomenda',
+    search: 'Procura',
     containsOf: 'consiste em',
     deliveries: 'entregas',
     enterZipCode: 'Digite seu CEP para obter acesso a todas as informações.',
     wrongZip: 'Este código postal está errado.',
-    showPickuplocation: 'Opsamlingssted',
-    articleList: 'Artigos neste pacote',
-    deliveryAddress: 'Endereço de entrega'
+    showPickuplocation: 'Mostrar local de recolha',
+    articleList: 'Artigos nesta encomenda',
+    deliveryAddress: 'Morada de entrega'
   },
   pl: {
     delivery: 'Dostawa',
