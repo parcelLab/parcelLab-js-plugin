@@ -10,6 +10,7 @@ const USER_ACTIVITY_ENDPOINT = _settings.user_activity_endpoint
 const COURIER_DEEPLINK_ENDPOINT = _settings.courier_deeplink_endpoint
 const ARTICLE_LIST_ENDPOINT = _settings.article_list_endpoint
 const LIVE_TRACKING_MAP_ENDPOINT = _settings.live_tracking_map_endpoint
+const BANNER_ENDPOINT = _settings.banner_endpoint
 
 // API calls for all the modules
 const status = {
@@ -207,6 +208,10 @@ exports.getArticleList = function (propsObj, callback) {
 
 exports.getLiveTrackingCoordinates = function (propsObj, callback) {
   _get(_toURL(BASE_URL, LIVE_TRACKING_MAP_ENDPOINT, _objToQueryArr(propsObj)), callback)
+}
+
+exports.getBanner = function (propsObj, callback) {
+  _get(_toURL(BASE_URL, BANNER_ENDPOINT, _objToQueryArr(propsObj)), callback)
 }
 
 exports.voteCourier = function (vote, propsObj, callback) {

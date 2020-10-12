@@ -10,7 +10,7 @@ const _settings = require('../settings')
 
 // settings
 const DEFAULT_ROOT_NODE = _settings.default_root_node
-const DEFAULT_OPTS = _settings.defualt_opts
+const DEFAULT_OPTS = _settings.default_opts
 
 /**
  * {class} ParcelLab

@@ -12,11 +12,12 @@ module.exports = {
   static_map_endpoint: 'staticmap/livetracking',
   article_list_endpoint: 'article-list',
   live_tracking_map_endpoint: 'courier/tour/coordinates',
+  banner_endpoint: 'banner',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
   google_api_key: require('./GOOGLE_API_KEY').key,
   mapShortenAddressForCouriers: ['ups-express', 'ups'],
-  defualt_opts: {
+  default_opts: {
     styles: true,
     show_searchForm: false,
     show_zipCodeInput: false,

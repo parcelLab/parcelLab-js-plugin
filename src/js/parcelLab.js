@@ -12,7 +12,7 @@ const _settings = require('../settings')
 
 // settings^
 const DEFAULT_ROOT_NODE = _settings.default_root_node
-const DEFAULT_OPTS = _settings.defualt_opts
+const DEFAULT_OPTS = _settings.default_opts
 const DEFAULT_STYLES = _settings.default_styles
 
 /**
@@ -71,10 +71,13 @@ class ParcelLab {
     if (this.getUrlQuery('animateTruck'))
       this.options.animateTruck = true
 
-    if (this.getUrlQuery('banner_image'))
+    if (this.getUrlQuery('banner'))
+      this.options.banner = this.getUrlQuery('banner')
+
+/*     if (this.getUrlQuery('banner_image'))
       this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
     if (this.getUrlQuery('banner_link'))
-      this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link'))
+      this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link')) */
 
     if (this.getUrlQuery('pwrdBy_parcelLab'))
       this.options.disableBranding = true
@@ -128,8 +131,10 @@ class ParcelLab {
       store.emit('fetchCheckpoints')
 
       // instagram post integration
-      if (this.options.banner_image && this.options.banner_image === 'instagram') {
+      if (this.options.banner === 'instagram') {
         store.emit('fetchInstagram')
+      } else if (this.options.banner === 'true') {
+        store.emit('fetchBanner')
       } else if (this.options.show_articleList) {
         store.emit('fetchArticleList')
       }
@@ -473,10 +478,21 @@ class ParcelLab {
           state.options.instagram = res.Item
         } else { // log error and fail silently
           console.log('⚠️ failed to retrieve latest instagram post', err)
-          state.options.banner_image = null
+          state.options.banner = false
         }
 
         this.store.set(state)
+      })
+    })
+
+    this.store.on('fetchBanner', () => {
+      Api.getBanner(this.store.get().query, (err, res) => {
+        if (err) this.store.set({ fetchBanner_failed: err })
+        else if (res) {
+          const state = this.store.get()
+          state.Banner = res
+          this.store.set(state)
+        }
       })
     })
 

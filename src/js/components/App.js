@@ -52,9 +52,9 @@ const App = (state, emit) => {
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
   let banner = null 
-  if (state.options.banner_image === 'instagram' && state.options.instagram)
+  if (state.options.banner === 'instagram' && state.options.instagram)
     banner = InstagramPost(state)
-  else if (state.options.banner_image && state.options.banner_link)
+  else if (state.options.banner === 'true')
     banner = Banner(state)
   else if (state.options.show_articleList)
     banner = ArticleBox(state, emit)
