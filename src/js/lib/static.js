@@ -1150,6 +1150,49 @@ const translations = {
     liveDelivery: 'ライブ追跡',
     articleList: '小包の中の品物',
     deliveryAddress: 'お届け先住所'
+  },
+  tr: {
+    delivery: 'Teslimat',
+    more: 'Daha fazla göster…',
+    orderNo: 'Sipariş',
+    predictions: {
+      OutForDelivery: 'Teslimat <b>bugün</b> gönderilecek.',
+      DestinationDeliveryCenter: 'Teslimat <b>yarın</b> gönderilecek.'
+    },
+    openingHours: 'açılış saatleri',
+    openingHoursWarning: '',
+    weekDays: [
+      'Pazar',
+      'Pazartesi',
+      'Sali',
+      'Carsamba',
+      'Persembe',
+      'Cuma',
+      'Cumartesi'
+    ],
+    alwaysOpened: '24 saat acik',
+    closesIn: 'civarinda kapanir',
+    opensIn: 'civarinda acilir',
+    error: {
+      delivery: 'Siparişiniz için henüz takip verisi almadık.',
+      search: 'Maalesef bu teslimat için hiçbir bilgi bulunamadı.'
+    },
+    searchOrder: 'Sipariş ara',
+    zip: 'Posta kodu',
+    search: 'Ara',
+    containsOf: 'içerir',
+    deliveries: 'Iletimler',
+    showPickuplocation: 'Alma yerini göster',
+    liveDelivery: 'Canli takip et',
+    articleList: 'Paketin icindeki ürünler',
+    deliveryAddress: 'Iletim Adresi',
+    liveTrackingLastUpdate: '',
+    liveTrackingStationsNext: '',
+    liveTrackingStation: '',
+    liveTrackingStations: '',
+    liveTrackingCaption: '',
+    liveTrackingCaptionNext: '',
+    liveTrackingPrediction: ''
   }
 }
 
