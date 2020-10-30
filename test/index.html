@@ -26,6 +26,18 @@
         // userId: 22,
         onRendered: function (state) {
           console.log('rerendered!', state)
+
+          if (state.checkpoints && state.checkpoints.header) {
+            var currentTrackingHeader = state.checkpoints.header[state.activeTracking]
+            if (currentTrackingHeader.actionBox && currentTrackingHeader.actionBox.type === 'vote-courier') {
+              if (state.query.lang.name === 'de') {
+                document.querySelectorAll('#pl-action-box-container div.pl-vote div.pl-box-body b').forEach(function (elem) {
+                  elem.textContent = elem.textContent.replace('Waren Sie mit', 'Warst du mit')
+                })
+              }
+            }
+          }
+
         },
         // customTranslations: {
         //   de: {

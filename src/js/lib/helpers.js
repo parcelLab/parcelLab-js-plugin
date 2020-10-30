@@ -30,20 +30,20 @@ exports.makeBig = el => {
 }
 
 exports.checkUrl = function (url) {
-  const invalidProtocolRegex = /^(%20|\s)*(javascript|data|vbscript)/im;
-  const ctrlCharactersRegex = /[^\x20-\x7EÀ-ž]/gim;
-  const urlSchemeRegex = /^([^:]+):/gm;
+  const invalidProtocolRegex = /^(%20|\s)*(javascript|data|vbscript)/im
+  const ctrlCharactersRegex = /[^\x20-\x7EÀ-ž]/gim
+  const urlSchemeRegex = /^([^:]+):/gm
   if (!url) {
-    return false;
+    return false
   }
-  const sanitizedUrl = url.replace(ctrlCharactersRegex, "").trim();
-  const urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
+  const sanitizedUrl = url.replace(ctrlCharactersRegex, '').trim()
+  const urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex)
   if (!urlSchemeParseResults) {
-    return true;
+    return true
   }
-  const urlScheme = urlSchemeParseResults[0];
+  const urlScheme = urlSchemeParseResults[0]
   if (invalidProtocolRegex.test(urlScheme)) {
-    return false;
+    return false
   }
-  return true;
+  return true
 }
