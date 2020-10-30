@@ -5,7 +5,7 @@ const isInstagram = url => (url.indexOf('instagram') >= 0)
 
 module.exports = function Banner ({ options }) {
   if (!checkUrl(options.banner_link)) {
-    console.log('The banner image link does not contain a valid URL!')
+    console.error('⚠️ The banner image link does not contain a valid URL!')
     return null
   }
   if (options.image === 'instagram') return null
