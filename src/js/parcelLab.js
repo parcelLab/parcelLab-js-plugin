@@ -470,7 +470,7 @@ class ParcelLab {
     // fetch latest ig post served by our api
     this.store.on('fetchInstagram', () => {
       Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err, res) => {
-        console.log('RES', { res })
+        //console.log('RES', { res })
         // console.log('got instagram_api response: ', err, res)
         const state = this.store.get()
 
