@@ -295,6 +295,18 @@ const languages = {
     label: '日本人',
     code: 'JPN',
     icon: 'https://cdn.parcellab.com/img/flags/jp.png'
+  },
+  ru: {
+    name: 'ru',
+    label: 'русский',
+    code: 'RUS',
+    icon: 'https://cdn.parcellab.com/img/flags/ru.png'
+  },
+  tr: {
+    name: 'tr',
+    label: 'Türkçe',
+    code: 'TUR',
+    icon: 'https://cdn.parcellab.com/img/flags/tr.png'
   }
 }
 
