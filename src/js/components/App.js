@@ -54,7 +54,7 @@ const App = (state, emit) => {
   let banner = null 
   if (state.options.banner === 'instagram' && state.options.instagram)
     banner = InstagramPost(state)
-  else if (state.options.banner === 'true')
+  else if (state.options.banner === 'true' && state.Banner)
     banner = Banner(state)
   else if (state.options.show_articleList)
     banner = ArticleBox(state, emit)

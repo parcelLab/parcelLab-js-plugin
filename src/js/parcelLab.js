@@ -487,7 +487,7 @@ class ParcelLab {
 
     this.store.on('fetchBanner', () => {
       Api.getBanner(this.store.get().query, (err, res) => {
-        if (err) this.store.set({ fetchBanner_failed: err })
+        if (err) this.store.get().options.banner = false
         else if (res) {
           const state = this.store.get()
           state.Banner = res
