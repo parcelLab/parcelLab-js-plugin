@@ -1,5 +1,6 @@
 const html = require('nanohtml')
 const Icon = require('../Icon')
+const raw = require('nanohtml/raw')
 
 const NextAction = ({ actionBox, last_delivery_status }) => {
   const { status, status_details } = last_delivery_status
@@ -20,7 +21,7 @@ const NextAction = ({ actionBox, last_delivery_status }) => {
       </div>
 
       <div class="pl-box-footer">
-        <div>${ details }</div>
+        <div>${ raw(details) }</div>
       </div>
     </div>
   `
