@@ -205,8 +205,11 @@ After adding the script, there will be a new `ParcelLabPrediction` class in the 
 ```
 
 ## For developers
+
+You will need GOOGLE_API_KEY for running the application locally. Andrej Fritz can provide it to you.
 ### Develop
 ```bash  
+$ npm install
 $ npm run start
 ```
 
