@@ -3,23 +3,33 @@ const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator.js')
 
-const Address = (delivery_info) => {
+const Address = (deliveryInfo, options) => {
   return html`
     <address>
-      ${delivery_info.recipient ? html`<p>${delivery_info.recipient}</p>` : ''}
-      <p>${raw(delivery_info.street)}</p>
+      ${deliveryInfo.recipient
+        ? html`
+            <p>${deliveryInfo.recipient}</p>
+          `
+        : ''}
+      <p>${raw(deliveryInfo.street)}</p>
       <p>
-        ${delivery_info.destination_country_iso3 || ''} ${delivery_info.zip_code} ${raw(delivery_info.city)}
+        ${(options.show_destinationCountryCode && deliveryInfo.destination_country_iso3) || ''}
+        ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
       </p>
     </address>
   `
 }
 
-module.exports = function DeliveryAddress(tHeader, lang) {
-  const { delivery_info } = tHeader
+module.exports = function DeliveryAddress (tHeader, lang, options) {
+  const { delivery_info: deliveryInfo } = tHeader
 
-  if (delivery_info && delivery_info.street && delivery_info.zip_code && delivery_info.city) {
-    const address = Address(delivery_info)
+  if (
+    deliveryInfo &&
+    deliveryInfo.street &&
+    deliveryInfo.zip_code &&
+    deliveryInfo.city
+  ) {
+    const address = Address(deliveryInfo, options)
 
     const icon = Icon('map', 0, '18')
     icon.style.display = 'inline-block'
@@ -27,15 +37,15 @@ module.exports = function DeliveryAddress(tHeader, lang) {
     icon.style.verticalAlign = 'middle'
 
     return html`
-    <div class="pl-box pl-action-box pl-box-address pl-space-top">
-      <div class="pl-box-body">
-        <p class="pl-box-address-caption">
-          ${ icon } ${ translate('deliveryAddress', lang.name)}
-        </p>
-        ${ address }
+      <div class="pl-box pl-action-box pl-box-address pl-space-top">
+        <div class="pl-box-body">
+          <p class="pl-box-address-caption">
+            ${icon} ${translate('deliveryAddress', lang.name)}
+          </p>
+          ${address}
+        </div>
       </div>
-    </div>
-  `
+    `
   } else {
     return ''
   }

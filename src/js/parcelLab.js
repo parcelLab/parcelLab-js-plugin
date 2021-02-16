@@ -21,7 +21,7 @@ const DEFAULT_STYLES = _settings.default_styles
  * ~> https://github.com/parcelLab/parcelLab-js-plugin
  */
 class ParcelLab {
-  constructor(rootNodeQuery, opts) {
+  constructor (rootNodeQuery, opts) {
     if (!rootNodeQuery) rootNodeQuery = DEFAULT_ROOT_NODE
     if (rootNodeQuery && typeof rootNodeQuery === 'string') {
       if (document.querySelector(rootNodeQuery)) {
@@ -34,22 +34,37 @@ class ParcelLab {
     }
   }
 
-  ///////////////////////
+  /// ////////////////////
   // Instance methods //
-  //////////////////////
+  /// ///////////////////
 
-  initialize() {
+  initialize () {
     this.orderNo = this.getUrlQuery('orderNo') || this.options.orderNo
     this.xid = this.getUrlQuery('xid') || this.options.xid
-    this.trackingNo = this.getUrlQuery('trackingNo') || this.getUrlQuery('tno') || this.options.trackingNo
-    this.courier = this.getUrlQuery('courier') || this.getUrlQuery('c') || this.options.courier
-    this.userId = this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
-    this.secureHash = this.getUrlQuery('s') || this.getUrlQuery('secureHash') || this.options.secureHash
-    this.client = this.getUrlQuery('client') || this.getUrlQuery('shop') || this.options.secureHash
+    this.trackingNo =
+      this.getUrlQuery('trackingNo') ||
+      this.getUrlQuery('tno') ||
+      this.options.trackingNo
+    this.courier =
+      this.getUrlQuery('courier') ||
+      this.getUrlQuery('c') ||
+      this.options.courier
+    this.userId =
+      this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
+    this.secureHash =
+      this.getUrlQuery('s') ||
+      this.getUrlQuery('secureHash') ||
+      this.options.secureHash
+    this.client =
+      this.getUrlQuery('client') ||
+      this.getUrlQuery('shop') ||
+      this.options.secureHash
     this.zip = this.getUrlQuery('zip') || this.options.zip
 
     // get note fron url
-    this.options.show_note = this.getUrlQuery('show_note') ? window.decodeURIComponent(this.getUrlQuery('show_note')) : (this.options.show_note || null)
+    this.options.show_note = this.getUrlQuery('show_note')
+      ? window.decodeURIComponent(this.getUrlQuery('show_note'))
+      : this.options.show_note || null
 
     this.initLanguage()
 
@@ -58,50 +73,78 @@ class ParcelLab {
       this.setGlobalStyles(this.options.customStyles)
     }
 
-    if (this.getUrlQuery('selectedTrackingNo'))
+    if (this.getUrlQuery('selectedTrackingNo')) {
       this.options.selectedTrackingNo = this.getUrlQuery('selectedTrackingNo')
+    }
 
-    if (this.getUrlQuery('show_searchForm'))
+    if (this.getUrlQuery('show_searchForm')) {
       this.options.show_searchForm = this.getUrlQuery('show_searchForm')
-    if (this.getUrlQuery('show_zipCodeInput'))
+    }
+    if (this.getUrlQuery('show_zipCodeInput')) {
       this.options.show_zipCodeInput = this.getUrlQuery('show_zipCodeInput')
-    if (this.getUrlQuery('rerouteButton'))
+    }
+    if (this.getUrlQuery('rerouteButton')) {
       this.options.rerouteButton = this.getUrlQuery('rerouteButton')
+    }
 
-    if (this.getUrlQuery('animateTruck'))
+    if (this.getUrlQuery('animateTruck')) {
       this.options.animateTruck = true
+    }
 
-    if (this.getUrlQuery('banner_image'))
-      this.options.banner_image = decodeURIComponent(this.getUrlQuery('banner_image'))
-    if (this.getUrlQuery('banner_link'))
-      this.options.banner_link = decodeURIComponent(this.getUrlQuery('banner_link'))
+    if (this.getUrlQuery('banner_image')) {
+      this.options.banner_image = decodeURIComponent(
+        this.getUrlQuery('banner_image')
+      )
+    }
+    if (this.getUrlQuery('banner_link')) {
+      this.options.banner_link = decodeURIComponent(
+        this.getUrlQuery('banner_link')
+      )
+    }
 
-    if (this.getUrlQuery('pwrdBy_parcelLab'))
+    if (this.getUrlQuery('pwrdBy_parcelLab')) {
       this.options.disableBranding = true
-    if (this.getUrlQuery('disableVoting'))
+    }
+    if (this.getUrlQuery('disableVoting')) {
       this.options.disableVoting = true
-    if (this.getUrlQuery('show_articleList'))
+    }
+    if (this.getUrlQuery('show_articleList')) {
       this.options.show_articleList = true
+    }
 
-    if (this.options.icon_theme) // transfer attr for more clarity
+    if (this.options.icon_theme) {
+      // transfer attr for more clarity
       this.options.theme = this.options.icon_theme
-    if (this.getUrlQuery('xmas_theme'))
+    }
+    if (this.getUrlQuery('xmas_theme')) {
       this.options.theme = 'xmas'
-    if (this.getUrlQuery('easter_theme'))
+    }
+    if (this.getUrlQuery('easter_theme')) {
       this.options.theme = 'easter'
-    if (this.getUrlQuery('icon_theme'))
+    }
+    if (this.getUrlQuery('icon_theme')) {
       this.options.theme = this.getUrlQuery('icon_theme')
+    }
 
-    if (this.getUrlQuery('forceZip'))
+    if (this.getUrlQuery('forceZip')) {
       this.options.forceZip = this.getUrlQuery('forceZip')
+    }
 
-    if (this.getUrlQuery('customCss'))
+    if (this.getUrlQuery('customCss')) {
       this.options.customCssURL = this.getUrlQuery('customCss')
+    }
 
-    if (this.getUrlQuery('openinghrs_warn'))
+    if (this.getUrlQuery('openinghrs_warn')) {
       this.options.openingHoursWarning = this.getUrlQuery('openinghrs_warn')
+    }
 
-    this.comingFromSearch = this.getUrlQuery('comingFromSearch') ? true : false
+    if (this.getUrlQuery('show_destinationCountryCode')) {
+      this.options.show_destinationCountryCode = this.getUrlQuery(
+        'show_destinationCountryCode'
+      )
+    }
+
+    this.comingFromSearch = !!this.getUrlQuery('comingFromSearch')
 
     // add custom css if possible
     if (this.options.customCssURL) this.addCustomCss(this.options.customCssURL)
@@ -112,10 +155,10 @@ class ParcelLab {
       query: this.getProps(),
       options: this.options,
       activeTracking: 0,
-      comingFromSearch: this.comingFromSearch,
+      comingFromSearch: this.comingFromSearch
     }
 
-    if (!queryOK) initialState['query_err'] = true
+    if (!queryOK) initialState.query_err = true
     const store = new Store(initialState)
     this.setupStore(store)
 
@@ -128,7 +171,10 @@ class ParcelLab {
       store.emit('fetchCheckpoints')
 
       // instagram post integration
-      if (this.options.banner_image && this.options.banner_image === 'instagram') {
+      if (
+        this.options.banner_image &&
+        this.options.banner_image === 'instagram'
+      ) {
         store.emit('fetchInstagram')
       } else if (this.options.show_articleList) {
         store.emit('fetchArticleList')
@@ -136,67 +182,98 @@ class ParcelLab {
     }
   }
 
-  initLanguage() {
+  initLanguage () {
     this._langCode = navigator.language || navigator.userLanguage
     if (this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang')
-    else if (this.getUrlQuery('language')) this._langCode = this.getUrlQuery('language')
-    else if (this.options.lang) this._langCode = this.options.lang
+    else if (this.getUrlQuery('language')) {
+      this._langCode = this.getUrlQuery('language')
+    } else if (this.options.lang) this._langCode = this.options.lang
     try {
-      if (this._langCode.indexOf('-') > 0) this._langCode = this._langCode.split('-')[0]
-      if (statics.languages[this._langCode])
+      if (this._langCode.indexOf('-') > 0) {
+        this._langCode = this._langCode.split('-')[0]
+      }
+      if (statics.languages[this._langCode]) {
         this.lang = statics.languages[this._langCode]
-      else
+      } else {
         throw new Error('whoops no lang found')
+      }
     } catch (err) {
       console.log('⚠️  Could not detect user language ... fallback to [EN]!')
       this.lang = statics.languages.en
     }
   }
 
-  initOpts(opts) {
+  initOpts (opts) {
     Object.keys(DEFAULT_OPTS).forEach(key => {
       if (!opts[key]) opts[key] = DEFAULT_OPTS[key]
     })
 
-    if (opts.show_searchForm && !opts.userId)
-      console.error('⚠️  You must pass your userId in the options if you want to display a searchForm!')
+    if (opts.show_searchForm && !opts.userId) {
+      console.error(
+        '⚠️  You must pass your userId in the options if you want to display a searchForm!'
+      )
+    }
 
     this.options = opts
 
-    if (opts.customTranslations) window.parcelLab_customTranslations = opts.customTranslations
+    if (opts.customTranslations) {
+      window.parcelLab_customTranslations = opts.customTranslations
+    }
   }
 
-  initStyles() {
+  initStyles () {
     document.querySelector(this.rootNodeQuery).classList.add('parcellab-styles')
   }
 
-  setGlobalStyles(customStyles) {
+  setGlobalStyles (customStyles) {
     if (!customStyles) customStyles = {}
 
-    if (this.getUrlQuery('borderColor'))
+    if (this.getUrlQuery('borderColor')) {
       customStyles.borderColor = `#${this.getUrlQuery('borderColor')}`
-    if (this.getUrlQuery('borderRadius'))
+    }
+    if (this.getUrlQuery('borderRadius')) {
       customStyles.borderRadius = this.getUrlQuery('borderRadius')
-    if (this.getUrlQuery('buttonColor'))
+    }
+    if (this.getUrlQuery('buttonColor')) {
       customStyles.buttonColor = `#${this.getUrlQuery('buttonColor')}`
-    if (this.getUrlQuery('buttonBackground'))
+    }
+    if (this.getUrlQuery('buttonBackground')) {
       customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
-    if (this.getUrlQuery('buttonBackground'))
+    }
+    if (this.getUrlQuery('buttonBackground')) {
       customStyles.buttonBackground = `#${this.getUrlQuery('buttonBackground')}`
-    if (this.getUrlQuery('margin'))
+    }
+    if (this.getUrlQuery('margin')) {
       customStyles.margin = decodeURIComponent(`${this.getUrlQuery('margin')}`)
-    if (this.getUrlQuery('iconColor'))
-      customStyles.iconColor = decodeURIComponent(`#${this.getUrlQuery('iconColor')}`)
-    if (this.getUrlQuery('tabIconColor'))
-      customStyles.tabIconColor = decodeURIComponent(`#${this.getUrlQuery('tabIconColor')}`)
-    if (this.getUrlQuery('activeTabIconColor'))
-      customStyles.activeTabIconColor = decodeURIComponent(`#${this.getUrlQuery('activeTabIconColor')}`)
-    if (this.getUrlQuery('actionIconColor'))
-      customStyles.actionIconColor = decodeURIComponent(`#${this.getUrlQuery('actionIconColor')}`)
-    if (this.getUrlQuery('liveMapColor'))
+    }
+    if (this.getUrlQuery('iconColor')) {
+      customStyles.iconColor = decodeURIComponent(
+        `#${this.getUrlQuery('iconColor')}`
+      )
+    }
+    if (this.getUrlQuery('tabIconColor')) {
+      customStyles.tabIconColor = decodeURIComponent(
+        `#${this.getUrlQuery('tabIconColor')}`
+      )
+    }
+    if (this.getUrlQuery('activeTabIconColor')) {
+      customStyles.activeTabIconColor = decodeURIComponent(
+        `#${this.getUrlQuery('activeTabIconColor')}`
+      )
+    }
+    if (this.getUrlQuery('actionIconColor')) {
+      customStyles.actionIconColor = decodeURIComponent(
+        `#${this.getUrlQuery('actionIconColor')}`
+      )
+    }
+    if (this.getUrlQuery('liveMapColor')) {
       customStyles.liveMapColor = `#${this.getUrlQuery('liveMapColor')}`
-    if (this.getUrlQuery('liveMapBackground'))
-      customStyles.liveMapBackground = `#${this.getUrlQuery('liveMapBackground')}`
+    }
+    if (this.getUrlQuery('liveMapBackground')) {
+      customStyles.liveMapBackground = `#${this.getUrlQuery(
+        'liveMapBackground'
+      )}`
+    }
 
     Object.keys(DEFAULT_STYLES).forEach(key => {
       if (!customStyles[key]) customStyles[key] = DEFAULT_STYLES[key]
@@ -205,7 +282,7 @@ class ParcelLab {
     window.parcelLab_styles = customStyles
   }
 
-  getProps() {
+  getProps () {
     return {
       trackingNo: this.trackingNo,
       orderNo: this.orderNo,
@@ -215,13 +292,13 @@ class ParcelLab {
       client: this.client,
       lang: this.lang,
       s: this.secureHash,
-      zip: this.zip,
+      zip: this.zip
     }
   }
 
-  getUrlQuery(key, url) {
+  getUrlQuery (key, url) {
     if (!url) url = window.location.href
-    key = key.replace(/[\[\]]/g, '\\$&')
+    key = key.replace(/[\[\]]/g, '\\$&') // eslint-disable-line
     const regex = new RegExp('[?&]' + key + '(=([^&#]*)|&|#|$)')
     const results = regex.exec(url)
     if (!results) return null
@@ -229,14 +306,18 @@ class ParcelLab {
     return decodeURIComponent(results[2].replace(/\+/g, ' '))
   }
 
-  sortCheckpoints(checkpoints = {}) {
+  sortCheckpoints (checkpoints = {}) {
     try {
       let { header } = checkpoints
       const { body } = checkpoints
 
       if (header && header.length > 1) {
-        let delivered = header.filter(h => h.last_delivery_status.code === 'Delivered')
-        let notDelivered = header.filter(h => h.last_delivery_status.code !== 'Delivered')
+        let delivered = header.filter(
+          h => h.last_delivery_status.code === 'Delivered'
+        )
+        let notDelivered = header.filter(
+          h => h.last_delivery_status.code !== 'Delivered'
+        )
 
         const sortFunc = (x, y) => {
           const xTime = x && x.id ? body[x.id][body.length - 1] : null
@@ -245,7 +326,6 @@ class ParcelLab {
           const yMS = yTime ? new Date(yTime) : null
           return xMS > yMS ? -1 : 1
         }
-
 
         delivered = delivered.sort(sortFunc)
         notDelivered = notDelivered.sort(sortFunc)
@@ -259,21 +339,23 @@ class ParcelLab {
     }
   }
 
-  findSelectedTrackingIndex({ header }) {
+  findSelectedTrackingIndex ({ header }) {
     const { selectedTrackingNo } = this.options
     let selectedTrackingIndex = 0
 
     if (selectedTrackingNo && header) {
       for (let i = 0; i < header.length; i++) {
         const elem = header[i]
-        if (elem.tracking_number === selectedTrackingNo) selectedTrackingIndex = i
+        if (elem.tracking_number === selectedTrackingNo) {
+          selectedTrackingIndex = i
+        }
       }
     }
 
     return selectedTrackingIndex
   }
 
-  setupStore(store) {
+  setupStore (store) {
     this.store = store
 
     // update app on ~all~ state changes
@@ -282,7 +364,10 @@ class ParcelLab {
       updateHTML(this.el, newApp)
 
       // run optional onRendered hook
-      if (this.options.onRendered && typeof this.options.onRendered === 'function') {
+      if (
+        this.options.onRendered &&
+        typeof this.options.onRendered === 'function'
+      ) {
         window.setTimeout(() => {
           try {
             this.options.onRendered(state)
@@ -301,7 +386,8 @@ class ParcelLab {
           this.store.set({ fetchCheckpoints_failed: err })
           if (err === 404) store.emit('fetchCourierTrackingUrl')
         } else {
-          if (res && res._rt) { // refetch checkpoints after 3 sek
+          if (res && res._rt) {
+            // refetch checkpoints after 3 sek
             window.setTimeout(() => {
               this.store.emit('fetchCheckpoints')
             }, 3000)
@@ -450,11 +536,14 @@ class ParcelLab {
         ['orderNo', encodeURIComponent(input)],
         ['u', userId],
         ['lang', langVal],
-        ['comingFromSearch', 'true'],
+        ['comingFromSearch', 'true']
       ]
       if (zip) props.push(['zip', encodeURIComponent(zip)])
-      let searchQuery = '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
-      if (searchQuery[searchQuery.length - 1] === '&') searchQuery = searchQuery.slice(0, -1)
+      let searchQuery =
+        '?' + props.map(prop => `${prop[0]}=${prop[1]}&`).join('')
+      if (searchQuery[searchQuery.length - 1] === '&') {
+        searchQuery = searchQuery.slice(0, -1)
+      }
       window.location.search = searchQuery
     })
 
@@ -464,20 +553,24 @@ class ParcelLab {
 
     // fetch latest ig post served by our api
     this.store.on('fetchInstagram', () => {
-      Api.get(_settings.instagram_api_url + '?uid=' + this.userId, (err, res) => {
-        console.log('RES', { res })
-        // console.log('got instagram_api response: ', err, res)
-        const state = this.store.get()
+      Api.get(
+        _settings.instagram_api_url + '?uid=' + this.userId,
+        (err, res) => {
+          console.log('RES', { res })
+          // console.log('got instagram_api response: ', err, res)
+          const state = this.store.get()
 
-        if (res && res.Item && res.Item.posts && res.Item.posts.length > 0) {
-          state.options.instagram = res.Item
-        } else { // log error and fail silently
-          console.log('⚠️ failed to retrieve latest instagram post', err)
-          state.options.banner_image = null
+          if (res && res.Item && res.Item.posts && res.Item.posts.length > 0) {
+            state.options.instagram = res.Item
+          } else {
+            // log error and fail silently
+            console.log('⚠️ failed to retrieve latest instagram post', err)
+            state.options.banner_image = null
+          }
+
+          this.store.set(state)
         }
-
-        this.store.set(state)
-      })
+      )
     })
 
     this.store.on('fetchCourierTrackingUrl', () => {
@@ -517,7 +610,10 @@ class ParcelLab {
         })
         if (splitter) {
           let [preZip, restUrl] = url.split(splitter)
-          restUrl = restUrl.indexOf('&') >= 0 ? restUrl.substring(restUrl.indexOf('&')) : ''
+          restUrl =
+            restUrl.indexOf('&') >= 0
+              ? restUrl.substring(restUrl.indexOf('&'))
+              : ''
           url = [preZip, `${splitter}${zip}`, restUrl].join('')
         } else {
           let toAppend = `zip=${zip}`
@@ -535,14 +631,15 @@ class ParcelLab {
     if (obj && typeof obj === 'object' && obj.header && obj.body) {
       const { header, body } = obj
       return JSON.stringify({ header, body }).length
-    }
-    else return false
+    } else return false
   }
 
   addCustomCss (url) {
     const CSSID = 'pl-customcss'
     const testRGX = /^https:\/\/cdn\.parcellab\.com\/.*\.css$/i
-    if (!testRGX.test(url)) return console.log('Custom CSS must be located on the parcelLab CDN.')
+    if (!testRGX.test(url)) {
+      return console.log('Custom CSS must be located on the parcelLab CDN.')
+    }
 
     if (!document.getElementById(CSSID)) {
       const head = document.getElementsByTagName('head')[0]

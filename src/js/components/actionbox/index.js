@@ -10,10 +10,18 @@ const ZipInput = require('./ZipInput')
 const LiveTrackingLink = require('./LiveTrackingLink')
 const LiveTrackingMap = require('./LiveTrackingMap')
 
-const ActionBox = ({ checkpoints, activeTracking, query, options, apiLoading }, emit) => {
+const ActionBox = (
+  { checkpoints, activeTracking, query, options, apiLoading },
+  emit
+) => {
   const tHeader = checkpoints.header[activeTracking]
-  const containsPersonalData = !!(tHeader.delivery_info && tHeader.delivery_info.zip_code)
-  const zipInput = (options.forceZip && !containsPersonalData) ? ZipInput(tHeader, query, apiLoading, emit) : null
+  const containsPersonalData = !!(
+    tHeader.delivery_info && tHeader.delivery_info.zip_code
+  )
+  const zipInput =
+    options.forceZip && !containsPersonalData
+      ? ZipInput(tHeader, query, apiLoading, emit)
+      : null
 
   if (tHeader && tHeader.actionBox) {
     const { type } = tHeader.actionBox
@@ -27,18 +35,18 @@ const ActionBox = ({ checkpoints, activeTracking, query, options, apiLoading }, 
     }
 
     if (type === 'vote-courier') {
-      result = [
-        Fallback(tHeader, options),
-        VoteCourier(tHeader, options, emit)
-      ]
+      result = [Fallback(tHeader, options), VoteCourier(tHeader, options, emit)]
     }
 
     if (type === 'prediction') {
-      if (tHeader.actionBox.data &&
-        (tHeader.actionBox.data.dayOfWeek || tHeader.actionBox.data.deliveryLocation)) {
+      if (
+        tHeader.actionBox.data &&
+        (tHeader.actionBox.data.dayOfWeek ||
+          tHeader.actionBox.data.deliveryLocation)
+      ) {
         result = [
           Prediction(tHeader),
-          zipInput || DeliveryAddress(tHeader, query.lang)
+          zipInput || DeliveryAddress(tHeader, query.lang, options)
         ]
       }
     }
@@ -56,9 +64,14 @@ const ActionBox = ({ checkpoints, activeTracking, query, options, apiLoading }, 
     }
 
     if (type === 'live-tracking') {
-      if (tHeader.actionBox.info && tHeader.courier && tHeader.courier.trackingurl) {
+      if (
+        tHeader.actionBox.info &&
+        tHeader.courier &&
+        tHeader.courier.trackingurl
+      ) {
         result = [
-          LiveTrackingLink(tHeader, query, options.animateTruck || false), zipInput
+          LiveTrackingLink(tHeader, query, options.animateTruck || false),
+          zipInput
         ]
       }
     }
@@ -66,14 +79,18 @@ const ActionBox = ({ checkpoints, activeTracking, query, options, apiLoading }, 
     if (type === 'live-tracking-map' && tHeader.actionBox.data) {
       result = [
         LiveTrackingMap(tHeader, query),
-        zipInput || DeliveryAddress(tHeader, query.lang)
+        zipInput || DeliveryAddress(tHeader, query.lang, options)
       ]
     }
 
-    result = (result && result.length > 0) ? result : [ // fallback
-      Fallback(tHeader, options),
-      zipInput || DeliveryAddress(tHeader, query.lang)
-    ]
+    result =
+      result && result.length > 0
+        ? result
+        : [
+            // fallback
+            Fallback(tHeader, options),
+            zipInput || DeliveryAddress(tHeader, query.lang, options)
+          ]
 
     return result
   }
