@@ -7,10 +7,16 @@ const Returned = ({ actionBox }) => {
   let iconName = 'return'
 
   // custom icons for some return reasons
-  if (actionBox.type === 'returned-AddressIssue') {
-    iconName = 'questionmark'
-  } else if (actionBox.type === 'returned-NotColleccted') {
-    iconName = 'not_delivered'
+  if (actionBox.type === 'returned-Recall') {
+    iconName = 'myicons/delivery/package_box_backward'
+  } else if (actionBox.type === 'returned-DeliveryPayment') {
+    iconName = 'myicons/money/money_wallet'
+  } else if (actionBox.type === 'returned-NotCollected') {
+    iconName = 'myicons/maps_navigation/pin_delete_disable'
+  } else if (actionBox.type === 'returned-AddressIssue') {
+    iconName = 'myicons/maps_navigation/pin_delete_disable'
+  } else if (actionBox.type === 'returned-CustomerRefusal') {
+    iconName = 'myicons/delivery/package_delivery_return'
   }
 
   return html`
