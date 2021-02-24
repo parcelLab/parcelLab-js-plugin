@@ -8,7 +8,7 @@ const Returned = ({ actionBox }) => {
 
   // custom icons for some return reasons
   if (actionBox.type === 'returned-AddressIssue') {
-    iconName = 'questionmark'
+    iconName = 'return'
   } else if (actionBox.type === 'returned-NotColleccted') {
     iconName = 'not_delivered'
   }
