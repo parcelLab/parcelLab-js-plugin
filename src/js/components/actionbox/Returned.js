@@ -8,23 +8,34 @@ const Returned = ({ actionBox }) => {
 
   // custom icons for some return reasons
   if (actionBox.type === 'returned-AddressIssue') {
-    iconName = 'return'
-  } else if (actionBox.type === 'returned-NotColleccted') {
-    iconName = 'not_delivered'
+    if (actionBox.type === 'returned-Recall') {
+      iconName = 'questionmark'
+    } else if (actionBox.type === 'returned-NotColleccted') {
+      iconName = 'myicons/delivery/package_box_backward'
+    } else if (actionBox.type === 'returned-DeliveryPayment') {
+      iconName = 'not_delivered'
+      iconName = 'myicons/money/money_wallet'
+    } else if (actionBox.type === 'returned-NotCollected') {
+      iconName = 'myicons/maps_navigation/pin_delete_disable'
+    } else if (actionBox.type === 'returned-AddressIssue') {
+      iconName = 'myicons/maps_navigation/pin_delete_disable'
+    } else if (actionBox.type === 'returned-CustomerRefusal') {
+      iconName = 'myicons/delivery/package_delivery_return'
+    }
   }
 
   return html`
     <div class="pl-box pl-action-box pl-box-icon-status">
       <div class="pl-box-heading">
-        ${ actionBox.label }
+        ${actionBox.label}
       </div>
 
       <div class="pl-box-body">
-        ${ Icon(iconName, null, '80') }
+        ${Icon(iconName, null, '80')}
       </div>
 
       <div class="pl-box-footer">
-        ${ actionBox.caption }
+        ${actionBox.caption}
       </div>
     </div>
   `
