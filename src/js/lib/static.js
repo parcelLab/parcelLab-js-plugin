@@ -1164,9 +1164,9 @@ const translations = {
     deliveryAddress: 'お届け先住所'
   },
   tr: {
-    delivery: 'Teslimat',
+    delivery: 'Gönderi Kodu',
     more: 'Daha fazla göster…',
-    orderNo: 'Sipariş',
+    orderNo: 'Sipariş Numarası',
     predictions: {
       OutForDelivery: 'Teslimat <b>bugün</b> gönderilecek.',
       DestinationDeliveryCenter: 'Teslimat <b>yarın</b> gönderilecek.'
