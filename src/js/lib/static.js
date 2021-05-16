@@ -470,7 +470,7 @@ const translations = {
     enterZipCode: 'Veuillez entrer votre code postal pour avoir accès à toutes les informations.',
     wrongZip: 'Ce code postal est incorrect.',
     showPickuplocation: 'Lieu de retrait',
-    articleList: 'Articles dans ce paquet',
+    articleList: 'Articles dans ce colis',
     deliveryAddress: 'Adresse de livraison'
   },
   it: {
