@@ -7,11 +7,11 @@ const translate = function (word, lang='en') {
   if (customTranslations && customTranslations[lang] && customTranslations[lang][word]) {
     return customTranslations[lang][word]
   }
-  
+
   else if (statics.translations[lang] && statics.translations[lang][word]) {
     return statics.translations[lang][word]
   }
-  
+
   else {
     console.warn('Can not translate "' + word + '" into ' + lang)
 
@@ -77,7 +77,12 @@ function dateToStringDash(ts, showTime) {
 
 function dateToStringEn(ts, showTime) {
   let result = ''
-  result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
+  const isUS = navigator && navigator.language && navigator.language.toLocaleLowerCase() === 'en-us'
+  if (isUS) {
+    result += padWithZero((ts.getMonth() + 1), 2) + '/' + padWithZero(ts.getDate(), 2) + '/' + ts.getFullYear()
+  } else {
+    result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
+  }
   if (showTime) {
     result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
     if (ts.getHours() < 12) result += ' a.m.'

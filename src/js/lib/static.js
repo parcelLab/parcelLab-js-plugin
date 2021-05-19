@@ -470,7 +470,7 @@ const translations = {
     enterZipCode: 'Veuillez entrer votre code postal pour avoir accès à toutes les informations.',
     wrongZip: 'Ce code postal est incorrect.',
     showPickuplocation: 'Lieu de retrait',
-    articleList: 'Articles dans ce paquet',
+    articleList: 'Articles dans ce colis',
     deliveryAddress: 'Adresse de livraison'
   },
   it: {
@@ -1164,9 +1164,9 @@ const translations = {
     deliveryAddress: 'お届け先住所'
   },
   tr: {
-    delivery: 'Teslimat',
+    delivery: 'Gönderi Kodu',
     more: 'Daha fazla göster…',
-    orderNo: 'Sipariş',
+    orderNo: 'Sipariş Numarası',
     predictions: {
       OutForDelivery: 'Teslimat <b>bugün</b> gönderilecek.',
       DestinationDeliveryCenter: 'Teslimat <b>yarın</b> gönderilecek.'
