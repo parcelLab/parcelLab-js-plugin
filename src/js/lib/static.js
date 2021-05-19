@@ -314,6 +314,7 @@ const translations = {
   en: {
     delivery: 'Delivery',
     more: 'Show more...',
+    moreArticles: 'Show more...',
     orderNo: 'Order',
     predictions: {
       OutForDelivery: 'The package will arrive <b>today</b>.',
@@ -359,6 +360,7 @@ const translations = {
   de: {
     delivery: 'Lieferung',
     more: 'Mehr anzeigen...',
+    moreArticles: 'Mehr anzeigen...',
     orderNo: 'Bestellung',
     predictions: {
       OutForDelivery: 'Die Ware wird noch <b>heute</b> geliefert.',
@@ -404,6 +406,7 @@ const translations = {
   es: {
     delivery: 'Entrega',
     more: 'Ver más...',
+    moreArticles: 'Ver más...',
     orderNo: 'Número de Orden',
     predictions: {
       OutForDelivery: 'El paquete llegará <b>Hoy</b>.',
@@ -440,6 +443,7 @@ const translations = {
   fr: {
     delivery: 'Livraison',
     more: 'Voir les étapes précédentes...',
+    moreArticles: 'Afficher plus...',
     orderNo: 'Commande',
     predictions: {
       OutForDelivery: "Le colis arrivera <b>aujourd'hui</b>.",
@@ -476,6 +480,7 @@ const translations = {
   it: {
     delivery: 'Consegna',
     more: 'Mostra di più...',
+    moreArticles: 'Mostra di più...',
     orderNo: 'Numero ordine',
     predictions: {
       OutForDelivery: 'Il pacchetto arriverà <b>oggi</b>.',
@@ -512,6 +517,7 @@ const translations = {
   nl: {
     delivery: 'Levering',
     more: 'Bekijk meer...',
+    moreArticles: 'Bekijk meer...',
     orderNo: 'Bestelling',
     predictions: {
       OutForDelivery: 'Het pakket zal <b>vandaag</b> aankomen.',
@@ -548,6 +554,7 @@ const translations = {
   da: {
     delivery: 'Levering',
     more: 'Se mere...',
+    moreArticles: 'Se mere...',
     orderNo: 'Ordre',
     predictions: {
       OutForDelivery: 'Pakken ankommer <b>i dag</b>.',
@@ -584,6 +591,7 @@ const translations = {
   sv: {
     delivery: 'Leverans',
     more: 'Se mer...',
+    moreArticles: 'Se mer...',
     orderNo: 'Beställning',
     predictions: {
       OutForDelivery: 'Paketet kommer fram <b>i dag</b>.',
@@ -620,6 +628,7 @@ const translations = {
   fi: {
     delivery: 'Toimitus',
     more: 'Katso lisää...',
+    moreArticles: 'Katso lisää...',
     orderNo: 'Tilaus',
     predictions: {
       OutForDelivery: 'Paketti saapuu <b>tänään</b>.',
@@ -656,6 +665,7 @@ const translations = {
   no: {
     delivery: 'Levering',
     more: 'Se mer...',
+    moreArticles: 'Se mer...',
     orderNo: 'Bestilling',
     predictions: {
       OutForDelivery: 'Pakken kommer fram <b>i dag</b>.',
@@ -692,6 +702,7 @@ const translations = {
   pt: {
     delivery: 'Entrega',
     more: 'Mostrar mais...',
+    moreArticles: 'Mostrar mais...',
     orderNo: 'Encomenda',
     predictions: {
       OutForDelivery: 'A encomenda chega <b>hoje</b>.',
@@ -728,6 +739,7 @@ const translations = {
   pl: {
     delivery: 'Dostawa',
     more: 'Pokaż więcej...',
+    moreArticles: 'Pokaż więcej...',
     orderNo: 'Zamówienie',
     predictions: {
       OutForDelivery: 'Paczka zostanie doręczona jeszcze <b>dziś</b>.',
@@ -764,6 +776,7 @@ const translations = {
   ro: {
     delivery: 'Livrare',
     more: 'Arată mai multe...',
+    moreArticles: 'Arată mai multe...',
     orderNo: 'Comandă',
     predictions: {
       OutForDelivery: 'Pachetul va sosi <b>astăzi</b>.',
@@ -800,6 +813,7 @@ const translations = {
   cs: {
     delivery: 'Zásilka',
     more: 'Zobrazit více ...',
+    moreArticles: 'Zobrazit více ...',
     orderNo: 'Objednávka',
     predictions: {
       OutForDelivery: 'Zásilka bude doručena <b>dnes</b>.',
@@ -836,6 +850,7 @@ const translations = {
   sl: {
     delivery: 'Dostava',
     more: 'Podrobnosti...',
+    moreArticles: 'Podrobnosti...',
     orderNo: 'Naročilo',
     predictions: {
       OutForDelivery: 'Paket bo dostavljen še <b>danes</b>.',
@@ -874,6 +889,7 @@ const translations = {
   hr: {
     delivery: 'Dostava',
     more: 'Prikaži više...',
+    moreArticles: 'Prikaži više...',
     orderNo: 'Narudžba',
     predictions: {
       OutForDelivery: 'Paket će biti dostavljen još <b>danas</b>.',
@@ -912,6 +928,7 @@ const translations = {
   bg: {
     delivery: 'Доставка',
     more: 'Научи повече...',
+    moreArticles: 'Научи повече...',
     orderNo: 'Поръчка',
     predictions: {
       OutForDelivery: 'Стоките ще бъдат доставени още <b>днес</b>.',
@@ -950,6 +967,7 @@ const translations = {
   sk: {
     delivery: 'Doprava',
     more: 'Podrobnosti',
+    moreArticles: 'Podrobnosti',
     orderNo: 'Objednávka',
     predictions: {
       OutForDelivery: 'Balík bude doručený <b>dnes</b>.',
@@ -988,6 +1006,7 @@ const translations = {
   hu: {
     delivery: 'Szállítás',
     more: 'További információk...',
+    moreArticles: 'További információk...',
     orderNo: 'Rendelés',
     predictions: {
       OutForDelivery: 'A rendelés még a <b>mai napon</b> kiszállításra kerül.',
@@ -1026,6 +1045,7 @@ const translations = {
   zh: {
     delivery: '配送',
     more: '显示更多...',
+    moreArticles: '显示更多...',
     orderNo: '订单',
     predictions: {
       OutForDelivery: '包裹将在今天<b></ b>到达。',
@@ -1061,6 +1081,7 @@ const translations = {
   ko: {
     delivery: '배송',
     more: '추가',
+    moreArticles: '추가',
     orderNo: '주문 번호',
     predictions: {
       OutForDelivery: '소포는 <b>금일</b>. 도착예정입니다.',
@@ -1096,6 +1117,7 @@ const translations = {
   tw: {
     delivery: '配送',
     more: '顯示更多...',
+    moreArticles: '顯示更多...',
     orderNo: '訂單',
     predictions: {
       OutForDelivery: '包裹將在今天<b></ b>到達。',
@@ -1131,6 +1153,7 @@ const translations = {
   ja: {
     delivery: '配達',
     more: 'さらに表示する...',
+    moreArticles: 'さらに表示する...',
     orderNo: '注文',
     predictions: {
       OutForDelivery: '小包は<b>今日</ b>到着します。',
@@ -1166,6 +1189,7 @@ const translations = {
   tr: {
     delivery: 'Gönderi Kodu',
     more: 'Daha fazla göster…',
+    moreArticles: 'Daha fazla göster…',
     orderNo: 'Sipariş Numarası',
     predictions: {
       OutForDelivery: 'Teslimat <b>bugün</b> gönderilecek.',
@@ -1209,6 +1233,7 @@ const translations = {
   ru: {
     delivery: 'Доставка',
     more: 'Подробнее',
+    moreArticles: 'Подробнее',
     orderNo: 'Заказ',
     predictions: {
       OutForDelivery: 'Посылка будет доставлена <b>сегодня</b>.',

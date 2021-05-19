@@ -64,7 +64,7 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query, show
 
     if (!showAllArticles && validArticles.length > 4) {
       articleList = articleList.slice(0, 4)
-      moreButton = MoreButton(T.translate('more', query.lang.name), emit, 'showAllArticles')
+      moreButton = MoreButton(T.translate('moreArticles', query.lang.name), emit, 'showAllArticles')
     }
 
     return html`
