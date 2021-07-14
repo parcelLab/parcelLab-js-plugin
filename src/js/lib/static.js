@@ -4,6 +4,11 @@ const transitStates = {
     xmas_icon: 'christmas_gift',
     easter_icon: 'easter_order_processed'
   },
+  WarehousePrepared: {
+    icon: 'order_processed',
+    xmas_icon: 'christmas_gift',
+    easter_icon: 'easter_order_processed'
+  },
   Pending: {
     icon: 'order_processed',
     xmas_icon: 'christmas_gift',
@@ -89,6 +94,13 @@ const transitStates = {
     easter_icon: 'easter_map'
   },
   Delivered: {
+    icon: 'success_standard',
+    xmas_icon: 'christmas_tree',
+    color: '#58B957',
+    alert: 'success',
+    easter_icon: 'easter_delivered'
+  },
+  ReturnProcessed: {
     icon: 'success_standard',
     xmas_icon: 'christmas_tree',
     color: '#58B957',
