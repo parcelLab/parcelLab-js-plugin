@@ -51,7 +51,7 @@ These are the available options:
 - show_zipCodeInput : Boolean (activates the zip code field for the search form)
 - userId : String (alternative way to pass userId - instead of in url)
 - trackingNo : String (alternative way to pass trackingNo - instead of in url)
-- orderNo : String (alternative way to pass orderNo - instead of in url)
+- orderNo : String (alternative way to pass orderNo - instead of in url/Activate split order OverView) 
 - zip : String (alternative way to pass zip - instead of in url)
 - courier : String (alternative way to pass courier - instead of in url)
 - client : String (alternative way to pass courier - instead of in url)
