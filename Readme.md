@@ -226,3 +226,20 @@ Minified `index.js` and `index.css` will be in the `dist` dir.
 $ npm run deploy
 ```
 The `index.js`and `index.css`files will be deployed as parcelLab.min.js and parcelLab.min.css on the CDN.
+
+## Installing through NPM
+If you do not want to use our brebuilt and hosted version - you can also install it yourself thtough NPM.
+
+```bash
+$ npm i @parcellab/js-plugin
+```
+
+Afterwards you should be able to use it like this:
+
+```javascript
+import { ParcelLab } from '@parcellab/js-plugin/bundle/module.min.js';
+import '@parcellab/js-plugin/bundle/module.min.css';
+
+const options = { rerouteButton: 'left', show_searchForm: 'true' };
+const plPlugin = new ParcelLab('#pl-trace', options);
+```

@@ -1,13 +1,15 @@
 {
-  "name": "parcellab-js-plugin",
-  "version": "1.0.0",
-  "description": "JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.",
+  "name": "@parcellab/js-plugin",
+  "version": "1.1.0",
+  "description": "Track and Trace JavaScript plugin used to retrieve and display trackings from parcelLab on any given webpage.",
   "main": "src/index.js",
   "scripts": {
     "start": "parcel test/index.html -p 4000",
     "build": "parcel build src/index.js --no-source-maps",
     "clean": "rm -rf .cache && rm -rf dist",
-    "deploy": "npm run clean && npm run build && make deploy && make deploy-v3"
+    "deploy": "npm run clean && npm run build && make deploy && make deploy-v3",
+    "bundle": "parcel build src/index.js --out-dir bundle ./ --out-file module.min.js --no-source-maps --no-cache",
+    "prepublishOnly": "npm run bundle"
   },
   "repository": {
     "type": "git",
@@ -15,9 +17,11 @@
   },
   "keywords": [
     "parcellab",
-    "trackings"
+    "plugin",
+    "track and trace",
+    "tracking"
   ],
-  "author": "Julian Krenge, Oscar Reyes, Andrej Fritz",
+  "author": "parcelLab GmbH",
   "license": "MIT",
   "homepage": "https://www.parcellab.com",
   "devDependencies": {
