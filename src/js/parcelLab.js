@@ -183,17 +183,23 @@ class ParcelLab {
   }
 
   initLanguage () {
-    this._langCode = navigator.language || navigator.userLanguage
-    if (this.getUrlQuery('lang')) this._langCode = this.getUrlQuery('lang')
-    else if (this.getUrlQuery('language')) {
+    const navigatorLang = navigator.language || navigator.userLanguage
+    this._langCode = navigatorLang
+    if (this.getUrlQuery('lang'))
+      this._langCode = this.getUrlQuery('lang')
+    else if (this.getUrlQuery('language'))
       this._langCode = this.getUrlQuery('language')
-    } else if (this.options.lang) this._langCode = this.options.lang
+    else if (this.options.lang)
+      this._langCode = this.options.lang
+    
     try {
-      if (this._langCode.indexOf('-') > 0) {
-        this._langCode = this._langCode.split('-')[0]
-      }
+      const fullCode = this._langCode.trim().toLowerCase().split('-')
+      fullCode[1] = fullCode[1] || navigatorLang.split('-').pop().toLowerCase()
+      this._langCode = fullCode[0]
+
       if (statics.languages[this._langCode]) {
         this.lang = statics.languages[this._langCode]
+        this.lang.fullCode = fullCode
       } else {
         throw new Error('whoops no lang found')
       }

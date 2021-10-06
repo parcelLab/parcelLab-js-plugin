@@ -22,14 +22,14 @@ const translate = function (word, lang='en') {
   }
 }
 
-const date = function (ts, time, code) {
+const date = function (ts, time, code, fullCode) {
   let res = ''
   if (['DEU', 'AUT', 'CHE', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time)
   else if (['FRA', 'fr'].indexOf(code) > -1) res = dateToStringFr(ts, time)
   else if (['BEL', 'ITA', 'it', 'ESP', 'es'].indexOf(code) > -1) res = dateToStringSlash(ts, time)
   else if (['NOR', 'no', 'nb', 'CZE', 'cs', 'POL', 'pl'].indexOf(code) > -1) res = dateToStringDot(ts, time)
   else if (['DNK', 'da', 'FIN', 'fi', 'NLD', 'nl'].indexOf(code) > -1) res = dateToStringDash(ts, time)
-  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = dateToStringEn(ts, time)
+  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = dateToStringEn(ts, time, fullCode[1] === 'us')
   else res = dateToStringIso(ts, time)
   return res
 }
@@ -75,9 +75,8 @@ function dateToStringDash(ts, showTime) {
   return result
 }
 
-function dateToStringEn(ts, showTime) {
+function dateToStringEn(ts, showTime, isUS) {
   let result = ''
-  const isUS = navigator && navigator.language && navigator.language.toLocaleLowerCase() === 'en-us'
   if (isUS) {
     result += padWithZero((ts.getMonth() + 1), 2) + '/' + padWithZero(ts.getDate(), 2) + '/' + ts.getFullYear()
   } else {

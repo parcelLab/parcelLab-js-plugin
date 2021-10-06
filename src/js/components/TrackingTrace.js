@@ -16,7 +16,7 @@ const showTimeOnCheckpoint = (d, i) => {
 
 const prepareCheckpoints = (checkpoints, query) => checkpoints.map((cp, i) => {
   const ts = cp.timestamp ? new Date(cp.timestamp) : null
-  if (ts) cp.dateText = T.date(ts, showTimeOnCheckpoint(ts, i), query.lang.name)
+  if (ts) cp.dateText = T.date(ts, showTimeOnCheckpoint(ts, i), query.lang.name, query.lang.fullCode)
 
   cp.transitStatus = statics.transitStates[cp.status]
   if (typeof cp.transitStatus === 'undefined')
