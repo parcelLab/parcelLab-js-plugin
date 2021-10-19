@@ -29,7 +29,7 @@ const date = function (ts, time, code, fullCode) {
   else if (['BEL', 'ITA', 'it', 'ESP', 'es'].indexOf(code) > -1) res = dateToStringSlash(ts, time)
   else if (['NOR', 'no', 'nb', 'CZE', 'cs', 'POL', 'pl'].indexOf(code) > -1) res = dateToStringDot(ts, time)
   else if (['DNK', 'da', 'FIN', 'fi', 'NLD', 'nl'].indexOf(code) > -1) res = dateToStringDash(ts, time)
-  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = dateToStringEn(ts, time, fullCode[1] === 'us')
+  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = dateToLocaleString(ts, time, fullCode)
   else res = dateToStringIso(ts, time)
   return res
 }
@@ -75,19 +75,10 @@ function dateToStringDash(ts, showTime) {
   return result
 }
 
-function dateToStringEn(ts, showTime, isUS) {
-  let result = ''
-  if (isUS) {
-    result += padWithZero((ts.getMonth() + 1), 2) + '/' + padWithZero(ts.getDate(), 2) + '/' + ts.getFullYear()
-  } else {
-    result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
-  }
-  if (showTime) {
-    result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
-    if (ts.getHours() < 12) result += ' a.m.'
-    else result += ' p.m.'
-  }
-  return result
+function dateToLocaleString(ts, showTime, langFullCode) {
+  const dateStr = ts.toLocaleDateString([langFullCode])
+  const timeStr = showTime ? ', ' + ts.toLocaleTimeString([langFullCode], { hour: '2-digit', minute: '2-digit' }) : ''
+  return dateStr + timeStr
 }
 
 function dateToStringFr(ts, showTime) {

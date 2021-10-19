@@ -199,7 +199,7 @@ class ParcelLab {
 
       if (statics.languages[this._langCode]) {
         this.lang = statics.languages[this._langCode]
-        this.lang.fullCode = fullCode
+        this.lang.fullCode = fullCode.join('-')
       } else {
         throw new Error('whoops no lang found')
       }
