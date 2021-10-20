@@ -31,7 +31,7 @@ exports.makeBig = el => {
 
 exports.checkUrl = function (url) {
   const invalidProtocolRegex = /^(%20|\s)*(javascript|data|vbscript)/im
-  const ctrlCharactersRegex = /[^\x20-\x7EÀ-ž]/gim
+  const ctrlCharactersRegex = /[^\x20-\x7E]/gim
   const urlSchemeRegex = /^([^:]+):/gm
   if (!url) {
     return false
