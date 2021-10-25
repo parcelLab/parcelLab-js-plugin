@@ -301,35 +301,35 @@ const translations = {
     more: 'Подробнее',
     orderNo: 'Заказ',
     predictions: {
-      OutForDelivery: 'Посылка будет доставлена <b>сегодня</b>.',
-      DestinationDeliveryCenter: 'Посылка будет доставлена <b>завтра</b>.'
+      OutForDelivery: 'Посылку доставят <b>сегодня</b>.',
+      DestinationDeliveryCenter: 'Посылку доставят <b>завтра</b>.'
     },
     openingHours: 'Часы работы',
     openingHoursWarning: '',
     weekDays: [
-      'Воскресенье',
       'Понедельник',
       'Вторник',
       'Среда',
       'Четверг',
       'Пятница',
-      'Суббота'
+      'Суббота',
+      'Воскресенье'
     ],
     alwaysOpened: 'Открыто круглосуточно',
     closesIn: 'Закрывается через',
     opensIn: 'Открывается через',
     error: {
       delivery: 'Мы еще не получили информацию о Вашем заказе.',
-      search: 'К сожалению, по данной доставке информация не найдена'
+      search: 'К сожалению, информация по этому заказу не найдена.'
     },
     searchOrder: 'Поиск заказа',
     zip: 'Почтовый индекс',
     search: 'Искать',
-    containsOf: 'Состоит из',
+    containsOf: 'В этом заказе:',
     deliveries: 'Доставки',
-    showPickuplocation: 'Пункт выдачи заказов',
-    liveDelivery: 'Отслеживание онлайн',
-    articleList: 'Артикулы в посылке',
+    showPickuplocation: 'Пункт самовывоза',
+    liveDelivery: 'Онлайн-отслеживание',
+    articleList: 'Товары в посылке',
     deliveryAddress: 'Адрес доставки',
     liveTrackingLastUpdate: '',
     liveTrackingStationsNext: '',
