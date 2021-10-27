@@ -1285,6 +1285,117 @@ const translations = {
     liveTrackingCaption: '',
     liveTrackingCaptionNext: '',
     liveTrackingPrediction: ''
+  },
+  ca: {
+    delivery: 'Lliurament',
+    more: 'Mostra més...',
+    moreArticles: 'Mostra més...',
+    orderNo: 'Número de comanda',
+    predictions: {
+      OutForDelivery: 'El paquet arribarà <b>avui</b>.',
+      DestinationDeliveryCenter: 'El paquet arribarà <b>demà</b>.'
+    },
+    openingHours: 'Horari d´obertura',
+    weekDays: [
+      'Diumenge',
+      'Dilluns',
+      'Dimarts',
+      'Dimecres',
+      'Dijous',
+      'Divendres',
+      'Dissabte'
+    ],
+    alwaysOpened: 'Obert tot el dia',
+    closesIn: 'es tanca en',
+    opensIn: 'obre en',
+    openingHoursWarning: 'L´horari d´obertura pot variar a causa de ###',
+    error: {
+      delivery: 'Actualment no hi ha de dades d´enviament disponibles per a aquesta comanda.',
+      search: 'Malauradament, el teu paquet no està disponible.'
+    },
+    searchOrder: 'Cerca de l´enviament',
+    search: 'Cerca',
+    containsOf: 'consisteix en',
+    deliveries: 'lliuraments',
+    enterZipCode: 'Si us plau, introdueix el teu codi postal per poder accedir a tota la informació.',
+    wrongZip: 'Aquest codi postal no és correcte.',
+    showPickuplocation: 'Lloc de recollida',
+    articleList: 'Articles d´aquest paquet',
+    deliveryAddress: 'Adreça de lliurament'
+  },
+  eu: {
+    delivery: 'Entrega',
+    more: 'Ikusi gehiago...',
+    moreArticles: 'Ikusi gehiago...',
+    orderNo: 'Eskaera-zenbakia',
+    predictions: {
+      OutForDelivery: 'Paketea <b>Gaur</b> iritsiko da.',
+      DestinationDeliveryCenter: 'Paketea <b>Bihar</b> iritsiko da.'
+    },
+    openingHours: 'Ordutegia',
+    weekDays: [
+      'Igandea',
+      'Astelehena',
+      'Asteartea',
+      'Asteazkena',
+      'Osteguna',
+      'Ostirala',
+      'Larunbata'
+    ],
+    alwaysOpened: 'Egun osoan zehar irekita',
+    closesIn: 'itxiera-ordua:',
+    opensIn: 'irekiera-ordua:',
+    openingHoursWarning: 'Irekiera-orduak aldatu daitezke ### dela eta.',
+    error: {
+      delivery: 'Une honetan ez dago eskaera honentzako bidalketa-daturik eskuragarri.',
+      search: 'Zoritxarrez, zure paketea ez dago eskuragarri.'
+    },
+    searchOrder: 'Bidalketaren bilaketa',
+    search: 'Bilatu',
+    containsOf: 'datza',
+    deliveries: 'entregak',
+    enterZipCode: 'Sartu zure posta-kodea informazio guztia atzitu ahal izateko.',
+    wrongZip: 'Posta-kode hau ez da zuzena.',
+    showPickuplocation: 'Jasotzeko lekua',
+    articleList: 'Pakete honetako artikuluak',
+    deliveryAddress: 'Entrega-helbidea'
+  },
+  gl: {
+    delivery: 'Entrega',
+    more: 'Ver máis...',
+    moreArticles: 'Ver máis...',
+    orderNo: 'Número de pedido',
+    predictions: {
+      OutForDelivery: 'O paquete chegará <b>hoxe</b>.',
+      DestinationDeliveryCenter: 'O paquete chegará <b>mañá</b>.'
+    },
+    openingHours: 'Horario de apertura',
+    weekDays: [
+      'Domingo',
+      'Luns',
+      'Martes',
+      'Mércores',
+      'Xoves',
+      'Venres',
+      'Sábado'
+    ],
+    alwaysOpened: 'Aberto todo o día',
+    closesIn: 'pecha en',
+    opensIn: 'abre en',
+    openingHoursWarning: 'As horas de apertura poden variar debido a ###',
+    error: {
+      delivery: 'Nestes momentos non hai datos de envío dispoñibles para este pedido.',
+      search: 'Sentímolo, o teu paquete non está dispoñible.'
+    },
+    searchOrder: 'Búsqueda do envío',
+    search: 'Buscar',
+    containsOf: 'consiste en',
+    deliveries: 'entregas',
+    enterZipCode: 'Introduce o teu código postal para ter acceso a toda a información.',
+    wrongZip: 'Este código postal está mal.',
+    showPickuplocation: 'Lugar de recollida',
+    articleList: 'Artigos neste paquete',
+    deliveryAddress: 'Enderezo de entrega'
   }
 }
 
