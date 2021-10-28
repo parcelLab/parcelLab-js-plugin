@@ -328,7 +328,7 @@ const languages = {
   },
   eu: {
     name: 'eu',
-    label: 'Euskalduna',
+    label: 'Euskal Herria',
     code: 'BAQ',
     icon: 'https://cdn.parcellab.com/img/flags/basque.png'
   },
