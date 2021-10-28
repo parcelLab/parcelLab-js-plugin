@@ -319,6 +319,24 @@ const languages = {
     label: 'Türkçe',
     code: 'TUR',
     icon: 'https://cdn.parcellab.com/img/flags/tr.png'
+  },
+  ca: {
+    name: 'ca',
+    label: 'Català',
+    code: 'CAT',
+    icon: 'https://cdn.parcellab.com/img/flags/catalonia.png'
+  },
+  eu: {
+    name: 'eu',
+    label: 'Euskalduna',
+    code: 'BAQ',
+    icon: 'https://cdn.parcellab.com/img/flags/basque.png'
+  },
+  gl: {
+    name: 'gl',
+    label: 'Galego',
+    code: 'GLG',
+    icon: 'https://cdn.parcellab.com/img/flags/galicia.png'
   }
 }
 
