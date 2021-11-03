@@ -329,7 +329,7 @@ const languages = {
   eu: {
     name: 'eu',
     label: 'Euskara',
-    code: 'BAQ',
+    code: 'EUS',
     icon: 'https://cdn.parcellab.com/img/flags/basque.png'
   },
   gl: {
