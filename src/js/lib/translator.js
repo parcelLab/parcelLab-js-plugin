@@ -22,14 +22,14 @@ const translate = function (word, lang='en') {
   }
 }
 
-const date = function (ts, time, code) {
+const date = function (ts, time, code, fullCode) {
   let res = ''
   if (['DEU', 'AUT', 'CHE', 'de'].indexOf(code) > -1) res = dateToStringDe(ts, time)
   else if (['FRA', 'fr'].indexOf(code) > -1) res = dateToStringFr(ts, time)
   else if (['BEL', 'ITA', 'it', 'ESP', 'es'].indexOf(code) > -1) res = dateToStringSlash(ts, time)
   else if (['NOR', 'no', 'nb', 'CZE', 'cs', 'POL', 'pl'].indexOf(code) > -1) res = dateToStringDot(ts, time)
   else if (['DNK', 'da', 'FIN', 'fi', 'NLD', 'nl'].indexOf(code) > -1) res = dateToStringDash(ts, time)
-  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = dateToStringEn(ts, time)
+  else if (['USA', 'IRL', 'GBR', 'en'].indexOf(code) > -1) res = fullCode.split('-').pop() === 'us' ? dateToLocaleString(ts, time, fullCode) : dateToStringEn(ts, time)
   else res = dateToStringIso(ts, time)
   return res
 }
@@ -76,19 +76,18 @@ function dateToStringDash(ts, showTime) {
 }
 
 function dateToStringEn(ts, showTime) {
-  let result = ''
-  const isUS = navigator && navigator.language && navigator.language.toLocaleLowerCase() === 'en-us'
-  if (isUS) {
-    result += padWithZero((ts.getMonth() + 1), 2) + '/' + padWithZero(ts.getDate(), 2) + '/' + ts.getFullYear()
-  } else {
-    result += padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
-  }
+  result = padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
   if (showTime) {
     result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
     if (ts.getHours() < 12) result += ' a.m.'
-    else result += ' p.m.'
   }
   return result
+}
+
+function dateToLocaleString(ts, showTime, langFullCode) {
+  const dateStr = ts.toLocaleDateString([langFullCode])
+  const timeStr = showTime ? ', ' + ts.toLocaleTimeString([langFullCode], { hour: '2-digit', minute: '2-digit' }) : ''
+  return dateStr + timeStr
 }
 
 function dateToStringFr(ts, showTime) {

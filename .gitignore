@@ -3,3 +3,4 @@ node_modules
 src/GOOGLE_API_KEY.json
 dist
 .cache
+.vscode
