@@ -652,7 +652,7 @@ const translations = {
     enterZipCode: 'Ange ditt postnummer för att få tillgång till all information.',
     wrongZip: 'Detta postnummer är fel.',
     showPickuplocation: 'Visa leveranstid',
-    articleList: 'Objekt i detta paket',
+    articleList: 'Artikel/Artiklar i detta paket',
     deliveryAddress: 'Leveransadress'
   },
   fi: {
