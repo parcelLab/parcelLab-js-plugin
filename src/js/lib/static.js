@@ -342,6 +342,7 @@ const languages = {
 
 const translations = {
   en: {
+    'submit-btn': 'Search',
     delivery: 'Delivery',
     more: 'Show more...',
     moreArticles: 'Show more...',
@@ -388,6 +389,7 @@ const translations = {
     liveTrackingPrediction: 'Arrival time approx.'
   },
   de: {
+    'submit-btn': 'Suchen',
     delivery: 'Lieferung',
     more: 'Mehr anzeigen...',
     moreArticles: 'Mehr anzeigen...',
@@ -416,7 +418,7 @@ const translations = {
     },
     searchOrder: 'Bestellung suchen',
     zip: 'PLZ',
-    forceZip: 'Bitte gib deine PLZ ein, um Zugriff auf alle Informationen zu erhalten.',
+    enterZipCode: 'Bitte gib deine PLZ ein, um Zugriff auf alle Informationen zu erhalten.',
     wrongZip: 'Diese PLZ ist falsch.',
     search: 'Suchen',
     containsOf: 'besteht aus',
@@ -434,6 +436,7 @@ const translations = {
     liveTrackingPrediction: 'Ankunftszeit ca.'
   },
   es: {
+    'submit-btn': 'Buscar',
     delivery: 'Entrega',
     more: 'Ver más...',
     moreArticles: 'Ver más...',
@@ -476,10 +479,10 @@ const translations = {
     moreArticles: 'Afficher plus...',
     orderNo: 'Commande',
     predictions: {
-      OutForDelivery: "Le colis arrivera <b>aujourd'hui</b>.",
+      OutForDelivery: 'Le colis arrivera <b>aujourd\'hui</b>.',
       DestinationDeliveryCenter: 'Le colis arrivera <b>demain</b>.'
     },
-    openingHours: "Heures d'ouverture",
+    openingHours: 'Heures d\'ouverture',
     weekDays: [
       'Dimanche',
       'Lundi',
@@ -494,8 +497,8 @@ const translations = {
     opensIn: 'ouvre dans',
     openingHoursWarning: 'Les heures d\'ouverture peuvent varier en raison de ###',
     error: {
-      delivery: "Aucune information concernant l'expédition disponible pour cette commande.",
-      search: "Malheureusement, ce numéro de colis ou de commande n'est pas valide."
+      delivery: 'Aucune information concernant l\'expédition disponible pour cette commande.',
+      search: 'Malheureusement, ce numéro de colis ou de commande n\'est pas valide.'
     },
     searchOrder: 'Rechercher la commande',
     search: 'Chercher',
@@ -534,7 +537,7 @@ const translations = {
       delivery: 'Non ci sono ancora informazioni sulla spedizione di questo ordine.',
       search: 'Purtroppo non abbiamo dati per questa consegna.'
     },
-    searchOrder: "cerca l'ordine",
+    searchOrder: 'cerca l\'ordine',
     search: 'Ricerca',
     containsOf: 'consiste in',
     deliveries: 'consegne',
@@ -1101,6 +1104,8 @@ const translations = {
     searchOrder: '搜索订单',
     zip: '邮政编码',
     search: '搜索',
+    enterZipCode: '请输入你的邮政编码，以获得所有信息。',
+    wrongZip: '这个邮政编码是错误的。',
     containsOf: '由**组成',
     deliveries: '配送',
     showPickuplocation: '显示取货地点',
@@ -1137,6 +1142,8 @@ const translations = {
     searchOrder: '주문 검색',
     zip: '우편번호',
     search: '검색',
+    enterZipCode: '모든 정보에 액세스하려면 우편 번호를 입력하십시오.',
+    wrongZip: '우편번호가 잘못되었습니다.',
     containsOf: '~로 구성되다',
     deliveries: '배송',
     showPickuplocation: '배송 픽업 장소 확인',
@@ -1209,6 +1216,8 @@ const translations = {
     searchOrder: 'ご注文検索',
     zip: '郵便番号',
     search: '検索',
+    enterZipCode: '全ての情報にアクセスするためには、郵便番号を入力してください',
+    wrongZip: 'この郵便番号は間違っています。',
     containsOf: 'からなる',
     deliveries: '配送',
     showPickuplocation: '受け取り場所を表示',
@@ -1226,7 +1235,7 @@ const translations = {
       DestinationDeliveryCenter: 'Teslimat <b>yarın</b> gönderilecek.'
     },
     openingHours: 'açılış saatleri',
-    openingHoursWarning: '',
+    openingHoursWarning: '###',
     weekDays: [
       'Pazar',
       'Pazartesi',
@@ -1246,6 +1255,8 @@ const translations = {
     searchOrder: 'Sipariş ara',
     zip: 'Posta kodu',
     search: 'Ara',
+    enterZipCode: 'Tüm bilgilere erişmek için lütfen posta kodunuzu girin.',
+    wrongZip: 'Bu posta kodu yanlış.',
     containsOf: 'içerir',
     deliveries: 'Iletimler',
     showPickuplocation: 'Alma yerini göster',
@@ -1290,6 +1301,8 @@ const translations = {
     searchOrder: 'Поиск заказа',
     zip: 'Почтовый индекс',
     search: 'Искать',
+    enterZipCode: 'Введите Ваш почтовый индекс чтобы получить доступ ко всей информации.',
+    wrongZip: 'Этот почтовый индекс неправильный.',
     containsOf: 'Состоит из',
     deliveries: 'Доставки',
     showPickuplocation: 'Пункт выдачи заказов',
