@@ -378,7 +378,7 @@ const translations = {
     deliveries: 'deliveries',
     showPickuplocation: 'Show pickup location',
     liveDelivery: 'Live tracking',
-    articleList: 'Articles in this package',
+    articleList: 'Items in this package',
     deliveryAddress: 'Delivery address',
     liveTrackingLastUpdate: 'Last update',
     liveTrackingStationsNext: 'The driver\'s on his way to you.',
