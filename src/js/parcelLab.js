@@ -206,7 +206,7 @@ class ParcelLab {
     } catch (err) {
       console.log('⚠️  Could not detect user language ... fallback to [EN]!')
       this.lang = statics.languages.en
-      this.lang.fullCode = 'en-us'
+      this.lang.fullCode = 'en-gb'
     }
   }
 
