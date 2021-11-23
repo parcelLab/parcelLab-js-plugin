@@ -13,7 +13,7 @@ module.exports = function ZipInput (tHeader, query, apiLoading, emit) {
   }
 
   if (!deliveryInfo || !deliveryInfo.zip_code) {
-    const infoText = translate('forceZip', lang.name)
+    const infoText = translate('enterZipCode', lang.name)
     const zipPlaceholder = translate('zip', lang.name)
     const wrongZip = translate('wrongZip', lang.name)
     const icon = html`<input type="image" src="https://icons.parcellab.com/circle_arrow_right?color=0051BA" alt="submit">`
