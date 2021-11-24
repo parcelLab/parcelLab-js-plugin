@@ -79,7 +79,6 @@ function dateToStringEn(ts, showTime) {
   result = padWithZero(ts.getDate(), 2) + '.' + padWithZero((ts.getMonth() + 1), 2) + '.' + ts.getFullYear()
   if (showTime) {
     result += ', ' + padWithZero(ts.getHours(), 2) + ':' + padWithZero(ts.getMinutes(), 2)
-    if (ts.getHours() < 12) result += ' a.m.'
   }
   return result
 }
