@@ -1,7 +1,7 @@
 const html = require('nanohtml')
 const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
-const { iso3CountryCode3to2LetterConversor } = require('../../lib/helpers')
+const { iso3CountryCode3to2LetterConverter } = require('../../lib/helpers')
 const { translate } = require('../../lib/translator.js')
 
 const Address = (deliveryInfo) => {
@@ -16,7 +16,7 @@ const Address = (deliveryInfo) => {
       <p>
         ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
         <br>
-        ${iso3CountryCode3to2LetterConversor(deliveryInfo.destination_country_iso3)}
+        ${iso3CountryCode3to2LetterConverter(deliveryInfo.destination_country_iso3)}
       </p>
     </address>
   `

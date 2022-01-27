@@ -48,7 +48,7 @@ exports.checkUrl = function (url) {
   return true
 }
 
-exports.iso3CountryCode3to2LetterConversor = function (countryCode) {
+exports.iso3CountryCode3to2LetterConverter = function (countryCode) {
   const iso3CountryCodes =
     {
       "AFG": "AF",
