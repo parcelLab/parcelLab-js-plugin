@@ -138,12 +138,6 @@ class ParcelLab {
       this.options.openingHoursWarning = this.getUrlQuery('openinghrs_warn')
     }
 
-    if (this.getUrlQuery('show_destinationCountryCode')) {
-      this.options.show_destinationCountryCode = this.getUrlQuery(
-        'show_destinationCountryCode'
-      )
-    }
-
     this.comingFromSearch = !!this.getUrlQuery('comingFromSearch')
 
     // add custom css if possible
