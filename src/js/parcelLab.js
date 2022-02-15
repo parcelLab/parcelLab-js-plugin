@@ -385,7 +385,8 @@ class ParcelLab {
 
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
-      Api.getCheckpoints(this.store.get(), (err, res) => {
+      const { query, options } = this.store.get()
+      Api.getCheckpoints(query, options.hideCancelled, (err, res) => {
         this.store.set({ apiLoading: false })
         if (err) {
           this.store.set({ fetchCheckpoints_failed: err })
