@@ -138,6 +138,10 @@ class ParcelLab {
       this.options.openingHoursWarning = this.getUrlQuery('openinghrs_warn')
     }
 
+    if (this.getUrlQuery('hide_cancelled')) {
+      this.options.hideCancelled = ['yes', 'true', '1'].indexOf(this.getUrlQuery('hide_cancelled')) > -1
+    }
+
     this.comingFromSearch = !!this.getUrlQuery('comingFromSearch')
 
     // add custom css if possible
@@ -381,7 +385,7 @@ class ParcelLab {
 
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
-      Api.getCheckpoints(this.store.get().query, (err, res) => {
+      Api.getCheckpoints(this.store.get(), (err, res) => {
         this.store.set({ apiLoading: false })
         if (err) {
           this.store.set({ fetchCheckpoints_failed: err })
