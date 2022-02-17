@@ -175,6 +175,21 @@ function _objToQueryArr(propsObj) {
   return result
 }
 
+function removeCanceledTrackings(res, hideCancelled) {
+  try {
+    if (!(hideCancelled && res && res.header)) return
+
+    res.header = res.header.filter(h => !(
+      typeof h.actionBox == 'object'
+      && h.actionBox.type == 'returned'
+      && typeof h.last_delivery_status == 'object'
+      && h.last_delivery_status.code == 'Cancelled'
+    ))
+  } catch (error) {
+    console.log(['Error filtering canceled trackings', error])
+  }
+}
+
 /////////////
 // Exports //
 /////////////
@@ -185,8 +200,11 @@ exports.post = _post
 
 exports.toURL = _toURL
 
-exports.getCheckpoints = function (propsObj, callback) {
-  _get(_toURL(BASE_URL, CHECKPOINTS_ENDPOINT, _objToQueryArr(propsObj)), callback)
+exports.getCheckpoints = function (query, hideCancelled, callback) {
+  _get(_toURL(BASE_URL, CHECKPOINTS_ENDPOINT, _objToQueryArr(query)), function (err, res) {
+    if (!err) removeCanceledTrackings(res, hideCancelled)
+    callback(err, res)
+  })
 }
 
 exports.getPickupLocation = function (propsObj, callback) {
