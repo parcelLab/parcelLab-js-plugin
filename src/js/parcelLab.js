@@ -139,7 +139,7 @@ class ParcelLab {
     }
 
     if (this.getUrlQuery('hide_cancelled')) {
-      this.options.hideCancelled = ['yes', 'true', '1'].indexOf(this.getUrlQuery('hide_cancelled')) > -1
+      this.options.hideCancelled = ['yes', 'true', '1'].includes(this.getUrlQuery('hide_cancelled'))
     }
 
     this.comingFromSearch = !!this.getUrlQuery('comingFromSearch')
