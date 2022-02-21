@@ -5,7 +5,25 @@ const { translate } = require('../../lib/translator.js')
 const statics = require('../../lib/static.js')
 
 const Address = (deliveryInfo, lang) => {
-  return html`
+  const translatedDestinationCountryName = `${translate('countryName', lang.name)[deliveryInfo.destination_country_iso3]}`
+  if (translatedDestinationCountryName === statics.translations[lang][word]) {
+    return html`
+      <address>
+        ${deliveryInfo.recipient
+          ? html`
+              <p>${deliveryInfo.recipient}</p>
+            `
+          : ''}
+        <p>${raw(deliveryInfo.street)}</p>
+        <p>
+          ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
+          <br>
+          ${translatedDestinationCountryName}
+        </p>
+      </address>
+    `
+  } else {
+    return html`
     <address>
       ${deliveryInfo.recipient
         ? html`
@@ -16,10 +34,11 @@ const Address = (deliveryInfo, lang) => {
       <p>
         ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
         <br>
-        ${translate('countryName', lang.name)[deliveryInfo.destination_country_iso3]}
+        ${deliveryInfo.destination_country_iso3}
       </p>
     </address>
   `
+  }
 }
 
 module.exports = function DeliveryAddress (tHeader, lang, options) {
