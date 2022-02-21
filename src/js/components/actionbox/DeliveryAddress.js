@@ -1,14 +1,10 @@
 const html = require('nanohtml')
 const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
-const { iso3CountryCode3to2LetterConverter } = require('../../lib/helpers')
 const { translate } = require('../../lib/translator.js')
 const statics = require('../../lib/static.js')
-const get = require('lodash.get'); 
 
 const Address = (deliveryInfo, lang) => {
-var translationsObject = statics.translations[lang]
-
   return html`
     <address>
       ${deliveryInfo.recipient
@@ -20,7 +16,7 @@ var translationsObject = statics.translations[lang]
       <p>
         ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
         <br>
-        ${translate(get(translationsObject, 'countryName.' + iso3CountryCode3to2LetterConverter(deliveryInfo.destination_country_iso3)), lang.name)}
+        ${translate('countryName', lang.name)[deliveryInfo.destination_country_iso3]}
       </p>
     </address>
   `
