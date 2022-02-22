@@ -3,11 +3,9 @@ const raw = require('nanohtml/raw')
 const Icon = require('../Icon')
 const { translate } = require('../../lib/translator.js')
 const statics = require('../../lib/static.js')
-const get = require('lodash.get')
 
 const Address = (deliveryInfo, lang) => {
-  var translationsObject = statics.translations[lang]
-  const translatedDestinationCountryName = `${translate(get(translationsObject, 'countryName', lang.name)[deliveryInfo.destination_country_iso3])}`
+  const translatedDestinationCountryName = `${translate(statics.translations[lang]['countryName'][deliveryInfo.destination_country_iso3])}`
 
     return html`
       <address>
