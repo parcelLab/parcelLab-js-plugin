@@ -5,7 +5,7 @@ const { translate } = require('../../lib/translator.js')
 const statics = require('../../lib/static.js')
 
 const Address = (deliveryInfo, lang) => {
-  const translatedDestinationCountryName = `${(statics.translations[lang]['countryName'][deliveryInfo.destination_country_iso3])}`
+  const translatedDestinationCountryName = `${translate('countryName', lang)[deliveryInfo.destination_country_iso3]}`
 
     return html`
       <address>
