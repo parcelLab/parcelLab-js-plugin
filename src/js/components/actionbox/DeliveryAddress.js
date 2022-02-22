@@ -8,7 +8,7 @@ const get = require('lodash.get')
 const Address = (deliveryInfo, lang) => {
   var translationsObject = statics.translations[lang]
   const translatedDestinationCountryName = `${translate(get(translationsObject, 'countryName', lang.name)[deliveryInfo.destination_country_iso3])}`
-  
+
     return html`
       <address>
         ${deliveryInfo.recipient
@@ -20,7 +20,7 @@ const Address = (deliveryInfo, lang) => {
         <p>
           ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
           <br>
-          ${translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3} 
+          ${translatedDestinationCountryName === 'undefined' ? deliveryInfo.destination_country_iso3 : translatedDestinationCountryName}
         </p>
       </address>
     `
