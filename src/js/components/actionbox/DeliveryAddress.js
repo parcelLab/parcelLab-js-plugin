@@ -4,7 +4,7 @@ const Icon = require('../Icon')
 const { translate } = require('../../lib/translator.js')
 
 const Address = (deliveryInfo, lang) => {
-  const translatedDestinationCountryName = `${translate('countryName', lang)[deliveryInfo.destination_country_iso3]}`
+  const translatedDestinationCountryName = translate('countryName', lang)[deliveryInfo.destination_country_iso3]
 
     return html`
       <address>
@@ -17,7 +17,7 @@ const Address = (deliveryInfo, lang) => {
         <p>
           ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
           <br>
-          ${translatedDestinationCountryName === 'undefined' ? deliveryInfo.destination_country_iso3 : translatedDestinationCountryName}
+          ${translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
         </p>
       </address>
     `
