@@ -177,7 +177,7 @@ function _objToQueryArr(propsObj) {
 
 function removeCanceledTrackings(res, hideCancelled) {
   try {
-    if (!(hideCancelled && res && res.header)) return
+    if (!(hideCancelled && res.header)) return
 
     res.header = res.header.filter(h => !(
       typeof h.actionBox == 'object'
@@ -187,6 +187,25 @@ function removeCanceledTrackings(res, hideCancelled) {
     ))
   } catch (error) {
     console.log(['Error filtering canceled trackings', error])
+  }
+}
+
+function trackingUrlLabelReplacement(res, showOriginCourier) {
+  try {
+    if (!(showOriginCourier && res.header)) return
+
+    res.header.forEach(h => {
+      if (!(h.courier && h.courier.prettyname && h.courier.destination_courier && h.courier.destination_courier.prettyname)) return
+
+      if (h.courier.trackingurl_label)
+        h.courier.trackingurl_label = h.courier.trackingurl_label.replace(h.courier.destination_courier.prettyname, h.courier.prettyname)
+
+      if (h.actionBox && h.actionBox.label) {
+        h.actionBox.label = h.actionBox.label.replace(h.courier.destination_courier.prettyname, h.courier.prettyname)
+      }
+    })
+  } catch (error) {
+    console.log(['Error replacing the tracking URL label', error])
   }
 }
 
@@ -200,9 +219,12 @@ exports.post = _post
 
 exports.toURL = _toURL
 
-exports.getCheckpoints = function (query, hideCancelled, callback) {
+exports.getCheckpoints = function (query, options, callback) {
   _get(_toURL(BASE_URL, CHECKPOINTS_ENDPOINT, _objToQueryArr(query)), function (err, res) {
-    if (!err) removeCanceledTrackings(res, hideCancelled)
+    if (!err && res) {
+      removeCanceledTrackings(res, options.hideCancelled)
+      trackingUrlLabelReplacement(res, options.showOriginCourier)
+    }
     callback(err, res)
   })
 }
