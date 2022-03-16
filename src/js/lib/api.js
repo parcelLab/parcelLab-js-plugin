@@ -177,7 +177,7 @@ function _objToQueryArr(propsObj) {
 
 function removeCanceledTrackings(res, hideCancelled) {
   try {
-    if (!(hideCancelled && res.header)) return
+    if (!(hideCancelled && res && res.header)) return
 
     res.header = res.header.filter(h => !(
       typeof h.actionBox == 'object'
@@ -192,7 +192,7 @@ function removeCanceledTrackings(res, hideCancelled) {
 
 function replaceDestinationCourierName(res, showOriginCourier) {
   try {
-    if (!(showOriginCourier && res.header)) return
+    if (!(showOriginCourier && res && res.header)) return
 
     res.header.forEach(h => {
       if (!(h.courier && h.courier.prettyname && h.courier.destination_courier && h.courier.destination_courier.prettyname)) return
@@ -205,7 +205,7 @@ function replaceDestinationCourierName(res, showOriginCourier) {
       }
     })
   } catch (error) {
-    console.log(['Error replacing the tracking URL label', error])
+    console.log(['Error replacing the destination courier name', error])
   }
 }
 
