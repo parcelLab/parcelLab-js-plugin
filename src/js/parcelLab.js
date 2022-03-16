@@ -189,7 +189,7 @@ class ParcelLab {
       this._langCode = this.getUrlQuery('language')
     else if (this.options.lang)
       this._langCode = this.options.lang
-    
+
     try {
       const fullCode = this._langCode.trim().toLowerCase().split('-')
       fullCode[1] = fullCode[1] || navigatorLang.split('-').pop().toLowerCase()
@@ -630,6 +630,7 @@ class ParcelLab {
       }
       this.store.set({ query })
       this.store.emit('fetchCheckpoints')
+      this.store.emit('fetchArticleList')
     })
   }
 
