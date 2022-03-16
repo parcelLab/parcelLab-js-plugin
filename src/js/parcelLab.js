@@ -142,6 +142,10 @@ class ParcelLab {
       this.options.hideCancelled = ['yes', 'true', '1'].includes(this.getUrlQuery('hide_cancelled'))
     }
 
+    if (this.getUrlQuery('use_origin_courier')) {
+      this.options.showOriginCourier = ['yes', 'true', '1'].includes(this.getUrlQuery('use_origin_courier'))
+    }
+
     this.comingFromSearch = !!this.getUrlQuery('comingFromSearch')
 
     // add custom css if possible
@@ -386,7 +390,7 @@ class ParcelLab {
     // fetch checkpoints
     this.store.on('fetchCheckpoints', () => {
       const { query, options } = this.store.get()
-      Api.getCheckpoints(query, options.hideCancelled, (err, res) => {
+      Api.getCheckpoints(query, options, (err, res) => {
         this.store.set({ apiLoading: false })
         if (err) {
           this.store.set({ fetchCheckpoints_failed: err })
