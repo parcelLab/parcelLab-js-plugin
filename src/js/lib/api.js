@@ -190,7 +190,7 @@ function removeCanceledTrackings(res, hideCancelled) {
   }
 }
 
-function trackingUrlLabelReplacement(res, showOriginCourier) {
+function replaceDestinationCourierName(res, showOriginCourier) {
   try {
     if (!(showOriginCourier && res.header)) return
 
@@ -223,7 +223,7 @@ exports.getCheckpoints = function (query, options, callback) {
   _get(_toURL(BASE_URL, CHECKPOINTS_ENDPOINT, _objToQueryArr(query)), function (err, res) {
     if (!err && res) {
       removeCanceledTrackings(res, options.hideCancelled)
-      trackingUrlLabelReplacement(res, options.showOriginCourier)
+      replaceDestinationCourierName(res, options.showOriginCourier)
     }
     callback(err, res)
   })
