@@ -250,6 +250,13 @@ const languages = {
     label: 'Русский',
     code: 'RUS',
     icon: 'https://cdn.parcellab.com/img/flags/ru.png'
+  },
+  ja: {
+	  name: 'jp',
+	  label: '日本語',
+	  code: 'JPN',
+	  icon: 'https://cdn.parcellab.com/img/flags/jp.png'
+
   }
 }
 
@@ -272,21 +279,21 @@ const translations = {
       'Friday',
       'Saturday'
     ],
-    alwaysOpened: '24h opened',
-    closesIn: 'Closes in about',
-    opensIn: 'Opens in about',
+    alwaysOpened: 'Open 24 hours a day',
+    closesIn: 'Closes at',
+    opensIn: 'Opens at',
     error: {
-      delivery: 'We have not yet received tracking data for your order.',
-      search: 'Unfortunately, no information was found for this delivery.'
+      delivery: 'We have not received your tracking information yet.',
+      search: 'We couldn\'t find any information for this delivery – please contact our Customer Service team.'
     },
-    searchOrder: 'Search order',
+    searchOrder: 'Search for your order',
     zip: 'Zip code',
     search: 'Search',
-    containsOf: 'consists of',
+    containsOf: 'includes',
     deliveries: 'deliveries',
-    showPickuplocation: 'Show pickup location',
-    liveDelivery: 'Live tracking',
-    articleList: 'Articles in this package',
+    showPickuplocation: 'Show collection location',
+    liveDelivery: 'Track your order',
+    articleList: 'Items in this package',
     deliveryAddress: 'Delivery address',
     liveTrackingLastUpdate: 'Last update',
     liveTrackingStationsNext: 'The driver\'s on his way to you.',
@@ -298,7 +305,7 @@ const translations = {
   },
   ru: {
     delivery: 'Доставка',
-    more: 'Подробнее',
+    more: 'Показать больше',
     orderNo: 'Заказ',
     predictions: {
       OutForDelivery: 'Посылку доставят <b>сегодня</b>.',
@@ -316,19 +323,19 @@ const translations = {
       'Воскресенье'
     ],
     alwaysOpened: 'Открыто круглосуточно',
-    closesIn: 'Закрывается через',
-    opensIn: 'Открывается через',
+    closesIn: 'Закрывается в',
+    opensIn: 'Открывается в',
     error: {
-      delivery: 'Мы еще не получили информацию о Вашем заказе.',
-      search: 'К сожалению, информация по этому заказу не найдена.'
+      delivery: 'Мы еще не получили информацию о заказе.',
+      search: 'Не удалось найти информацию об этом заказе. Пожалуйста, обратитесь в клиентскую службу.'
     },
     searchOrder: 'Поиск заказа',
     zip: 'Почтовый индекс',
     search: 'Искать',
     containsOf: 'В этом заказе:',
     deliveries: 'Доставки',
-    showPickuplocation: 'Пункт самовывоза',
-    liveDelivery: 'Онлайн-отслеживание',
+    showPickuplocation: 'Посмотреть адрес пункта',
+    liveDelivery: 'Отследить заказ',
     articleList: 'Товары в посылке',
     deliveryAddress: 'Адрес доставки',
     liveTrackingLastUpdate: '',
@@ -340,12 +347,12 @@ const translations = {
     liveTrackingPrediction: ''
   },
   de: {
-    delivery: 'Lieferung',
-    more: 'Mehr anzeigen...',
+    delivery: 'Zustellung',
+    more: 'Mehr zeigen',
     orderNo: 'Bestellung',
     predictions: {
-      OutForDelivery: 'Die Ware wird noch <b>heute</b> geliefert.',
-      DestinationDeliveryCenter: 'Die Ware wird <b>morgen</b> geliefert.'
+      OutForDelivery: 'Ihr Paket kommt <b>heute</b>an',
+      DestinationDeliveryCenter: 'Ihr Paket kommt <b>morgen </b>an'
     },
     openingHours: 'Öffnungszeiten',
     weekDays: [
@@ -357,22 +364,22 @@ const translations = {
       'Freitag',
       'Samstag'
     ],
-    alwaysOpened: 'Durchgehend geöffnet',
-    closesIn: 'Schließt in ungefähr',
-    opensIn: 'Öffnet in ungefähr',
+    alwaysOpened: '24 Stunden geöffnet',
+    closesIn: 'Schließt um',
+    opensIn: 'Öffnet um',
     error: {
-      delivery: 'Zu dieser Bestellung liegen noch keine Sendungsdaten vor.',
-      search: 'Leider liegen uns aktuell keine Sendungsdetails zu dieser Bestellung vor.'
+      delivery: 'Es sind noch keine Tracking-Informationen verfügbar',
+      search: 'Leider konnten wir für diese Sendung keine Informationen finden. Bitte wenden Sie sich an unseren Kundenservice'
     },
     searchOrder: 'Bestellung suchen',
-    zip: 'PLZ',
+    zip: 'Postleitzahl',
     search: 'Suchen',
-    containsOf: 'besteht aus',
-    deliveries: 'Lieferungen',
+    containsOf: 'beinhaltet',
+    deliveries: 'Zustellungen',
     showPickuplocation: 'Abholort anzeigen',
-    liveDelivery: 'Live verfolgen',
+    liveDelivery: 'Bestellung verfolgen',
     articleList: 'Artikel in diesem Paket',
-    deliveryAddress: 'Zustelladresse',
+    deliveryAddress: 'Lieferadresse',
     liveTrackingLastUpdate: 'Letzte Aktualisierung',
     liveTrackingStationsNext: 'Der Fahrer ist auf dem Weg zu dir.',
     liveTrackingStation: 'Noch ### Stopp vor dir',
@@ -416,13 +423,13 @@ const translations = {
   },
   fr: {
     delivery: 'Livraison',
-    more: 'Voir les étapes précédentes...',
+    more: 'Voir plus.',
     orderNo: 'Commande',
     predictions: {
-      OutForDelivery: "Le colis arrivera <b>aujourd'hui</b>.",
-      DestinationDeliveryCenter: 'Le colis arrivera <b>demain</b>.'
+      OutForDelivery: "Votre colis arrivera <b>aujourd'hui</b>.",
+      DestinationDeliveryCenter: 'Votre colis arrivera <b>demain</b>.'
     },
-    openingHours: "Heures d'ouverture",
+    openingHours: "Horaires d'ouverture",
     weekDays: [
       'Dimanche',
       'Lundi',
@@ -432,19 +439,21 @@ const translations = {
       'Vendredi',
       'Samedi'
     ],
-    alwaysOpened: 'Ouvert toute la journée',
-    closesIn: 'ferme dans',
-    opensIn: 'ouvre dans',
+    alwaysOpened: 'Ouvert 24h/24',
+    closesIn: 'ferme à',
+    opensIn: 'ouvre à',
     error: {
-      delivery: "Aucune information concernant l'expédition disponible pour cette commande.",
-      search: "Malheureusement, ce numéro de colis ou de commande n'est pas valide."
+      delivery: "Nous n'avons pas encore reçu vos informations de suivi.",
+      search: "Nous n'avons trouvé aucune information pour cette livraison - veuillez contacter notre équipe du Service client."
     },
-    searchOrder: 'Rechercher la commande',
+    searchOrder: 'Chercher ma commande',
+	zip: 'Code postal',
     search: 'Chercher',
-    containsOf: 'consiste en',
+    containsOf: 'inclut',
     deliveries: 'livraisons',
-    showPickuplocation: 'Lieu de retrait',
-    articleList: 'Articles dans ce paquet',
+	liveDelivery:'Suivre ma commande',
+    showPickuplocation: 'Afficher le lieu de collecte',
+    articleList: 'Articles dans ce colis',
     deliveryAddress: 'Adresse de livraison'
   },
   it: {
@@ -515,11 +524,11 @@ const translations = {
   },
   da: {
     delivery: 'Levering',
-    more: 'Se mere...',
+    more: 'Vis mere',
     orderNo: 'Ordre',
     predictions: {
-      OutForDelivery: 'Pakken ankommer <b>i dag</b>.',
-      DestinationDeliveryCenter: 'Pakken ankommer <b>i morgen</b>.'
+      OutForDelivery: 'Din pakke ankommer <b>i dag</b>.',
+      DestinationDeliveryCenter: 'Din pakke ankommer <b>i morgen</b>.'
     },
     openingHours: 'Åbningstider',
     weekDays: [
@@ -531,28 +540,30 @@ const translations = {
       'Fredag',
       'Lørdag'
     ],
-    alwaysOpened: 'Døgnåbent',
-    closesIn: 'Lukker om',
-    opensIn: 'Åbner om',
+    alwaysOpened: 'Åben 24 timer i døgnet',
+    closesIn: 'Lukker',
+    opensIn: 'Åbner',
     error: {
-      delivery: 'Der findes endnu ingen leveringsinformationer til denne bestilling.',
-      search: 'Beklageligvis er leveringen ikke tilgængelig.'
+      delivery: 'Vi har endnu ikke modtaget dine sporingsoplysninger.',
+      search: 'Vi kunne ikke finde nogen oplysninger om denne levering – kontakt venligst vores kundeservice-team.'
     },
-    searchOrder: 'Søg ordre',
+    searchOrder: 'Søg efter din ordre',
     search: 'Søg',
-    containsOf: 'består af',
+	zip:'Postnummer',
+    containsOf: 'omfatter',
     deliveries: 'leveringer',
-    showPickuplocation: 'Vis leveringssted',
-    articleList: 'Varer i denne pakke',
+    showPickuplocation: 'Vis afhentningslokation',
+	liveDelivery: 'Spor din ordre',
+    articleList: 'Produkter i denne pakke',
     deliveryAddress: 'Leveringsadresse'
   },
   sv: {
     delivery: 'Leverans',
-    more: 'Se mer...',
-    orderNo: 'Beställning',
+    more: 'Visa mer',
+    orderNo: 'Beställning:',
     predictions: {
-      OutForDelivery: 'Paketet kommer fram <b>i dag</b>.',
-      DestinationDeliveryCenter: 'Paketet kommer fram <b>i morgon</b>.'
+      OutForDelivery: 'Ditt paket kommer att anlända <b>idag</b>.',
+      DestinationDeliveryCenter: 'Ditt paket kommer att anlända <b>imorgon</b>.'
     },
     openingHours: 'Öppettider',
     weekDays: [
@@ -564,19 +575,21 @@ const translations = {
       'Fredag',
       'Lörda'
     ],
-    alwaysOpened: 'Öppet hela dagen',
-    closesIn: 'stänger om',
-    opensIn: 'öppnas om',
+    alwaysOpened: 'Öppet dygnet runt',
+    closesIn: 'Stänger klockan',
+    opensIn: 'Öppnar klockan',
     error: {
-      delivery: 'Beställningen har ännu inte tilldelats något kollinummer.',
-      search: 'Tyvärr är inte denna leverans tillgänglig.'
+      delivery: 'Vi har inte tagit emot dina spårningsuppgifter än.',
+      search: 'Vi hittar ingen information om denna leverans – vänligen kontakta vårt kundtjänstteam.'
     },
-    searchOrder: 'Sök order',
+    searchOrder: 'Sök efter din beställning',
+	zip: 'Postnummer',
     search: 'Sök',
-    containsOf: 'består av',
+    containsOf: 'inkluderar',
     deliveries: 'leveranser',
-    showPickuplocation: 'Visa leveranstid',
-    articleList: 'Objekt i detta paket',
+	liveDelivery: 'Spåra beställning',
+    showPickuplocation: 'Visa var du hittar upphämtningsstället',
+    articleList: 'Varor i detta paket',
     deliveryAddress: 'Leveransadress'
   },
   fi: {
@@ -647,13 +660,13 @@ const translations = {
   },
   pt: {
     delivery: 'Entrega',
-    more: 'Ver mais...',
-    orderNo: 'Ordem',
+    more: 'Ver mais',
+    orderNo: 'Pedido',
     predictions: {
-      OutForDelivery: 'O pacote chegará hoje.',
-      DestinationDeliveryCenter: 'O pacote chegará amanhã.'
+      OutForDelivery: 'Seu pacote chegará <b>hoje</b>.',
+      DestinationDeliveryCenter: 'Seu pacote chegará <b>amanhã</b>.'
     },
-    openingHours: 'horário de funcionamento',
+    openingHours: 'Horário de atendimento',
     weekDays: [
       'Domingo',
       'Segunda-feira',
@@ -663,19 +676,21 @@ const translations = {
       'Sexta-feira',
       'Sábado'
     ],
-    alwaysOpened: 'Aberto o dia inteiro',
-    closesIn: 'fecha em',
-    opensIn: 'abre em',
+    alwaysOpened: 'Aberto 24 horas por dia',
+    closesIn: 'fecha às',
+    opensIn: 'abre às',
     error: {
-      delivery: 'Infelizmente, esta entrega não está disponível.',
-      search: 'Infelizmente, esta entrega não está disponível.'
+      delivery: 'Ainda não recebemos suas informações de rastreamento.',
+      search: 'Não encontramos nenhuma informação para esta entrega. Por favor, entre em contato com o nosso time de Apoio ao cliente.'
     },
-    searchOrder: 'ordem de pesquisa',
-    search: 'Pesquisa',
-    containsOf: 'consiste em',
+    searchOrder: 'Procure seu pedido',
+    search: 'Procurar',
+	zip: 'CEP',
+    containsOf: 'inclui',
     deliveries: 'entregas',
-    showPickuplocation: 'Opsamlingssted',
-    articleList: 'Artigos neste pacote',
+	liveDelivery: 'Acompanhe seu pedido',
+    showPickuplocation: 'Mostrar o local de retirada',
+    articleList: 'Itens neste pacote',
     deliveryAddress: 'Endereço de entrega'
   },
   pl: {
@@ -951,6 +966,41 @@ const translations = {
     liveDelivery: 'Élő követés',
     articleList: 'Ebben a csomagban található termékek',
     deliveryAddress: 'Szállítási cím'
+  },
+  ja: {
+    delivery: '配送',
+    more: '詳細を見る',
+    orderNo: 'ご注文',
+    predictions: {
+      OutForDelivery: 'ご注文の商品は<b>本日お届け予定です</b>',
+      DestinationDeliveryCenter: 'ご注文の商品は<b>明日お届け予定です</b>'
+    },
+    openingHours: '営業時間',
+    weekDays: [
+      '日曜日',
+      '月曜日',
+      '火曜日',
+      '水曜日',
+      '木曜日',
+      '金曜日',
+      '土曜日'
+    ],
+    alwaysOpened: '24時間営業',
+    closesIn: '閉店',
+    opensIn: '開店',
+    error: {
+      delivery: '追跡情報を確認中です.',
+      search: 'この配送について情報を表示できません。お手数ですが、カスタマーサービスまでお問い合わせいただきますようお願いいたします.'
+    },
+    searchOrder: 'ご注文を検索',
+    zip: '郵便番号',
+    search: '検索',
+    containsOf: '含む',
+    deliveries: '配送',
+    showPickuplocation: '集荷先住所を見る',
+    liveDelivery: 'ご注文の追跡',
+    articleList: 'この荷物に含まれる商品',
+    deliveryAddress: 'お届け先住所'
   }
 }
 
