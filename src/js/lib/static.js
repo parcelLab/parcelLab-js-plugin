@@ -251,7 +251,7 @@ const languages = {
     code: 'RUS',
     icon: 'https://cdn.parcellab.com/img/flags/ru.png'
   },
-  jp: {
+  ja: {
 	  name: 'jp',
 	  label: '日本語',
 	  code: 'JPN',
@@ -967,7 +967,7 @@ const translations = {
     articleList: 'Ebben a csomagban található termékek',
     deliveryAddress: 'Szállítási cím'
   },
-  jp: {
+  ja: {
     delivery: '配送',
     more: '詳細を見る',
     orderNo: 'ご注文',
