@@ -14,11 +14,14 @@ const Address = (deliveryInfo, lang) => {
             `
           : ''}
         <p>${raw(deliveryInfo.street)}</p>
-        <p>
-          ${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}
-          <br>
+        ${deliveryInfo.destination_country_iso3 &&
+          deliveryInfo.destination_country_iso3 === 'GBR'
+            ? html`<p>
+                ${raw(deliveryInfo.city)} <br>
+                ${deliveryInfo.zip_code}
+              </p>`
+            : html`<p>${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}</p>`}
           ${translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
-        </p>
       </address>
     `
 }
