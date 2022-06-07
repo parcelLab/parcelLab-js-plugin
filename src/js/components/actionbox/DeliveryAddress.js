@@ -33,7 +33,7 @@ const Address = (deliveryInfo, lang) => {
 }
 
 module.exports = function DeliveryAddress (tHeader, lang, options) {
-  const { deliveryInfo: deliveryInfo } = tHeader
+  const { delivery_info: deliveryInfo } = tHeader
   if (
     deliveryInfo &&
     deliveryInfo.street &&
