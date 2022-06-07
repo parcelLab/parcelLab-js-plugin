@@ -13,7 +13,7 @@ const Address = (deliveryInfo, lang) => {
         `
       : (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
       ? html`
-        ${raw(deliveryInfo.city)}${(delivery_info.region && delivery_info.region.indexOf('-') > -1) ? `, ${delivery_info.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code}
+        ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code}
       `
       : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}` // Otherwise format
 
@@ -34,7 +34,7 @@ const Address = (deliveryInfo, lang) => {
 }
 
 module.exports = function DeliveryAddress (tHeader, lang, options) {
-  const { delivery_info: deliveryInfo } = tHeader
+  const { deliveryInfo: deliveryInfo } = tHeader
   if (
     deliveryInfo &&
     deliveryInfo.street &&
