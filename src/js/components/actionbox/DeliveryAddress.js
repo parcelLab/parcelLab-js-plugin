@@ -5,18 +5,6 @@ const { translate } = require('../../lib/translator.js')
 
 const Address = (deliveryInfo, lang) => {
   const translatedDestinationCountryName = translate('countryName', lang)[deliveryInfo.destination_country_iso3]
-  const cityLine = 
-    (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'GBR')) // Format for Great Britian
-      ? html`
-          ${raw(deliveryInfo.city)} <br>
-          ${deliveryInfo.zip_code}
-        `
-      : (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
-      ? html`
-        ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code}
-      `
-      : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}` // Otherwise format
-
     return html`
       <address>
         ${deliveryInfo.recipient
@@ -26,9 +14,20 @@ const Address = (deliveryInfo, lang) => {
           : ''}
         <p>${raw(deliveryInfo.street)}</p>
         <p>
-          ${cityLine}
-        </p>
           ${(deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) ? '' : translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
+        ${deliveryInfo.destination_country_iso3 &&
+          deliveryInfo.destination_country_iso3 === 'GBR' // Great Britain Formatting
+            ? html`
+                ${raw(deliveryInfo.city)} <br>
+                ${deliveryInfo.zip_code}
+              `
+            : deliveryInfo.destination_country_iso3 &&
+            deliveryInfo.destination_country_iso3 === 'USA' // USA Formatting
+            ? html`
+              ${raw(deliveryInfo.city)}${deliveryInfo.region} ${deliveryInfo.zip_code}
+            ` : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}`}
+            </p>
+          ${translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
       </address>
     `
 }
