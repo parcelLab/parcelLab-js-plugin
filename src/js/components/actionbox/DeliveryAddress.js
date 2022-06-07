@@ -5,6 +5,17 @@ const { translate } = require('../../lib/translator.js')
 
 const Address = (deliveryInfo, lang) => {
   const translatedDestinationCountryName = translate('countryName', lang)[deliveryInfo.destination_country_iso3]
+  const cityLine = 
+    (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'GBR')) // Format for Great Britian
+      ? html`
+          ${raw(deliveryInfo.city)} <br>
+          ${deliveryInfo.zip_code}
+        `
+      : (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
+      ? html`
+        ${raw(deliveryInfo.city)}${(delivery_info.region && delivery_info.region.indexOf('-') > -1) ? `, ${delivery_info.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code}
+      `
+      : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}` // Otherwise format
 
     return html`
       <address>
@@ -15,14 +26,8 @@ const Address = (deliveryInfo, lang) => {
           : ''}
         <p>${raw(deliveryInfo.street)}</p>
         <p>
-        ${deliveryInfo.destination_country_iso3 &&
-          deliveryInfo.destination_country_iso3 === 'GBR'
-            ? html`
-                ${raw(deliveryInfo.city)} <br>
-                ${deliveryInfo.zip_code}
-              `
-            : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}`}
-            </p>
+          ${cityLine}
+        </p>
           ${translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
       </address>
     `
