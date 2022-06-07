@@ -35,7 +35,6 @@ const Address = (deliveryInfo, lang) => {
 
 module.exports = function DeliveryAddress (tHeader, lang, options) {
   const { delivery_info: deliveryInfo } = tHeader
-  console.log(deliveryInfo)
   if (
     deliveryInfo &&
     deliveryInfo.street &&
