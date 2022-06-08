@@ -13,7 +13,7 @@ const Address = (deliveryInfo, lang) => {
         `
       : (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
       ? html`
-        ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code}
+        ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code.substring(0, 5)}
       `
       : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}` // Otherwise format
 
