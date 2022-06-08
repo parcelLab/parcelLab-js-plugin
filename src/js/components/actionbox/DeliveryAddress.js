@@ -28,7 +28,8 @@ const Address = (deliveryInfo, lang) => {
         <p>
           ${cityLine}
         </p>
-          ${translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
+          ${(deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
+          ? '' : translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
       </address>
     `
 }
