@@ -6,7 +6,7 @@ const { translate } = require('../../lib/translator.js')
 const Address = (deliveryInfo, lang) => {
   const translatedDestinationCountryName = translate('countryName', lang)[deliveryInfo.destination_country_iso3]
   const cityLine = 
-    (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'GBR')) // Format for Great Britian
+    (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'GBR')) // Format for United Kingdom
       ? html`
           ${raw(deliveryInfo.city)} <br>
           ${deliveryInfo.zip_code}
