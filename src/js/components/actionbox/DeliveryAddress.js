@@ -14,29 +14,30 @@ const Address = (deliveryInfo, lang) => {
         return html`
           ${raw(deliveryInfo.city)} <br />
           ${deliveryInfo.zip_code}
-        `;
+        `
       case "USA":
         if (deliveryInfo.city.search(regex) !== -1) {
           // Trust vendor's data
-          return html` ${raw(deliveryInfo.city)} ${deliveryInfo.zip_code.substring(0, 5)} `;
+          return html` ${raw(deliveryInfo.city)} ${deliveryInfo.zip_code.substring(0, 5)} `
          }  else {
          // Use our region data
          return html`
             ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code.substring(0, 5)}`
          }
       default:
-        return html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}`;
+        return html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}`
     }
-  };
+  }
+  
   const formatCountryLine = () => {
-    if (deliveryInfo.destination_country_iso3 === "USA") return "";
+    if (deliveryInfo.destination_country_iso3 === "USA") return ""
     switch (deliveryInfo.destination_country_iso3) {
       case "USA":
-        return '';
+        return ''
       default:
-        return translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3;
+        return translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3
     }
-  };
+  }
 
   return html`
     <address>
