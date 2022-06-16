@@ -10,12 +10,12 @@ const Address = (deliveryInfo, lang) => {
   const regex = new RegExp(`(^|[^a-zA-Z])${regionCode}([^a-zA-Z]|$)`, 'g')
   const formatCityLine = () => {
     switch (deliveryInfo.destination_country_iso3) {
-      case "GBR":
+      case 'GBR':
         return html`
           ${raw(deliveryInfo.city)} <br />
           ${deliveryInfo.zip_code}
         `
-      case "USA":
+      case 'USA':
         if (deliveryInfo.city.search(regex) !== -1) {
           // Trust vendor's data
           return html` ${raw(deliveryInfo.city)} ${deliveryInfo.zip_code.substring(0, 5)} `
@@ -28,11 +28,11 @@ const Address = (deliveryInfo, lang) => {
         return html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}`
     }
   }
-  
+
   const formatCountryLine = () => {
-    if (deliveryInfo.destination_country_iso3 === "USA") return ""
+    if (deliveryInfo.destination_country_iso3 === 'USA') return ''
     switch (deliveryInfo.destination_country_iso3) {
-      case "USA":
+      case 'USA':
         return ''
       default:
         return translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3
