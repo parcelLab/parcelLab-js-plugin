@@ -8,30 +8,52 @@ const Address = (deliveryInfo, lang) => {
 
   const regionCode = (deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? deliveryInfo.region.split('-')[1] : 'REGION_CODE'
   const regex = new RegExp(`(^|[^a-zA-Z])${regionCode}([^a-zA-Z]|$)`, 'g')
+  const formatCityLine = () => {
+    switch (deliveryInfo.destination_country_iso3) {
+      case "GBR":
+        return html`
+          ${raw(deliveryInfo.city)} <br />
           ${deliveryInfo.zip_code}
-        `
-      : (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
-      ? html`
-        ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code.substring(0, 5)}
-      `
-      : html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}` // Otherwise format
+        `;
+      case "USA":
+        if (deliveryInfo.city.search(regex) !== -1) {
+          // Trust vendor's data
+          return html` ${raw(deliveryInfo.city)} ${deliveryInfo.zip_code.substring(0, 5)} `;
+         }  else {
+         // Use our region data
+         return html`
+            ${raw(deliveryInfo.city)}${(deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? `, ${deliveryInfo.region.split('-')[1]}`: ''} ${deliveryInfo.zip_code.substring(0, 5)}`
+         }
+      default:
+        return html`${deliveryInfo.zip_code} ${raw(deliveryInfo.city)}`;
+    }
+  };
+  const formatCountryLine = () => {
+    if (deliveryInfo.destination_country_iso3 === "USA") return "";
+    switch (deliveryInfo.destination_country_iso3) {
+      case "USA":
+        return '';
+      default:
+        return translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3;
+    }
+  };
 
-    return html`
-      <address>
-        ${deliveryInfo.recipient
-          ? html`
-              <p>${deliveryInfo.recipient}</p>
-            `
-          : ''}
-        <p>${raw(deliveryInfo.street)}</p>
-        <p>
-          ${cityLine}
-        </p>
-          ${(deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA'))
-          ? '' 
-          : translatedDestinationCountryName ? translatedDestinationCountryName : deliveryInfo.destination_country_iso3}
-      </address>
-    `
+  return html`
+    <address>
+      ${deliveryInfo.recipient
+        ? html`
+            <p>${deliveryInfo.recipient}</p>
+          `
+        : ''}
+      <p>${raw(deliveryInfo.street)}</p>
+      <p>
+        ${formatCityLine()}
+      </p>
+      <p>
+        ${formatCountryLine()}
+      </p>
+    </address>
+  `
 }
 
 module.exports = function DeliveryAddress (tHeader, lang, options) {
