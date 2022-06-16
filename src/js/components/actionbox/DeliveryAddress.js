@@ -5,10 +5,9 @@ const { translate } = require('../../lib/translator.js')
 
 const Address = (deliveryInfo, lang) => {
   const translatedDestinationCountryName = translate('countryName', lang)[deliveryInfo.destination_country_iso3]
-  const cityLine = 
-    (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'GBR')) // Format for United Kingdom
-      ? html`
-          ${raw(deliveryInfo.city)} <br>
+
+  const regionCode = (deliveryInfo.region && deliveryInfo.region.indexOf('-') > -1) ? deliveryInfo.region.split('-')[1] : 'REGION_CODE'
+  const regex = new RegExp(`(^|[^a-zA-Z])${regionCode}([^a-zA-Z]|$)`, 'g')
           ${deliveryInfo.zip_code}
         `
       : (deliveryInfo.destination_country_iso3 && (deliveryInfo.destination_country_iso3 === 'USA')) // Format for USA
