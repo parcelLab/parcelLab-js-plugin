@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "branchPrefix": "chore/renovate/",
+  "commitBodyTable": true,
+  "commitMessageAction": "Pin",
+  "commitMessageExtra": "{{#if isMajor}}v{{{newMajor}}}{{else}}{{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}{{/if}}",
+  "commitMessageTopic": "{{depName}}",
+  "packageRules": [
+    {
+      "commitMessageSuffix": "dev",
+      "automerge": true,
+      "matchDepTypes": [
+        "devDependencies"
+      ]
+    }
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 3,
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "{{parentDir}}"
+}
