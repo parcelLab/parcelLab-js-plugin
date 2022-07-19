@@ -25,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: parcel build src/index.js --no-source-maps
+        run: npx parcel build src/index.js --no-source-maps
 
       - name: AWS - authentication
         uses: aws-actions/configure-aws-credentials@v1
@@ -33,14 +33,14 @@ jobs:
           aws-region: 'eu-central-1'
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
 
-      - name: Upload files for V2 (AWS S3)
-        run: |
-          aws s3 cp \
-            --cache-control max-age=86400
-            ./dist/index.css s3://parcellab-cdn/css/v2/parcelLab.min.css \
-          aws s3 cp \
-          --cache-control max-age=86400
-          ./dist/index.js s3://parcellab-cdn/js/v2/parcelLab.min.js \
+      # - name: Upload files for V2 (AWS S3)
+      #   run: |
+      #     aws s3 cp \
+      #       --cache-control max-age=86400
+      #       ./dist/index.css s3://parcellab-cdn/css/v2/parcelLab.min.css \
+      #     aws s3 cp \
+      #     --cache-control max-age=86400
+      #     ./dist/index.js s3://parcellab-cdn/js/v2/parcelLab.min.js \
 
       # - name: Clear the CDN cache (CloudFront)
       #   run: |
