@@ -38,7 +38,7 @@ jobs:
           aws s3 cp \
             --cache-control max-age=86400
             ./dist/index.css s3://parcellab-cdn/css/v2/parcelLab.min.css \
-	        aws s3 cp \
+          aws s3 cp \
           --cache-control max-age=86400
           ./dist/index.js s3://parcellab-cdn/js/v2/parcelLab.min.js \
 
