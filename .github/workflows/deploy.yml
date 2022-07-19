@@ -12,7 +12,7 @@ jobs:
       contents: read
       id-token: write
     env:
-      Greeting: Hello
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
     steps:
       - uses: actions/checkout@v3
@@ -33,14 +33,14 @@ jobs:
           aws-region: 'eu-central-1'
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
 
-      # - name: Upload files for V2 (AWS S3)
-      #   run: |
-      #     aws s3 cp \
-      #       --cache-control max-age=86400
-      #       ./dist/index.css s3://parcellab-cdn/css/v2/parcelLab.min.css \
-      #     aws s3 cp \
-      #     --cache-control max-age=86400
-      #     ./dist/index.js s3://parcellab-cdn/js/v2/parcelLab.min.js \
+      - name: Upload files for V2 (AWS S3)
+        run: |
+          aws s3 cp \
+            --cache-control max-age=86400
+            ./dist/index.css s3://parcellab-cdn/css/v2/parcelLab.min.css \
+          aws s3 cp \
+          --cache-control max-age=86400
+          ./dist/index.js s3://parcellab-cdn/js/v2/parcelLab.min.js \
 
       # - name: Clear the CDN cache (CloudFront)
       #   run: |
