@@ -1,0 +1,53 @@
+name: deploy
+
+on:
+  push:
+    branches: ["cd"]
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      Greeting: Hello
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '10'
+
+      - name: npm install
+        run: npm ci
+
+      - name: Build
+        run: parcel build src/index.js --no-source-maps
+
+      - name: AWS - authentication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: 'eu-central-1'
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+
+      - name: Upload files for V2 (AWS S3)
+        run: |
+          aws s3 cp \
+            --cache-control max-age=86400
+            ./dist/index.css s3://parcellab-cdn/css/v2/parcelLab.min.css \
+	        aws s3 cp \
+          --cache-control max-age=86400
+          ./dist/index.js s3://parcellab-cdn/js/v2/parcelLab.min.js \
+
+      # - name: Clear the CDN cache (CloudFront)
+      #   run: |
+      #     aws cloudfront create-invalidation \
+      #       --distribution-id E3R5S2BJQI4RDS \
+      #       --paths \
+      #         "/css/v2/parcelLab.min.css" \
+      #         "/js/v2/parcelLab.min.js" \
+      #         "/css/v3/parcelLab.min.css" \
+      #         "/js/v3/parcelLab.min.js"
