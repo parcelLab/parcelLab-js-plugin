@@ -51,12 +51,12 @@ jobs:
             --cache-control max-age=86400 \
             ./dist/index.js s3://parcellab-cdn/js/v3/parcelLab.min.js
 
-      # - name: Clear the CDN cache (CloudFront)
-      #   run: |
-      #     aws cloudfront create-invalidation \
-      #       --distribution-id E3R5S2BJQI4RDS \
-      #       --paths \
-      #         "/css/v2/parcelLab.min.css" \
-      #         "/js/v2/parcelLab.min.js" \
-      #         "/css/v3/parcelLab.min.css" \
-      #         "/js/v3/parcelLab.min.js"
+      - name: Clear the CDN cache (CloudFront)
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E3R5S2BJQI4RDS \
+            --paths \
+              "/css/v2/parcelLab.min.css" \
+              "/js/v2/parcelLab.min.js" \
+              "/css/v3/parcelLab.min.css" \
+              "/js/v3/parcelLab.min.js"
