@@ -223,10 +223,8 @@ $ npm run build
 Minified `index.js` and `index.css` will be in the `dist` dir.
 
 ### Deploy
-```bash
-$ npm run deploy
-```
-The `index.js`and `index.css`files will be deployed as parcelLab.min.js and parcelLab.min.css on the CDN.
+Automatically deployed via GitHub Actions.
+The `index.js` and `index.css` files will be deployed as parcelLab.min.js and parcelLab.min.css on the CDN.
 
 ## Installing through NPM
 If you do not want to use our brebuilt and hosted version - you can also install it yourself thtough NPM.
