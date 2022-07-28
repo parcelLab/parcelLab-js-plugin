@@ -217,6 +217,8 @@ class ParcelLab {
       if (!opts[key]) opts[key] = DEFAULT_OPTS[key]
     })
 
+    if(opts.plUserId) opts.userId = opts.plUserId
+
     if (opts.show_searchForm && !opts.userId) {
       console.error(
         '⚠️  You must pass your userId in the options if you want to display a searchForm!'
