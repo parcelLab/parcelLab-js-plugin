@@ -50,7 +50,7 @@ class ParcelLab {
       this.getUrlQuery('c') ||
       this.options.courier
     this.userId =
-      this.getUrlQuery('plUserId') || this.getUrlQuery('userId') || this.getUrlQuery('u') || this.options.userId
+      this.getUrlQuery('plUserId') || this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
     this.secureHash =
       this.getUrlQuery('s') ||
       this.getUrlQuery('secureHash') ||
