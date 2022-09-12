@@ -2,8 +2,6 @@ const html = require('nanohtml')
 const { translate } = require('../../../js/lib/translator.js')
 
 const PickupLocationUnknown = ({ actionBox, courier, last_delivery_status }, lang) => {
-  if (!courier || !courier.trackingurl) return null
-
   const status = last_delivery_status ? last_delivery_status.status : null
   return html`
     <div class="pl-box pl-action-box pl-box-pseudo-map">
