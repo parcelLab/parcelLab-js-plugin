@@ -51,7 +51,7 @@ const ActionBox = (
       }
     }
 
-    if (type === 'pickup-location-unknown') {
+    if (type === 'pickup-location-unknown' && tHeader.courier && tHeader.courier.trackingurl) {
       result = [PickupLocationUnknown(tHeader, query.lang)]
     }
 
