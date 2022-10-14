@@ -469,7 +469,7 @@ const translations = {
     delivery: 'Entrega',
     more: 'Ver más...',
     moreArticles: 'Ver más...',
-    orderNo: 'Número de Orden',
+    orderNo: 'Número de pedido',
     predictions: {
       OutForDelivery: 'El paquete llegará <b>Hoy</b>.',
       DestinationDeliveryCenter: 'El paquete llegará <b>Mañana</b>.'
@@ -496,7 +496,7 @@ const translations = {
     searchOrder: 'Búsqueda del envío',
     search: 'Buscar',
     containsOf: 'consiste en',
-    deliveries: 'entregas',
+    deliveries: 'paquetes entregados',
     enterZipCode:
       'Por favor, introduzca su código postal para tener acceso a toda la información.',
     wrongZip: 'Este código postal está mal.',
@@ -581,11 +581,11 @@ const translations = {
       'Inserisci il tuo codice di avviamento postale per accedere a tutte le informazioni.',
     wrongZip: 'Il codice postale è sbagliato.',
     showPickuplocation: 'Mostra punto di ritiro',
-    articleList: 'Articoli in questo pacchetto',
+    articleList: 'Articoli in questo pacco',
     deliveryAddress: 'Indirizzo di consegna'
   },
   nl: {
-    delivery: 'Levering',
+    delivery: 'Bezorging',
     more: 'Bekijk meer...',
     moreArticles: 'Bekijk meer...',
     orderNo: 'Bestelling',
@@ -615,7 +615,7 @@ const translations = {
     searchOrder: 'Zoek order',
     search: 'Zoeken',
     containsOf: 'bestaat uit',
-    deliveries: 'leveringen',
+    deliveries: 'bezorgingen',
     enterZipCode:
       'Voer uw postcode in om toegang te krijgen tot alle informatie.',
     wrongZip: 'Deze postcode is fout.',
