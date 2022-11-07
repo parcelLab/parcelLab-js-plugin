@@ -50,7 +50,7 @@ class ParcelLab {
       this.getUrlQuery('c') ||
       this.options.courier
     this.userId =
-      this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
+      this.getUrlQuery('plUserId') || this.getUrlQuery('u') || this.getUrlQuery('userId') || this.options.userId
     this.secureHash =
       this.getUrlQuery('s') ||
       this.getUrlQuery('secureHash') ||
@@ -216,6 +216,8 @@ class ParcelLab {
     Object.keys(DEFAULT_OPTS).forEach(key => {
       if (!opts[key]) opts[key] = DEFAULT_OPTS[key]
     })
+
+    if(opts.plUserId) opts.userId = opts.plUserId
 
     if (opts.show_searchForm && !opts.userId) {
       console.error(
