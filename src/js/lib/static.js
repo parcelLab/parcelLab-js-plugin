@@ -316,6 +316,12 @@ const languages = {
     label: 'Ελληνικά',
     code: 'GRC',
     icon: 'https://cdn.parcellab.com/img/flags/gr.png'
+  },
+  ar: {
+    name: 'ar',
+    label: 'العربية',
+    code: 'ARB',
+    icon: 'https://cdn.parcellab.com/img/flags/ae.png'
   }
 };
 
@@ -1498,6 +1504,39 @@ const translations = {
     liveTrackingCaption: 'μέχρι να φτάσει η αποστολή σας.',
     liveTrackingCaptionNext: 'Είστε ο επόμενος ενδιάμεσος σταθμός.',
     liveTrackingPrediction: 'Χρόνος άφιξης περίπου.'
+  },
+  ar: {
+    'submit-btn': 'بحث',
+    delivery: 'التوصيل',
+    more: 'عرض المزيد',
+    moreArticles: 'عرض المزيد',
+    orderNo: 'الطلب',
+    predictions: {
+      OutForDelivery: 'طردك سيصل <b>اليوم</b>',
+      DestinationDeliveryCenter: 'طردك سيصل <b>غدًا</b>'
+    },
+    openingHours: 'ساعات العمل',
+    weekDays: [
+      'الأحد',
+      'الاثنين',
+      'الثلاثاء',
+      'الأربعاء',
+      'الخميس',
+      'الجمعة',
+      'السبت'
+    ],
+    alwaysOpened: 'مفتوح على مدار اليوم',
+    closesIn: 'يغلق في',
+    opensIn: 'يفتح في',
+    searchOrder: 'البحث عن طلبك',
+    zip: 'الرمز البريدي',
+    search: 'بحث',
+    containsOf: 'يشمل',
+    deliveries: 'عمليات التوصيل',
+    showPickuplocation: 'عرض مكان الاستلام',
+    liveDelivery: 'تتبع طلبك',
+    articleList: 'القطع الموجودة في هذا الطرد',
+    deliveryAddress: 'عنوان التوصيل'
   }
 };
 
