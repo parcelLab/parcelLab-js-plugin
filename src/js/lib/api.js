@@ -137,7 +137,7 @@ function _toURL(baseUrl, endpoint, queryArr) {
     url += param.name + '=' + param.value + '&'
   })
 
-  return url
+  return url + 'plugin-version=4'
 }
 
 function _objToQueryArr(propsObj) {
