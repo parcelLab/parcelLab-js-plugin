@@ -1,6 +1,9 @@
+# parcelLab JavaScript Plugin v4
+
+*v3 available on [main branch](https://github.com/parcelLab/parcelLab-js-plugin/tree/main).*
+
 ![parcelLab JS Plugin](./mockup.jpg)
 
-# parcelLab Javascript Plugin
 Integrate parcelLab to your shop frontend (or any webpage). This plugin will fetch and display all important information of a given tracking and turn any webpage to a delivery status page.
 
 ## Integrate delivery status page
