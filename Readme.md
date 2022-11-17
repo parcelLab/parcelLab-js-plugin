@@ -1,4 +1,4 @@
-# parcelLab Track and Trace Plugin V3
+# parcelLab JavaScript Plugin v3
 
 *v4 available on [v4 branch](https://github.com/parcelLab/parcelLab-js-plugin/tree/main).*
 
