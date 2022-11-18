@@ -2,7 +2,7 @@ name: deploy v4
 
 on:
   push:
-    branches: ["v4-deploy"]
+    branches: ["v4"]
 
 jobs:
   deployment:
@@ -37,13 +37,13 @@ jobs:
         run: |
           aws s3 cp \
             --cache-control max-age=86400 \
-            ./dist/index.css s3://parcellab-cdn/css/v4/parcelLab.delete-me.css
+            ./dist/index.css s3://parcellab-cdn/css/v4/parcelLab.min.css
           aws s3 cp \
             --cache-control max-age=86400 \
-            ./dist/index.js s3://parcellab-cdn/js/v4/parcelLab.delete-me.js
+            ./dist/index.js s3://parcellab-cdn/js/v4/parcelLab.min.js
 
       - name: Clear the CDN cache (CloudFront)
         run: |
           aws cloudfront create-invalidation \
             --distribution-id E3R5S2BJQI4RDS \
-            --paths "/css/v4/parcelLab.delete-me.css" "/js/v4/parcelLab.delete-me.js"
+            --paths "/css/v4/parcelLab.min.css" "/js/v4/parcelLab.min.js"
