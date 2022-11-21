@@ -1,5 +1,7 @@
-node_modules
-.env
-src/GOOGLE_API_KEY.json
-dist
 .cache
+.DS_Store
+.env
+.vscode
+dist
+node_modules
+src/GOOGLE_API_KEY.json

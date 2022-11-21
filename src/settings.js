@@ -14,7 +14,7 @@ module.exports = {
   live_tracking_map_endpoint: 'courier/tour/coordinates',
   default_root_node: '#parcelLab-trace-wrapper',
   instagram_api_url: 'https://instagrapi.parcellab.com/prod/',
-  google_api_key: require('./GOOGLE_API_KEY').key,
+  google_api_key: process.env.GOOGLE_API_KEY,
   mapShortenAddressForCouriers: ['ups-express', 'ups'],
   defualt_opts: {
     styles: true,
