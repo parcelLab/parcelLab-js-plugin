@@ -12,10 +12,14 @@ function calcArticleTotalSum(validArticles) {
   return sum
 }
 
+function isValidURL(value) {
+  return typeof value === 'string' && /^(http|https):\/\/[^ "]+$/.test(value)
+}
+
 function ArticleItem({ articleName, articleNo, quantity, imageUrl, productUrl , articleImageUrl, articleUrl }) {
   // because of js caching...
-  imageUrl = imageUrl || articleImageUrl || null
-  productUrl = productUrl || articleUrl || null
+  imageUrl = isValidURL(imageUrl) ? imageUrl : isValidURL(articleImageUrl) ? articleImageUrl : null
+  productUrl = isValidURL(productUrl) ? productUrl : isValidURL(articleUrl) ? articleUrl : null
 
   let articleImage = null
 
@@ -27,7 +31,7 @@ function ArticleItem({ articleName, articleNo, quantity, imageUrl, productUrl , 
   } else {
     articleImage = Icon('no_camera', '000', '40')
     articleImage.style.margin = 'auto'
-    articleImage.style.opacity = '.2'  
+    articleImage.style.opacity = '.2'
   }
 
   return html`
@@ -38,7 +42,7 @@ function ArticleItem({ articleName, articleNo, quantity, imageUrl, productUrl , 
         </div>
         <div class="pl-col" style="width:70%;">
           <div class="pl-article-description">
-            ${ (articleNo && articleName) ? html`<span class="pl-article-list-no">${ articleNo }</span>` : '' } 
+            ${ (articleNo && articleName) ? html`<span class="pl-article-list-no">${ articleNo }</span>` : '' }
             ${ quantity ? html`<span class="pl-article-quantity">${ quantity }x</span>` : '' }
             ${ articleName || articleNo }
           </div>
@@ -77,7 +81,7 @@ module.exports = function ArticleList({ activeTracking, checkpoints, query, show
           <ul class="pl-article-list">
             ${ articleList }
           </ul>
-        
+
           ${ moreButton }
         </div>
 
