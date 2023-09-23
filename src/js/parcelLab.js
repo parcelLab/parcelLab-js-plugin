@@ -357,7 +357,10 @@ class ParcelLab {
     if (selectedTrackingNo && header) {
       for (let i = 0; i < header.length; i++) {
         const elem = header[i]
-        if (elem.tracking_number === selectedTrackingNo) {
+        if (
+          elem.tracking_number === selectedTrackingNo ||
+          elem.id === selectedTrackingNo
+        ) {
           selectedTrackingIndex = i
         }
       }
