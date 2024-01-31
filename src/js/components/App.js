@@ -26,6 +26,13 @@ const App = (state, emit) => {
 
   // fetch failed
   if (state.query_err || state.fetchCheckpoints_failed) {
+    if (state.fetchCheckpoints_failed === 429) {
+      return Layout(Alert({
+        ...state,
+        className: "pl-alert-center",
+        errorMessageKey: "requestsLimit"
+      }))
+    }
     let errApp = []
     state.options.show_searchForm ? errApp.push(Search(state, emit)) : errApp.push(Alert(state))
 
@@ -33,17 +40,17 @@ const App = (state, emit) => {
     && state.query.courier && state.query.trackingNo
     && state.fallback_deeplink)
       errApp.push(FallbackFurtherInfos(state))
-    
+
     return Layout(errApp)
   }
-  
+
   // tracking w/ no cps
   if (state.checkpoints && state.checkpoints.header.length === 0) {
     return Layout(Alert(state))
-  } 
-  
+  }
+
   // still loading
-  if (!state.checkpoints) return Layout(Loading()) 
+  if (!state.checkpoints) return Layout(Loading())
 
 
   const header = Header(state, emit)
@@ -51,7 +58,7 @@ const App = (state, emit) => {
   const actionBox = ActionBox(state, emit)
   const trace = TrackingTrace(state, emit)
   const note = (state.options.show_note && !state.hideNote) ? Note(state, emit) : null
-  let banner = null 
+  let banner = null
   if (state.options.banner_image === 'instagram' && state.options.instagram)
     banner = InstagramPost(state)
   else if (state.options.banner_image && state.options.banner_link)

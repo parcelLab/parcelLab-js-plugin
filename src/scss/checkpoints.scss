@@ -39,6 +39,9 @@ div.pl-alert {
   small {
     opacity: .6;
   }
+  &.pl-alert-center {
+    text-align: center;
+  }
 }
 
 div.pl-icon {
@@ -78,7 +81,7 @@ div.pl-tab-container {
   margin-top: 0;
   margin-left: -15px;
   margin-right: -15px;
-  
+
   & > div {
     padding: 0 15px;
   }
@@ -112,7 +115,7 @@ div.pl-tab {
       overflow: hidden;
       text-overflow: ellipsis;
       padding-right: 40px;
-      
+
       span.pl-tab-text-tno {
         overflow: hidden;
         text-overflow: ellipsis;
