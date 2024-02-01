@@ -39,6 +39,7 @@ function handleFetchResponse(res) {
   if (res.status >= 200 && res.status < 300) {
     return res
   } else if (res.status === 404) return null // HACK: for tracking not found
+  else if (res.status === 429) return res
   else throw new Error(`Request Error at fetch: ${res.status} ~> ${res.statusText}`)
 }
 
@@ -48,6 +49,8 @@ function handleRequestResponse(request, callback) {
     return callback(null, handleJSON(request.responseText.trim()))
   } else if (request.status === 404) {
     return callback(404)
+  } else if (request.status === 429) {
+      return callback(429)
   } else {
     return callback(`Request Error at xhr request: ${request.status} ~> ${request.responseText}`)
   }
@@ -63,10 +66,14 @@ function _get(url, callback) {
       .then(res => handleFetchResponse(res))
       .then(res => {
         if (res) {
-          res
-            .text()
-            .then(res => handleJSON(res))
-            .then(res => callback(null, res))
+          if (res.status === 429) {
+            callback(429)
+          } else {
+            res
+                .text()
+                .then(res => handleJSON(res))
+                .then(res => callback(null, res))
+          }
         } else {
           callback(404)
         }

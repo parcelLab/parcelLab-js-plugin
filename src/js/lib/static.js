@@ -391,7 +391,8 @@ const translations = {
     openingHoursWarning: 'Opening hours may vary due to ###',
     error: {
       delivery: 'We have not yet received tracking data for your order.',
-      search: 'Unfortunately, no information was found for this delivery.'
+      search: 'Unfortunately, no information was found for this delivery.',
+      requestsLimit: 'Too many incorrect attempts. Please try again in 30 minutes'
     },
     searchOrder: 'Search order',
     zip: 'Zip code',
@@ -662,7 +663,8 @@ const translations = {
     openingHoursWarning: 'Öffnungszeiten können aufgrund von ### abweichen',
     error: {
       delivery: 'Zu dieser Bestellung liegen noch keine Sendungsdaten vor.',
-      search: 'Leider liegen uns aktuell keine Sendungsdetails zu dieser Bestellung vor.'
+      search: 'Leider liegen uns aktuell keine Sendungsdetails zu dieser Bestellung vor.',
+      requestsLimit: 'Zu viele Fehlversuche. Bitte versuchen Sie es in 30 Minuten erneut'
     },
     searchOrder: 'Bestellung suchen',
     zip: 'PLZ',
@@ -933,7 +935,8 @@ const translations = {
     openingHoursWarning: 'Las horas de apertura pueden variar debido a ###',
     error: {
       delivery: 'Actualmente no hay de datos de envío disponibles para este pedido.',
-      search: 'Desafortunadamente tu paquete no esta disponible.'
+      search: 'Desafortunadamente tu paquete no esta disponible.',
+      requestsLimit: 'Demasiados intentos incorrectos. Inténtelo de nuevo en 30 minutos'
     },
     searchOrder: 'Búsqueda del envío',
     search: 'Buscar',
@@ -1194,7 +1197,8 @@ const translations = {
     openingHoursWarning: 'Les heures d\'ouverture peuvent varier en raison de ###',
     error: {
       delivery: 'Aucune information concernant l\'expédition disponible pour cette commande.',
-      search: 'Malheureusement, ce numéro de colis ou de commande n\'est pas valide.'
+      search: 'Malheureusement, ce numéro de colis ou de commande n\'est pas valide.',
+      requestsLimit: 'Trop de tentatives incorrectes. Veuillez réessayer dans 30 minutes'
     },
     searchOrder: 'Rechercher la commande',
     search: 'Chercher',
@@ -1455,7 +1459,8 @@ const translations = {
     openingHoursWarning: 'Gli orari di apertura possono variare a causa di ###',
     error: {
       delivery: 'Non ci sono ancora informazioni sulla spedizione di questo ordine.',
-      search: 'Purtroppo non abbiamo dati per questa consegna.'
+      search: 'Purtroppo non abbiamo dati per questa consegna.',
+      requestsLimit: 'Troppi tentativi sbagliati. Riprova tra 30 minuti'
     },
     searchOrder: 'cerca l\'ordine',
     search: 'Ricerca',
@@ -1716,7 +1721,8 @@ const translations = {
     openingHoursWarning: 'De openingstijden kunnen variëren als gevolg van ###',
     error: {
       delivery: 'Voor deze bestelling zijn nog geen track & trace gegevens bekend',
-      search: 'Helaas is de levering niet bekend.'
+      search: 'Helaas is de levering niet bekend.',
+      requestsLimit: 'Te veel onjuiste pogingen. Probeer het opnieuw over 30 minuten'
     },
     searchOrder: 'Zoek order',
     search: 'Zoeken',
@@ -1977,7 +1983,8 @@ const translations = {
     openingHoursWarning: 'Åbningstider kan variere på grund af ###',
     error: {
       delivery: 'Der findes endnu ingen leveringsinformationer til denne bestilling.',
-      search: 'Beklageligvis er leveringen ikke tilgængelig.'
+      search: 'Beklageligvis er leveringen ikke tilgængelig.',
+      requestsLimit: 'For mange forkerte forsøg. Prøv igen om 30 minutter'
     },
     searchOrder: 'Søg ordre',
     search: 'Søg',
@@ -2238,7 +2245,8 @@ const translations = {
     openingHoursWarning: 'Öppettiderna kan variera beroende på ###',
     error: {
       delivery: 'Beställningen har ännu inte tilldelats något kollinummer.',
-      search: 'Tyvärr är inte denna leverans tillgänglig.'
+      search: 'Tyvärr är inte denna leverans tillgänglig.',
+      requestsLimit: 'För många felaktiga försök. Försök igen om 30 minuter'
     },
     searchOrder: 'Sök order',
     search: 'Sök',
@@ -2499,7 +2507,8 @@ const translations = {
     openingHoursWarning: 'Käyttötunnit voivat vaihdella ### : n takia',
     error: {
       delivery: 'Tästä tilauksesta ei ole vielä lähetystietoja.',
-      search: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.'
+      search: 'Valitettavasti tämä toimitus ei ole saatavilla järjestelmässä.',
+      requestsLimit: 'Liian monta virheellistä yritystä. Yritä uudelleen 30 minuutin kuluttua'
     },
     searchOrder: 'Hae tilausta',
     search: 'Hae',
@@ -2760,7 +2769,8 @@ const translations = {
     openingHoursWarning: 'Driftstider kan variere på grunn av ###',
     error: {
       delivery: 'Vi har ennå ikke mottatt sendingsopplysninger tilknyttet denne bestillingen.',
-      search: 'Dessverre er denne leveransen ikke tilgjengelig.'
+      search: 'Dessverre er denne leveransen ikke tilgjengelig.',
+      requestsLimit: 'For mange feilforsøk. Prøv igjen om 30 minutter'
     },
     searchOrder: 'Søk etter bestilling',
     search: 'Søk',
@@ -3021,7 +3031,8 @@ const translations = {
     openingHoursWarning: 'O horário de funcionamento pode variar devido ao ###',
     error: {
       delivery: 'Não foram ainda recebidos os dados de rastreamento do seu pedido.',
-      search: 'Infelizmente, nenhuma informação foi encontrada para esta entrega.'
+      search: 'Infelizmente, nenhuma informação foi encontrada para esta entrega.',
+      requestsLimit: 'Demasiadas tentativas incorrectas. Tente novamente dentro de 30 minutos'
     },
     searchOrder: 'Procura de encomenda',
     search: 'Procura',
@@ -3282,7 +3293,8 @@ const translations = {
     openingHoursWarning: 'Godziny pracy mogą się różnić ze względu na ###',
     error: {
       delivery: 'Nie wprowadzono jeszcze do systemu informacji o tej przesyłce.',
-      search: 'Niestety, ta paczka nie znajduje się w systemie.'
+      search: 'Niestety, ta paczka nie znajduje się w systemie.',
+      requestsLimit: 'Zbyt wiele nieprawidłowych prób. Proszę spróbować ponownie za 30 minut'
     },
     searchOrder: 'szukaj zamówienia',
     search: 'Szukaj',
@@ -3543,7 +3555,8 @@ const translations = {
     openingHoursWarning: 'Orele de funcționare pot varia din cauza ###',
     error: {
       delivery: 'Din păcate, această livrare nu este disponibil.',
-      search: 'Din păcate, această livrare nu este disponibil.'
+      search: 'Din păcate, această livrare nu este disponibil.',
+      requestsLimit: 'Prea multe încercări incorecte. Vă rugăm să încercați din nou în 30 de minute'
     },
     searchOrder: 'ordinea de căutare',
     search: 'Căutare',
@@ -3804,7 +3817,8 @@ const translations = {
     openingHoursWarning: 'Provozní hodiny se mohou lišit v důsledku ###',
     error: {
       delivery: 'Je nám líto, ale tato zásilka není k dispozici.',
-      search: 'Pro tuto zásilku nebyly nalezeny žádné informace.'
+      search: 'Pro tuto zásilku nebyly nalezeny žádné informace.',
+      requestsLimit: 'Příliš mnoho nesprávných pokusů. Zkuste to prosím znovu za 30 minut'
     },
     searchOrder: 'Hledat objednávku',
     search: 'Hledat',
@@ -4065,7 +4079,8 @@ const translations = {
     openingHoursWarning: 'Ure delovanja se zaradi ### lahko razlikujejo',
     error: {
       delivery: 'Za to naročilo še ni na voljo številke za sledenje.',
-      search: 'Žal trenutni nimamo na voljo številke za sledenje za to naročilo.'
+      search: 'Žal trenutni nimamo na voljo številke za sledenje za to naročilo.',
+      requestsLimit: 'Preveč napačnih poskusov. Prosimo, poskusite znova čez 30 minut'
     },
     searchOrder: 'Išči naročilo',
     zip: 'PTT',
@@ -4328,7 +4343,8 @@ const translations = {
     openingHoursWarning: 'Sati rada mogu varirati zbog ###',
     error: {
       delivery: 'Ova narudžba još nema broja za online pračenje pošiljke.',
-      search: 'Nažalost, trenutno broj za online pračenje pošiljke nije dostupan.'
+      search: 'Nažalost, trenutno broj za online pračenje pošiljke nije dostupan.',
+      requestsLimit: 'Previše pogrešnih pokušaja. Pokušajte ponovo za 30 minuta'
     },
     searchOrder: 'Traži narudžbu',
     zip: 'Poštanski broj',
@@ -4591,7 +4607,8 @@ const translations = {
     openingHoursWarning: 'Часовете на работа може да варират поради ###',
     error: {
       delivery: 'Все още няма данни за пратката към тази поръчка.',
-      search: 'За съжаление, в момента още нямаме данни за пратката към тази поръчка.'
+      search: 'За съжаление, в момента още нямаме данни за пратката към тази поръчка.',
+      requestsLimit: 'Твърде много неправилни опити. Моля, опитайте отново след 30 минути'
     },
     searchOrder: 'Намери поръчка',
     zip: 'Пощ. код',
@@ -4854,7 +4871,8 @@ const translations = {
     openingHoursWarning: 'Prevádzkové hodiny sa môžu líšiť v dôsledku ###',
     error: {
       delivery: 'Žiaľ doposiaľ sme neobdržali dáta na sledovanie Vašej objednávky.',
-      search: 'Bohužiaľ, k zadanej objednávke neboli nájdené žiadne informacie.'
+      search: 'Bohužiaľ, k zadanej objednávke neboli nájdené žiadne informacie.',
+      requestsLimit: 'Príliš veľa nesprávnych pokusov. Skúste to znova o 30 minút'
     },
     searchOrder: 'Vyhľadať objednávku',
     zip: 'PSČ',
@@ -5117,7 +5135,8 @@ const translations = {
     openingHoursWarning: 'A működési idő a ### miatt változhat',
     error: {
       delivery: 'Ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.',
-      search: 'Sajnos ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.'
+      search: 'Sajnos ehhez a rendeléshez még nem állnak rendelkezésre szállítási adatok.',
+      requestsLimit: 'Túl sok hibás próbálkozás. Kérjük, próbálja újra 30 perc múlva'
     },
     searchOrder: 'Rendelés keresése',
     zip: 'Irányítószám',
@@ -5379,7 +5398,8 @@ const translations = {
     opensIn: '开始营业大约在',
     error: {
       delivery: '我们尚未收到您订单的跟踪数据。',
-      search: '很遗憾，我们找不到此次配送的信息。'
+      search: '很遗憾，我们找不到此次配送的信息。',
+      requestsLimit: '错误尝试太多。请在 30 分钟后再试一次'
     },
     searchOrder: '搜索订单',
     zip: '邮政编码',
@@ -5641,7 +5661,8 @@ const translations = {
     opensIn: '영업 개시',
     error: {
       delivery: '고객님 배송 정보를 아직 받지 못했습니다.',
-      search: '안타깝게도 이 배송건에 관련된 정보가 확인되지 않습니다.'
+      search: '안타깝게도 이 배송건에 관련된 정보가 확인되지 않습니다.',
+      requestsLimit: '잘못된 시도가 너무 많습니다. 30분 후에 다시 시도하세요.'
     },
     searchOrder: '주문 검색',
     zip: '우편번호',
@@ -5903,7 +5924,8 @@ const translations = {
     opensIn: '開始營業大約在',
     error: {
       delivery: '我們尚未收到您訂單的跟踪數據。',
-      search: '很遺憾，我們找不到此次配送的信息。'
+      search: '很遺憾，我們找不到此次配送的信息。',
+      requestsLimit: '잘못된 시도가 너무 많습니다. 30분 후에 다시 시도하세요.'
     },
     searchOrder: '搜索訂單',
     zip: '郵政編碼',
@@ -6163,7 +6185,8 @@ const translations = {
     opensIn: 'もうすぐ開きます',
     error: {
       delivery: 'ご注文の追跡情報をまだ受け取っていません。',
-      search: '残念ながら、この配送に関する情報は見つかりませんでした。'
+      search: '残念ながら、この配送に関する情報は見つかりませんでした。',
+      requestsLimit: '間違った試行が多すぎます。 30 分後にもう一度お試しください'
     },
     searchOrder: 'ご注文検索',
     zip: '郵便番号',
@@ -6426,7 +6449,8 @@ const translations = {
     opensIn: 'civarinda acilir',
     error: {
       delivery: 'Siparişiniz için henüz takip verisi almadık.',
-      search: 'Maalesef bu teslimat için hiçbir bilgi bulunamadı.'
+      search: 'Maalesef bu teslimat için hiçbir bilgi bulunamadı.',
+      requestsLimit: 'Çok fazla yanlış deneme var. Lütfen 30 dakika içinde tekrar deneyin'
     },
     searchOrder: 'Sipariş ara',
     zip: 'Posta kodu',
@@ -6696,7 +6720,8 @@ const translations = {
     opensIn: 'Открывается через',
     error: {
       delivery: 'Мы еще не получили информацию о Вашем заказе.',
-      search: 'К сожалению, по данной доставке информация не найдена'
+      search: 'К сожалению, по данной доставке информация не найдена',
+      requestsLimit: 'Слишком много неправильных попыток. Пожалуйста, повторите попытку через 30 минут'
     },
     searchOrder: 'Поиск заказа',
     zip: 'Почтовый индекс',
@@ -6966,7 +6991,8 @@ const translations = {
     openingHoursWarning: 'L´horari d´obertura pot variar a causa de ###',
     error: {
       delivery: 'Actualment no hi ha de dades d´enviament disponibles per a aquesta comanda.',
-      search: 'Malauradament, el teu paquet no està disponible.'
+      search: 'Malauradament, el teu paquet no està disponible.',
+      requestsLimit: 'Massa intents incorrectes. Torneu-ho a provar en 30 minuts'
     },
     searchOrder: 'Cerca de l´enviament',
     search: 'Cerca',
@@ -7227,7 +7253,8 @@ const translations = {
     openingHoursWarning: 'Irekiera-orduak aldatu daitezke ### dela eta.',
     error: {
       delivery: 'Une honetan ez dago eskaera honentzako bidalketa-daturik eskuragarri.',
-      search: 'Zoritxarrez, zure paketea ez dago eskuragarri.'
+      search: 'Zoritxarrez, zure paketea ez dago eskuragarri.',
+      requestsLimit: 'Saiakera okerregiak. Saia zaitez berriro 30 minututan'
     },
     searchOrder: 'Bidalketaren bilaketa',
     search: 'Bilatu',
@@ -7488,7 +7515,8 @@ const translations = {
     openingHoursWarning: 'As horas de apertura poden variar debido a ###',
     error: {
       delivery: 'Nestes momentos non hai datos de envío dispoñibles para este pedido.',
-      search: 'Sentímolo, o teu paquete non está dispoñible.'
+      search: 'Sentímolo, o teu paquete non está dispoñible.',
+      requestsLimit: 'Demasiados intentos incorrectos. Téntao de novo en 30 minutos'
     },
     searchOrder: 'Búsqueda do envío',
     search: 'Buscar',
@@ -7750,7 +7778,8 @@ const translations = {
     openingHoursWarning: 'Οι ώρες λειτουργίας ενδέχεται να διαφέρουν λόγω ###',
     error: {
       delivery: 'Δεν έχουμε λάβει ακόμη δεδομένα παρακολούθησης για την παραγγελία σας.',
-      search: 'Δυστυχώς, δεν βρέθηκαν πληροφορίες για την παράδοση αυτή.'
+      search: 'Δυστυχώς, δεν βρέθηκαν πληροφορίες για την παράδοση αυτή.',
+      requestsLimit: 'Πάρα πολλές λανθασμένες προσπάθειες. Παρακαλώ προσπαθήστε ξανά σε 30 λεπτά'
     },
     searchOrder: 'Παραγγελία αναζήτησης',
     zip: 'TK',
@@ -8013,7 +8042,8 @@ const translations = {
     openingHoursWarning: 'Lahtiolekuajad võivad {{warning}} tõttu erineda',
     error: {
       delivery: 'Me ei ole veel teie tellimuse jälgimisandmeid saanud.',
-      search: 'Kahjuks ei leitud selle kohaletoimetamise kohta teavet.'
+      search: 'Kahjuks ei leitud selle kohaletoimetamise kohta teavet.',
+      requestsLimit: 'Liiga palju ebaõigeid katseid. Palun proovige uuesti 30 minuti pärast'
     },
     searchOrder: 'Otsige tellimust',
     zip: 'Sihtnumber',
@@ -8276,7 +8306,8 @@ const translations = {
     openingHoursWarning: 'Darbo valandos gali skirtis dėl {{įspėjimas}}',
     error: {
       delivery: 'Dar negavome jūsų užsakymo sekimo duomenų.',
-      search: 'Deja, informacijos apie šį pristatymą nerasta.'
+      search: 'Deja, informacijos apie šį pristatymą nerasta.',
+      requestsLimit: 'Per daug neteisingų bandymų. Bandykite dar kartą po 30 minučių'
     },
     searchOrder: 'Ieškoti užsakymo',
     zip: 'ZIP kodas',
@@ -8539,7 +8570,8 @@ const translations = {
     openingHoursWarning: 'Darba laiks var mainīties sakarā ar {{warning}}',
     error: {
       delivery: 'Mēs vēl neesam saņēmuši jūsu pasūtījuma izsekošanas datus.',
-      search: 'Diemžēl informācija par šo sūtījumu netika atrasta.'
+      search: 'Diemžēl informācija par šo sūtījumu netika atrasta.',
+      requestsLimit: 'Pārāk daudz nepareizu mēģinājumu. Lūdzu, mēģiniet vēlreiz pēc 30 minūtēm'
     },
     searchOrder: 'Meklēt pasūtījumu',
     zip: 'Pasta indekss',
