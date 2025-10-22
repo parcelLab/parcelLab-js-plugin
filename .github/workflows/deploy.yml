@@ -2,7 +2,9 @@ name: deploy
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   deployment:
@@ -15,9 +17,8 @@ jobs:
       GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: '10'
 
@@ -28,7 +29,7 @@ jobs:
         run: npx parcel build src/index.js --no-source-maps
 
       - name: AWS - authentication
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v5.1.0
         with:
           aws-region: 'eu-central-1'
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
