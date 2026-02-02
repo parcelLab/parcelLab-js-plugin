@@ -1,6 +1,8 @@
 .cache
+.parcel-cache
 .env
 .vscode
+.idea
 dist
 node_modules
 src/GOOGLE_API_KEY.json

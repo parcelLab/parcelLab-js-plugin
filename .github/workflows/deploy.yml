@@ -20,13 +20,13 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
         with:
-          node-version: '10'
+          node-version: '22'
 
       - name: npm install
         run: npm ci
 
       - name: Build
-        run: npx parcel build src/index.js --no-source-maps
+        run: npx parcel build --target deploy
 
       - name: AWS - authentication
         uses: aws-actions/configure-aws-credentials@v5.1.0
