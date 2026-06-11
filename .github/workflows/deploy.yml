@@ -32,7 +32,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v5.1.0
         with:
           aws-region: 'eu-central-1'
-          role-to-assume: ${{ vars.AWS_ASSUME_ROLE_ARN_EXTRA }}
+          role-to-assume: ${{ vars.AWS_ASSUME_ROLE_ARN_CUSTOM }}
 
       - name: Upload files for V2 (AWS S3)
         run: |
